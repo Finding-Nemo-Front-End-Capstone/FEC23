@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import Questions from './Questions.jsx';
 import Overview from './Overview.jsx';
+import Ratings from '.Ratings.jsx';
 
 
 const App = () => {
@@ -15,6 +16,7 @@ const App = () => {
       This is a placeholder being served
       <Questions />
       <Overview />
+      <Ratings />
     </div>
   )
 }
