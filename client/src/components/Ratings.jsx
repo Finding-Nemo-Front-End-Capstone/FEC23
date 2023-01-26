@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
-
-let Ratings = (props) => {
+function Ratings(props) {
+  const [reviewsList, setReviewList] = useState([]);
 
   return (
-  <div>hello from ratings</div>
-  )
+    <div>hello from ratings</div>
+  );
 }
 
-export default Ratings
+export default Ratings;

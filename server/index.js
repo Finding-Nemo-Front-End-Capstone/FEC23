@@ -10,7 +10,6 @@ const router = require('./router.js');
 app.use(bodyParser());
 app.use(express.json());
 app.use(express.static(path.join(`${__dirname}/../client/dist`)));
-app.use(router);
 
 app.use('/db', router);
 

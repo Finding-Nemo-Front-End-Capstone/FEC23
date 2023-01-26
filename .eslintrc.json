@@ -18,7 +18,7 @@
         "react"
     ],
     "rules": {
-        // "react/jsx-filename-extension": [0],  // not sure what this does
-        "import/extensions": "off"
+    // "react/jsx-filename-extension": [0],
+    "import/extensions": "off"
     }
 }
