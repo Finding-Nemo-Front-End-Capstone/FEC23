@@ -1,3 +1,8 @@
 #app {
   font-family: Georgia, 'Times New Roman', Times, serif;
 }
+
+.relatedContainer {
+  overflow-x: auto;
+  display: flex;
+}

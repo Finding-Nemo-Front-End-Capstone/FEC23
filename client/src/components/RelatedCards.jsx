@@ -1,37 +1,53 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-
 const RelatedCards = ({id}) => {
-  const [cardInfo, setCardInfo] = (useState(
-    {
-      "thumbnail": null, "category": "",
-      "Product Name": "", "Price": "23.88",
-      "Rating": ""
-    }))
-
-  useEffect(() => {
-    let temp = {...cardInfo};
-    axios.get('/db/' + id)
+  const [cardInfo, setCardInfo] = useState(
+    { "id": "", "category": "", "name": "",
+      "price": "", "rating": ""
+    })
+  const [image, setImage] = useState({"thumbnail": null})
+  const createInfo = () => {
+    return axios.get('/db/' + id)
     .then((data) => {
+      let temp = {...cardInfo};
       temp["category"] = data.data["category"];
-      temp["Product Name"] = data.data["name"];
-      temp["Price"] = data.data["default_price"];
-      temp["Rating"] = 0;
+      temp["name"] = data.data["name"];
+      temp["price"] = data.data["default_price"];
+      temp["rating"] = 5;
+      setCardInfo(temp);
     })
-    axios.get('/db/styles/' + id)
+  }
+
+  const attachImage = () => {
+    let temp = {...image}
+    return axios.get('/db/styles/' + id)
     .then((data) => {
-      // console.log(data.data.results[0]["photos"][0]["thumbnail_url"]);
       temp["thumbnail"] = data.data.results[0]["photos"][0]["thumbnail_url"];
+      setImage(temp);
     })
-    setCardInfo(cardInfo);
+  }
+  useEffect(() => {
+    createInfo();
   }, [])
 
+  useEffect(() => {
+    attachImage();
+  }, [cardInfo]);
+
   return (
-    <div>
-      This is card info
-      {cardInfo["Price"]}
-      {cardInfo["Rating"]}
+    <div className="cardInfo">
+      {image["thumbnail"] === null ?
+        <img width="250" height="250"/>:
+        <img src={image["thumbnail"]} width="250" height="250"/>
+      }
+      <div className="details">
+        Name: {cardInfo["name"]} <br />
+        Category: {cardInfo["category"]} <br />
+        Price: {cardInfo["price"]} <br />
+        Rating: {cardInfo["rating"]} <br />
+      </div>
+
     </div>
   )
 }
