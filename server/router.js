@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const helpers = require('../helpers');
+
 const controllers = require('./controllers');
 
 router.get('/reviews/:product_id/:sort/:count', controllers.reviews.getReviewById);
@@ -13,45 +13,41 @@ router.get('/related/:id', controllers.products.getRelated);
 router.get('/allProducts', controllers.products.getAllProducts);
 router.get('/:id', controllers.products.getOneProduct);
 
-router.post('/post/:id', function(req, res) {
+router.post('/post/:id', (req, res) => {
   res.status(200).send('making a post not set up yet');
-})
+});
 
-
-router.get('/questions', function(req, res) {
+router.get('/questions', (req, res) => {
   res.status(200).send('questions is not set up yet');
-})
+});
 
-router.get('/answers', function(req, res) {
-  //expected format /qa/questions/:question_id/answer
+router.get('/answers', (req, res) => {
+  // expected format /qa/questions/:question_id/answer
   res.status(200).send('answers is not set up yet');
-})
+});
 
-router.post('/ask', function(req, res) {
+router.post('/ask', (req, res) => {
   res.status(200).send('asking questions not set up yet');
-})
+});
 
-router.post('/answer', function(req, res) {
+router.post('/answer', (req, res) => {
   res.status(200).send('answering questions is not set up');
-})
+});
 
-router.put('/helpfulquestion', function(req, res) {
+router.put('/helpfulquestion', (req, res) => {
   res.status(200).send('marking helpful not set up');
-})
+});
 
-router.put('/reportquestion', function(req, res) {
+router.put('/reportquestion', (req, res) => {
   res.status(200).send('reporting question not set up');
-})
+});
 
-router.put('/helpfulanswer', function(req, res) {
+router.put('/helpfulanswer', (req, res) => {
   res.status(200).send('helpful answer not set up');
-})
+});
 
-router.put('/reportanswer', function(req, res) {
+router.put('/reportanswer', (req, res) => {
   res.status(200).send('report answer not set up');
-})
-
-
-
+});
 
 module.exports = router;
