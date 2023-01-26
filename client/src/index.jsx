@@ -22,8 +22,8 @@ const [product, setProduct] = useState([]);
     <div>
       This is a placeholder being served
       {/* <Overview product={product}/> */}
-      <Ratings product={product}/>
-      <Questions product={product}/>
+      {/* <Ratings product={product}/>
+      <Questions product={product}/> */}
       <RelatedProducts product={product} setProduct={setProduct}/>
     </div>
   )
