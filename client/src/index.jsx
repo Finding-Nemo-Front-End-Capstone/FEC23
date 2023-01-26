@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import RelatedProducts from './components/RelatedProducts.jsx'
-import Questions from './Questions.jsx';
-import Overview from './Overview.jsx';
-import Ratings from './Ratings.jsx';
+import Questions from './components/Questions.jsx';
+import Overview from './components/Overview.jsx';
+import Ratings from './components/Ratings.jsx';
 import axios from 'axios'
 
 const App = () => {
@@ -21,10 +21,10 @@ useEffect(() => {
   return (
     <div>
       This is a placeholder being served
-      <RelatedProducts id={}/>
       <Overview product={product}/>
       <Ratings product={product}/>
       <Questions product={product}/>
+      <RelatedProducts product={product} setProduct={setProduct}/>
     </div>
   )
 }
