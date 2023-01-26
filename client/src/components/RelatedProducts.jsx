@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import RelatedCards from './RelatedCards.jsx';
 
-const RelatedProducts = ({id}) => {
+function RelatedProducts({ id }) {
   const [relatedIds, setRelatedIds] = useState([]);
   const [currentId, setCurrentId] = useState(id === undefined ? 40344 : id);
   useEffect(() => {
@@ -24,8 +24,7 @@ const RelatedProducts = ({id}) => {
     <div>
       {cards}
     </div>
-  )
+  );
 }
-
 
 export default RelatedProducts;
