@@ -8,19 +8,26 @@ import Ratings from './components/Ratings.jsx';
 
 function App() {
 // const [productList, setProductList] = useState([]);
-  const [product, setProduct] = useState([]);
+  const [product, setProduct] = useState({});
+  const [rating, setRating] = useState({});
 
   useEffect(() => {
-    axios.get('/products')
+    axios.get('/db/allProducts')
       .then((data) => { setProduct(data.data[0]); })
-      .catch(() => console.log('err in fetching product List'));
+      .catch((err) => console.log(err));
   }, []);
+
+  useEffect(() => {
+    axios.get(`db/meta/${product.id}`)
+      .then((data) => { console.log(data.data); })
+      .catch((err) => { console.log('meta did not work'); });
+  }, [product]);
 
   return (
     <div>
       This is a placeholder being served
-      <Overview product={product} />
-      <Ratings product={product} />
+      <Overview product={product} rating={rating} />
+      <Ratings product={product} rating={rating} />
       <Questions product={product} />
       <RelatedProducts product={product} setProduct={setProduct} />
     </div>
