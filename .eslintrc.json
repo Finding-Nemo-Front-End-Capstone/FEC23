@@ -1,7 +1,12 @@
 {
     "env": {
         "browser": true,
+<<<<<<< HEAD
         "es2021": true
+=======
+        "es2021": true,
+        "node": true
+>>>>>>> 39392689cf487217647f36bc72dcba0dbb3aad5a
     },
     "extends": [
         "plugin:react/recommended",
@@ -17,8 +22,7 @@
         "react"
     ],
     "rules": {
-        // "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
-        // "react/jsx-filename-extension": [0],
-        "import/extensions": "off"
+    // "react/jsx-filename-extension": [0],
+    "import/extensions": "off"
     }
 }
