@@ -21,7 +21,7 @@ module.exports = {
   },
 
   getStyles(req, res) {
-    helpers.getStyleInfo(req.params.id)
+    helpers.getStyle(req.params.id)
       .then((data) => { res.status(200).send(data.data); })
       .catch((err) => {
         console.log('error in prod controller styles');
