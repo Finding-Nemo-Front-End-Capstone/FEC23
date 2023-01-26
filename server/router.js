@@ -1,13 +1,14 @@
 const express = require("express");
 const axios = require('axios');
-const router = express.Router()
+const router = express.Router();
+const config = require('../config.js');
 
 router.get('/products', (req, res) => {
   axios({
     method:'GET',
     url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products',
     headers: {
-      AUTHORIZATION: process.env.AUTHORIZATION
+      AUTHORIZATION: config.TOKEN
     }
   })
     .then ((data) =>{
