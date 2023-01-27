@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function RelatedCards({ id }) {
+function RelatedCards({ id, display }) {
   const [cardInfo, setCardInfo] = useState(
     {
       id: '',
@@ -33,7 +33,7 @@ function RelatedCards({ id }) {
   };
   useEffect(() => {
     createInfo();
-  }, []);
+  }, [display]);
 
   useEffect(() => {
     attachImage();
