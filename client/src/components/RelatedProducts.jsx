@@ -43,11 +43,12 @@ function RelatedProducts({ id }) {
     return (
       relatedIds.slice(display[0], display[1]).map((singleId) => (
         <div className="relatedCard">
-          <RelatedCards id={singleId} display={display} setDisplay={setDisplay} />
+          <RelatedCards id={singleId} display={display} />
         </div>
       ))
     );
   }
+
   return (
     <div className="relatedContainer">
       { currentIndex !== 0 ? <input onClick={clickHandler} type="submit" className="leftArrow" value="◀" /> : null }
