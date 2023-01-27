@@ -16,7 +16,6 @@ function RelatedProducts({ id }) {
 
   const cards = relatedIds.map((singleId) => (
     <div className="relatedCard">
-      {singleId}
       <RelatedCards id={singleId} />
     </div>
   ));

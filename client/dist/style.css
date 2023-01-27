@@ -5,4 +5,29 @@
 .relatedContainer {
   overflow-x: auto;
   display: flex;
+  scrollbar-width: none;
+  height: 15%;
 }
+
+.relatedImageContainer {
+  /* max-width: 100%; */
+  max-width:150px;
+}
+.cardInfo {
+  width: 100%;
+}
+.previewImage {
+  height: 200px;
+  width: 100%;
+}
+
+.relatedCard {
+  border: 1px solid grey;
+  margin-right: 10px;
+  max-width: 250px;
+  /* width: 30% */
+}
+
+/* .details {
+  overflow-wrap: break-word;
+} */

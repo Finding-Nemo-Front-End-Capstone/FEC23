@@ -1,15 +1,16 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import axios from 'axios';
+// import axios from 'axios';
 import RelatedProducts from './components/RelatedProducts.jsx';
-import Questions from './components/Questions.jsx';
+// import Questions from './components/Questions.jsx';
 // import Overview from './components/Overview.jsx';
-import Ratings from './components/Ratings.jsx';
+// import Ratings from './components/Ratings.jsx';
 
 function App() {
 // const [productList, setProductList] = useState([]);
   const [product, setProduct] = useState({});
-  const [rating, setRating] = useState({});
+  // const [rating, setRating] = useState({});
 
   // useEffect(() => {
   //   axios.get('/db/allProducts')
