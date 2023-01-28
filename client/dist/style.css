@@ -1,3 +1,10 @@
 #app {
   font-family: Georgia, 'Times New Roman', Times, serif;
 }
+
+.review-photo {
+  display: table-cell;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+

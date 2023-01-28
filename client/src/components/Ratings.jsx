@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import ClipLoader from 'react-spinners/ClipLoader';
 import ReviewEntry from './RatingsComp/ReviewEntry.jsx';
-import ClipLoader from "react-spinners/ClipLoader";
 
 function Ratings({ product, rating, setProduct }) {
   const [reviewList, setReviewList] = useState([]);
@@ -10,7 +10,8 @@ function Ratings({ product, rating, setProduct }) {
   const [totalReview, setTotalReviews] = useState('');
   const [reviewHolder, setReviewHolder] = useState([]);
   const [reviewDisplay, setReviewDisplay] = useState([]);
-  let [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
+  const [moreDisplay, setMoreDisplay] = useState('none');
 
   useEffect(() => {
     if (rating.product_id) {
@@ -37,6 +38,9 @@ function Ratings({ product, rating, setProduct }) {
   useEffect(() => {
     if (reviewHolder[0]) {
       setCount(2);
+      if (reviewHolder.length > 2) {
+        setMoreDisplay('');
+      }
     }
   }, [reviewHolder]);
 
@@ -50,44 +54,40 @@ function Ratings({ product, rating, setProduct }) {
   const moreHandler = (e) => {
     const addCount = count + 2;
     setCount(addCount);
+    if (addCount >= reviewHolder.length) {
+      setMoreDisplay('none');
+    }
   };
-  const sortHelpful = (e) => {
+
+  const sortChange = (e) => {
     setLoading(true);
-    setSort('helpful');
-    setCount(0);
-  };
-  const sortRelevance = (e) => {
-    setLoading(true);
-    setSort('relevant');
-    setCount(0);
-  };
-  const sortNewest = (e) => {
-    setLoading(true);
-    setSort('newest');
+    setSort(e.target.value);
     setCount(0);
   };
 
   return (
     <div>
       RATINGS
+      <div className="dropdown">
+        <label htmlFor="sort">Sort By: </label>
+        <select name="sort" id="sort" onChange={sortChange}>
+          <option value="newest">Newest</option>
+          <option value="relevant">Relevant</option>
+          <option value="helpful">Helpful</option>
+        </select>
+      </div>
       <ClipLoader
-        color={'green'}
+        color="green"
         loading={loading}
         size={15}
         aria-label="Loading Spinner"
         data-testid="loader"
       />
-      {reviewDisplay.map((review) => {
-        console.log(review);
-        return (
-          <ReviewEntry review={review} />
-        );
-      })}
-      <br/>
-      <button onClick={moreHandler}>more</button><br/>
-      <button onClick={sortHelpful}>Sort based on helpful</button>
-      <button onClick={sortRelevance}>Sort based on relevance</button>
-      <button onClick={sortNewest}>Sort based on newest</button>
+      {reviewDisplay.map((review) => (
+        <ReviewEntry review={review} />
+      ))}
+      <br />
+      <button onClick={moreHandler} style={{ display: moreDisplay }}>More Reviews</button>
     </div>
   );
 }
