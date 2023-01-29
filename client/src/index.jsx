@@ -16,20 +16,23 @@ function App() {
   //     .then((data) => { setProduct(data.data[0]); })
   //     .catch((err) => console.log(err));
   // }, []);
+p
+  useEffect(() => {
+    if (product.id) {
+      axios.get(`db/meta/${product.id}`)
+        .then((data) => { setRating(data.data); })
+        .catch((err) => { console.log('meta did not work'); });
+    }
+  }, [product]);
 
-  // useEffect(() => {
-  //   axios.get(`/db/meta/${product.id}`)
-  //     .then((data) => { console.log(data.data); })
-  //     .catch((err) => { console.log('meta did not work'); });
-  // }, [product]);
 
   return (
     <div>
       This is a placeholder being served
       {/* <Overview product={product} rating={rating} /> */}
-      {/* <Ratings product={product} rating={rating} />
-      <Questions product={product} /> */}
-      <RelatedProducts product={product} setProduct={setProduct} />
+      <Ratings product={product} rating={rating} setProduct={setProduct} />
+      {/* <Questions product={product} /> */}
+      {/* <RelatedProducts product={product} setProduct={setProduct} /> */}
     </div>
   );
 }
