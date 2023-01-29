@@ -46,7 +46,7 @@ module.exports = {
     helpers.putReportReview(req.params.review_id)
       .then((data) => {
         console.log('this is reporting it');
-        res.status(500).send(data.data);
+        res.status(204).send(data.data);
       })
       .catch((err) => {
         console.log('error in put controller report');
