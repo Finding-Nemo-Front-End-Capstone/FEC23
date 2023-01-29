@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
