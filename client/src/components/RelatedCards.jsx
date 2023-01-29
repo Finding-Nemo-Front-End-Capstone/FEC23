@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function RelatedCards({ id }) {
+function RelatedCards({ id, display }) {
   const [cardInfo, setCardInfo] = useState(
     {
       id: '',
@@ -33,7 +33,7 @@ function RelatedCards({ id }) {
   };
   useEffect(() => {
     createInfo();
-  }, []);
+  }, [display]);
 
   useEffect(() => {
     attachImage();
@@ -41,32 +41,22 @@ function RelatedCards({ id }) {
 
   return (
     <div className="cardInfo">
-      {image.thumbnail === null
-        ? <img width="250" height="250" />
-        : <img src={image.thumbnail} width="250" height="250" />}
+      <div className="relatedImageContainer">
+        {image.thumbnail === null
+          ? <img className="previewImage" alt="" />
+          : <img className="previewImage" src={image.thumbnail} alt="" />}
+      </div>
       <div className="details">
-        Name:
-        {' '}
-        {cardInfo.name}
-        {' '}
-        <br />
-        Category:
-        {' '}
         {cardInfo.category}
-        {' '}
         <br />
-        Price:
-        {' '}
+        {cardInfo.name}
+        <br />
+        $
         {cardInfo.price}
-        {' '}
         <br />
-        Rating:
-        {' '}
         {cardInfo.rating}
-        {' '}
         <br />
       </div>
-
     </div>
   );
 }

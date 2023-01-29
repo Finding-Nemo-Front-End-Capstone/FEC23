@@ -2,8 +2,52 @@
   font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
+
+.relatedContainer {
+  overflow-x: auto;
+  display: -webkit-box;
+  scrollbar-width: none;
+  max-height: 15%;
+  max-width: 70%;
+  position: relative;
+  /* mask-image: linear-gradient(90deg, white, 80% ,transparent); */
+  width: 650px;
+  transform: scale(1,1);
+
 .review-photo {
   display: table-cell;
   margin-left: 5%;
   margin-right: 5%;
+
+}
+
+.leftArrow,
+.rightArrow {
+  position: absolute;
+  font-size: 30px;
+  top: 40%;
+}
+
+.rightArrow {
+  right: 0%;
+}
+
+.relatedImageContainer {
+  /* max-width: 100%; */
+  width:100%
+}
+
+.cardInfo {
+  width: 100%;
+}
+.previewImage {
+  height: 200px;
+  width: 100%;
+}
+
+.relatedCard {
+  border: 1px solid grey;
+  margin-right: 10px;
+  max-width: 175px;
+  width: 100%;
 }
