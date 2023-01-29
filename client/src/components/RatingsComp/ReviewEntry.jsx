@@ -1,9 +1,10 @@
+/* eslint-disable react/button-has-type */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PhotoEntry from './PhotoEntry.jsx';
 
 function ReviewEntry(props) {
-  console.log(props.review);
+  // console.log(props.review);
   const [body, setBody] = useState('');
   const [moreBody, setMoreBody] = useState('none');
   const [recommend, setRecommend] = useState('');
