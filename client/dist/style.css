@@ -13,12 +13,11 @@
   /* mask-image: linear-gradient(90deg, white, 80% ,transparent); */
   width: 650px;
   transform: scale(1,1);
+}
 
 .review-photo {
   display: table-cell;
-  margin-left: 5%;
-  margin-right: 5%;
-
+  width: 12em;
 }
 
 .leftArrow,
