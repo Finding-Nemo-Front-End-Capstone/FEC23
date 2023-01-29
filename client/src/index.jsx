@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import RelatedProducts from './components/RelatedProducts.jsx';
 import Questions from './components/Questions.jsx';
-import Overview from './components/Overview.jsx';
+// import Overview from './components/Overview.jsx';
 import Ratings from './components/Ratings.jsx';
 
 function App() {
@@ -11,12 +11,12 @@ function App() {
   const [product, setProduct] = useState({});
   const [rating, setRating] = useState({});
 
-  useEffect(() => {
-    axios.get('/db/allProducts')
-      .then((data) => { setProduct(data.data[0]); })
-      .catch((err) => console.log(err));
-  }, []);
-
+  // useEffect(() => {
+  //   axios.get('/db/allProducts')
+  //     .then((data) => { setProduct(data.data[0]); })
+  //     .catch((err) => console.log(err));
+  // }, []);
+p
   useEffect(() => {
     if (product.id) {
       axios.get(`db/meta/${product.id}`)
@@ -24,6 +24,7 @@ function App() {
         .catch((err) => { console.log('meta did not work'); });
     }
   }, [product]);
+
 
   return (
     <div>
