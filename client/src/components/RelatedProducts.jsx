@@ -45,6 +45,7 @@ function RelatedProducts({ id, product }) {
       ))
     );
   }
+
   return (
     <div className="relatedContainer">
       { currentIndex !== 0 && !relatedIds.length <= 3 ? <input onClick={clickHandler} type="submit" className="leftArrow" value="◀" /> : null }

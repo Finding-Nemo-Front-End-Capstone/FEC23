@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-
+// figure out how to close modal if another button is clicked
 function Modal({
   show, setShowModal, relFeat, relName, currFeat, currName,
 }) {
