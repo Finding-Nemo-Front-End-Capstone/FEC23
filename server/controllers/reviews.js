@@ -3,11 +3,12 @@ const helpers = require('../../helpers/reviews');
 module.exports = {
 
   getReviewById(req, res) {
+    console.log('test', req.params);
     helpers.getReviews(req.params)
       .then((data) => { res.status(200).send(data.data); })
       .catch((err) => {
         console.log('error in getting controller reviews');
-        res.status(404).send(err);
+        res.status(500).send(err);
       });
   },
 
@@ -16,7 +17,7 @@ module.exports = {
       .then((data) => { res.status(200).send(data.data); })
       .catch((err) => {
         console.log('error in getting controller meta');
-        res.status(404).send(err);
+        res.status(500).send(err);
       });
   },
 
@@ -25,7 +26,7 @@ module.exports = {
       .then((data) => { res.status(201).send(data.data); })
       .catch((err) => {
         console.log('error in posting controller review');
-        res.status(404).send(err);
+        res.status(500).send(err);
       });
   },
 
@@ -37,7 +38,7 @@ module.exports = {
       })
       .catch((err) => {
         console.log('error in put controller helpful');
-        res.status(404).send(err);
+        res.status(500).send(err);
       });
   },
 
@@ -49,7 +50,7 @@ module.exports = {
       })
       .catch((err) => {
         console.log('error in put controller report');
-        res.status(404).send(err);
+        res.status(500).send(err);
       });
   },
 

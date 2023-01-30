@@ -4,32 +4,29 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import RelatedProducts from './components/RelatedProducts.jsx';
-// import Questions from './components/Questions.jsx';
-// import Overview from './components/Overview.jsx';
-// import Ratings from './components/Ratings.jsx';
+import Questions from './components/Questions.jsx';
+import Overview from './components/Overview.jsx';
+import Ratings from './components/Ratings.jsx';
 // import Modal from './components/Modal.jsx';
 
 function App() {
 // const [productList, setProductList] = useState([]);
   const [product, setProduct] = useState({});
-  // const [rating, setRating] = useState({});
+  const [rating, setRating] = useState({});
 
   useEffect(() => {
-    let item;
     axios.get('/db/allProducts')
-      .then((data) => {
-        item = data.data[0].id;
-        axios.get(`/db/${item}`)
-          .then((dat) => { setProduct(dat.data); })
-          .catch((err) => console.log('this is from index.jsx error', err));
-      })
+      .then((data) => { setProduct(data.data[0]); })
       .catch((err) => console.log(err));
   }, []);
-  // useEffect(() => {
-  //   axios.get(`/db/meta/${product.id}`)
-  //     .then((data) => { console.log(data.data); })
-  //     .catch((err) => { console.log('meta did not work'); });
-  // }, [product]);
+
+  useEffect(() => {
+    if (product.id) {
+      axios.get(`db/meta/${product.id}`)
+        .then((data) => { setRating(data.data); })
+        .catch((err) => { console.log('meta did not work'); });
+    }
+  }, [product]);
 
   return (
     <div>
