@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Modal from './Modal.jsx';
 
-function RelatedCards({ id, display }) {
+function RelatedCards({ id, product }) {
   const [cardInfo, setCardInfo] = useState(
     {
       id: '',
@@ -12,7 +13,9 @@ function RelatedCards({ id, display }) {
       rating: '',
     },
   );
+  const [features, setFeatures] = useState([]);
   const [image, setImage] = useState({ thumbnail: null });
+  const [showModal, setShowModal] = useState(false);
   const createInfo = () => axios.get(`/db/${id}`)
     .then((data) => {
       const temp = { ...cardInfo };
@@ -20,6 +23,7 @@ function RelatedCards({ id, display }) {
       temp.name = data.data.name;
       temp.price = data.data.default_price;
       temp.rating = 5;
+      setFeatures(data.data.features);
       setCardInfo(temp);
     });
 
@@ -33,14 +37,26 @@ function RelatedCards({ id, display }) {
   };
   useEffect(() => {
     createInfo();
-  }, [display]);
+  }, [id]);
 
   useEffect(() => {
     attachImage();
   }, [cardInfo]);
-
+  function clickNewProduct(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    setShowModal(!showModal);
+  }
   return (
-    <div className="cardInfo">
+    <button type="submit" className="cardInfo" name={id} onClick={clickNewProduct}>
+      <Modal
+        show={showModal}
+        setShowModal={setShowModal}
+        relFeat={features}
+        relName={cardInfo.name}
+        currFeat={product.features}
+        currName={product.name}
+      />
       <div className="relatedImageContainer">
         {image.thumbnail === null
           ? <img className="previewImage" alt="" />
@@ -57,7 +73,7 @@ function RelatedCards({ id, display }) {
         {cardInfo.rating}
         <br />
       </div>
-    </div>
+    </button>
   );
 }
 
