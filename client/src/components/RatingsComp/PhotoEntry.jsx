@@ -6,7 +6,7 @@ function PhotoEntry(props) {
   // console.log(props.photo.url);
   return (
     <div className="review-photo">
-      <img class='eachReviewPhoto' src={props.photo.url} />
+      <img className='eachReviewPhoto' src={props.photo.url} />
     </div>
   );
 }
