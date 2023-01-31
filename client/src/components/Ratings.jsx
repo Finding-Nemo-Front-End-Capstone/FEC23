@@ -1,7 +1,9 @@
+/* eslint-disable react/button-has-type */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ClipLoader from 'react-spinners/ClipLoader';
 import ReviewEntry from './RatingsComp/ReviewEntry.jsx';
+import ReviewForm from './RatingsComp/ReviewForm.jsx';
 
 function Ratings({ product, rating, setProduct }) {
   const [reviewList, setReviewList] = useState([]);
@@ -12,6 +14,7 @@ function Ratings({ product, rating, setProduct }) {
   const [reviewDisplay, setReviewDisplay] = useState([]);
   const [loading, setLoading] = useState(true);
   const [moreDisplay, setMoreDisplay] = useState('none');
+  const [reviewForm, setReviewForm] = useState(false);
 
   useEffect(() => {
     if (rating.product_id) {
@@ -24,7 +27,6 @@ function Ratings({ product, rating, setProduct }) {
       axios.get(`/db/reviews/${rating.product_id}/${sort}/${totalReview}/1`)
         .then((data) => { setReviewList(data.data.results); })
         .catch(() => console.log('error in obtaining review'));
-      // setProduct({id: 40345})
     }
   }, [totalReview, sort]);
 
@@ -65,16 +67,49 @@ function Ratings({ product, rating, setProduct }) {
     setCount(0);
   };
 
+  const reviewFormBut = (e) => {
+    setReviewForm(!reviewForm);
+  };
+
+  const reviewFilter = (e) => {
+    if (e.target.value === 'all') {
+      setReviewHolder(reviewList);
+      setCount(0);
+    } else {
+      const arr = reviewList.filter((reviewFilter) => {
+        if (reviewFilter.rating === Number(e.target.value)) {
+          return true;
+        }
+        return false;
+      });
+      setReviewHolder(arr);
+      setCount(0);
+    }
+  };
+
   return (
     <div>
       RATINGS
+      <div className="reviewFilter">
+        <label>
+          Filter Rating:
+          <button onClick={reviewFilter} value="all">All</button>
+          <button onClick={reviewFilter} value="5">5</button>
+          <button onClick={reviewFilter} value="4">4</button>
+          <button onClick={reviewFilter} value="3">3</button>
+          <button onClick={reviewFilter} value="2">2</button>
+          <button onClick={reviewFilter} value="1">1</button>
+        </label>
+      </div>
       <div className="dropdown">
-        <label htmlFor="sort">Sort By: </label>
-        <select name="sort" id="sort" onChange={sortChange}>
-          <option value="newest">Newest</option>
-          <option value="relevant">Relevant</option>
-          <option value="helpful">Helpful</option>
-        </select>
+        <label htmlFor="sort">
+          Sort By:
+          <select name="sort" id="sort" onChange={sortChange}>
+            <option value="newest">Newest</option>
+            <option value="relevant">Relevant</option>
+            <option value="helpful">Helpful</option>
+          </select>
+        </label>
       </div>
       <ClipLoader
         color="green"
@@ -87,7 +122,17 @@ function Ratings({ product, rating, setProduct }) {
         <ReviewEntry review={review} />
       ))}
       <br />
-      <button onClick={moreHandler} style={{ display: moreDisplay }}>More Reviews</button>
+      <button className='moreReviewBut' onClick={moreHandler} style={{ display: moreDisplay }}>More Reviews</button>
+      <br/>
+      <button className="writeReview" onClick={reviewFormBut}>Write Review</button>
+
+      {reviewForm
+      && (
+      <div className="reviewForm">
+        <button className="closeReviewForm" onClick={reviewFormBut}>x</button>
+        <ReviewForm />
+      </div>
+      )}
     </div>
   );
 }
