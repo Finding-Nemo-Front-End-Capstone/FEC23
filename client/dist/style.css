@@ -1,3 +1,6 @@
+
+/* Start of Britta's CSS */
+
 :root {
   --bg: #f1faee;
 }
@@ -45,12 +48,12 @@ body, button {
   padding-top: 2em;
 }
 
-@media (max-width: 500px) {
+/* @media (max-width: 500px) {
   .prod-content {
     flex-direction: column;
     justify-content: space-around;
   }
-}
+} */
 
 .prod-info {
   display: flex;
@@ -130,3 +133,5 @@ body, button {
   -webkit-text-stroke: initial;
   /* overflow: hidden; */
 }
+
+/* End of Britta's CSS */
