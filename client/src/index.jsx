@@ -6,7 +6,8 @@ import axios from 'axios';
 import RelatedProducts from './components/RelatedProducts.jsx';
 import Questions from './components/Questions.jsx';
 import Overview from './components/Overview.jsx';
-import Ratings from './components/Ratings.jsx';
+// import Ratings from './components/Ratings.jsx';
+// import css from '../../client/dist/style.css';
 
 function App() {
 // const [productList, setProductList] = useState([]);
@@ -21,22 +22,25 @@ function App() {
 
   useEffect(() => {
     if (product.id) {
-      axios.get(`db/meta/${product.id}`)
+      axios.get(`/db/meta/${product.id}`)
         .then((data) => { setRating(data.data); })
         .catch((err) => { console.log('meta did not work'); });
     }
   }, [product]);
 
-
   return (
-    <div>
-      This is a placeholder being served
-      {/* <Overview product={product} rating={rating} /> */}
-      <Ratings product={product} rating={rating} setProduct={setProduct} />
-      {/* <Questions product={product} /> */}
-      {/* <RelatedProducts product={product} setProduct={setProduct} /> */}
-    </div>
+    <>
+      <nav className="nav-bar">Finding Nemo</nav>
+      <div>
+        <p className="site-announcement">SITE-WIDE ANNOUNCEMENT MESSAGE!</p>
+        <Overview product={product} rating={rating} />
+        {/* <Ratings product={product} rating={rating} />
+        <Questions product={product} /> */}
+        {/* <RelatedProducts product={product} setProduct={setProduct} /> */}
+      </div>
+    </>
   );
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
+
