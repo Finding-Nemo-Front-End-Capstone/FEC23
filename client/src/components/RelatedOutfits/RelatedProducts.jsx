@@ -10,7 +10,7 @@ import Outfits from './Outfits.jsx';
 
 function RelatedProducts({ id, product }) {
   const [relatedIds, setRelatedIds] = useState([]);
-  const [currentId, setCurrentId] = useState(id === undefined ? 40346 : id);
+  const [currentId, setCurrentId] = useState(id === undefined ? 40345 : id);
   const [display, setDisplay] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [storage, setStorage] = useState({});

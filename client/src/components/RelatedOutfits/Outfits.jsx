@@ -7,6 +7,9 @@ function Outfits({ product }) {
     if (localStorage.getItem('outfits')) {
       const getStorage = JSON.parse(localStorage.getItem('outfits'));
       setSaved(getStorage);
+      if (getStorage.some((item) => item.id === product.id)) {
+        setHasCurrent(true);
+      }
     }
   }, [product]);
   function createItem(info) {
@@ -27,6 +30,13 @@ function Outfits({ product }) {
     localStorage.setItem('outfits', JSON.stringify(storage));
     setSaved(storage);
     setHasCurrent(true);
+  }
+  function createOutfitsCard(arr) {
+    return arr.map((item) => (
+      <div className="outfitCard">
+        placeholder
+      </div>
+    ));
   }
   return (
     <div>

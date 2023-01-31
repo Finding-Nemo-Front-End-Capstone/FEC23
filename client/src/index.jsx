@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import RelatedProducts from './components/RelatedProducts.jsx';
+import RelatedProducts from './components/RelatedOutfits/RelatedProducts.jsx';
 // import Questions from './components/Questions.jsx';
 // import Overview from './components/Overview.jsx';
 // import Ratings from './components/Ratings.jsx';
@@ -27,7 +27,7 @@ function App() {
 
   useEffect(() => {
     if (product.id) {
-      axios.get(`db/meta/${product.id}`)
+      axios.get(`/db/meta/${product.id}`)
         .then((data) => { setRating(data.data); })
         .catch((err) => { console.log('meta did not work'); });
     }
