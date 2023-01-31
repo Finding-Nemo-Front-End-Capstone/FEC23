@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import RelatedCards from './RelatedCards.jsx';
 import Modal from './Modal.jsx';
+import Outfits from './Outfits.jsx';
 // figure out how to persist collections using window.localStorage
 
 function RelatedProducts({ id, product }) {
@@ -12,6 +13,8 @@ function RelatedProducts({ id, product }) {
   const [currentId, setCurrentId] = useState(id === undefined ? 40346 : id);
   const [display, setDisplay] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [storage, setStorage] = useState({});
+  const [currStyle, setCurrStyle] = useState({});
   function scroll(className) {
     let copy = currentIndex;
     if (className === 'rightArrow') { copy += 1; }
@@ -34,8 +37,13 @@ function RelatedProducts({ id, product }) {
         }
       })
       .catch((err) => { console.log('there was an error', err); });
+    if (!localStorage.getItem('outfits')) {
+      localStorage.setItem('outfits', JSON.stringify([]));
+    }
+    axios.get(`/db/styles/${currentId}`)
+      .then((data) => { setCurrStyle(data.data); })
+      .catch((err) => { console.log('there was an error'); });
   }, [currentId]);
-
   function cards() {
     return (
       relatedIds.slice(display[0], display[1]).map((singleId) => (
@@ -45,12 +53,17 @@ function RelatedProducts({ id, product }) {
       ))
     );
   }
-
   return (
-    <div className="relatedContainer">
-      { currentIndex !== 0 && !relatedIds.length <= 3 ? <input onClick={clickHandler} type="submit" className="leftArrow" value="◀" /> : null }
-      {cards()}
-      { currentIndex !== relatedIds.length - 3 && display[1] <= 3 ? <input onClick={clickHandler} type="submit" className="rightArrow" value="▶" /> : null }
+    <div className="RelatedOutfits">
+      <div className="relatedContainer">
+        { currentIndex !== 0 && !relatedIds.length <= 3 ? <input onClick={clickHandler} type="submit" className="leftArrow" value="◀" /> : null }
+        {cards()}
+        { currentIndex !== relatedIds.length - 3 && display[1] <= 3 ? <input onClick={clickHandler} type="submit" className="rightArrow" value="▶" /> : null }
+      </div>
+      <br />
+      <div className="outfitContainer">
+        <Outfits product={product} />
+      </div>
     </div>
   );
 }
