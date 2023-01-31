@@ -21,15 +21,15 @@ const Overview = ({ product, rating }) => {
   }, [product])
 
   // onClick for "Read all # reviews" -> scroll to reviews
-  // onClick for selected style - update images etc
+  // onClick for selected style - update images and price
+  // social media share buttons
 
   if (styles.length > 0) {
     return (
       <div className="prod-content">
         <div className="prod-info">
           <h1 className="heading">{product.name}</h1>
-          {/* <p>{product.description}</p> */}
-          <p>${product.default_price}</p>
+          <span>${product.default_price}</span>
           <Stars product={product} rating={rating}/>
           <div className="style-wrapper">
             <p>STYLE > {currStyle.name}</p>
@@ -43,6 +43,7 @@ const Overview = ({ product, rating }) => {
           </div>
         </div>
           <img className="main-photo" src={currStyle.photos[0].url}/>
+              {/* <p>{product.description}</p> */}
           <div className="gallery">
               {currStyle.photos.map((photo, i) => {
                 return <img className="gallery-photos"

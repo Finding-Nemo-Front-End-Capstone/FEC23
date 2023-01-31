@@ -1,13 +1,21 @@
 const helpers = require('../../helpers/products');
 
+const headers = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+  'Access-Control-Allow-Headers': 'content-type, accept, authorization',
+  'Access-Control-Allow-Credentials': 'true',
+  'Access-Control-Max-Age': 10, // Seconds.
+};
+
 module.exports = {
 
   getAllProducts(req, res) {
     helpers.getAllProducts()
-      .then((data) => { res.status(200).send(data.data); })
+      .then((data) => { res.header(headers); res.status(200).send(data.data); })
       .catch((err) => {
         console.log('error in prod controller getAll');
-        res.status(404).send(err);
+        res.status(500).send(err);
       });
   },
 
@@ -16,7 +24,7 @@ module.exports = {
       .then((data) => { res.status(200).send(data.data); })
       .catch((err) => {
         console.log('error in prod controller getOne');
-        res.status(404).send(err);
+        res.status(500).send(err);
       });
   },
 
@@ -25,7 +33,7 @@ module.exports = {
       .then((data) => { res.status(200).send(data.data); })
       .catch((err) => {
         console.log('error in prod controller styles');
-        res.status(404).send(err);
+        res.status(500).send(err);
       });
   },
 
@@ -34,7 +42,7 @@ module.exports = {
       .then((data) => { res.status(200).send(data.data); })
       .catch((err) => {
         console.log('error in prod controller related');
-        res.status(404).send(err);
+        res.status(500).send(err);
       });
   },
 };
