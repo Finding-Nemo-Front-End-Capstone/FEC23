@@ -39,7 +39,7 @@ function RelatedCards({ id, product }) {
     setShowModal(!showModal);
   }
   return (
-    <div className="cardInfo" name={id}>
+    <div className="cardInfo">
       <button type="submit" className="modalButton" onClick={clickModal}>
         ⭐
       </button>
@@ -50,7 +50,7 @@ function RelatedCards({ id, product }) {
           ? <img className="previewImage" alt="" />
           : <img className="previewImage" src={cardInfo.thumbnail} alt="" />}
       </div>
-      <div className="details">
+      <div className="cardDetails">
         {cardInfo.category}
         <br />
         {cardInfo.name}
