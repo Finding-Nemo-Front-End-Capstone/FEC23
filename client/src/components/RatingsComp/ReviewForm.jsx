@@ -30,6 +30,7 @@ function ReviewForm(props) {
   const [imageList, setImageList] = useState([]);
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
+  const [submitWarning, setSubmitWarning] = useState('none')
 
   const click = {
     clickSize: (e) => {
@@ -91,22 +92,26 @@ function ReviewForm(props) {
     }
   };
 
-  const submitForm = {
-
+  const submitForm = (e) => {
+    if (size === '' || width === '' || comfort === '' ||quality === '' || length === '' || fit === '' || bodyValue.length < 50 || nickname === '' || email === '' || email.indexOf('@') === -1 || countStar === 0) {
+      setSubmitWarning('')
+    } else {
+      console.log('success submit')
+    }
   };
 
   return (
-    <div>
+    <div className="reviewFormContent">
       ReviewForm
       <br />
       <br />
       <label htmlFor="nickname">
         Nickname:
-        <input type="text" className="nickname" value={nickname} />
+        <input type="text" className="nickname" value={nickname} onChange={nicknameChange} />
       </label>
       <label htmlFor="email">
         email:
-        <input type="email" className="email" value={email} />
+        <input type="email" className="email" value={email} onChange={emailChange}/>
       </label>
       <br />
       <br />
@@ -134,8 +139,9 @@ function ReviewForm(props) {
         <ReviewPhoto imageList={imageList} setImageList={setImageList} />
       </div>
       <br />
-      <button className="submitReviewForm">Submit Review</button>
-      {/* Mandatory: rating, characteristic, body, nickname, email */}
+      <text className='submittingWarning' style={{display: submitWarning, color:'red'}}>{'Please make sure that nickname, email,rating, characteristics, and body (min of 50 characters) are all filled out before submitting'}</text>
+      <br/>
+      <button className="submitReviewForm" onClick={submitForm}>Submit Review</button>
     </div>
   );
 }

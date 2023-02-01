@@ -4,9 +4,9 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import RelatedProducts from './components/RelatedOutfits/RelatedProducts.jsx';
-// import Questions from './components/Questions.jsx';
-// import Overview from './components/Overview.jsx';
-// import Ratings from './components/Ratings.jsx';
+import Questions from './components/Questions.jsx';
+import Overview from './components/Overview.jsx';
+import Ratings from './components/Ratings.jsx';
 // import Modal from './components/Modal.jsx';
 
 function App() {
@@ -36,10 +36,10 @@ function App() {
   return (
     <div>
       This is a placeholder being served
-      {/* <Overview product={product} rating={rating} /> */}
-      {/* <Ratings product={product} rating={rating} />
-      <Questions product={product} /> */}
+      <Overview product={product} rating={rating} />
+      <Ratings product={product} rating={rating} />
       <RelatedProducts id={product.id} product={product} />
+      <Questions product={product} />
     </div>
   );
 }
