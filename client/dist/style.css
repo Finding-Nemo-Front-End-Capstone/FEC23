@@ -151,6 +151,14 @@ body, button {
   position: absolute;
 }
 
+.relatedProductsHeader,
+.outfitsHeader {
+  font-family: Arial, Helvetica, sans-serif;
+  color: grey;
+  font-size: small;
+  font-weight: bold;
+}
+
 .relatedContainer,
 .outfitsContainer {
   position: relative;
@@ -159,7 +167,8 @@ body, button {
   /* flex-direction: column; */
 }
 .relatedCard,
-.outfitCard {
+.outfitCard,
+.addOutfit {
   border: 1px solid grey;
   margin-right: 10px;
   width: 175px;
@@ -200,10 +209,17 @@ body, button {
 }
 
 .relatedModal {
-  border: 1px solid grey;
+  border: 2px solid lightslategrey;
   background-color: white;
   z-index: 1;
   position: relative;
+  font-size: small;
+}
+
+.modalCurrHeader,
+.modalCompHeader {
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .relatedModalComparing{
