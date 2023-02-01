@@ -2,97 +2,107 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import ReviewInput from './ReviewInput.jsx';
+import ReviewInput from './ReviewFormComp/ReviewInput.jsx';
+import ReviewStar from './ReviewFormComp/ReviewStar.jsx';
+import Characteristic from './ReviewFormComp/Characteristic.jsx';
+import Summary from './ReviewFormComp/Summary.jsx';
+import Body from './ReviewFormComp/Body.jsx';
+import ReviewPhoto from './ReviewFormComp/ReviewPhoto.jsx';
 
 function ReviewForm(props) {
-  const unclick = 'fa fa-star';
-  const clicked = 'fa fa-star checked';
-  const [star1, setStar1] = useState(unclick);
-  const [star2, setStar2] = useState(unclick);
-  const [star3, setStar3] = useState(unclick);
-  const [star4, setStar4] = useState(unclick);
-  const [star5, setStar5] = useState(unclick);
   const [countStar, setCountStar] = useState(0);
-  const [starDef, setStarDef] = useState('');
-
-  useEffect(() => {
-    let count = 0;
-    if (star1 === 'fa fa-star checked') {
-      count++;
-    }
-    if (star2 === 'fa fa-star checked') {
-      count++;
-    }
-    if (star3 === 'fa fa-star checked') {
-      count++;
-    }
-    if (star4 === 'fa fa-star checked') {
-      count++;
-    }
-    if (star5 === 'fa fa-star checked') {
-      count++;
-    }
-    setCountStar(count);
-    console.log(countStar);
-  }, [star1, star2, star3, star4, star5]);
-
-  const starClick = (e) => {
-    if (e.target.id === 'star5') {
-      setStar5(clicked);
-      setStar4(clicked);
-      setStar3(clicked);
-      setStar2(clicked);
-      setStar1(clicked);
-      setStarDef('5 stars - “Great”');
-    }
-    if (e.target.id === 'star4') {
-      setStar5(unclick);
-      setStar4(clicked);
-      setStar3(clicked);
-      setStar2(clicked);
-      setStar1(clicked);
-      setStarDef('4 stars - “Good”');
-    }
-    if (e.target.id === 'star3') {
-      setStar5(unclick);
-      setStar4(unclick);
-      setStar3(clicked);
-      setStar2(clicked);
-      setStar1(clicked);
-      setStarDef('3 stars - “Average”');
-    }
-    if (e.target.id === 'star2') {
-      setStar5(unclick);
-      setStar4(unclick);
-      setStar3(unclick);
-      setStar2(clicked);
-      setStar1(clicked);
-      setStarDef('2 stars - “Fair”');
-    }
-    if (e.target.id === 'star1') {
-      setStar5(unclick);
-      setStar4(unclick);
-      setStar3(unclick);
-      setStar2(unclick);
-      setStar1(clicked);
-      setStarDef('1 star - “Poor”');
-    }
+  const [recommendStatus, setRecommendStatus] = useState(false);
+  const [size, setSize] = useState('');
+  const [width, setWidth] = useState('');
+  const [comfort, setComfort] = useState('');
+  const [quality, setQuality] = useState('');
+  const [length, setLength] = useState('');
+  const [fit, setFit] = useState('');
+  const [sizeStatus, setSizeStatus] = useState('');
+  const [widthStatus, setWidthSatus] = useState('');
+  const [comfortStatus, setComfortStatus] = useState('');
+  const [qualityStatus, setQualityStatus] = useState('');
+  const [lengthStatus, setLengthStatus] = useState('');
+  const [fitStatus, setFitStatus] = useState('');
+  const [summaryValue, setSummaryValue] = useState('');
+  const [bodyValue, setBodyValue] = useState('');
+  const click = {
+    clickSize: (e) => {
+      const explain = ['A size too small', '½ a size too small', 'Perfect', '½ a size too big', 'A size too wide'];
+      const value = Number(e.target.value);
+      setSize(value);
+      setSizeStatus(explain[value - 1]);
+    },
+    clickWidth: (e) => {
+      const explain = ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'];
+      const value = Number(e.target.value);
+      setWidth(value);
+      setWidthSatus(explain[value - 1]);
+    },
+    clickComfort: (e) => {
+      const explain = ['Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comfortable', 'Perfect'];
+      const value = Number(e.target.value);
+      setComfort(value);
+      setComfortStatus(explain[value - 1]);
+    },
+    clickQuality: (e) => {
+      const explain = ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'];
+      const value = Number(e.target.value);
+      setQuality(value);
+      setQualityStatus(explain[value - 1]);
+    },
+    clickLength: (e) => {
+      const explain = ['Runs short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'];
+      const value = Number(e.target.value);
+      setLength(value);
+      setLengthStatus(explain[value - 1]);
+    },
+    clickFit: (e) => {
+      const explain = ['Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long'];
+      const value = Number(e.target.value);
+      setFit(value);
+      setFitStatus(explain[value - 1]);
+    },
   };
+
+  const status = {
+    sizeStatus,
+    widthStatus,
+    comfortStatus,
+    qualityStatus,
+    lengthStatus,
+    fitStatus,
+  };
+
   return (
     <div>
       ReviewForm
+      <br />
+      <br />
       <div className="reviewFormStarRating">
-        <span id="star1" className={star1} onClick={starClick} />
-        <span id="star2" className={star2} onClick={starClick} />
-        <span id="star3" className={star3} onClick={starClick} />
-        <span id="star4" className={star4} onClick={starClick} />
-        <span id="star5" className={star5} onClick={starClick} />
-        <text>{starDef}</text>
+        <ReviewStar setCountStar={setCountStar} />
       </div>
-
+      <br />
       <div className="reviewInput">
-        <ReviewInput star={countStar} />
+        <ReviewInput setRecommendStatus={setRecommendStatus} recommendStatus={recommendStatus} />
       </div>
+      <br />
+      <div className="characteristic">
+        <Characteristic click={click} status={status} />
+      </div>
+      <br />
+      <div className="summary">
+        <Summary summaryValue={summaryValue} setSummaryValue={setSummaryValue} />
+      </div>
+      <br />
+      <div className="body">
+        <Body bodyValue={bodyValue} setBodyValue={setBodyValue} />
+      </div>
+      <br />
+      <div className="reviewPhotos">
+        <ReviewPhoto />
+      </div>
+      <br />
 
     </div>
   );

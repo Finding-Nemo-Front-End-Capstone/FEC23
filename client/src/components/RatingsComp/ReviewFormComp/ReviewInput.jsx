@@ -2,12 +2,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function ReviewInput(props) {
-  const [recommendStatus, setRecommendStatus] = useState(false);
-
+function ReviewInput({setRecommendStatus, recommendStatus}) {
   const recommendClick = (e) => {
     setRecommendStatus(!recommendStatus);
   };
+
   return (
     <div>
       <label>recommend :</label>
