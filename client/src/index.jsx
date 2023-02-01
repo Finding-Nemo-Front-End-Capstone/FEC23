@@ -7,7 +7,6 @@ import RelatedProducts from './components/RelatedOutfits/RelatedProducts.jsx';
 import Questions from './components/Questions.jsx';
 import Overview from './components/Overview.jsx';
 import Ratings from './components/Ratings.jsx';
-import Modal from './components/Modal.jsx';
 
 function App() {
 // const [productList, setProductList] = useState([]);
