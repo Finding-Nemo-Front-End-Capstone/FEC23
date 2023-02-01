@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import OutfitCards from './OutfitCards.jsx';
 
 function Outfits({ product }) {
   const [saved, setSaved] = useState([]);
   const [hasCurrent, setHasCurrent] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
   useEffect(() => {
     if (localStorage.getItem('outfits')) {
       const getStorage = JSON.parse(localStorage.getItem('outfits'));
@@ -31,20 +33,32 @@ function Outfits({ product }) {
     setSaved(storage);
     setHasCurrent(true);
   }
+  function arrowClick(e) {
+    e.preventDefault();
+    let copy = currentIndex;
+    if (e.target.className === 'leftOutfit') { copy += 1; }
+    if (e.target.className === 'rightOutfit') { copy -= 1; }
+    setCurrentIndex(copy);
+  }
   function createOutfitsCard(arr) {
     return arr.map((item) => (
       <div className="outfitCard">
-        placeholder
+        <OutfitCards product={item} />
       </div>
     ));
   }
   return (
-    <div>
-      { hasCurrent === true ? null : (
-        <button type="submit" onClick={clickHandler}>
-          Add to outfit
-        </button>
-      ) }
+    <div className="outfitsContainer">
+      { currentIndex !== 0 && saved.length >= 3
+        ? <input type="submit" className="leftOutfit" onClick={arrowClick} value="left" />
+        : null}
+      { hasCurrent === false
+        ? <button type="submit" onClick={clickHandler}> + </button>
+        : null }
+      { currentIndex !== saved.length - 3 && saved.length >= 3
+        ? <input type="submit" className="rightOutfit" onClick={arrowClick} value="right" />
+        : null}
+      {createOutfitsCard(saved)}
     </div>
   );
 }

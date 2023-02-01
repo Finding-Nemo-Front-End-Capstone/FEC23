@@ -15,16 +15,15 @@ function RelatedProducts({ id, product }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [storage, setStorage] = useState({});
   const [currStyle, setCurrStyle] = useState({});
-  function scroll(className) {
-    let copy = currentIndex;
-    if (className === 'rightArrow') { copy += 1; }
-    if (className === 'leftArrow') { copy -= 1; }
-    setCurrentIndex(copy);
-    setDisplay([copy, copy + 3 > relatedIds.length ? relatedIds.length : copy + 3]);
-  }
   function clickHandler(e) {
     e.preventDefault();
-    scroll(e.target.className);
+    let copy = currentIndex;
+    if (e.target.className === 'rightArrow') { copy += 1; }
+    if (e.target.className === 'leftArrow') { copy -= 1; }
+    setCurrentIndex(copy);
+    setDisplay([copy, copy + 3 > relatedIds.length
+      ? relatedIds.length
+      : copy + 3]);
   }
   useEffect(() => {
     axios.get(`/db/related/${currentId}`)
@@ -61,9 +60,8 @@ function RelatedProducts({ id, product }) {
         { currentIndex !== relatedIds.length - 3 && display[1] <= 3 ? <input onClick={clickHandler} type="submit" className="rightArrow" value="▶" /> : null }
       </div>
       <br />
-      <div className="outfitContainer">
-        <Outfits product={product} />
-      </div>
+      <h4>Your Outfit</h4>
+      <Outfits product={product} />
     </div>
   );
 }

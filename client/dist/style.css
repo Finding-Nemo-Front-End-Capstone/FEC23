@@ -20,13 +20,6 @@ body, button {
   /* width: fit-content; */
 }
 
-
-.relatedContainer {
-  overflow-x: auto;
-  display: flex;
-  /* flex-direction: column; */
-}
-
 .nav-bar {
   display: block;
   position: sticky;
@@ -139,21 +132,21 @@ body, button {
 }
 
 /* End of Britta's CSS */
-  display: -webkit-box;
+  /* display: -webkit-box;
   scrollbar-width: none;
   max-height: 15%;
   max-width: 70%;
-  position: relative;
+  position: relative; */
   /* mask-image: linear-gradient(90deg, white, 80% ,transparent); */
-  width: 650px;
+  /* width: 650px;
   transform: scale(1,1);
-}
+} */
 
 .review-photo {
   display: table-cell;
   width: 12em;
 }
-
+/* Related Products and Outfits */
 .leftArrow,
 .rightArrow {
   position: absolute;
@@ -165,11 +158,6 @@ body, button {
   right: 0%;
 }
 
-.relatedImageContainer {
-  /* max-width: 100%; */
-  width:100%
-}
-
 .cardInfo {
   width: 100%;
 }
@@ -178,11 +166,25 @@ body, button {
   width: 100%;
 }
 
-.relatedCard {
+.relatedContainer,
+.outfitContainer {
+  overflow-x: auto;
+  display: flex;
+  /* flex-direction: column; */
+}
+
+.relatedCard,
+.outfitCard {
   border: 1px solid grey;
   margin-right: 10px;
   max-width: 175px;
   width: 100%;
+}
+
+.relatedImageContainer,
+.outfitImageContainer {
+  /* max-width: 100%; */
+  width:100%
 }
 
 .relatedModalComparing{
@@ -193,6 +195,7 @@ body, button {
 .relatedModal {
   border: 1px solid grey;
 }
+
 
 .reviewForm {
   position:fixed;
