@@ -7,7 +7,8 @@ import RelatedProducts from './components/RelatedOutfits/RelatedProducts.jsx';
 import Questions from './components/Questions.jsx';
 import Overview from './components/Overview.jsx';
 import Ratings from './components/Ratings.jsx';
-import Modal from './components/Modal.jsx';
+// import Modal from './components/Modal.jsx';
+
 
 function App() {
 // const [productList, setProductList] = useState([]);
@@ -38,8 +39,8 @@ function App() {
       This is a placeholder being served
       <Overview product={product} rating={rating} />
       <Ratings product={product} rating={rating} />
-      <Questions product={product} />
       <RelatedProducts id={product.id} product={product} />
+      <Questions product={product} />
     </div>
   );
 }
