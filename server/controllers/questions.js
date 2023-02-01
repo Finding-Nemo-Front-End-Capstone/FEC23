@@ -3,8 +3,7 @@ const helpers = require('../../helpers/questions');
 module.exports = {
 
   getQuestions(req, res) {
-    console.log("this is the req params", req.query);
-    helpers.getQuestions(req.query)
+    helpers.getQuestions(req.params, req.query)
       .then((response) => { res.status(200).send(response.data); })
       .catch((err) => {
         console.log('error in getting questions');
@@ -13,6 +12,7 @@ module.exports = {
   },
 
   addQuestion(req, res) {
+    console.log(req.body);
     helpers.addQuestion(req.body)
       .then(() => { res.status(201).send('Created'); })
       .catch((err) => {

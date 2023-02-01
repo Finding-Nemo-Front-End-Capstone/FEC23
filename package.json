@@ -26,7 +26,8 @@
           ".jsx"
         ]
       }
-    ]
+    ],
+    "react/prop-types": 0
   },
   "homepage": "https://github.com/Finding-Nemo-Front-End-Capstone/FEC23#readme",
   "devDependencies": {
