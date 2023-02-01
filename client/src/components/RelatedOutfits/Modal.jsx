@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 // figure out how to close modal if another button is clicked
-function Modal({
-  show, setShowModal, relFeat, relName, currFeat, currName,
-}) {
+function Modal({show, setShowModal, relFeat, relName, currFeat, currName}) {
   const [sharedFeat, setSharedFeat] = useState([]);
   useEffect(() => {
     if (relFeat && currFeat) {
@@ -24,6 +22,7 @@ function Modal({
           }
           , ''),
         }));
+      document.addEventListener('click', closeModal);
       setSharedFeat(result);
       console.log(result);
     }
@@ -34,16 +33,16 @@ function Modal({
       sharedFeat.map((feat) => (
         <tr className={feat}>
           <td>{feat.curr === '' ? null : feat.curr} </td>
-          <td className={modalProp}>{feat.prop}</td>
+          <td className="modalProp">{feat.prop}</td>
           <td>{feat.rel === '' ? null : feat.rel} </td>
         </tr>
       )));
   }
   function closeModal(e) {
     e.preventDefault();
+    document.removeEventListener('click', closeModal);
     setShowModal(false);
   }
-  document.addEventListener('click', closeModal);
   if (!show) {
     return null;
   }

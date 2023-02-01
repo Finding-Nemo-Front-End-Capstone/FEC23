@@ -6,7 +6,7 @@ import axios from 'axios';
 import RelatedProducts from './components/RelatedOutfits/RelatedProducts.jsx';
 // import Questions from './components/Questions.jsx';
 // import Overview from './components/Overview.jsx';
-// import Ratings from './components/Ratings.jsx';
+import ReviewForm from './components/RatingsComp/ReviewForm.jsx';
 // import Modal from './components/Modal.jsx';
 
 function App() {
@@ -37,8 +37,8 @@ function App() {
     <div>
       This is a placeholder being served
       {/* <Overview product={product} rating={rating} /> */}
-      {/* <Ratings product={product} rating={rating} />
-      <Questions product={product} /> */}
+      <ReviewForm product={product} rating={rating} />
+      {/* <Questions product={product} /> */}
       <RelatedProducts id={product.id} product={product} />
     </div>
   );

@@ -15,7 +15,7 @@ function RelatedProducts({ id, product }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [storage, setStorage] = useState({});
   const [currStyle, setCurrStyle] = useState({});
-  function clickHandler(e) {
+  function arrowHandler(e) {
     e.preventDefault();
     let copy = currentIndex;
     if (e.target.className === 'rightArrow') { copy += 1; }
@@ -56,9 +56,9 @@ function RelatedProducts({ id, product }) {
     <div className="RelatedOutfits">
       <h7 className="relatedProductsHeader">RELATED PRODUCTS</h7>
       <div className="relatedContainer">
-        { currentIndex !== 0 && !relatedIds.length <= 3 ? <input onClick={clickHandler} type="submit" className="leftArrow" value="◀" /> : null }
+        { currentIndex !== 0 && !relatedIds.length <= 3 ? <input onClick={arrowHandler} type="submit" className="leftArrow" value="◀" /> : null }
         {cards()}
-        { currentIndex !== relatedIds.length - 3 && display[1] <= 3 ? <input onClick={clickHandler} type="submit" className="rightArrow" value="▶" /> : null }
+        { currentIndex !== relatedIds.length - 3 && display[1] <= 3 ? <input onClick={arrowHandler} type="submit" className="rightArrow" value="▶" /> : null }
       </div>
       <br />
       <h7 className="outfitsHeader">YOUR OUTFIT</h7>
