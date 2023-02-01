@@ -212,21 +212,19 @@ body, button {
 
 /* Review & Ratings */
 /* review form */
-body.active-reviewForm {
-  overflow-y: hidden;
-}
-.overlay {
-  background: rgba(49,49,49,0.8);
-  }
+
 .reviewForm, .overlay {
   width: 100vw;
   height: 100vh;
   top: 0;
   left: 0;
   right: 0;
-  background-color: white;
+  bottom: 0;
+  position: fixed;
 }
-
+.overlay {
+  background: rgba(49,49,49,0.8);
+  }
 .reviewFormContent {
   position: absolute;
   top: 50%;
