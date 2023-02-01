@@ -16,38 +16,14 @@ router.get('/:id', controllers.products.getOneProduct);
 router.post('/post/:id', (req, res) => {
   res.status(200).send('making a post not set up yet');
 });
-
-router.get('/questions', (req, res) => {
-  res.status(200).send('questions is not set up yet');
-});
-
-router.get('/answers', (req, res) => {
-  // expected format /qa/questions/:question_id/answer
-  res.status(200).send('answers is not set up yet');
-});
-
-router.post('/ask', (req, res) => {
-  res.status(200).send('asking questions not set up yet');
-});
-
-router.post('/answer', (req, res) => {
-  res.status(200).send('answering questions is not set up');
-});
-
-router.put('/helpfulquestion', (req, res) => {
-  res.status(200).send('marking helpful not set up');
-});
-
-router.put('/reportquestion', (req, res) => {
-  res.status(200).send('reporting question not set up');
-});
-
-router.put('/helpfulanswer', (req, res) => {
-  res.status(200).send('helpful answer not set up');
-});
-
-router.put('/reportanswer', (req, res) => {
-  res.status(200).send('report answer not set up');
-});
+// Q&A:
+router.get('/questions/:id', controllers.questions.getQuestions);
+router.get('/answers/:question_id', controllers.answers.getAnswers);
+router.post('/question', controllers.questions.addQuestion);
+router.post('/answers/:question_id', controllers.answers.addAnswers);
+router.put('/helpfulquestion', controllers.questions.addHelpful);
+router.put('/helpfulanswer', controllers.answers.addHelpful);
+router.put('/reportquestion/:question_id', controllers.questions.addReport);
+router.put('/reportanswer', controllers.answers.addReport);
 
 module.exports = router;
