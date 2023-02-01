@@ -10,7 +10,7 @@
   font-family: Georgia, 'Times New Roman', Times, serif;
 } */
 
-body, button {
+body {
   font-family: Georgia, 'Times New Roman', Times, serif;
   background-color: var(--bg);
 }
@@ -62,34 +62,36 @@ body, button {
 }
 
 .main-photo {
-  max-width: 400px;
-  height: auto;
+  width: 400px;
+  height: 500px;
   padding: 10px;
+  object-fit: cover;
 }
 
 .style-wrapper {
-  height: 100%;
-  width: 300px;
-  /* border: 1px solid black; */
-}
-
-.styles {
   display: flex;
-  /* font-size: 0; */
-  flex-wrap: wrap;
-  /* margin: -10px 0 0 -10px; */
+  flex-direction: column;
+  width: 300px;
+  height: auto;
+  /* border: 1px solid black; */
+  padding: 1em;
+  position: relative;
 }
 
-.thumbnails {
+.style-wrapper i {
+  position: absolute;
+  /* top: 0;
+  left: 0; */
+}
+
+.style-wrapper img {
   width: 60px;
   height: 60px;
   border: 2px solid grey;
   border-radius: 50px;
   padding: 1px;
   object-fit: cover;
-  /* display: inline block; */
-  /* flex-direction: row; */
-  /* flex: 1 0 21%; */
+  margin: 0.2em;
 }
 
 .gallery-photos {
@@ -138,7 +140,19 @@ body, button {
   /* overflow: hidden; */
 }
 
+.on-sale {
+  text-decoration: line-through;
+  color: red;
+}
+
+.cart-form button {
+  display: flex;
+  margin: 1em;
+}
+
 /* End of Britta's CSS */
+.relatedContainer {
+  overflow-x: auto;
   display: -webkit-box;
   scrollbar-width: none;
   max-height: 15%;

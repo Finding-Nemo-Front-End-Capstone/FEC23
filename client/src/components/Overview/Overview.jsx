@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Stars from './Stars.jsx';
+import Price from './Price.jsx';
+import Styles from './Styles.jsx';
+import CartForm from './CartForm.jsx';
 
 const Overview = ({ product, rating }) => {
 
   const [styles, setStyles] = useState([]);
   // const [activeIndex, setActiveIndex] = useState(0);
   const [currStyle, setCurrStyle] = useState({});
+  console.log(styles)
 
   useEffect(() => {
     if (product.id) {
@@ -21,7 +25,6 @@ const Overview = ({ product, rating }) => {
   }, [product])
 
   // onClick for "Read all # reviews" -> scroll to reviews
-  // onClick for selected style - update images and price
   // social media share buttons
 
   if (styles.length > 0) {
@@ -29,28 +32,20 @@ const Overview = ({ product, rating }) => {
       <div className="prod-content">
         <div className="prod-info">
           <h1 className="heading">{product.name}</h1>
-          <span>${product.default_price}</span>
+          <Price currStyle={currStyle}/>
           <Stars product={product} rating={rating}/>
-          <div className="style-wrapper">
-            <p>STYLE > {currStyle.name}</p>
-            <div className="styles">
-              {styles.map((style, i) => {
-                return <img className="thumbnails"
-                src={style.photos[0].thumbnail_url} key={style.style_id} index={i}
-                onClick={e => {setCurrStyle(styles[e.target.getAttribute('index')])}}/>
-              })}
-            </div>
-          </div>
+          <Styles styles={styles} currStyle={currStyle} setCurrStyle={setCurrStyle}/>
+          <CartForm currStyle={currStyle}/>
         </div>
           <img className="main-photo" src={currStyle.photos[0].url}/>
               {/* <p>{product.description}</p> */}
           <div className="gallery">
-              {currStyle.photos.map((photo, i) => {
-                return <img className="gallery-photos"
-                src={photo.thumbnail_url} key={photo.url} index={i}
-                />
-              })}
-            </div>
+            {currStyle.photos.map((photo, i) => {
+              return <img className="gallery-photos"
+              src={photo.thumbnail_url} key={photo.url} index={i}
+              />
+            })}
+          </div>
       </div>
     )
   }
