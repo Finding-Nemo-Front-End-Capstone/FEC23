@@ -129,8 +129,10 @@ function Ratings({ product, rating, setProduct }) {
       {reviewForm
       && (
       <div className="reviewForm">
+        <div className='overlay'>
         <button className="closeReviewForm" onClick={reviewFormBut}>x</button>
         <ReviewForm />
+        </div>
       </div>
       )}
     </div>
