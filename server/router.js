@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 const controllers = require('./controllers');
 
-router.get('/reviews/:product_id/:sort/:count', controllers.reviews.getReviewById);
+router.get('/reviews/:product_id/:sort/:count/:page', controllers.reviews.getReviewById);
 router.get('/meta/:id', controllers.reviews.getMeta);
 router.post('/post/:id', controllers.reviews.postReview);
 router.put('/helpfulpost/:review_id', controllers.reviews.putHelpfulReview);

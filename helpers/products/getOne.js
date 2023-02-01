@@ -1,5 +1,4 @@
 const axios = require('axios');
-const path = require('path');
 const config = require('../../config.js');
 
 const getOne = (id) => {
@@ -11,3 +10,4 @@ const getOne = (id) => {
 };
 
 module.exports.getOne = getOne;
+

@@ -1,14 +1,13 @@
 const axios = require('axios');
 const config = require('../../config.js');
-const path = require('path');
 
-let getReviews = (params) => { //maybe add req.params as arguments
-  const url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews`;
+const getReviews = (params) => { // maybe add req.params as arguments
+  const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews';
 
-  const auth = {'Authorization': `${config.TOKEN}` };
-  return axios.get(url, { params: params, headers : auth });
-  //may have to add additional parameters in the options of the axios.get
-}
+  const auth = { Authorization: `${config.TOKEN}` };
+  return axios.get(url, { params, headers: auth });
+  // may have to add additional parameters in the options of the axios.get
+};
 
 module.exports.getReviews = getReviews;
 
