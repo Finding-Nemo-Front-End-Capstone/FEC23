@@ -10,3 +10,4 @@ const getOne = (id) => {
 };
 
 module.exports.getOne = getOne;
+
