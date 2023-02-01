@@ -1,10 +1,12 @@
 import React from 'react';
+import QuestionsList from './QuestionsList.jsx';
 
-const Questions = function () {
-
+function Questions({ product }) {
   return (
-    <div>hi from questions</div>
-  )
+    <div>
+      <QuestionsList product={product} />
+    </div>
+  );
 }
 
 export default Questions;
