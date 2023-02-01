@@ -54,14 +54,14 @@ function RelatedProducts({ id, product }) {
   }
   return (
     <div className="RelatedOutfits">
-      <h7>RELATED PRODUCTS</h7>
+      <h7 className="relatedProductsHeader">RELATED PRODUCTS</h7>
       <div className="relatedContainer">
         { currentIndex !== 0 && !relatedIds.length <= 3 ? <input onClick={clickHandler} type="submit" className="leftArrow" value="◀" /> : null }
         {cards()}
         { currentIndex !== relatedIds.length - 3 && display[1] <= 3 ? <input onClick={clickHandler} type="submit" className="rightArrow" value="▶" /> : null }
       </div>
       <br />
-      <h7>YOUR OUTFIT</h7>
+      <h7 className="outfitsHeader">YOUR OUTFIT</h7>
       <Outfits product={product} />
     </div>
   );

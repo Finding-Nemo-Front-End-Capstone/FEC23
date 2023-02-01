@@ -55,7 +55,11 @@ function Outfits({ product }) {
         ? <input type="submit" className="leftOutfit" onClick={arrowClick} value="left" />
         : null}
       { hasCurrent === false
-        ? <button type="submit" onClick={clickHandler}> + </button>
+        ? <button type="submit" className="addOutfit" onClick={clickHandler}>
+            <h1>+</h1>
+          <br />
+          Add to my outfits
+        </button>
         : null }
       { currentIndex !== saved.length - 3 && saved.length >= 3
         ? <input type="submit" className="rightOutfit" onClick={arrowClick} value="right" />
