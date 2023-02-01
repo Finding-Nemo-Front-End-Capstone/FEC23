@@ -1,10 +1,13 @@
+/* eslint-disable import/no-named-as-default */
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import RelatedProducts from './components/RelatedProducts.jsx';
+import RelatedProducts from './components/RelatedOutfits/RelatedProducts.jsx';
 import Questions from './components/Questions.jsx';
 import Overview from './components/Overview.jsx';
 import Ratings from './components/Ratings.jsx';
+import Modal from './components/Modal.jsx';
 
 function App() {
 // const [productList, setProductList] = useState([]);
@@ -13,14 +16,21 @@ function App() {
 
   useEffect(() => {
     axios.get('/db/allProducts')
-      .then((data) => { setProduct(data.data[0]); })
+      .then((data) => {
+        setProduct(data.data[0]);
+        axios.get(`/db/${data.data[0].id}`)
+          .then((dat) => setProduct(dat.data))
+          .catch((err) => console.log('error in index'));
+      })
       .catch((err) => console.log(err));
   }, []);
 
   useEffect(() => {
-    axios.get(`db/meta/${product.id}`)
-      .then((data) => { console.log(data.data); })
-      .catch((err) => { console.log('meta did not work'); });
+    if (product.id) {
+      axios.get(`/db/meta/${product.id}`)
+        .then((data) => { setRating(data.data); })
+        .catch((err) => { console.log('meta did not work'); });
+    }
   }, [product]);
 
   return (
@@ -29,10 +39,9 @@ function App() {
       <Overview product={product} rating={rating} />
       <Ratings product={product} rating={rating} />
       <Questions product={product} />
-      <RelatedProducts product={product} setProduct={setProduct} />
+      <RelatedProducts id={product.id} product={product} />
     </div>
   );
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
-
