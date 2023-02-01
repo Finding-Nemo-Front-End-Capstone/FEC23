@@ -1,5 +1,7 @@
-exports.products = require('./products.js');
+module.exports.products = require('./products.js');
 
-exports.qa = require('./qa.js');
+module.exports.questions = require('./questions.js');
 
-exports.reviews = require('./reviews.js');
+module.exports.reviews = require('./reviews.js');
+
+module.exports.answers = require('./answers.js');

@@ -142,10 +142,7 @@ body, button {
   transform: scale(1,1);
 } */
 
-.review-photo {
-  display: table-cell;
-  width: 12em;
-}
+
 /* Related Products and Outfits */
 .RelatedOutfits {
   position: absolute;
@@ -172,18 +169,8 @@ body, button {
   border: 1px solid grey;
   margin-right: 10px;
   width: 175px;
-}
-.cardInfo,
-.outfitInfo {
-  position: relative;
-  width: 100%;
-}
-.modalButton,
-.outfitButton {
-  position: absolute;
-  right: 0;
-  background-color: white;
-}
+  }
+
 .leftArrow,
 .rightArrow {
   position: absolute;
@@ -195,19 +182,15 @@ body, button {
 .rightArrow {
   right: 0%;
 }
-
-
 .previewImage {
   height: 200px;
   width: 100%;
 }
-
 .relatedImageContainer,
 .outfitImageContainer {
   /* max-width: 100%; */
   width:100%
 }
-
 .relatedModal {
   border: 2px solid lightslategrey;
   background-color: white;
@@ -215,49 +198,66 @@ body, button {
   position: relative;
   font-size: small;
 }
-
 .modalCurrHeader,
 .modalCompHeader {
   font-weight: bold;
   font-family: Arial, Helvetica, sans-serif;
 }
-
 .relatedModalComparing{
   font-size: xx-small;
   font-family: Arial, Helvetica, sans-serif;
+  bottom: 0;
+  position: fixed;
 }
 
+/* Review & Ratings */
+/* review form */
+body.active-reviewForm {
+  overflow-y: hidden;
+}
+.overlay {
+  background: rgba(49,49,49,0.8);
+  }
+.reviewForm, .overlay {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+}
 
-
-
-.reviewForm {
-  position:fixed;
-  margin:auto;
-  background-color:burlywood;
-  width: fit-content;
+.reviewFormContent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1.4;
+  background: #6bd7f0;
+  padding: 14px 28px;
+  border-radius: 3px;
+  max-width: 600px;
+  min-width: 300px;
   height: 80%;
-  box-shadow:rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  transform: translate(20%, 20%);
-  top: -5%;
   overflow-y: auto;
 }
-
 .closeReviewForm {
   margin-right: 5%;
   margin-top: 5%;
-  float: right;
   background: none;
   border: none;
   color: white;
   cursor: pointer;
   font-size: 20px;
+  margin-right: 33%;
+  z-index: 3;
+  position: relative;
+  margin-left: 64%;
 }
-
 button {
   cursor: pointer;
   background: none;
 }
-
 /* for review star Rating */
 .checked {
   color: orange;
@@ -329,7 +329,7 @@ input:checked + .slider:before {
 .radioDivReviewForm {
   width: fit-content;
   margin-left: 8%;
-  color: blue;
+  /* color: blue; */
 }
 
 /* for Upload photo in review */
@@ -348,6 +348,7 @@ input:checked + .slider:before {
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-between;
-
 }
+
+
 
