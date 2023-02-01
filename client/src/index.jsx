@@ -4,10 +4,9 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import RelatedProducts from './components/RelatedOutfits/RelatedProducts.jsx';
-// import Questions from './components/Questions.jsx';
-// import Overview from './components/Overview.jsx';
-// import Ratings from './components/Ratings.jsx';
-// import Modal from './components/Modal.jsx';
+import Questions from './components/Questions.jsx';
+import Overview from './components/Overview.jsx';
+import Ratings from './components/Ratings.jsx';
 
 function App() {
 // const [productList, setProductList] = useState([]);

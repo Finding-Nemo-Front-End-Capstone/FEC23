@@ -159,8 +159,26 @@ body.active-reviewForm {
   bottom: 0;
   position: fixed;
 }
-
-.reviewFormContent {
+.relatedCard,
+.outfitCard,
+.addOutfit {
+  border: 1px solid grey;
+  margin-right: 10px;
+  width: 175px;
+}
+.cardInfo,
+.outfitInfo {
+  position: relative;
+  width: 100%;
+}
+.modalButton,
+.outfitButton {
+  position: absolute;
+  right: 0;
+  background-color: white;
+}
+.leftArrow,
+.rightArrow {
   position: absolute;
   font-size: 30px;
   top: 40%;
@@ -172,10 +190,13 @@ body.active-reviewForm {
 }
 
 
+
+
 .previewImage {
   height: 200px;
   width: 100%;
 }
+
 
 .relatedImageContainer,
 .outfitImageContainer {
@@ -183,13 +204,18 @@ body.active-reviewForm {
   width:100%
 }
 
+
 .relatedModal {
   border: 1px solid grey;
   background-color: white;
   z-index: 1;
   position: relative;
 }
-
+.modalCurrHeader,
+.modalCompHeader {
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+}
 .relatedModalComparing{
   font-size: xx-small;
   font-family: Arial, Helvetica, sans-serif;
