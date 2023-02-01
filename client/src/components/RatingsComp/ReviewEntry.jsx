@@ -36,7 +36,7 @@ function ReviewEntry(props) {
       setPhotoList(props.review.photos);
       setPhotoDisplay('none');
     }
-    console.log('need this for test', props.review)
+    console.log('need this for test', props.review);
   }, [props.review]);
 
   const moreBodyClick = (e) => {
@@ -47,15 +47,15 @@ function ReviewEntry(props) {
   return (
     <div>
       <label>rating: </label>
-      <text className="ratingReview" data-testid='ratingReview'>{props.review.rating}</text>
+      <text className="ratingReview" data-testid="ratingReview">{props.review.rating}</text>
       <br />
       <text>{usernameDate}</text>
       <br />
-      {photoList.map((photo) =>
+      {photoList.map((photo) => (
         <PhotoEntry photo={photo} />
-      )}
-      <text style={{display:photoDisplay}}>--no photo to display--</text>
-      <br style={{display:photoDisplay}}/>
+      ))}
+      <text style={{ display: photoDisplay }}>--no photo to display--</text>
+      <br />
       <label>summary: </label>
       <text className="summary">{props.review.summary}</text>
       <br />

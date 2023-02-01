@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState, useEffect } from 'react';
@@ -26,6 +27,10 @@ function ReviewForm(props) {
   const [fitStatus, setFitStatus] = useState('');
   const [summaryValue, setSummaryValue] = useState('');
   const [bodyValue, setBodyValue] = useState('');
+  const [imageList, setImageList] = useState([]);
+  const [nickname, setNickname] = useState('');
+  const [email, setEmail] = useState('');
+
   const click = {
     clickSize: (e) => {
       const explain = ['A size too small', '½ a size too small', 'Perfect', '½ a size too big', 'A size too wide'];
@@ -74,9 +79,35 @@ function ReviewForm(props) {
     fitStatus,
   };
 
+  const nicknameChange = (e) => {
+    if (e.target.value.length <= 60) {
+      setNickname(e.target.value);
+    }
+  };
+
+  const emailChange = (e) => {
+    if (e.target.value.length <= 60) {
+      setEmail(e.target.value);
+    }
+  };
+
+  const submitForm = {
+
+  };
+
   return (
     <div>
       ReviewForm
+      <br />
+      <br />
+      <label htmlFor="nickname">
+        Nickname:
+        <input type="text" className="nickname" value={nickname} />
+      </label>
+      <label htmlFor="email">
+        email:
+        <input type="email" className="email" value={email} />
+      </label>
       <br />
       <br />
       <div className="reviewFormStarRating">
@@ -100,10 +131,11 @@ function ReviewForm(props) {
       </div>
       <br />
       <div className="reviewPhotos">
-        <ReviewPhoto />
+        <ReviewPhoto imageList={imageList} setImageList={setImageList} />
       </div>
       <br />
-
+      <button className="submitReviewForm">Submit Review</button>
+      {/* Mandatory: rating, characteristic, body, nickname, email */}
     </div>
   );
 }

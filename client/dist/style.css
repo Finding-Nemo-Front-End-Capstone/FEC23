@@ -64,6 +64,8 @@
 }
 
 .closeReviewForm {
+  margin-right: 5%;
+  margin-top: 5%;
   float: right;
   background: none;
   border: none;
@@ -154,4 +156,18 @@ input:checked + .slider:before {
 /* for Upload photo in review */
 .reviewUploadPhoto {
   border:'none';
+}
+.ReviewFormPhotoEntry {
+  margin: 0.5em 0;
+  width:30%;
+  display: flex;
+  flex-direction: column;
+}
+.divReviewFormPhotoEntry {
+  width:fit-content;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
 }
