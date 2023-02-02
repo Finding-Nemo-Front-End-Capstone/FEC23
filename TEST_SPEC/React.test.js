@@ -66,3 +66,4 @@ describe ('Related Products', () => {
       .catch((err) => console.log('failed get request', err));
   });
 })
+
