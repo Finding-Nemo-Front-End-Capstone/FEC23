@@ -17,6 +17,7 @@ function Ratings({ product, rating, setProduct }) {
   const [reviewForm, setReviewForm] = useState(false);
 
   useEffect(() => {
+    console.log('this is rating', rating);
     if (rating.product_id) {
       setTotalReviews(rating.recommended.true + rating.recommended.false);
     }
@@ -33,7 +34,7 @@ function Ratings({ product, rating, setProduct }) {
   useEffect(() => {
     if (reviewList[0]) {
       setReviewHolder(reviewList);
-      // setCount(2);
+      setCount(0);
     }
   }, [reviewList]);
 
@@ -104,7 +105,7 @@ function Ratings({ product, rating, setProduct }) {
       <div className="dropdown">
         <label htmlFor="sort">
           Sort By:
-          <select name="sort" id="sort" onChange={sortChange}>
+          <select name="sort" id="sort" onChange={sortChange} value={sort}>
             <option value="newest">Newest</option>
             <option value="relevant">Relevant</option>
             <option value="helpful">Helpful</option>
@@ -122,16 +123,22 @@ function Ratings({ product, rating, setProduct }) {
         <ReviewEntry review={review} />
       ))}
       <br />
-      <button className='moreReviewBut' onClick={moreHandler} style={{ display: moreDisplay }}>More Reviews</button>
-      <br/>
+      <button className="moreReviewBut" onClick={moreHandler} style={{ display: moreDisplay }}>More Reviews</button>
+      <br />
       <button className="writeReview" onClick={reviewFormBut}>Write Review</button>
 
       {reviewForm
       && (
       <div className="reviewForm">
-        <div className='overlay'>
-        <button className="closeReviewForm" onClick={reviewFormBut}>x</button>
-        <ReviewForm />
+        <div className="overlay">
+          <button className="closeReviewForm" onClick={reviewFormBut}>x</button>
+          <ReviewForm
+            rating={rating}
+            setReviewForm={setReviewForm}
+            totalReview={totalReview}
+            setTotalReviews={setTotalReviews}
+            setSort={setSort}
+          />
         </div>
       </div>
       )}

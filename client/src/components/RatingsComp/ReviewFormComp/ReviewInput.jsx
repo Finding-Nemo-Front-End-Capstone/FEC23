@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function ReviewInput({setRecommendStatus, recommendStatus}) {
+function ReviewInput({ setRecommendStatus, recommendStatus }) {
   const recommendClick = (e) => {
     setRecommendStatus(!recommendStatus);
   };
@@ -11,7 +11,7 @@ function ReviewInput({setRecommendStatus, recommendStatus}) {
     <div>
       <label>recommend :</label>
       <label className="switch">
-        <input type="checkbox" onClick={recommendClick} />
+        <input type="checkbox" className="checkSlider" onClick={recommendClick} />
         <span className="slider round" />
       </label>
     </div>
