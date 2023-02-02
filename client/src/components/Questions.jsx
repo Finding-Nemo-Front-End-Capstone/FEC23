@@ -1,7 +1,7 @@
 import React from 'react';
 import QuestionsList from './QuestionsList.jsx';
 
-function Questions({product}) {
+function Questions({ product }) {
   const [expanded, setExpanded] = useState(true);
   const [buttonText, setButtonText] = useState('Collapse');
   const [questions, setQuestions] = useState([]);
