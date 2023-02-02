@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 import React from 'react';
 import { render } from '@testing-library/react';
 import axios from 'axios';
@@ -8,7 +9,7 @@ import ReviewEntry from '../client/src/components/RatingsComp/ReviewEntry.jsx';
 import serverTest from './utils.js';
 // @jest-environment jsdom
 
-import RelatedProducts from '../client/src/components/RelatedOutfits/RelatedProducts.jsx';
+// import RelatedProducts from '../client/src/components/RelatedOutfits/RelatedProducts.jsx';
 
 const allProducts = serverTest.allProducts;
 const reviews = serverTest.reviews;
@@ -65,4 +66,4 @@ describe ('Related Products', () => {
       })
       .catch((err) => console.log('failed get request', err));
   });
-})
+});

@@ -35,11 +35,11 @@ function App() {
 
   return (
     <div>
-      This is a placeholder being served
+      <nav className="nav-bar">top bar</nav>
       <Overview product={product} rating={rating} />
       <Ratings product={product} rating={rating} />
-      <RelatedProducts id={product.id} product={product} rating={rating} />
       <Questions product={product} />
+      <RelatedProducts id={product.id} product={product} rating={rating} />
     </div>
   );
 }
