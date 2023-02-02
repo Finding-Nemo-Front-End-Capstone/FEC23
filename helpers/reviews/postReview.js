@@ -1,12 +1,12 @@
 const axios = require('axios');
 const config = require('../../config.js');
 
-const postReview = (id, reqBody) => {
+const postReview = (params) => {
   const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews';
 
   const auth = { Authorization: `${config.TOKEN}` };
 
-  return axios.post(url, reqBody, { headers: auth });
+  return axios.post(url, {params:params}, { headers: auth });
 };
 
 module.exports.postReview = postReview;

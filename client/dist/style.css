@@ -184,8 +184,18 @@ body, button {
   border: 1px solid grey;
   margin-right: 10px;
   width: 175px;
-  }
-
+}
+.cardInfo,
+.outfitInfo {
+  position: relative;
+  width: 100%;
+}
+.modalButton,
+.outfitButton {
+  position: absolute;
+  right: 0;
+  background-color: white;
+}
 .leftArrow,
 .rightArrow {
   position: absolute;
@@ -197,15 +207,19 @@ body, button {
 .rightArrow {
   right: 0%;
 }
+
+
 .previewImage {
   height: 200px;
   width: 100%;
 }
+
 .relatedImageContainer,
 .outfitImageContainer {
   /* max-width: 100%; */
   width:100%
 }
+
 .relatedModal {
   border: 2px solid lightslategrey;
   background-color: white;
@@ -213,6 +227,7 @@ body, button {
   position: relative;
   font-size: small;
 }
+
 .modalCurrHeader,
 .modalCompHeader {
   font-weight: bold;
@@ -236,6 +251,7 @@ body, button {
   right: 0;
   bottom: 0;
   position: fixed;
+  z-index: 10;
 }
 .overlay {
   background: rgba(49,49,49,0.8);
@@ -253,6 +269,7 @@ body, button {
   min-width: 300px;
   height: 80%;
   overflow-y: auto;
+  z-index: 11;
 }
 .closeReviewForm {
   margin-right: 5%;
@@ -263,7 +280,7 @@ body, button {
   cursor: pointer;
   font-size: 20px;
   margin-right: 33%;
-  z-index: 3;
+  z-index: 13;
   position: relative;
   margin-left: 64%;
 }
