@@ -17,5 +17,15 @@
         "react"
     ],
     "rules": {
+        "react/jsx-filename-extension": 0,
+        "react/prop-types": 0,
+        "react/jsx-first-prop-new-line": 0,
+        "react/jsx-one-expression-per-line": "off",
+        "react/jsx-max-props-per-line": "off",
+        "jsx-a11y/no-noninteractive-element-interactions": 0,
+        "jsx-a11y/click-events-have-key-events": 0,
+        "import/extensions": "off",
+        "jsx-a11y/alt-text": 0
+
     }
 }

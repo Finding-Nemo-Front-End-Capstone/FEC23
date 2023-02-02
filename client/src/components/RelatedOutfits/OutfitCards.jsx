@@ -43,7 +43,7 @@ function OutfitCards({ product, setHasCurrent, setSaved }) {
           : <img className="previewImage" src={cardInfo.thumbnail} alt="" />}
       </div>
       <div className="details">
-        <>{cardInfo.category}</>
+        {cardInfo.category}
         <br />
         {cardInfo.name}
         <br />

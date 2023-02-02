@@ -45,7 +45,7 @@ function Outfits({ product }) {
   function createOutfitsCard(arr) {
     return arr.map((item) => (
       <div className="outfitCard">
-        <OutfitCards product={item} setHasCurrent={setHasCurrent} setSaved={setSaved}/>
+        <OutfitCards product={item} setHasCurrent={setHasCurrent} setSaved={setSaved} />
       </div>
     ));
   }
@@ -55,11 +55,13 @@ function Outfits({ product }) {
         ? <input type="submit" className="leftOutfit" onClick={arrowClick} value="left" />
         : null}
       { hasCurrent === false
-        ? <button type="submit" className="addOutfit" onClick={clickHandler}>
+        ? (
+          <button type="submit" className="addOutfit" onClick={clickHandler}>
             <h1>+</h1>
-          <br />
-          Add to my outfits
-        </button>
+            <br />
+            Add to my outfits
+          </button>
+        )
         : null }
       { currentIndex !== saved.length - 3 && saved.length >= 3
         ? <input type="submit" className="rightOutfit" onClick={arrowClick} value="right" />

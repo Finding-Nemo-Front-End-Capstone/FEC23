@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Modal from './Modal.jsx';
@@ -44,7 +43,8 @@ function RelatedCards({ id, product }) {
         ⭐
       </button>
       <Modal show={showModal} setShowModal={setShowModal} relFeat={features}
-        relName={cardInfo.name} currFeat={product.features} currName={product.name} />
+        relName={cardInfo.name} currFeat={product.features} currName={product.name}
+      />
       <div className="relatedImageContainer">
         {cardInfo.thumbnail === null
           ? <img className="previewImage" alt="" />
