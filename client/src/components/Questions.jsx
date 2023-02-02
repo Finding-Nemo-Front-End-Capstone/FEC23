@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import QuestionsList from './QuestionsComp/QuestionsList.jsx';
 
-function Questions({product}) {
+function Questions({ product }) {
   const [expanded, setExpanded] = useState(true);
   const [buttonText, setButtonText] = useState('Collapse');
   const [questions, setQuestions] = useState([]);

@@ -75,3 +75,4 @@ describe ('Related Products', async () => {
       .catch((err) => console.log('failed get request', err));
   });
 })
+
