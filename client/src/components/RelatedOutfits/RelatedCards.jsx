@@ -1,18 +1,12 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Modal from './Modal.jsx';
 
-function RelatedCards({ id, display }) {
-  const [cardInfo, setCardInfo] = useState(
-    {
-      id: '',
-      category: '',
-      name: '',
-      price: '',
-      rating: '',
-    },
-  );
-  const [image, setImage] = useState({ thumbnail: null });
+function RelatedCards({ id, product }) {
+  const [cardInfo, setCardInfo] = useState({});
+  const [features, setFeatures] = useState([]);
+  const [showModal, setShowModal] = useState(false);
   const createInfo = () => axios.get(`/db/${id}`)
     .then((data) => {
       const temp = { ...cardInfo };
@@ -21,38 +15,47 @@ function RelatedCards({ id, display }) {
       temp.price = data.data.default_price;
       temp.rating = 5;
       setCardInfo(temp);
+      setFeatures(data.data.features);
     });
 
   const attachImage = () => {
-    const temp = { ...image };
+    const temp = { ...cardInfo };
     return axios.get(`/db/styles/${id}`)
       .then((data) => {
         temp.thumbnail = data.data.results[0].photos[0].thumbnail_url;
-        setImage(temp);
+        setCardInfo(temp);
       });
   };
   useEffect(() => {
     createInfo();
-  }, [display]);
+  }, [id]);
 
   useEffect(() => {
     attachImage();
-  }, [cardInfo]);
-
+  }, [features]);
+  function clickModal(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    setShowModal(!showModal);
+  }
   return (
     <div className="cardInfo">
+      <button type="submit" className="modalButton" onClick={clickModal}>
+        ⭐
+      </button>
+      <Modal show={showModal} setShowModal={setShowModal} relFeat={features}
+        relName={cardInfo.name} currFeat={product.features} currName={product.name} />
       <div className="relatedImageContainer">
-        {image.thumbnail === null
+        {cardInfo.thumbnail === null
           ? <img className="previewImage" alt="" />
-          : <img className="previewImage" src={image.thumbnail} alt="" />}
+          : <img className="previewImage" src={cardInfo.thumbnail} alt="" />}
       </div>
-      <div className="details">
+      <div className="cardDetails">
         {cardInfo.category}
         <br />
         {cardInfo.name}
         <br />
-        $
-        {cardInfo.price}
+        ${cardInfo.price}
         <br />
         {cardInfo.rating}
         <br />

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const CartForm = ({ currStyle }) => {
+function CartForm({ currStyle }) {
 
   const [currSize, setCurrSize] = useState('option 1');
 

@@ -5,7 +5,7 @@ import Price from './Price.jsx';
 import Styles from './Styles.jsx';
 import CartForm from './CartForm.jsx';
 
-const Overview = ({ product, rating }) => {
+function Overview({ product, rating }) {
 
   const [styles, setStyles] = useState([]);
   // const [activeIndex, setActiveIndex] = useState(0);
@@ -54,7 +54,7 @@ const Overview = ({ product, rating }) => {
 
 
 
-};
+}
 
 export default Overview;
 

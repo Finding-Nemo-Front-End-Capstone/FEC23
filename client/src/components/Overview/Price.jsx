@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Price = ({ currStyle }) => {
+function Price({ currStyle }) {
 
   if (currStyle.sale_price) {
     return (

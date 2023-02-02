@@ -7,6 +7,9 @@ import axios from 'axios';
 import ReviewEntry from '../client/src/components/RatingsComp/ReviewEntry.jsx';
 import serverTest from './utils.js';
 // @jest-environment jsdom
+
+import RelatedProducts from '../client/src/components/RelatedOutfits/RelatedProducts.jsx';
+
 const allProducts = serverTest.allProducts;
 const reviews = serverTest.reviews;
 
@@ -59,3 +62,16 @@ describe('SERVER', () => {
   //   it(reviews.status).not.toBe(404 && 500);
   // });
 });
+
+describe ('Related Products', async () => {
+  it('should get list of related products based on the current product', () => {
+    const knownRelated = [40345, 40346, 40351, 40350];
+    let getRelated = [];
+    axios.get(`/db/related/${40344}`)
+      .then((data) => {
+        getRelated = data.data;
+        expect(knownRelated === getRelated);
+      })
+      .catch((err) => console.log('failed get request', err));
+  });
+})
