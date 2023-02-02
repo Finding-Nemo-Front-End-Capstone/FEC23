@@ -1,11 +1,47 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function Characteristic({ click, status }) {
+function Characteristic({ click, status, rating, setCharacteristicList, setIdChacList }) {
+  const [sizeDis, setSizeDis] = useState('none');
+  const [widthDis, setWidthDis] = useState('none');
+  const [comfortDis, setComfortDis] = useState('none');
+  const [qualityDis, setQualityDis] = useState('none');
+  const [lengthDis, setLengthDis] = useState('none');
+  const [fitDis, setFitDis] = useState('none');
+
+  useEffect(() => {
+    if (rating) {
+      const chacList = Object.keys(rating.characteristics);
+      setCharacteristicList(chacList);
+      const keyList = Object.values(rating.characteristics);
+      const idList = keyList.map((each) => each.id);
+      setIdChacList(idList);
+      chacList.forEach((chac) => {
+        if (chac === 'Size') {
+          setSizeDis('');
+        }
+        if (chac === 'Width') {
+          setWidthDis('');
+        }
+        if (chac === 'Comfort') {
+          setComfortDis('');
+        }
+        if (chac === 'Quality') {
+          setQualityDis('');
+        }
+        if (chac === 'Length') {
+          setLengthDis('');
+        }
+        if (chac === 'Fit') {
+          setFitDis('');
+        }
+      });
+    }
+  }, [rating]);
   return (
     <div>
       <div>
-        <label>
+        <label className="eachChacForm" style={{display:sizeDis}}>
           {'Size: '}
           <text>{status.sizeStatus}</text>
           <div className="radioDivReviewForm">
@@ -23,7 +59,7 @@ function Characteristic({ click, status }) {
             <text className="review2">5</text>
           </div>
         </label>
-        <label>
+        <label className="eachChacForm" style={{display:widthDis}}>
           {'Width: '}
           <text>{status.widthStatus}</text>
           <div className="radioDivReviewForm">
@@ -41,7 +77,7 @@ function Characteristic({ click, status }) {
             <text className="review2">5</text>
           </div>
         </label>
-        <label>
+        <label className="eachChacForm" style={{display:comfortDis}}>
           {'Comfort: '}
           <text>{status.comfortStatus}</text>
           <div className="radioDivReviewForm">
@@ -59,7 +95,7 @@ function Characteristic({ click, status }) {
             <text className="review2">5</text>
           </div>
         </label>
-        <label>
+        <label className="eachChacForm" style={{display:qualityDis}}>
           {'Quality: '}
           <text>{status.qualityStatus}</text>
           <div className="radioDivReviewForm">
@@ -77,7 +113,7 @@ function Characteristic({ click, status }) {
             <text className="review2">5</text>
           </div>
         </label>
-        <label>
+        <label className="eachChacForm" style={{display:lengthDis}}>
           {'Length: '}
           <text>{status.lengthStatus}</text>
           <div className="radioDivReviewForm">
@@ -95,7 +131,7 @@ function Characteristic({ click, status }) {
             <text className="review2">5</text>
           </div>
         </label>
-        <label>
+        <label className="eachChacForm" style={{display:fitDis}}>
           {'Fit: '}
           <text>{status.fitStatus}</text>
           <div className="radioDivReviewForm">
