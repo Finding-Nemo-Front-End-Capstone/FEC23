@@ -35,21 +35,12 @@ describe('Ratings & Reviews', () => {
 
 describe('SERVER', () => {
   test('should receive all products', async () => {
-    // const data = await axios.get(`http://localhost:${process.env.PORT}/db/allProducts`);
-    // console.log('here', data.data)
-    // expect(data.status).not.toBe(404 && 500);
-    // 400 is for page not found, 500 is for not able to obtain the data
     const data = await allProducts();
-    // console.log(data.status);
-    // const data = await allProducts();
-    // console.log('what is data', data);
     expect(data.status).toBe(200);
   });
 
   it('should receive the first product and obtain the review', async () => {
     const allProductsData = await allProducts();
-    // const data = await axios.get(`http://localhost:${process.env.PORT}/db/allProducts`);
-    // console.log('here', allProductsData);
     const firstProduct = await allProductsData.data[0].id;
     const reviewsData = await reviews(firstProduct);
     expect(reviewsData.status).toBe(200);
@@ -63,15 +54,16 @@ describe('SERVER', () => {
   // });
 });
 
-describe ('Related Products', async () => {
-  it('should get list of related products based on the current product', () => {
+describe ('Related Products', () => {
+  it('should get list of related products based on the current product', async () => {
     const knownRelated = [40345, 40346, 40351, 40350];
     let getRelated = [];
     axios.get(`/db/related/${40344}`)
       .then((data) => {
         getRelated = data.data;
-        expect(knownRelated === getRelated);
+        expect(JSON.stringify(knownRelated)).toBe(JSON.stringify(getRelated));
       })
       .catch((err) => console.log('failed get request', err));
   });
 })
+
