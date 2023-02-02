@@ -1,27 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function OutfitCards({ product, setHasCurrent, setSaved }) {
+function OutfitCards({ product, saved, setHasCurrent, setSaved }) {
   const [cardInfo, setCardInfo] = useState({});
   useEffect(() => {
-    const copy = cardInfo;
+    const copy = {...cardInfo};
     copy.id = product.id;
     copy.category = product.category;
     copy.name = product.name;
     copy.price = product.price;
     copy.rating = 5;
+    copy.thumbnail = product.thumbnail;
     setCardInfo(copy);
-  }, [localStorage]);
+  }, [product]);
 
-  useEffect(() => {
-    const copy = cardInfo;
-    axios.get(`db/styles/${product.id}`)
-      .then((data) => {
-        copy.thumbnail = data.data.results[0].photos[0].thumbnail_url;
-        setCardInfo(copy);
-      })
-      .catch(() => console.log('error getting style in outfitcards'));
-  }, [cardInfo]);
   function clickExit(e) {
     e.stopPropagation();
     e.preventDefault();
@@ -43,12 +35,15 @@ function OutfitCards({ product, setHasCurrent, setSaved }) {
           : <img className="previewImage" src={cardInfo.thumbnail} alt="" />}
       </div>
       <div className="details">
-        <>{cardInfo.category}</>
-        <br />
-        {cardInfo.name}
-        <br />
-        $
-        {cardInfo.price}
+        <div className="outfitCatText">
+          {cardInfo.category ? cardInfo.category.toUpperCase() : null}
+        </div>
+        <div className="outfitProdText">
+          {cardInfo.name}
+        </div>
+        <div className="outfitPriceText">
+          ${cardInfo.price}
+        </div>
         <br />
         {cardInfo.rating}
         <br />
