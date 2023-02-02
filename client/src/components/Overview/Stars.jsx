@@ -5,8 +5,6 @@ const Stars = ({ product, rating }) => {
   let reviewCount = 0;
   let total = 0;
   if (rating.ratings) {
-    console.log(rating.ratings)
-    console.log(rating)
     for (let stars in rating.ratings) {
       reviewCount += Number(rating.ratings[stars]);
       total += (stars * rating.ratings[stars]);

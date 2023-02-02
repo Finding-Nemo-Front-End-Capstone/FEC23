@@ -11,8 +11,6 @@ module.exports = {
   },
 
   addAnswers(req, res) {
-    console.log('PARAMS', req.params);
-    console.log('BODY', req.body);
     helpers.addAnswers(req.body, req.params)
       .then(() => { res.status(201).send('Created'); })
       .catch((err) => {

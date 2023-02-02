@@ -35,7 +35,7 @@ function QuestionsList({ product, questions }) {
       }
       setDisplayed(arr);
     }
-  }, []);
+  }, [numQuestions, questions]);
   return (
     <div>
       {displayed}
