@@ -19,30 +19,56 @@ function RelatedProducts({ id, product, ratings, currStyle }) {
       ? relatedIds.length
       : copy + 4]);
   }
+  function getInfo(relId) {
+    const endpoints = [
+      `db/styles/${relId}`,
+      `db/${relId}`,
+      `db/meta/${relId}`
+    ];
+    const obj = {
+      category: '',
+      name: '',
+      price: '',
+      features: [],
+      thumbnail: null,
+    }
+    axios.all(endpoints.map((endpoint) =>
+      axios.get(endpoint)))
+      .then(
+        axios.spread((styles, prod, ratings) => {
+          obj.category = prod.data.category;
+          obj.name = prod.data.name;
+          obj.price = prod.data.default_price;
+          obj.features = prod.data.features;
+          obj.rating = ratings.data;
+          obj.thumbnail = styles.data.results[0].photos[0].thumbnail_url;
+        })
+      )
+    return obj;
+  };
   useEffect(() => {
     axios.get(`/db/related/${currentId}`)
       .then((data) => {
-        setRelatedIds(data.data);
-        if (data.data.length > 4) {
-          setDisplay([0, 4]);
-        } else {
-          setDisplay([0, data.data.length]);
+        setRelatedIds(data.data.map((singleId) => getInfo(singleId)))
+        if (data.data.length > 4) { setDisplay([0, 4]); }
+        else { setDisplay([0, data.data.length]); }
         }
-      })
-      .catch((err) => { console.log('there was an error', err); });
-    if (!localStorage.getItem('outfits')) {
-      localStorage.setItem('outfits', JSON.stringify([]));
-    }
+      )
+      .catch(() => console.log('error with get all'));
+      if (!localStorage.getItem('outfits')) {
+        localStorage.setItem('outfits', JSON.stringify([]));
+      }
   }, [currentId]);
-  function cards() {
+  function cards () {
     return (
-      relatedIds.slice(display[0], display[1]).map((singleId) => (
+      relatedIds.slice(display[0], display[1]).map((targetInfo) => (
         <div className="relatedCard">
-          <RelatedCards id={singleId} product={product} setCurrentId={setCurrentId} />
+          <RelatedCards relInfo={targetInfo} product={product} display={display}/>
         </div>
       ))
-    );
+    )
   }
+
   return (
     <div className="RelatedOutfits">
       <h7 className="relatedProductsHeader">RELATED PRODUCTS</h7>

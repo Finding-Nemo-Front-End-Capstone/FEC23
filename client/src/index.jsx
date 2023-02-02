@@ -30,7 +30,7 @@ function App() {
   useEffect(() => {
     if (product.id) {
       axios.get(`db/meta/${product.id}`)
-        .then((data) => { setRating(data.data); })
+        .then((data) => { setRating(data.data); console.log('meta data', data.data)})
         .catch((err) => { console.log('meta did not work'); });
       axios.get(`db/styles/${product.id}`)
         .then((data) => {setStyle(data.data); })
@@ -41,9 +41,9 @@ function App() {
   return (
     <div>
       <nav className="nav-bar">top bar</nav>
-      <Overview product={product} rating={rating} />
+      {/* <Overview product={product} rating={rating} />
       <Ratings product={product} rating={rating} setProduct={setProduct} />
-      <Questions product={product} />
+      <Questions product={product} /> */}
       <RelatedProducts id={product.id} product={prodInfo} rating={rating} currStyle={style}/>
     </div>
   );

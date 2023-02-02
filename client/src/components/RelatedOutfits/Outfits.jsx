@@ -45,7 +45,7 @@ function Outfits({ product, ratings, currStyle }) {
   function createOutfitsCard(arr) {
     return arr.map((item) => (
       <div className="outfitCard">
-        <OutfitCards product={item} saved={saved} setHasCurrent={setHasCurrent} setSaved={setSaved} />
+        <OutfitCards product={item} rating={ratings} saved={saved} setHasCurrent={setHasCurrent} setSaved={setSaved} />
       </div>
     ));
   }

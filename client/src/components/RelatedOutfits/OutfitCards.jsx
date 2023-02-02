@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import Stars from '../Overview/Stars.jsx';
 function OutfitCards({ product, saved, setHasCurrent, setSaved }) {
   const [cardInfo, setCardInfo] = useState({});
   useEffect(() => {

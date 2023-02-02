@@ -160,11 +160,11 @@ body, button {
 }
 .relatedCatText,
 .outfitCatText {
-  font-size:small;
+  font-size: x-small;
 }
 .relatedProdText,
 .outfitProdText {
-  font-weight:bold;
+  font-weight: bold;
 }
 .relatedPriceText,
 .outfitPriceText {
@@ -183,7 +183,7 @@ body, button {
 .relatedCard,
 .outfitCard,
 .addOutfit {
-  border: 1px solid grey;
+  border: 1.5px solid grey;
   margin-right: 10px;
   width: 175px;
   min-height: 250px;
