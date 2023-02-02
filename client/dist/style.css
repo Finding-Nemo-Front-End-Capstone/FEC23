@@ -364,6 +364,10 @@ input:checked + .slider:before {
   flex-wrap: wrap;
   justify-content: space-between;
 }
+.eachReviewPhoto {
+  width: 5%;
+  margin-left: 1%;
+}
 
 
 
