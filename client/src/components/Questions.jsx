@@ -7,6 +7,8 @@ function Questions({product}) {
   const [expanded, setExpanded] = useState(false);
   const [buttonText, setButtonText] = useState('Expand');
   const [questions, setQuestions] = useState([]);
+  const [displayed, setDisplayed] = useState([]);
+  const [numQuestions, setNumQuestions] = useState(4);
   useEffect(() => {
     // console.log('product id', product);
     axios({
@@ -24,7 +26,7 @@ function Questions({product}) {
     <div>
       Questions
       <button onClick={handleAccordion} type="button">{buttonText}</button>
-      {expanded && <QuestionsList product={product} questions={questions} />}
+      {expanded && <QuestionsList product={product} questions={questions} displayed={displayed} setDisplayed={setDisplayed} numQuestions={numQuestions} setNumQuestions={setNumQuestions} />}
     </div>
   );
 }

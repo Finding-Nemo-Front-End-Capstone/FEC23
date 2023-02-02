@@ -3,10 +3,10 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import RelatedProducts from './components/RelatedOutfits/RelatedProducts.jsx';
+// import RelatedProducts from './components/RelatedProducts.jsx';
 import Questions from './components/Questions.jsx';
 import Overview from './components/Overview/Overview.jsx';
-// import Ratings from './components/Ratings.jsx';
+import Ratings from './components/Ratings.jsx';
 
 function App() {
 // const [productList, setProductList] = useState([]);
@@ -36,9 +36,10 @@ function App() {
     <div>
       <nav className="nav-bar">top bar</nav>
       <Overview product={product} rating={rating} />
-      {/* <Ratings product={product} rating={rating} setProduct={setProduct} /> */}
+      <Ratings product={product} rating={rating} />
+      {/* <RelatedProducts id={product.id} product={product} /> */}
       <Questions product={product} />
-      <RelatedProducts product={product} setProduct={setProduct} />
+      {/* <RelatedProducts product={product} setProduct={setProduct} /> */}
     </div>
   );
 }
