@@ -9,7 +9,19 @@ function Answers({ question_id }) {
   const [numAnswers, setNumAnswers] = useState(2);
   const [displayed, setDisplayed] = useState([]);
   const [page, setPage] = useState(1);
-  const [count, setCount] = useState(5);
+  const [count, setCount] = useState(100);
+  function answerItem(answer) {
+    return (
+      <div>
+        <li>
+          {answer.body}
+        </li>
+        <div>
+          {`by ${answer.answerer_name} ${answer.date}`}
+        </div>
+      </div>
+    );
+  }
   useEffect(() => {
     if (question_id) {
       axios({
@@ -23,26 +35,12 @@ function Answers({ question_id }) {
     const arr = [<span>A:</span>];
     if (allAnswers[0] && allAnswers.length < numAnswers) {
       for (let i = 0; i < allAnswers.length; i++) {
-        arr.push(
-          <li>
-            {allAnswers[i].body}
-          </li>,
-          <div>
-            {`by ${allAnswers[i].answerer_name} ${allAnswers[i].date}`}
-          </div>,
-        );
+        arr.push(answerItem(allAnswers[i]));
       }
       setDisplayed(arr);
     } else if (allAnswers[0] && allAnswers.length > numAnswers) {
       for (let i = 0; i < numAnswers; i++) {
-        arr.push(
-          <li>
-            {allAnswers[i].body}
-          </li>,
-          <div>
-            {`by ${allAnswers[i].answerer_name} ${allAnswers[i].date}`}
-          </div>,
-        );
+        arr.push(answerItem(allAnswers[i]));
       }
       setDisplayed(arr);
     }

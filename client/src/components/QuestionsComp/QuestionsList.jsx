@@ -21,6 +21,7 @@ function QuestionsList({
             {' '}
             {questions[i].question_body}
             <Answers question_id={questions[i].question_id} />
+            <br />
           </div>,
         );
         setDisplayed(arr);
@@ -33,6 +34,7 @@ function QuestionsList({
             {' '}
             {questions[i].question_body}
             <Answers question_id={questions[i].question_id} />
+            <br />
           </div>,
         );
       }
