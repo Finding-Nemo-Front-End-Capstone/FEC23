@@ -8,7 +8,7 @@ import Modal from './Modal.jsx';
 import Outfits from './Outfits.jsx';
 // figure out how to persist collections using window.localStorage
 
-function RelatedProducts({ id, product }) {
+function RelatedProducts({ id, product, ratings }) {
   const [relatedIds, setRelatedIds] = useState([]);
   const [currentId, setCurrentId] = useState(id === undefined ? 40345 : id);
   const [display, setDisplay] = useState([]);
@@ -62,7 +62,7 @@ function RelatedProducts({ id, product }) {
       </div>
       <br />
       <h7 className="outfitsHeader">YOUR OUTFIT</h7>
-      <Outfits product={product} />
+      <Outfits product={product} ratings={ratings}/>
     </div>
   );
 }
