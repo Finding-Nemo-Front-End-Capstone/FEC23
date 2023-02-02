@@ -24,7 +24,6 @@ function Modal({show, setShowModal, relFeat, relName, currFeat, currName}) {
         }));
       document.addEventListener('click', closeModal);
       setSharedFeat(result);
-      console.log(result);
     }
   }, [show]);
 
