@@ -30,8 +30,9 @@ module.exports = {
   },
 
   postReview(req, res) {
-    helpers.postReview(req.params.id, req.body)
-      .then((data) => { res.status(201).send(data.data); })
+    helpers.postReview(req.params)
+      .then((data) => {
+        res.status(201).send(data.data); })
       .catch((err) => {
         console.log('error in posting controller review');
         res.status(500).send(err);

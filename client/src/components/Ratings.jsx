@@ -1,7 +1,7 @@
 /* eslint-disable react/button-has-type */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import ClipLoader from 'react-spinners/ClipLoader';
+import ClipLoader from 'react-spinners/ClipLoader.js';
 import ReviewEntry from './RatingsComp/ReviewEntry.jsx';
 import ReviewForm from './RatingsComp/ReviewForm.jsx';
 
@@ -129,8 +129,10 @@ function Ratings({ product, rating, setProduct }) {
       {reviewForm
       && (
       <div className="reviewForm">
+        <div className='overlay'>
         <button className="closeReviewForm" onClick={reviewFormBut}>x</button>
         <ReviewForm />
+        </div>
       </div>
       )}
     </div>
