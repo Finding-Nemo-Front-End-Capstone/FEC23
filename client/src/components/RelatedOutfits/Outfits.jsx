@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import OutfitCards from './OutfitCards.jsx';
 
-function Outfits({ product }) {
+function Outfits({ product, ratings, currStyle }) {
   const [saved, setSaved] = useState([]);
   const [hasCurrent, setHasCurrent] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -10,30 +10,30 @@ function Outfits({ product }) {
       const getStorage = JSON.parse(localStorage.getItem('outfits'));
       setSaved(getStorage);
     }
-  }, [product]);
+  }, [localStorage, product]);
   useEffect(() => {
     if (saved.some((item) => item.id === product.id)) {
       setHasCurrent(true);
     }
   }, [saved]);
-  function createItem(info) {
+  function createItem(info, img) {
     const item = {
       id: info.id,
       category: info.category,
       name: info.name,
       price: info.default_price,
       rating: 5,
+      thumbnail: img.results[0].photos[0].thumbnail_url
     };
     return item;
   }
   function clickHandler(e) {
     e.preventDefault();
-    const newItem = createItem(product);
+    const newItem = createItem(product, currStyle);
     const storage = JSON.parse(localStorage.getItem('outfits'));
-    storage.push(newItem);
-    localStorage.setItem('outfits', JSON.stringify(storage));
+    storage.unshift(newItem);
     setSaved(storage);
-    setHasCurrent(true);
+    localStorage.setItem('outfits', JSON.stringify(storage));
   }
   function arrowClick(e) {
     e.preventDefault();
@@ -45,7 +45,7 @@ function Outfits({ product }) {
   function createOutfitsCard(arr) {
     return arr.map((item) => (
       <div className="outfitCard">
-        <OutfitCards product={item} setHasCurrent={setHasCurrent} setSaved={setSaved} />
+        <OutfitCards product={item} saved={saved} setHasCurrent={setHasCurrent} setSaved={setSaved} />
       </div>
     ));
   }

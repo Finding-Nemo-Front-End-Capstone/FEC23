@@ -6,12 +6,11 @@ import RelatedCards from './RelatedCards.jsx';
 import Outfits from './Outfits.jsx';
 // figure out how to persist collections using window.localStorage
 
-function RelatedProducts({ id, product, ratings }) {
+function RelatedProducts({ id, product, ratings, currStyle }) {
   const [relatedIds, setRelatedIds] = useState([]);
   const [currentId, setCurrentId] = useState(id === undefined ? 40345 : id);
   const [display, setDisplay] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [currStyle, setCurrStyle] = useState({});
   function arrowHandler(e) {
     e.preventDefault();
     let copy = currentIndex;
@@ -26,8 +25,8 @@ function RelatedProducts({ id, product, ratings }) {
     axios.get(`/db/related/${currentId}`)
       .then((data) => {
         setRelatedIds(data.data);
-        if (data.data.length > 3) {
-          setDisplay([0, 3]);
+        if (data.data.length > 4) {
+          setDisplay([0, 4]);
         } else {
           setDisplay([0, data.data.length]);
         }
@@ -36,9 +35,6 @@ function RelatedProducts({ id, product, ratings }) {
     if (!localStorage.getItem('outfits')) {
       localStorage.setItem('outfits', JSON.stringify([]));
     }
-    axios.get(`/db/styles/${currentId}`)
-      .then((data) => { setCurrStyle(data.data); })
-      .catch(() => { console.log('there was an error'); });
   }, [currentId]);
   function cards() {
     return (
@@ -53,13 +49,13 @@ function RelatedProducts({ id, product, ratings }) {
     <div className="RelatedOutfits">
       <h7 className="relatedProductsHeader">RELATED PRODUCTS</h7>
       <div className="relatedContainer">
-        { currentIndex !== 0 && !relatedIds.length <= 3 ? <input onClick={arrowHandler} type="submit" className="leftArrow" value="◀" /> : null }
+        { currentIndex !== 0 && !relatedIds.length <= 4 ? <input onClick={arrowHandler} type="submit" className="leftArrow" value="◀" /> : null }
         {cards()}
-        { currentIndex !== relatedIds.length - 3 && display[1] <= 3 ? <input onClick={arrowHandler} type="submit" className="rightArrow" value="▶" /> : null }
+        { currentIndex !== relatedIds.length - 4 && display[1] <= 4 ? <input onClick={arrowHandler} type="submit" className="rightArrow" value="▶" /> : null }
       </div>
       <br />
       <h7 className="outfitsHeader">YOUR OUTFIT</h7>
-      <Outfits product={product} ratings={ratings} />
+      <Outfits product={product} ratings={ratings} currStyle={currStyle}/>
     </div>
   );
 }
