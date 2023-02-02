@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-// import RelatedProducts from './components/RelatedOutfits/RelatedProducts.jsx';
+import RelatedProducts from './components/RelatedOutfits/RelatedProducts.jsx';
 import Questions from './components/Questions.jsx';
 import Overview from './components/Overview/Overview.jsx';
-// import Ratings from './components/Ratings.jsx';
+import Ratings from './components/Ratings.jsx';
 
 function App() {
 // const [productList, setProductList] = useState([]);
@@ -24,7 +24,7 @@ function App() {
 
   useEffect(() => {
     axios.get(`db/meta/${product.id}`)
-      .then((data) => { console.log(data.data); })
+      .then((data) => { setRating(data.data) })
       .catch((err) => { console.log('meta did not work'); });
   }, [product]);
 
@@ -32,7 +32,7 @@ function App() {
     <div>
       <nav className="nav-bar">top bar</nav>
       <Overview product={product} rating={rating} />
-      {/* <Ratings product={product} rating={rating} setProduct={setProduct} /> */}
+      <Ratings product={product} rating={rating} setProduct={setProduct} />
       <Questions product={product} />
       <RelatedProducts product={product} setProduct={setProduct} />
     </div>
