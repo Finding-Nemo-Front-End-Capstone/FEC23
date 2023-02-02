@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default-member */
 /* eslint-disable import/no-named-as-default */
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
@@ -35,7 +36,7 @@ function App() {
       <nav className="nav-bar">top bar</nav>
       <Overview product={product} rating={rating} />
       <Ratings product={product} rating={rating} />
-      <RelatedProducts id={product.id} product={product} rating={rating}/>
+      <RelatedProducts id={product.id} product={product} rating={rating} />
       <Questions product={product} />
       {/* <RelatedProducts product={product} setProduct={setProduct} /> */}
     </div>
