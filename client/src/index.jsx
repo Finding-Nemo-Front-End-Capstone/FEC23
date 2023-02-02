@@ -34,11 +34,11 @@ function App() {
   return (
     <div>
       <nav className="nav-bar">top bar</nav>
+      <nav className="nav-bar">top bar</nav>
       <Overview product={product} rating={rating} />
       <Ratings product={product} rating={rating} />
-      <RelatedProducts id={product.id} product={product} rating={rating} />
       <Questions product={product} />
-      {/* <RelatedProducts product={product} setProduct={setProduct} /> */}
+      <RelatedProducts id={product.id} product={product} rating={rating} />
     </div>
   );
 }
