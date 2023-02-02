@@ -42,7 +42,7 @@ function App() {
     <div>
       <nav className="nav-bar">top bar</nav>
       <Overview product={product} rating={rating} />
-      <Ratings product={product} rating={rating} />
+      <Ratings product={product} rating={rating} setProduct={setProduct} />
       <Questions product={product} />
       <RelatedProducts id={product.id} product={prodInfo} rating={rating} currStyle={style}/>
     </div>
