@@ -5,6 +5,7 @@ import axios from 'axios';
 
 // import Ratings from '../client/src/components/Ratings.jsx';
 import ReviewEntry from '../client/src/components/RatingsComp/ReviewEntry.jsx';
+import QuestionList from '../client/src/components/Questions/QuestionList.jsx';
 import serverTest from './utils.js';
 // @jest-environment jsdom
 
@@ -67,3 +68,14 @@ describe ('Related Products', () => {
   });
 })
 
+// describe ('Questions and Answers', () => {
+//   it('intially render up to four questions', async () => {
+//     let getRelated = [];
+//     axios.get(`/db/questions?product_id=40344&page=1&count=100`)
+//       .then((data) => {
+//         getRelated = data.data;
+//         expect(JSON.stringify(knownRelated)).toBe(JSON.stringify(getRelated));
+//       })
+//       .catch((err) => console.log('failed get request', err));
+//   });
+// })
