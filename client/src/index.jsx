@@ -16,7 +16,7 @@ function App() {
   useEffect(() => {
     axios.get('/db/allProducts')
       .then((data) => {
-        setProduct(data.data[1]);
+        setProduct(data.data[0]);
         axios.get(`/db/${data.data[0].id}`)
           .then((dat) => setProduct(dat.data))
           .catch((err) => console.log('error in index'));

@@ -30,7 +30,7 @@ module.exports = {
   },
 
   postReview(req, res) {
-    helpers.postReview(req.params)
+    helpers.postReview(req.body)
       .then((data) => {
         res.status(201).send(data.data); })
       .catch((err) => {
