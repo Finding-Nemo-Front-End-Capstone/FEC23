@@ -2,9 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import RelatedCards from './RelatedCards.jsx';
-
 import Outfits from './Outfits.jsx';
-// figure out how to persist collections using window.localStorage
 
 function RelatedProducts({ id, product, ratings, currStyle }) {
   const [relatedIds, setRelatedIds] = useState([]);
@@ -17,9 +15,9 @@ function RelatedProducts({ id, product, ratings, currStyle }) {
     if (e.target.className === 'rightArrow') { copy += 1; }
     if (e.target.className === 'leftArrow') { copy -= 1; }
     setCurrentIndex(copy);
-    setDisplay([copy, copy + 3 > relatedIds.length
+    setDisplay([copy, copy + 4 > relatedIds.length
       ? relatedIds.length
-      : copy + 3]);
+      : copy + 4]);
   }
   useEffect(() => {
     axios.get(`/db/related/${currentId}`)
@@ -48,11 +46,11 @@ function RelatedProducts({ id, product, ratings, currStyle }) {
   return (
     <div className="RelatedOutfits">
       <h7 className="relatedProductsHeader">RELATED PRODUCTS</h7>
+      { currentIndex !== 0 && !relatedIds.length <= 3 ? <input onClick={arrowHandler} type="submit" className="leftArrow" value="◀" /> : null }
       <div className="relatedContainer">
-        { currentIndex !== 0 && !relatedIds.length <= 4 ? <input onClick={arrowHandler} type="submit" className="leftArrow" value="◀" /> : null }
         {cards()}
-        { currentIndex !== relatedIds.length - 4 && display[1] <= 4 ? <input onClick={arrowHandler} type="submit" className="rightArrow" value="▶" /> : null }
       </div>
+      { currentIndex !== relatedIds.length - 3 && display[1] <= 4 ? <input onClick={arrowHandler} type="submit" className="rightArrow" value="▶" /> : null }
       <br />
       <h7 className="outfitsHeader">YOUR OUTFIT</h7>
       <Outfits product={product} ratings={ratings} currStyle={currStyle}/>

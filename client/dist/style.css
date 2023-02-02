@@ -175,9 +175,10 @@ body, button {
   position: relative;
   overflow-x: auto;
   display: flex;
-  min-width: 100%;
-  /* mask-image: linear-gradient(90deg, white, 80% ,transparent); */
-  /* transform: scale(1,1); */
+  width: 700px;
+  mask-image: linear-gradient(90deg, white, 90% ,transparent);
+  transform: scale(1,1);
+  scrollbar-width: None;
 }
 .relatedCard,
 .outfitCard,
@@ -193,6 +194,10 @@ body, button {
   width: 100%;
   min-width: 175px;
 }
+.cardDetails {
+  margin-left: 5px;
+  margin-right: 5px;
+}
 .modalButton,
 .outfitButton {
   position: absolute;
@@ -203,11 +208,12 @@ body, button {
 .rightArrow {
   position: absolute;
   font-size: 30px;
-  top: 40%;
+  top: 20%;
   z-index: 1;
+  left: 0%;
 }
 .rightArrow {
-  right: 0%;
+  left: 95%;
 }
 .previewImage {
   height: 250px;

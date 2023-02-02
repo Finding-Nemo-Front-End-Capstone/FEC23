@@ -34,7 +34,7 @@ function OutfitCards({ product, saved, setHasCurrent, setSaved }) {
           ? <img className="previewImage" alt="" />
           : <img className="previewImage" src={cardInfo.thumbnail} alt="" />}
       </div>
-      <div className="details">
+      <div className="cardDetails">
         <div className="outfitCatText">
           {cardInfo.category ? cardInfo.category.toUpperCase() : null}
         </div>
