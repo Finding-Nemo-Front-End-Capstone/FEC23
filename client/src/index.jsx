@@ -16,8 +16,8 @@ function App() {
   useEffect(() => {
     axios.get('/db/allProducts')
       .then((data) => {
-        setProduct(data.data[1]);
-        axios.get(`/db/${data.data[1].id}`)
+        setProduct(data.data[0]);
+        axios.get(`/db/${data.data[0].id}`)
           .then((dat) => setProduct(dat.data))
           .catch((err) => console.log('error in index'));
       })
@@ -37,7 +37,7 @@ function App() {
       This is a placeholder being served
       <Overview product={product} rating={rating} />
       <Ratings product={product} rating={rating} />
-      <RelatedProducts id={product.id} product={product} />
+      <RelatedProducts id={product.id} product={product} rating={rating}/>
       <Questions product={product} />
     </div>
   );
