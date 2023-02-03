@@ -16,6 +16,23 @@ function Ratings({ product, rating, setProduct }) {
   const [loading, setLoading] = useState(true);
   const [moreDisplay, setMoreDisplay] = useState('none');
   const [reviewForm, setReviewForm] = useState(false);
+  const [containFilter, setContainFilter] = useState([]);
+
+  useEffect(() => {
+    if (!containFilter[0]) {
+      setReviewHolder(reviewList);
+      setCount(0);
+    } else {
+      const arr = reviewList.filter((reviewFilter) => {
+        if (containFilter.indexOf(reviewFilter.rating) !== -1) {
+          return true
+        }
+        return false
+      });
+      setReviewHolder(arr);
+      setCount(0);
+    }
+  }, [containFilter])
 
   useEffect(() => {
     console.log('this is rating', rating);
@@ -73,21 +90,33 @@ function Ratings({ product, rating, setProduct }) {
     setReviewForm(!reviewForm);
   };
 
-  const reviewFilter = (e) => {
-    if (e.target.value === 'all') {
-      setReviewHolder(reviewList);
-      setCount(0);
+  const reviewFilter = (value) => {
+    value = Number(value);
+    const index = containFilter.indexOf(value)
+    if (index === -1) {
+      const result1 = containFilter.slice();
+      result1.push(value);
+      setContainFilter(result1);
     } else {
-      const arr = reviewList.filter((reviewFilter) => {
-        if (reviewFilter.rating === Number(e.target.value)) {
-          return true;
-        }
-        return false;
-      });
-      console.log(e.target.value)
-      setReviewHolder(arr);
-      setCount(0);
+      const arr1 = containFilter.slice(0,index);
+      const arr2 = containFilter.slice(index + 1, containFilter.length);
+      const result2 = arr1.concat(arr2);
+      setContainFilter(result2)
     }
+    // if (value === 'all') {
+    //   setReviewHolder(reviewList);
+    //   setCount(0);
+    // } else {
+    //   const arr = reviewList.filter((reviewFilter) => {
+    //     if (reviewFilter.rating === Number(value)) {
+    //       return true;
+    //     }
+    //     return false;
+    //   });
+    //   console.log(value)
+    //   setReviewHolder(arr);
+    //   setCount(0);
+    // }
   };
 
   return (

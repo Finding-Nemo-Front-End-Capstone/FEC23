@@ -34,26 +34,40 @@ function Breakdown({rating, reviewFilter}) {
       setStar1(rating.ratings[1])
     }
   }, [rating])
+  const click5 = (e) => {
+    reviewFilter("5")
+    console.log('this is', e.target.name)
+  }
+  const click4 = (e) => {
+    reviewFilter("4")
+  }
+  const click3 = (e) => {
+    reviewFilter("3")
+  }
+  const click2 = (e) => {
+    reviewFilter("2")
+  }
+  const click1 = (e) => {
+    reviewFilter("1")
+  }
   return (
     <div className="breakdownBar">
         <div class="row">
-          <button className="eachBarBreakdown" onClick={reviewFilter} value="5">
-            <label for='eachBarBreakdown'>
-              <div class="side">
-                <div>5 star</div>
+          <button name="5"className="eachBarBreakdown" onClick={click5} style={{cursor: 'pointer'}}>
+            <div class="side">
+              <div>5 star</div>
+            </div>
+            <div class="middle">
+              <div class="bar-container">
+                <div class="bar-5" style={{width:bar5}}></div>
               </div>
-              <div class="middle">
-                <div class="bar-container">
-                  <div class="bar-5" style={{width:bar5}}></div>
-                </div>
-              </div>
-              <div class="side right">
-                <div>{star5}</div>
-              </div>
-              </label>
-            </button>
+            </div>
+            <div class="side right">
+              <div>{star5}</div>
+            </div>
+          </button>
           <br/>
-          <button className="eachBarBreakdown">
+          <button className="eachBarBreakdown" onClick={click4}>
             <div class="side">
               <div>4 star</div>
             </div>
@@ -67,7 +81,7 @@ function Breakdown({rating, reviewFilter}) {
             </div>
           </button>
           <br/>
-          <button className="eachBarBreakdown">
+          <button className="eachBarBreakdown" onClick={click3}>
             <div class="side">
               <div>3 star</div>
             </div>
@@ -81,7 +95,7 @@ function Breakdown({rating, reviewFilter}) {
             </div>
           </button>
           <br/>
-          <button className="eachBarBreakdown">
+          <button className="eachBarBreakdown" onClick={click2}>
             <div class="side">
               <div>2 star</div>
             </div>
@@ -95,7 +109,7 @@ function Breakdown({rating, reviewFilter}) {
             </div>
           </button>
           <br/>
-          <button className="eachBarBreakdown">
+          <button className="eachBarBreakdown" onClick={click1}>
             <div class="side">
               <div>1 star</div>
             </div>
