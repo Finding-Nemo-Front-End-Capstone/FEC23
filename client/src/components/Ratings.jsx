@@ -4,6 +4,7 @@ import axios from 'axios';
 import ClipLoader from 'react-spinners/ClipLoader.js';
 import ReviewEntry from './RatingsComp/ReviewEntry.jsx';
 import ReviewForm from './RatingsComp/ReviewForm.jsx';
+import Breakdown from './RatingsComp/Breakdown.jsx'
 
 function Ratings({ product, rating, setProduct }) {
   const [reviewList, setReviewList] = useState([]);
@@ -83,6 +84,7 @@ function Ratings({ product, rating, setProduct }) {
         }
         return false;
       });
+      console.log(e.target.value)
       setReviewHolder(arr);
       setCount(0);
     }
@@ -91,6 +93,7 @@ function Ratings({ product, rating, setProduct }) {
   return (
     <div>
       RATINGS
+      <Breakdown rating={rating} reviewFilter={reviewFilter}/>
       <div className="reviewFilter">
         <label>
           Filter Rating:

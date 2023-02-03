@@ -44,7 +44,7 @@ function App() {
       <Overview product={product} rating={rating} />
       <Ratings product={product} rating={rating} setProduct={setProduct} />
       <Questions product={product} />
-      <RelatedProducts id={product.id} product={prodInfo} rating={rating} currStyle={style}/>
+      {/* <RelatedProducts id={product.id} product={prodInfo} rating={rating} currStyle={style}/> */}
     </div>
   );
 }
