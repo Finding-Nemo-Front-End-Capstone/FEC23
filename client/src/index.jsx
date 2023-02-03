@@ -19,8 +19,8 @@ function App() {
   useEffect(() => {
     axios.get('/db/allProducts')
       .then((data) => {
-        setProduct(data.data[0]);
-        axios.get(`/db/${data.data[0].id}`)
+        setProduct(data.data[2]);
+        axios.get(`/db/${data.data[2].id}`)
           .then((info) => setProdInfo(info.data))
           .catch(() => console.log('product info did not work'))
       })
@@ -41,9 +41,9 @@ function App() {
   return (
     <div>
       <nav className="nav-bar">top bar</nav>
-      <Overview product={product} rating={rating} />
+      {/* <Overview product={product} rating={rating} />
       <Ratings product={product} rating={rating} setProduct={setProduct} />
-      <Questions product={product} />
+      <Questions product={product} /> */}
       <RelatedProducts id={product.id} product={prodInfo} rating={rating} currStyle={style}/>
     </div>
   );

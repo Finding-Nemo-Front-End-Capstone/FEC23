@@ -6,7 +6,6 @@ import Outfits from './Outfits.jsx';
 
 function RelatedProducts({ id, product, rating, currStyle }) {
   const [relatedIds, setRelatedIds] = useState([]);
-  const [currentId, setCurrentId] = useState(id === undefined ? 40345 : id);
   const [display, setDisplay] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   function arrowHandler(e) {
@@ -19,47 +18,47 @@ function RelatedProducts({ id, product, rating, currStyle }) {
       ? relatedIds.length
       : copy + 4]);
   }
-  function getInfo(relId) {
+  async function getInfo(relId) {
     const endpoints = [
       `db/styles/${relId}`,
       `db/${relId}`,
       `db/meta/${relId}`
     ];
-    const obj = {
-      category: '',
-      name: '',
-      price: '',
-      features: [],
-      thumbnail: null,
-    }
-    axios.all(endpoints.map((endpoint) =>
+    const obj = await Promise.all(endpoints.map((endpoint) =>
       axios.get(endpoint)))
       .then(
         axios.spread((styles, prod, ratings) => {
-          obj.category = prod.data.category;
-          obj.name = prod.data.name;
-          obj.price = prod.data.default_price;
-          obj.features = prod.data.features;
-          obj.rating = ratings.data;
-          obj.thumbnail = styles.data.results[0].photos[0].thumbnail_url;
+          let res = {};
+          res.category = prod.data.category;
+          res.name = prod.data.name;
+          res.price = prod.data.default_price;
+          res.features = prod.data.features;
+          res.rating = ratings.data;
+          res.thumbnail = styles.data.results[0].photos[0].thumbnail_url;
+          return res;
         })
       )
+      .then((res) => (res));
     return obj;
   };
   useEffect(() => {
-    axios.get(`/db/related/${currentId}`)
-      .then((data) => {
-        setRelatedIds(data.data.map((singleId) => getInfo(singleId)))
-        if (data.data.length > 4) { setDisplay([0, 4]); }
-        else { setDisplay([0, data.data.length]); }
+    if (id) {
+      axios.get(`/db/related/${id}`)
+        .then(async (data) => {
+          setRelatedIds(await Promise.all(data.data.map((singleId) =>  getInfo(singleId))))
+          if (data.data.length > 4) { setDisplay([0, 4]); }
+          else { setDisplay([0, data.data.length]); }
+          }
+        )
+        .catch(() => console.log('error with get all'));
+        if (!localStorage.getItem('outfits')) {
+          localStorage.setItem('outfits', JSON.stringify([]));
         }
-      )
-      .catch(() => console.log('error with get all'));
-      if (!localStorage.getItem('outfits')) {
-        localStorage.setItem('outfits', JSON.stringify([]));
-      }
-  }, [currentId]);
+
+    }
+  }, [id]);
   function cards () {
+
     return (
       relatedIds.slice(display[0], display[1]).map((targetInfo) => (
         <div className="relatedCard">
@@ -71,14 +70,14 @@ function RelatedProducts({ id, product, rating, currStyle }) {
 
   return (
     <div className="RelatedOutfits">
-      <h7 className="relatedProductsHeader">RELATED PRODUCTS</h7>
+      <h4 className="relatedProductsHeader">RELATED PRODUCTS</h4>
       { currentIndex !== 0 && !relatedIds.length <= 3 ? <input onClick={arrowHandler} type="submit" className="leftArrow" value="◀" /> : null }
       <div className="relatedContainer">
         {cards()}
       </div>
       { currentIndex !== relatedIds.length - 3 && display[1] <= 4 ? <input onClick={arrowHandler} type="submit" className="rightArrow" value="▶" /> : null }
       <br />
-      <h7 className="outfitsHeader">YOUR OUTFIT</h7>
+      <h4 className="outfitsHeader">YOUR OUTFIT</h4>
       <Outfits product={product} rating={rating} currStyle={currStyle}/>
     </div>
   );

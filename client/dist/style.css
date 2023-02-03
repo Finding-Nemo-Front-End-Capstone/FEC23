@@ -243,13 +243,18 @@ body, button {
 .modalCurr {
   text-align: left;
   padding-left: 10px;
+  max-width: 60px;
 }
 .modalProp {
   text-align: center;
+  max-width: 60px;
+  padding-left: 60px;
+  padding-right: 60px;
 }
 .modalRel {
   text-align: right;
   padding-right: 10px;
+  max-width: 60px;
 }
 .relatedModalComparing{
   font-size: xx-small;
