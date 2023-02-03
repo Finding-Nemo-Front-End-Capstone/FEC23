@@ -108,52 +108,36 @@ function Ratings({ product, rating, setProduct }) {
         setContainFilter(result2)
       }
     }
-    // if (value === 'all') {
-    //   setReviewHolder(reviewList);
-    //   setCount(0);
-    // } else {
-    //   const arr = reviewList.filter((reviewFilter) => {
-    //     if (reviewFilter.rating === Number(value)) {
-    //       return true;
-    //     }
-    //     return false;
-    //   });
-    //   console.log(value)
-    //   setReviewHolder(arr);
-    //   setCount(0);
-    // }
   };
 
   return (
     <div>
       RATINGS
       <Breakdown rating={rating} reviewFilter={reviewFilter}/>
-      <div className="reviewFilter">
-        <label>
-          Filter Rating:
-          <button onClick={reviewFilter} value="all">All</button>
-        </label>
+      <div className="reviewHeader">
+        <div className="dropdown">
+          <label htmlFor="sort">
+            Sort By:
+            <select name="sort" id="sort" onChange={sortChange} value={sort}>
+              <option value="newest">Newest</option>
+              <option value="relevant">Relevant</option>
+              <option value="helpful">Helpful</option>
+            </select>
+          </label>
+        </div>
+        <ClipLoader
+          color="green"
+          loading={loading}
+          size={15}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
       </div>
-      <div className="dropdown">
-        <label htmlFor="sort">
-          Sort By:
-          <select name="sort" id="sort" onChange={sortChange} value={sort}>
-            <option value="newest">Newest</option>
-            <option value="relevant">Relevant</option>
-            <option value="helpful">Helpful</option>
-          </select>
-        </label>
+      <div className='divReviewEntry'>
+        {reviewDisplay.map((review) => (
+          <ReviewEntry review={review} />
+        ))}
       </div>
-      <ClipLoader
-        color="green"
-        loading={loading}
-        size={15}
-        aria-label="Loading Spinner"
-        data-testid="loader"
-      />
-      {reviewDisplay.map((review) => (
-        <ReviewEntry review={review} />
-      ))}
       <br />
       <button className="moreReviewBut" onClick={moreHandler} style={{ display: moreDisplay }}>More Reviews</button>
       <br />
