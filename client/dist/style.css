@@ -472,6 +472,7 @@ input[type=file]{
   border: none;
   display: inline;
   font-size: 100%;
+  cursor: pointer;
 }
 
 /* Individual bars */
