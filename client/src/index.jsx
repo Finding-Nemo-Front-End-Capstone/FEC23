@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-// import RelatedProducts from './components/RelatedOutfits/RelatedProducts.jsx';
+import RelatedProducts from './components/RelatedOutfits/RelatedProducts.jsx';
 import Questions from './components/Questions.jsx';
 import Overview from './components/Overview/Overview.jsx';
 // import Ratings from './components/Ratings.jsx';
@@ -10,6 +10,7 @@ function App() {
 // const [productList, setProductList] = useState([]);
   const [product, setProduct] = useState({});
   const [rating, setRating] = useState({});
+  const [currPhotoIndex, setCurrPhotoIndex] = useState(0);
 
   useEffect(() => {
     axios.get('/db/allProducts')
@@ -31,12 +32,14 @@ function App() {
   return (
     <div>
       <nav className="nav-bar">top bar</nav>
-      <Overview product={product} rating={rating} />
+      <Overview product={product} rating={rating}
+      currPhotoIndex={currPhotoIndex} setCurrPhotoIndex={setCurrPhotoIndex}/>
       {/* <Ratings product={product} rating={rating} setProduct={setProduct} /> */}
-      <Questions product={product} />
-      <RelatedProducts product={product} setProduct={setProduct} />
+      {/* <Questions product={product} /> */}
+      {/* <RelatedProducts product={product} setProduct={setProduct} /> */}
     </div>
   );
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
+// ReactDOM.createRoot()

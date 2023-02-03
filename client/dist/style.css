@@ -15,21 +15,20 @@
   font-family: Georgia, 'Times New Roman', Times, serif;
 } */
 
-body, button {
+body {
   font-family: Georgia, 'Times New Roman', Times, serif;
   background-color: var(--bg);
   display: block;
+  padding: 10px;
 }
 
 .nav-bar {
-  display: block;
   position: sticky;
-  width: 100%;
-  height: 40px;
+  height: 30px;
   background-color: #a8dadc;
-  overflow: hidden;
+  padding: 10px 10px;
+  /* overflow: hidden; */
   border-radius: 0.5em;
-  padding: 1em;
 }
 
 .site-announcement {
@@ -38,9 +37,20 @@ body, button {
 
 .prod-content {
   display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-around;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
   padding-top: 2em;
+  /* border: 1px solid black; */
+}
+
+.prod-content span {
+  text-transform: uppercase;
+}
+
+.gallery-description {
+  display: flex;
+  flex-direction: column;
 }
 
 /* @media (max-width: 500px) {
@@ -53,29 +63,17 @@ body, button {
 .prod-info {
   display: flex;
   flex-direction: column;
-}
-
-.main-photo {
-  width: 400px;
-  height: 500px;
-  padding: 10px;
-  object-fit: cover;
+  width: 300px;
+  /* border: 1px solid red; */
 }
 
 .style-wrapper {
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 320px;
   height: auto;
   /* border: 1px solid black; */
-  padding: 1em;
-  position: relative;
-}
-
-.style-wrapper i {
-  position: absolute;
-  /* top: 0;
-  left: 0; */
+  padding-bottom: 1em;
 }
 
 .style-wrapper img {
@@ -85,13 +83,65 @@ body, button {
   border-radius: 50px;
   padding: 1px;
   object-fit: cover;
-  margin: 0.2em;
 }
 
-.gallery-photos {
-  width: 100px;
-  height: 100px;
+.style-wrapper span {
+  position: relative;
+  margin: 5px;
+}
+
+.style-wrapper i {
+  position: absolute;
+  top: 10;
+  right: 0;
+}
+
+.social {
+  font-size: 50px;
+
+}
+.fa-facebook-square {
+  color: #3b5998;
+}
+.fa-twitter-square {
+  color: #1DA1F2;
+  padding: 10px;
+}
+.fa-pinterest-square {
+  color: #E60023;
+}
+
+.gallery-wrap {
+  position: relative;
+  /* display: flex;
+  flex-wrap: wrap; */
+  /* border: 1px solid blue; */
+}
+
+.main-photo {
+  width: 500px;
+  height: 600px;
+  padding-bottom: 10px;
+  padding-right: 10px;
   object-fit: cover;
+  border-radius: 10px;
+}
+
+.gallery-ribbon {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+}
+
+.gallery-photo {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border: 1px solid black;
 }
 
 .read-all-reviews {
@@ -139,8 +189,18 @@ body, button {
   color: red;
 }
 
+.cart-form {
+  /* display: flex; */
+  /* padding-right: 1em; */
+  border: 1px solid black;
+}
+
+.cart-form select {
+  margin: 1em;
+}
+
 .cart-form button {
-  display: flex;
+  /* display: flex; */
   margin: 1em;
 }
 
