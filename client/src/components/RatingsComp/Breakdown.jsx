@@ -137,6 +137,7 @@ function Breakdown({rating, reviewFilter}) {
     <div className="breakdownBar">
         <div class="row">
           <button onClick={allRating}>Show all rating</button>
+          <br/>
           <button name="5"className="eachBarBreakdown" onClick={click5} style={{cursor: 'pointer', 'color':hoverColor5}} onMouseEnter={hoverOn5} onMouseLeave={hoverOn5}>
             <div class="side">
               <div>5 star</div>

@@ -522,6 +522,12 @@ input[type=file]{
   display: table;
   clear: both;
 }
+.breakdownBar {
+  display: block;
+  width: 50%;
+  float:left;
+  height:50%;
+}
 
 /* The bar container */
 .bar-container {
@@ -563,5 +569,17 @@ input[type=file]{
   }
 }
 .row {
-  width: 24%;
+  width: 90%;
+}
+.reviewHeader {
+  float: right;
+  margin-right: 2%;
+}
+.divReviewEntry {
+  width: 50%;
+  max-height: 50%;
+  overflow-y: scroll;
+  position: absolute;
+  margin-left: 48%;
+  margin-top: 6%;
 }
