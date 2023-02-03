@@ -16,7 +16,7 @@ const serverTest = {
     } catch (e) {
       return [];
     }
-  }
-}
+  },
+};
 
 export default serverTest;

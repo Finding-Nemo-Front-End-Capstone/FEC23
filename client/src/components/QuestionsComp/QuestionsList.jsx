@@ -1,44 +1,56 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-plusplus */
 import React, { useEffect, useState } from 'react';
-import Answers from './QuestionsComp/Answers.jsx';
+import Answers from './Answers.jsx';
+import axios from 'axios';
 
-function QuestionsList({ product, questions }) {
-  // console.log("these are questions", questions);
-  // const list = questions.map((question) => <li>{question.</li>)
-  const [displayed, setDisplayed] = useState([]);
-  const [numQuestions, setNumQuestions] = useState(4);
+function QuestionsList({
+  product, questions, displayed, setDisplayed, numQuestions, setNumQuestions, search
+}) {
+  const [disabled, setDisabled] = useState(false);
+  const [filtered, setFiltered] = useState([]);
+  useEffect(() => {
+    if(search.length > 2) {
+      setFiltered(questions.filter((question) => (question.question_body.toLowerCase().includes(search))));
+    } else {
+      setFiltered(questions);
+    }
+  },[search, questions])
   useEffect(() => {
     const arr = [];
-    if (questions[0] && questions.length > 4) {
-      for (let i = 0; i < 4; i++) {
-        arr.push(
-          <div>
-            Q:
-            {' '}
-            {questions[i].question_body}
-            <Answers question_id={questions[i].question_id} />
-          </div>,
-        );
-        setDisplayed(arr);
+    if (filtered[0] && filtered.length > numQuestions) {
+      for (let i = 0; i < numQuestions; i++) {
+        arr.push(displayQuestion(filtered[i]));
       }
-    } else if (questions[0]) {
-      for (let i = 0; i < questions.length; i++) {
-        arr.push(
-          <div>
-            Q:
-            {' '}
-            {questions[i].question_body}
-            <Answers question_id={questions[i].question_id} />
-          </div>,
-        );
+      setDisplayed(arr);
+    } else if (filtered[0]) {
+      for (let i = 0; i < filtered.length; i++) {
+        arr.push(displayQuestion(filtered[i]));
       }
       setDisplayed(arr);
     }
-  }, [numQuestions, questions]);
+  }, [numQuestions, filtered, questions]);
+  function displayQuestion (question) {
+    return (
+      <div>
+        Q:
+        {' '}
+        {question.question_body}
+        <button type="button" disabled={disabled} onClick={() => {helpfulQuestion(question);}}>Helpful?</button>
+        <Answers question_id={question.question_id} />
+        <br />
+      </div>
+    )
+  }
+  function helpfulQuestion (q) {
+    setDisabled(true);  // not sure why disabling this doesn't work
+    axios.put(`/db/helpfulquestion?question_id=${q.question_id}`)
+    .catch((err) => {console.log('err marking question helpful', err)})
+  }
   return (
     <div>
       {displayed}
+      {displayed.length < questions.length && <button type="button" onClick={() => { setNumQuestions(numQuestions + 2); }}>Show more questions</button>}
     </div>
   );
 }

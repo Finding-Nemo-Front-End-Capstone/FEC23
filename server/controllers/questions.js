@@ -3,7 +3,6 @@ const helpers = require('../../helpers/questions');
 module.exports = {
 
   getQuestions(req, res) {
-    console.log("this is the req params", req.query);
     helpers.getQuestions(req.query)
       .then((response) => { res.status(200).send(response.data); })
       .catch((err) => {

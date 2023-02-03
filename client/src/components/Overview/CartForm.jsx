@@ -17,10 +17,14 @@ function CartForm({ currStyle }) {
   console.log('values',values)
 
   // onChange={handleChange(i)}
-  const handleChange = (index) => {
-    setCurrQty(values[index].quantity);
+  const handleChange = (e) => {
+    console.log(e.target.value)
+    setCurrSize(e.target.value);
+    // setCurrQty(values[])
   }
   console.log('currQty', currQty)
+
+
 
   return (
     <div className="cart-form">
@@ -33,7 +37,7 @@ function CartForm({ currStyle }) {
       {/* <select name="qty-list" id="2">
         <option value="select-qty">-</option>
         {values.map((sku, i) => {
-          return <option key={i} value={sku.qty}>{sku.size}</option>
+          return <option key={i} value={sku.quantity}>{sku.quantity}</option>
         })}
       </select> */}
       <button>ADD TO BAG     +</button>

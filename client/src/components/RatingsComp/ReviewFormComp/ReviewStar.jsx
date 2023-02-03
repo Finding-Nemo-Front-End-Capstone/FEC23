@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function ReviewStar({setCountStar}) {
+function ReviewStar({setCountStar, countStar}) {
   const unclick = 'fa fa-star';
   const clicked = 'fa fa-star checked';
   const [star1, setStar1] = useState(unclick);
@@ -12,6 +12,16 @@ function ReviewStar({setCountStar}) {
   const [star4, setStar4] = useState(unclick);
   const [star5, setStar5] = useState(unclick);
   const [starDef, setStarDef] = useState('');
+
+  useEffect(() => {
+    if (countStar === 0) {
+      setStar1(unclick);
+      setStar2(unclick);
+      setStar3(unclick);
+      setStar4(unclick);
+      setStar5(unclick);
+    }
+  }, [countStar]);
 
   useEffect(() => {
     let count = 0;

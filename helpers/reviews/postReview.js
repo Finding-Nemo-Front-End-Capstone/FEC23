@@ -1,12 +1,13 @@
+/* eslint-disable import/extensions */
 const axios = require('axios');
 const config = require('../../config.js');
 
-const postReview = (params) => {
+const postReview = (body) => {
   const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews';
-
+  console.log(body);
   const auth = { Authorization: `${config.TOKEN}` };
 
-  return axios.post(url, {params:params}, { headers: auth });
+  return axios.post(url, body, { headers: auth });
 };
 
 module.exports.postReview = postReview;

@@ -5,17 +5,23 @@ function Modal({show, setShowModal, relFeat, relName, currFeat, currName}) {
   const [sharedFeat, setSharedFeat] = useState([]);
   useEffect(() => {
     if (relFeat && currFeat) {
-      const combined = relFeat.concat(currFeat);
+      let combined = relFeat.concat(currFeat);
+      combined = combined.reduce((res, item) => {
+        if (!res.includes(item.feature)) {
+          return [...res, item.feature];
+        }
+        return res;
+      }, []);
       const result = combined.map((prop) => (
-        { prop: prop.feature,
+        { prop: prop,
           rel: relFeat.reduce((acc, i) => {
-            if (i.feature === prop.feature) {
+            if (i.feature === prop) {
               return acc + (i.value === null ? acc : i.value);
             }
             return acc
           }, ''),
           curr: currFeat.reduce((acc, i) => {
-            if (i.feature === prop.feature) {
+            if (i.feature === prop) {
               return acc + (i.value === null ? acc : i.value);
             }
             return acc
@@ -31,9 +37,17 @@ function Modal({show, setShowModal, relFeat, relName, currFeat, currName}) {
     return (
       sharedFeat.map((feat) => (
         <tr className={feat}>
-          <td>{feat.curr === '' ? null : feat.curr} </td>
+          <td className="modalCurr">
+            {feat.curr === '' ? null :
+            typeof feat.curr === 'boolean' ? '✓'
+            : feat.curr}
+          </td>
           <td className="modalProp">{feat.prop}</td>
-          <td>{feat.rel === '' ? null : feat.rel} </td>
+          <td className="modalRel">
+            {feat.rel === '' ? null :
+            typeof feat.rel === 'boolean' ? '✓'
+            : feat.rel}
+            </td>
         </tr>
       )));
   }
@@ -48,13 +62,17 @@ function Modal({show, setShowModal, relFeat, relName, currFeat, currName}) {
   return createPortal(
     <table className="relatedModal" onClick={closeModal}>
       <tbody>
-        <tr className="relatedModalComparing">COMPARING</tr>
+        <tr>
+          <td className="relatedModalComparing">COMPARING</td>
+        </tr>
         <tr>
           <td className="modalCurrHeader">{currName}</td>
           <td />
           <td className="modalCompHeader">{relName}</td>
         </tr>
-        <br />
+        <tr>
+          <td><br /></td>
+        </tr>
         {makeFeat()}
       </tbody>
     </table>,
