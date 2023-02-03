@@ -5,50 +5,54 @@ import Answers from './Answers.jsx';
 import axios from 'axios';
 
 function QuestionsList({
-  product, questions, displayed, setDisplayed, numQuestions, setNumQuestions,
+  product, questions, displayed, setDisplayed, numQuestions, setNumQuestions, search
 }) {
-  // console.log("these are questions", questions);
-  // const list = questions.map((question) => <li>{question.</li>)
-  // const [displayed, setDisplayed] = useState([]);
-  // const [numQuestions, setNumQuestions] = useState(4);
+  const [disabled, setDisabled] = useState(false);
+  const [filtered, setFiltered] = useState([]);
+  useEffect(() => {
+    if(search.length > 2) {
+      setFiltered(questions.filter((question) => (question.question_body.toLowerCase().includes(search))));
+    } else {
+      setFiltered(questions);
+    }
+  },[search, questions])
   useEffect(() => {
     const arr = [];
-    if (questions[0] && questions.length > numQuestions) {
+    if (filtered[0] && filtered.length > numQuestions) {
       for (let i = 0; i < numQuestions; i++) {
-        arr.push(displayQuestion(questions[i]));
-        setDisplayed(arr);
+        arr.push(displayQuestion(filtered[i]));
       }
-    } else if (questions[0]) {
-      for (let i = 0; i < questions.length; i++) {
-        arr.push(displayQuestion(questions[i]));
+      setDisplayed(arr);
+    } else if (filtered[0]) {
+      for (let i = 0; i < filtered.length; i++) {
+        arr.push(displayQuestion(filtered[i]));
       }
       setDisplayed(arr);
     }
-  }, [numQuestions, questions]);
-  return (
-    <div>
-      {displayed}
-      {displayed.length < questions.length && <button type="button" onClick={() => { setNumQuestions(numQuestions + 2); }}>Show more questions</button>}
-    </div>
-  );
+  }, [numQuestions, filtered, questions]);
   function displayQuestion (question) {
     return (
       <div>
         Q:
         {' '}
         {question.question_body}
-        <button type="button" onClick={() => {helpfulQuestion(question)}}>Helpful?</button>
+        <button type="button" disabled={disabled} onClick={() => {helpfulQuestion(question);}}>Helpful?</button>
         <Answers question_id={question.question_id} />
         <br />
       </div>
     )
   }
   function helpfulQuestion (q) {
-    console.log(q.question_id);
+    setDisabled(true);  // not sure why disabling this doesn't work
     axios.put(`/db/helpfulquestion?question_id=${q.question_id}`)
-      .then((response) => {console.log('question marked successful:', response)})
-      .catch((err) => {console.log('err marking question helpful', err)})
+    .catch((err) => {console.log('err marking question helpful', err)})
   }
+  return (
+    <div>
+      {displayed}
+      {displayed.length < questions.length && <button type="button" onClick={() => { setNumQuestions(numQuestions + 2); }}>Show more questions</button>}
+    </div>
+  );
 }
 
 export default QuestionsList;
