@@ -1,3 +1,502 @@
+
+/* Start of Britta's CSS */
+
+:root {
+  --bg: #f1faee;
+}
+
+.heading {
+  /* margin: 5px; */
+  /* width: fit-content; */
+}
+
+/* button,
 #app {
   font-family: Georgia, 'Times New Roman', Times, serif;
+} */
+
+body, button {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  background-color: var(--bg);
+  display: block;
+}
+
+.nav-bar {
+  display: block;
+  position: sticky;
+  width: 100%;
+  height: 40px;
+  background-color: #a8dadc;
+  overflow: hidden;
+  border-radius: 0.5em;
+  padding: 1em;
+}
+
+.site-announcement {
+  text-align: center;
+}
+
+.prod-content {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+  padding-top: 2em;
+}
+
+/* @media (max-width: 500px) {
+  .prod-content {
+    flex-direction: column;
+    justify-content: space-around;
+  }
+} */
+
+.prod-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-photo {
+  width: 400px;
+  height: 500px;
+  padding: 10px;
+  object-fit: cover;
+}
+
+.style-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  height: auto;
+  /* border: 1px solid black; */
+  padding: 1em;
+  position: relative;
+}
+
+.style-wrapper i {
+  position: absolute;
+  /* top: 0;
+  left: 0; */
+}
+
+.style-wrapper img {
+  width: 60px;
+  height: 60px;
+  border: 2px solid grey;
+  border-radius: 50px;
+  padding: 1px;
+  object-fit: cover;
+  margin: 0.2em;
+}
+
+.gallery-photos {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.read-all-reviews {
+  text-decoration: underline;
+  padding-left: 1em;
+}
+
+.rating {
+  display: block;
+  font-size: 16px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  padding-top: 1em;
+  /* flex-direction: row-reverse; */
+}
+
+.rating-wrap {
+  display: inline-block;
+  position: relative;
+  height: 19px;
+  /* display: flex; */
+}
+
+.rating .stars-active {
+  color: #EEBD01;
+  position: relative;
+  z-index: 10;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.rating .stars-inactive {
+  color: grey;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-text-stroke: initial;
+  /* overflow: hidden; */
+}
+
+.on-sale {
+  text-decoration: line-through;
+  color: red;
+}
+
+.cart-form button {
+  display: flex;
+  margin: 1em;
+}
+
+/* End of Britta's CSS */
+
+/* Related Products and Outfits */
+.RelatedOutfits {
+  position: absolute;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #525252;
+}
+.relatedProductsHeader,
+.outfitsHeader {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #525252;
+  font-size: small;
+}
+.relatedCatText,
+.outfitCatText {
+  font-size: x-small;
+}
+.relatedProdText,
+.outfitProdText {
+  font-weight: bold;
+}
+.relatedPriceText,
+.outfitPriceText {
+  font-size: x-small;
+}
+.relatedContainer,
+.outfitsContainer {
+  position: relative;
+  overflow-x: auto;
+  display: flex;
+  width: 700px;
+  mask-image: linear-gradient(90deg, white, 90% ,transparent);
+  transform: scale(1,1);
+  scrollbar-width: None;
+}
+.relatedCard,
+.outfitCard,
+.addOutfit {
+  border: 1.5px solid grey;
+  margin-right: 10px;
+  width: 175px;
+  min-height: 250px;
+}
+.cardInfo,
+.outfitInfo {
+  position: relative;
+  width: 100%;
+  min-width: 175px;
+}
+.cardDetails {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.modalButton,
+.outfitButton {
+  position: absolute;
+  right: 0;
+  background-color: white;
+}
+.leftArrow,
+.rightArrow {
+  position: absolute;
+  font-size: 30px;
+  top: 20%;
+  z-index: 1;
+  left: 0%;
+}
+.rightArrow {
+  left: 95%;
+}
+.previewImage {
+  height: 250px;
+  width: 100%;
+  object-fit: cover;
+}
+.relatedImageContainer,
+.outfitImageContainer {
+  /* max-width: 100%; */
+  width:100%
+}
+.relatedModal {
+  border: 2px solid lightslategrey;
+  background-color: white;
+  z-index: 1;
+  position: relative;
+  font-size: small;
+  font-family: Arial, Helvetica, sans-serif
+}
+.modalCurrHeader,
+.modalCompHeader {
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.modalCurr {
+  text-align: left;
+  padding-left: 10px;
+  max-width: 60px;
+}
+.modalProp {
+  text-align: center;
+  max-width: 60px;
+  padding-left: 60px;
+  padding-right: 60px;
+}
+.modalRel {
+  text-align: right;
+  padding-right: 10px;
+  max-width: 60px;
+}
+.relatedModalComparing{
+  font-size: xx-small;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 5px 0px 0px 10px;
+}
+
+/* Review & Ratings */
+/* review form */
+
+.reviewForm, .overlay {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  z-index: 10;
+}
+.overlay {
+  background: rgba(49,49,49,0.8);
+  }
+.reviewFormContent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1.4;
+  background: #6bd7f0;
+  padding: 14px 28px;
+  border-radius: 3px;
+  max-width: 600px;
+  min-width: 300px;
+  height: 80%;
+  overflow-y: auto;
+  z-index: 11;
+}
+.closeReviewForm {
+  margin-right: 5%;
+  margin-top: 5%;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  margin-right: 33%;
+  z-index: 13;
+  position: relative;
+  margin-left: 64%;
+}
+button {
+  cursor: pointer;
+  background: none;
+}
+/* for review star Rating */
+.checked {
+  color: orange;
+}
+.fa.fa-star {
+  cursor: pointer;
+}
+
+/* for slider ReviewForm */
+input[type=checkbox], input[type=radio] {
+  margin: 3px 0 0;
+  margin-left: 10%;
+  line-height: normal;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 17px;
+  margin-left: 1%;
+}
+.slider {
+  position:absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 13px;
+  width: 13px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+input:checked + .slider {
+  background-color: #2196F3;
+}
+input:checked + .slider:before {
+  -webkit-transform: translateX(13px);
+  -ms-transform: translateX(13px);
+  transform: translateX(13px);
+}
+.slider.round {
+  border-radius: 34px;
+}
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* more review button */
+.moreReviewBut {
+  background: none;
+  border: none;
+  color:blue;
+  cursor: pointer;
+}
+
+/* for review label radio button */
+.reviewLabel {
+  width: fit-content;
+  margin-left: 9.5%;
+}
+.review2 {
+  margin-left: 25%;
+}
+.radioDivReviewForm {
+  width: 50%;
+  margin-left: 8%;
+  /* color: blue; */
+}
+label.eachChacForm {
+  display: block;
+}
+input.radioButReviewForm {
+  margin-left: 2%;
+}
+
+/* for Upload photo in review */
+.reviewUploadPhoto {
+  border:'none';
+}
+.ReviewFormPhotoEntry {
+  margin: 0.5em 0;
+  width:30%;
+  display: flex;
+  flex-direction: column;
+}
+.divReviewFormPhotoEntry {
+  width:fit-content;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.eachReviewPhoto {
+  width: 5%;
+  margin-left: 1%;
+}
+.divEachReviewPhoto {
+  display:contents;
+  width: fit-content;
+}
+.imgHuge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1.4;
+  padding: 14px 28px;
+  border-radius: 3px;
+  max-width: 600px;
+  min-width: 300px;
+  height: 80%;
+  z-index: 11;
+}
+input[type=file]{
+  width:90px;
+  color:transparent;
+}
+/* Three column layout */
+.side {
+  float: left;
+  width: 15%;
+  margin-top: 10px;
+}
+
+.middle {
+  float: left;
+  width: 70%;
+  margin-top: 15px;
+}
+
+/* Place text to the right */
+.right {
+  text-align: right;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* The bar container */
+.bar-container {
+  margin-left: 3%;
+  width: 101%;
+  background-color: #f1f1f1;
+  text-align: center;
+  color: white;
+}
+.eachBarBreakdown {
+  width: 68%;
+  margin-left: 14%;
+  border: none;
+  display: inline;
+  font-size: 100%;
+  cursor: pointer;
+}
+
+/* Individual bars */
+.bar-5 {height: 10px; background-color: #00bcd4;}
+.bar-4 {height: 10px; background-color: #00bcd4;}
+.bar-3 {height: 10px; background-color: #00bcd4;}
+.bar-2 {height: 10px; background-color: #00bcd4;}
+.bar-1 {height: 10px; background-color: #00bcd4;}
+
+/* Responsive layout - make the columns stack on top of each other instead of next to each other */
+@media (max-width: 400px) {
+  .side, .middle {
+    width: 100%;
+  }
+  /* Hide the right column on small screens */
+  .right {
+    display: none;
+  }
+}
+.row {
+  width: 24%;
 }
