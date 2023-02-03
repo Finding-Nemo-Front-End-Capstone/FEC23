@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Stars from '../Overview/Stars.jsx';
+import RelatedStars from './RelatedStars.jsx';
 function OutfitCards({ product, saved, setHasCurrent, setSaved }) {
   const [cardInfo, setCardInfo] = useState({});
   useEffect(() => {
@@ -9,7 +9,7 @@ function OutfitCards({ product, saved, setHasCurrent, setSaved }) {
     copy.category = product.category;
     copy.name = product.name;
     copy.price = product.price;
-    copy.rating = 5;
+    copy.rating = product.rating;
     copy.thumbnail = product.thumbnail;
     setCardInfo(copy);
   }, [product]);
@@ -44,9 +44,7 @@ function OutfitCards({ product, saved, setHasCurrent, setSaved }) {
         <div className="outfitPriceText">
           ${cardInfo.price}
         </div>
-        <br />
-        {cardInfo.rating}
-        <br />
+        {cardInfo.rating ? <RelatedStars rating = {cardInfo.rating} /> : null}
       </div>
     </div>
   );

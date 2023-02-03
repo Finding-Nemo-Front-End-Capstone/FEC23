@@ -5,12 +5,10 @@ import RelatedStars from './RelatedStars.jsx';
 
 function RelatedCards({ relInfo, product, display }) {
   const [cardInfo, setCardInfo] = useState({});
-  const [features, setFeatures] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     setCardInfo(relInfo);
-    setFeatures(relInfo.features);
   }, [relInfo, display]);
 
   function clickModal(e) {
@@ -18,13 +16,12 @@ function RelatedCards({ relInfo, product, display }) {
     e.preventDefault();
     setShowModal(!showModal);
   }
-  console.log('this is relInfo.rating', relInfo.rating);
   return (
     <div className="cardInfo">
       <button type="submit" className="modalButton" onClick={clickModal}>
         ⭐
       </button>
-      <Modal show={showModal} setShowModal={setShowModal} relFeat={features}
+      <Modal show={showModal} setShowModal={setShowModal} relFeat={relInfo.features}
         relName={cardInfo.name} currFeat={product.features} currName={product.name}
       />
       <div className="relatedImageContainer">

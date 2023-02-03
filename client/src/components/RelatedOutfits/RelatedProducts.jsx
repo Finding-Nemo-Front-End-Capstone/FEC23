@@ -4,7 +4,7 @@ import axios from 'axios';
 import RelatedCards from './RelatedCards.jsx';
 import Outfits from './Outfits.jsx';
 
-function RelatedProducts({ id, product, ratings, currStyle }) {
+function RelatedProducts({ id, product, rating, currStyle }) {
   const [relatedIds, setRelatedIds] = useState([]);
   const [currentId, setCurrentId] = useState(id === undefined ? 40345 : id);
   const [display, setDisplay] = useState([]);
@@ -79,7 +79,7 @@ function RelatedProducts({ id, product, ratings, currStyle }) {
       { currentIndex !== relatedIds.length - 3 && display[1] <= 4 ? <input onClick={arrowHandler} type="submit" className="rightArrow" value="▶" /> : null }
       <br />
       <h7 className="outfitsHeader">YOUR OUTFIT</h7>
-      <Outfits product={product} ratings={ratings} currStyle={currStyle}/>
+      <Outfits product={product} rating={rating} currStyle={currStyle}/>
     </div>
   );
 }
