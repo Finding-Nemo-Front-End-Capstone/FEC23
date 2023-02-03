@@ -11,7 +11,7 @@ function QuestionsList({
   const [filtered, setFiltered] = useState([]);
   useEffect(() => {
     if(search.length > 2) {
-      setFiltered(questions.filter((question) => (question.question_body.includes(search))));
+      setFiltered(questions.filter((question) => (question.question_body.toLowerCase().includes(search))));
     } else {
       setFiltered(questions);
     }

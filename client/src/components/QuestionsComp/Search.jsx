@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 function Search ({questions, setQuestions, search, setSearch}) {
   function handleChange(e) {
-    setSearch(e.target.value);
+    setSearch(e.target.value.toLowerCase());
   }
   return (
     <div>
