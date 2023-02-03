@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import OutfitCards from './OutfitCards.jsx';
 
-function Outfits({ product, ratings, currStyle }) {
+function Outfits({ product, rating, currStyle }) {
   const [saved, setSaved] = useState([]);
   const [hasCurrent, setHasCurrent] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -16,20 +16,20 @@ function Outfits({ product, ratings, currStyle }) {
       setHasCurrent(true);
     }
   }, [saved]);
-  function createItem(info, img) {
+  function createItem(info, rate, img) {
     const item = {
       id: info.id,
       category: info.category,
       name: info.name,
       price: info.default_price,
-      rating: 5,
+      rating: rate,
       thumbnail: img.results[0].photos[0].thumbnail_url
     };
     return item;
   }
   function clickHandler(e) {
     e.preventDefault();
-    const newItem = createItem(product, currStyle);
+    const newItem = createItem(product, rating, currStyle);
     const storage = JSON.parse(localStorage.getItem('outfits'));
     storage.unshift(newItem);
     setSaved(storage);

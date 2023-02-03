@@ -1,37 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Modal from './Modal.jsx';
+import RelatedStars from './RelatedStars.jsx';
 
-function RelatedCards({ id, product }) {
+function RelatedCards({ relInfo, product, display }) {
   const [cardInfo, setCardInfo] = useState({});
-  const [features, setFeatures] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const createInfo = () => axios.get(`/db/${id}`)
-    .then((data) => {
-      const temp = { ...cardInfo };
-      temp.category = data.data.category;
-      temp.name = data.data.name;
-      temp.price = data.data.default_price;
-      temp.rating = 5;
-      setCardInfo(temp);
-      setFeatures(data.data.features);
-    });
-
-  const attachImage = () => {
-    const temp = { ...cardInfo };
-    return axios.get(`/db/styles/${id}`)
-      .then((data) => {
-        temp.thumbnail = data.data.results[0].photos[0].thumbnail_url;
-        setCardInfo(temp);
-      });
-  };
-  useEffect(() => {
-    createInfo();
-  }, [id]);
 
   useEffect(() => {
-    attachImage();
-  }, [features]);
+    setCardInfo(relInfo);
+  }, [relInfo, display]);
+
   function clickModal(e) {
     e.stopPropagation();
     e.preventDefault();
@@ -42,7 +21,7 @@ function RelatedCards({ id, product }) {
       <button type="submit" className="modalButton" onClick={clickModal}>
         ⭐
       </button>
-      <Modal show={showModal} setShowModal={setShowModal} relFeat={features}
+      <Modal show={showModal} setShowModal={setShowModal} relFeat={relInfo.features}
         relName={cardInfo.name} currFeat={product.features} currName={product.name}
       />
       <div className="relatedImageContainer">
@@ -60,9 +39,9 @@ function RelatedCards({ id, product }) {
         <div className="relatedPriceText">
           ${cardInfo.price}
         </div>
-        <br />
-        {cardInfo.rating}
-        <br />
+        <div className="starRating">
+          {cardInfo.rating ? <RelatedStars rating={cardInfo.rating} /> : null}
+        </div>
       </div>
     </div>
   );
