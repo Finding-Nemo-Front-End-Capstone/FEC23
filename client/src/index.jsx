@@ -19,8 +19,8 @@ function App() {
   useEffect(() => {
     axios.get('/db/allProducts')
       .then((data) => {
-        setProduct(data.data[0]);
-        axios.get(`/db/${data.data[0].id}`)
+        setProduct(data.data[2]);
+        axios.get(`/db/${data.data[2].id}`)
           .then((info) => setProdInfo(info.data))
           .catch(() => console.log('product info did not work'))
       })
