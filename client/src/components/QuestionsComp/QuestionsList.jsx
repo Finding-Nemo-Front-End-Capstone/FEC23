@@ -7,10 +7,6 @@ import axios from 'axios';
 function QuestionsList({
   product, questions, displayed, setDisplayed, numQuestions, setNumQuestions,
 }) {
-  // console.log("these are questions", questions);
-  // const list = questions.map((question) => <li>{question.</li>)
-  // const [displayed, setDisplayed] = useState([]);
-  // const [numQuestions, setNumQuestions] = useState(4);
   useEffect(() => {
     const arr = [];
     if (questions[0] && questions.length > numQuestions) {
