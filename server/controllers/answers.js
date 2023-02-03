@@ -20,7 +20,6 @@ module.exports = {
   },
 
   addHelpful(req, res) {
-    console.log(req.query);
     helpers.addHelpful(req.query)
       .then(() => { res.status(201).send('Created'); })
       .catch((err) => {
