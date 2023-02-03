@@ -539,6 +539,10 @@ input[type=file]{
   font-size: 100%;
   cursor: pointer;
 }
+/* .eachBarBreakdown:hover{
+  color:purple;
+} */
+
 
 /* Individual bars */
 .bar-5 {height: 10px; background-color: #00bcd4;}
@@ -546,6 +550,7 @@ input[type=file]{
 .bar-3 {height: 10px; background-color: #00bcd4;}
 .bar-2 {height: 10px; background-color: #00bcd4;}
 .bar-1 {height: 10px; background-color: #00bcd4;}
+
 
 /* Responsive layout - make the columns stack on top of each other instead of next to each other */
 @media (max-width: 400px) {
