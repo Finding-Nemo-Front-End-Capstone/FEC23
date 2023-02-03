@@ -4,13 +4,15 @@ import Stars from './Stars.jsx';
 import Price from './Price.jsx';
 import Styles from './Styles.jsx';
 import CartForm from './CartForm.jsx';
+import Gallery from './Gallery.jsx';
+import Social from './Social.jsx';
 
-function Overview({ product, rating }) {
+function Overview({ product, rating, currPhotoIndex, setCurrPhotoIndex }) {
 
   const [styles, setStyles] = useState([]);
   // const [activeIndex, setActiveIndex] = useState(0);
   const [currStyle, setCurrStyle] = useState({});
-  console.log(styles)
+  // console.log(styles)
 
   useEffect(() => {
     if (product.id) {
@@ -29,30 +31,27 @@ function Overview({ product, rating }) {
 
   if (styles.length > 0) {
     return (
-      <div className="prod-content">
-        <div className="prod-info">
-          <h1 className="heading">{product.name}</h1>
-          <Price currStyle={currStyle}/>
-          <Stars product={product} rating={rating}/>
-          <Styles styles={styles} currStyle={currStyle} setCurrStyle={setCurrStyle}/>
-          <CartForm currStyle={currStyle}/>
-        </div>
-          <img className="main-photo" src={currStyle.photos[0].url}/>
-              {/* <p>{product.description}</p> */}
-          <div className="gallery">
-            {currStyle.photos.map((photo, i) => {
-              return <img className="gallery-photos"
-              src={photo.thumbnail_url} key={photo.url} index={i}
-              />
-            })}
+      <div>
+        <div className="prod-content">
+          <div className="galler-description">
+            <Gallery product={product} currStyle={currStyle}
+            currPhotoIndex={currPhotoIndex} setCurrPhotoIndex={setCurrPhotoIndex}/>
           </div>
+          <div className="prod-info">
+            <Stars product={product} rating={rating}/>
+            <span>{product.category}</span>
+            <h1 className="heading">{product.name}</h1>
+            <Price currStyle={currStyle}/>
+            <Styles styles={styles} currStyle={currStyle}
+            setCurrStyle={setCurrStyle}/>
+            <CartForm currStyle={currStyle}/>
+            <Social/>
+          </div>
+        </div>
+          <p>{product.description}</p>
       </div>
     )
   }
-
-
-
-
 
 }
 
