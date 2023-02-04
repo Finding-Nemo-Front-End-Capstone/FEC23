@@ -30,7 +30,6 @@ function App() {
 
   useEffect(() => {
     if (product.id) {
-      console.log('product id was changed to', product.id);
       axios.get(`db/meta/${product.id}`)
         .then((data) => { setRating(data.data); })
         .catch((err) => { console.log('meta did not work'); });

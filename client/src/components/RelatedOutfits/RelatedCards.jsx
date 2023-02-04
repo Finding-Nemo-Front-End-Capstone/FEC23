@@ -8,7 +8,6 @@ function RelatedCards({ relInfo, product, setProduct, display }) {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    console.log('relInfo is', relInfo);
     setCardInfo(relInfo);
   }, [relInfo, display]);
 
@@ -20,7 +19,6 @@ function RelatedCards({ relInfo, product, setProduct, display }) {
   function clickNav(e) {
     e.stopPropagation();
     e.preventDefault();
-    console.log('this was clicked', cardInfo.id);
     setProduct({id : cardInfo.id});
   }
   return (
