@@ -111,35 +111,36 @@ function Ratings({ product, rating, setProduct }) {
   };
 
   return (
-    <div>
-      RATINGS
-      <Breakdown rating={rating} reviewFilter={reviewFilter}/>
-      <div className="reviewHeader">
-        <div className="dropdown">
-          <label htmlFor="sort">
-            Sort By:
-            <select name="sort" id="sort" onChange={sortChange} value={sort}>
-              <option value="newest">Newest</option>
-              <option value="relevant">Relevant</option>
-              <option value="helpful">Helpful</option>
-            </select>
-          </label>
-        </div>
-        <ClipLoader
-          color="green"
-          loading={loading}
-          size={15}
-          aria-label="Loading Spinner"
-          data-testid="loader"
-        />
-      </div>
+    <div className="RatingsReview">
+      RATINGS & REVIEWS
+      <Breakdown rating={rating} reviewFilter={reviewFilter} totalReview={totalReview}/>
       <div className='divReviewEntry'>
-        {reviewDisplay.map((review) => (
-          <ReviewEntry review={review} />
-        ))}
+        <div className="reviewHeader">
+          <div className="dropdown">
+            <label htmlFor="sort">
+              Sort By:
+              <select name="sort" id="sort" onChange={sortChange} value={sort}>
+                <option value="newest">Newest</option>
+                <option value="relevant">Relevant</option>
+                <option value="helpful">Helpful</option>
+              </select>
+            </label>
+          </div>
+          <ClipLoader
+            color="green"
+            loading={loading}
+            size={15}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        </div>
+        <div className="divMapReview">
+          {reviewDisplay.map((review) => (
+            <ReviewEntry review={review} />
+          ))}
+            <button className="moreReviewBut" onClick={moreHandler} style={{ display: moreDisplay }}>More Reviews</button>
+          </div>
       </div>
-      <br />
-      <button className="moreReviewBut" onClick={moreHandler} style={{ display: moreDisplay }}>More Reviews</button>
       <br />
       <button className="writeReview" onClick={reviewFormBut}>Write Review</button>
 

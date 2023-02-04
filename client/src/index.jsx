@@ -42,10 +42,14 @@ function App() {
   return (
     <div>
       <nav className="nav-bar">top bar</nav>
-      {/* <Overview product={product} rating={rating} />
+      <Overview product={product} rating={rating}
+      currPhotoIndex={currPhotoIndex} setCurrPhotoIndex={setCurrPhotoIndex}/>
+      <Questions product={product} />
+      <RelatedProducts id={product.id} product={prodInfo} rating={rating} currStyle={style}/>
       <Ratings product={product} rating={rating} setProduct={setProduct} />
-      <Questions product={product} /> */}
-      <RelatedProducts id={product.id} product={prodInfo} setProduct={setProduct} rating={rating} currStyle={style}/>
+      <br/>
+      <div>
+      </div>
     </div>
   );
 }
