@@ -1,13 +1,12 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-plusplus */
 import React, { useEffect, useState } from 'react';
-import Answers from './Answers.jsx';
 import axios from 'axios';
+import Question from './Question.jsx'
 
 function QuestionsList({
   product, questions, displayed, setDisplayed, numQuestions, setNumQuestions, search
 }) {
-  const [disabled, setDisabled] = useState(false);
   const [filtered, setFiltered] = useState([]);
   useEffect(() => {
     if(search.length > 2) {
@@ -33,20 +32,10 @@ function QuestionsList({
   function displayQuestion (question) {
     return (
       <div>
-        Q:
-        {' '}
-        {question.question_body}
-        <button type="button" disabled={disabled} onClick={() => {disabled ? <span>Thanks for feedback!</span> : helpfulQuestion(question);}}>Helpful?</button>
-
-        <Answers question_id={question.question_id} />
+        <Question question={question} />
         <br />
       </div>
     )
-  }
-  function helpfulQuestion (q) {
-    setDisabled(true);  // not sure why disabling this doesn't work
-    axios.put(`/db/helpfulquestion?question_id=${q.question_id}`)
-    .catch((err) => {console.log('err marking question helpful', err)})
   }
   return (
     <div>
