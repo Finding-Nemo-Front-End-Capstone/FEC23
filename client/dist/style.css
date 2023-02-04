@@ -522,6 +522,12 @@ input[type=file]{
   display: table;
   clear: both;
 }
+.breakdownBar {
+  display: block;
+  width: 50%;
+  float:left;
+  height:50%;
+}
 
 /* The bar container */
 .bar-container {
@@ -539,6 +545,10 @@ input[type=file]{
   font-size: 100%;
   cursor: pointer;
 }
+/* .eachBarBreakdown:hover{
+  color:purple;
+} */
+
 
 /* Individual bars */
 .bar-5 {height: 10px; background-color: #00bcd4;}
@@ -546,6 +556,7 @@ input[type=file]{
 .bar-3 {height: 10px; background-color: #00bcd4;}
 .bar-2 {height: 10px; background-color: #00bcd4;}
 .bar-1 {height: 10px; background-color: #00bcd4;}
+
 
 /* Responsive layout - make the columns stack on top of each other instead of next to each other */
 @media (max-width: 400px) {
@@ -558,5 +569,17 @@ input[type=file]{
   }
 }
 .row {
-  width: 24%;
+  width: 90%;
+}
+.reviewHeader {
+  float: right;
+  margin-right: 2%;
+}
+.divReviewEntry {
+  width: 50%;
+  max-height: 50%;
+  overflow-y: scroll;
+  position: absolute;
+  margin-left: 48%;
+  margin-top: 6%;
 }
