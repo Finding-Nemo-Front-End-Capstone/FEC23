@@ -11,7 +11,6 @@ function AnswersList({ question_id }) {
   const [displayed, setDisplayed] = useState([]);
   const [page, setPage] = useState(1);
   const [count, setCount] = useState(100);
-  const [trigger, setTrigger] = useState(false);
   useEffect(() => {
     if (question_id) {
       axios({
@@ -20,26 +19,27 @@ function AnswersList({ question_id }) {
       })
       .then((response) => { setAllAnswers(response.data.results); });
     }
-  }, [trigger]);
+  }, []);
   useEffect(() => {
-    const arr = [<span>A:</span>];
+    const arr = [];
     if (allAnswers[0] && allAnswers.length < numAnswers) {
       for (let i = 0; i < allAnswers.length; i++) {
         arr.push(displayAnswer(allAnswers[i]));
       }
       setDisplayed(arr);
-    } else if (allAnswers[0] && allAnswers.length > numAnswers) {
+    } else if (allAnswers[0]) {
       for (let i = 0; i < numAnswers; i++) {
         arr.push(displayAnswer(allAnswers[i]));
       }
       setDisplayed(arr);
     }
-  }, [allAnswers, trigger, numAnswers]);
+  }, [allAnswers, numAnswers]);
   function displayAnswer(answer) {
-    return (<Answer answer={answer} setTrigger={setTrigger} trigger={trigger} />);
+    return (<Answer answer={answer} allAnswers={allAnswers} setAllAnswers={setAllAnswers} />);
   }
   return (
     <div>
+      {displayed[0] && <span>A:</span>}
       {displayed}
       {displayed.length < allAnswers.length && <button type="button" onClick={() => { setNumAnswers(numAnswers + 2); }}>Show more answers</button>}
     </div>

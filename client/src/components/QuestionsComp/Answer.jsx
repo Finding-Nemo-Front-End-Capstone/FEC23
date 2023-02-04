@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-function Answer({answer, setTrigger, trigger}) {
+function Answer({answer, allAnswers, setAllAnswers}) {
   const [disableHelpful, setDisableHelpful] = useState(false);
   const [disableReport, setDisableReport] = useState(false);
   function helpfulAnswer(a) {
@@ -10,10 +10,12 @@ function Answer({answer, setTrigger, trigger}) {
     .catch((err) => {console.log('err marking answer helpful', err)})
   }
   function reportAnswer(a) {
-    setDisableReport(true);
-    setTrigger(!trigger);
     axios.put(`/db/reportanswer?answers_id=${a.answer_id}`)
+    .then(() => {setAllAnswers(allAnswers.filter((answer) => {
+      return (a.answer_id !== answer.answer_id )
+    }))})
     .catch((err) => {console.log('err reporting answer', err)})
+
   }
   return (
     <div>
