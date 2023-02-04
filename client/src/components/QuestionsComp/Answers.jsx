@@ -42,6 +42,7 @@ function Answers({ question_id }) {
         <div>
           {`by ${answer.answerer_name} ${answer.date}`}
           <button type="button" onClick={() => {helpfulAnswer(answer)}}>Helpful?</button>
+          <button type="button" onClick={() => {reportAnswer(answer)}}>Report</button>
         </div>
       </div>
     );
@@ -49,6 +50,10 @@ function Answers({ question_id }) {
   function helpfulAnswer(a) {
     axios.put(`/db/helpfulanswer?answers_id=${a.answer_id}`)
     .catch((err) => {console.log('err marking answer helpful', err)})
+  }
+  function reportAnswer(a) {
+    axios.put(`/db/reportanswer?answers_id=${a.answer_id}`)
+    .catch((err) => {console.log('err reporting answer', err)})
   }
   return (
     <div>
