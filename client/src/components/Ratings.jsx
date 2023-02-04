@@ -91,69 +91,53 @@ function Ratings({ product, rating, setProduct }) {
   };
 
   const reviewFilter = (value) => {
-    value = Number(value);
-    const index = containFilter.indexOf(value)
-    if (index === -1) {
-      const result1 = containFilter.slice();
-      result1.push(value);
-      setContainFilter(result1);
+    if (value === 'all') {
+      setContainFilter([])
+      setCount(0);
     } else {
-      const arr1 = containFilter.slice(0,index);
-      const arr2 = containFilter.slice(index + 1, containFilter.length);
-      const result2 = arr1.concat(arr2);
-      setContainFilter(result2)
+      value = Number(value);
+      const index = containFilter.indexOf(value)
+      if (index === -1) {
+        const result1 = containFilter.slice();
+        result1.push(value);
+        setContainFilter(result1);
+      } else {
+        const arr1 = containFilter.slice(0,index);
+        const arr2 = containFilter.slice(index + 1, containFilter.length);
+        const result2 = arr1.concat(arr2);
+        setContainFilter(result2)
+      }
     }
-    // if (value === 'all') {
-    //   setReviewHolder(reviewList);
-    //   setCount(0);
-    // } else {
-    //   const arr = reviewList.filter((reviewFilter) => {
-    //     if (reviewFilter.rating === Number(value)) {
-    //       return true;
-    //     }
-    //     return false;
-    //   });
-    //   console.log(value)
-    //   setReviewHolder(arr);
-    //   setCount(0);
-    // }
   };
 
   return (
     <div>
       RATINGS
       <Breakdown rating={rating} reviewFilter={reviewFilter}/>
-      <div className="reviewFilter">
-        <label>
-          Filter Rating:
-          <button onClick={reviewFilter} value="all">All</button>
-          <button onClick={reviewFilter} value="5">5</button>
-          <button onClick={reviewFilter} value="4">4</button>
-          <button onClick={reviewFilter} value="3">3</button>
-          <button onClick={reviewFilter} value="2">2</button>
-          <button onClick={reviewFilter} value="1">1</button>
-        </label>
+      <div className="reviewHeader">
+        <div className="dropdown">
+          <label htmlFor="sort">
+            Sort By:
+            <select name="sort" id="sort" onChange={sortChange} value={sort}>
+              <option value="newest">Newest</option>
+              <option value="relevant">Relevant</option>
+              <option value="helpful">Helpful</option>
+            </select>
+          </label>
+        </div>
+        <ClipLoader
+          color="green"
+          loading={loading}
+          size={15}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
       </div>
-      <div className="dropdown">
-        <label htmlFor="sort">
-          Sort By:
-          <select name="sort" id="sort" onChange={sortChange} value={sort}>
-            <option value="newest">Newest</option>
-            <option value="relevant">Relevant</option>
-            <option value="helpful">Helpful</option>
-          </select>
-        </label>
+      <div className='divReviewEntry'>
+        {reviewDisplay.map((review) => (
+          <ReviewEntry review={review} />
+        ))}
       </div>
-      <ClipLoader
-        color="green"
-        loading={loading}
-        size={15}
-        aria-label="Loading Spinner"
-        data-testid="loader"
-      />
-      {reviewDisplay.map((review) => (
-        <ReviewEntry review={review} />
-      ))}
       <br />
       <button className="moreReviewBut" onClick={moreHandler} style={{ display: moreDisplay }}>More Reviews</button>
       <br />

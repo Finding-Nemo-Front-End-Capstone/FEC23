@@ -4,7 +4,7 @@ import axios from 'axios';
 import RelatedCards from './RelatedCards.jsx';
 import Outfits from './Outfits.jsx';
 
-function RelatedProducts({ id, product, rating, currStyle }) {
+function RelatedProducts({ id, product, setProduct, rating, currStyle }) {
   const [relatedIds, setRelatedIds] = useState([]);
   const [display, setDisplay] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -29,6 +29,7 @@ function RelatedProducts({ id, product, rating, currStyle }) {
       .then(
         axios.spread((styles, prod, ratings) => {
           let res = {};
+          res.id = prod.data.id;
           res.category = prod.data.category;
           res.name = prod.data.name;
           res.price = prod.data.default_price;
@@ -62,7 +63,7 @@ function RelatedProducts({ id, product, rating, currStyle }) {
     return (
       relatedIds.slice(display[0], display[1]).map((targetInfo) => (
         <div className="relatedCard">
-          <RelatedCards relInfo={targetInfo} product={product} display={display}/>
+          <RelatedCards relInfo={targetInfo} product={product} setProduct={setProduct} display={display}/>
         </div>
       ))
     )

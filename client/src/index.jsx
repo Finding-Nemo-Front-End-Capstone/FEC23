@@ -14,6 +14,7 @@ function App() {
   const [product, setProduct] = useState({});
   const [prodInfo, setProdInfo] = useState({});
   const [rating, setRating] = useState({});
+  const [currPhotoIndex, setCurrPhotoIndex] = useState(0);
   const [style, setStyle] = useState([]);
 
   useEffect(() => {
@@ -29,6 +30,7 @@ function App() {
 
   useEffect(() => {
     if (product.id) {
+      console.log('product id was changed to', product.id);
       axios.get(`db/meta/${product.id}`)
         .then((data) => { setRating(data.data); })
         .catch((err) => { console.log('meta did not work'); });
@@ -44,9 +46,10 @@ function App() {
       {/* <Overview product={product} rating={rating} />
       <Ratings product={product} rating={rating} setProduct={setProduct} />
       <Questions product={product} /> */}
-      <RelatedProducts id={product.id} product={prodInfo} rating={rating} currStyle={style}/>
+      <RelatedProducts id={product.id} product={prodInfo} setProduct={setProduct} rating={rating} currStyle={style}/>
     </div>
   );
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
+// ReactDOM.createRoot()

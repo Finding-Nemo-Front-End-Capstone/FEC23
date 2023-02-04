@@ -69,6 +69,20 @@ describe ('Related Products', () => {
   });
 })
 
+// describe ('Overview - Styles', () => {
+//   it('should get list of styles based on the current product', async () => {
+//     const knownStyles = [240500, 240501, 240502, 240503, 240504, 240505];
+//     let getStyles = [];
+//     axios.get(`/db/styles/${40344}`)
+//       .then((data) => {
+//         for (var i = 0; i < data.data.results.length; i++) {
+//           getStyles.push(data.data.results[i].style_id)
+//         }
+//         expect(JSON.stringify(knownStyles)).toBe(JSON.stringify(getStyles));
+//       })
+//       .catch((err) => console.log('failed get request', err));
+//   });
+// })
 // describe ('Questions and Answers', () => {
 //   it('intially render up to four questions', async () => {
 //     let getRelated = [];
