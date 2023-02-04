@@ -14,6 +14,7 @@ function App() {
   const [product, setProduct] = useState({});
   const [prodInfo, setProdInfo] = useState({});
   const [rating, setRating] = useState({});
+  const [currPhotoIndex, setCurrPhotoIndex] = useState(0);
   const [style, setStyle] = useState([]);
 
   useEffect(() => {
@@ -41,7 +42,8 @@ function App() {
   return (
     <div>
       <nav className="nav-bar">top bar</nav>
-      <Overview product={product} rating={rating} />
+      <Overview product={product} rating={rating}
+      currPhotoIndex={currPhotoIndex} setCurrPhotoIndex={setCurrPhotoIndex}/>
       <Ratings product={product} rating={rating} setProduct={setProduct} />
       <Questions product={product} />
       <RelatedProducts id={product.id} product={prodInfo} rating={rating} currStyle={style}/>
@@ -50,3 +52,4 @@ function App() {
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
+// ReactDOM.createRoot()

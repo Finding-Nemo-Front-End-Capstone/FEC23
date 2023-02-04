@@ -10,8 +10,6 @@ const Styles = ({ styles, currStyle, setCurrStyle }) => {
   return (
     <div className="style-wrapper">
       <p>STYLE > {currStyle.name}</p>
-      {/* <ul>
-        <li> */}
         <div>
           {styles.map((style, i) => {
             return (
@@ -23,8 +21,6 @@ const Styles = ({ styles, currStyle, setCurrStyle }) => {
             )
           })}
         </div>
-        {/* </li>
-      </ul> */}
     </div>
   )
 }
