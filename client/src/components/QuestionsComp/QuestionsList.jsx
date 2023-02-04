@@ -36,7 +36,8 @@ function QuestionsList({
         Q:
         {' '}
         {question.question_body}
-        <button type="button" disabled={disabled} onClick={() => {helpfulQuestion(question);}}>Helpful?</button>
+        <button type="button" disabled={disabled} onClick={() => {disabled ? <span>Thanks for feedback!</span> : helpfulQuestion(question);}}>Helpful?</button>
+
         <Answers question_id={question.question_id} />
         <br />
       </div>
