@@ -7,7 +7,7 @@ import axios from 'axios';
 import RelatedProducts from './components/RelatedOutfits/RelatedProducts.jsx';
 import Questions from './components/Questions.jsx';
 import Overview from './components/Overview/Overview.jsx';
-import Ratings from './components/Ratings.jsx';
+// import Ratings from './components/Ratings.jsx';
 
 function App() {
 // const [productList, setProductList] = useState([]);
@@ -44,7 +44,7 @@ function App() {
       <nav className="nav-bar">top bar</nav>
       <Overview product={product} rating={rating}
       currPhotoIndex={currPhotoIndex} setCurrPhotoIndex={setCurrPhotoIndex}/>
-      <Ratings product={product} rating={rating} setProduct={setProduct} />
+      {/* <Ratings product={product} rating={rating} setProduct={setProduct} /> */}
       <Questions product={product} />
       <RelatedProducts id={product.id} product={prodInfo} rating={rating} currStyle={style}/>
     </div>

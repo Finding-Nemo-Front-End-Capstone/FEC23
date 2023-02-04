@@ -3,13 +3,15 @@
 /* eslint-disable camelcase */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Answer from './Answer.jsx';
 
-function Answers({ question_id }) {
+function AnswersList({ question_id }) {
   const [allAnswers, setAllAnswers] = useState([]);
   const [numAnswers, setNumAnswers] = useState(2);
   const [displayed, setDisplayed] = useState([]);
   const [page, setPage] = useState(1);
   const [count, setCount] = useState(100);
+  const [trigger, setTrigger] = useState(false);
   useEffect(() => {
     if (question_id) {
       axios({
@@ -18,7 +20,7 @@ function Answers({ question_id }) {
       })
       .then((response) => { setAllAnswers(response.data.results); });
     }
-  }, []);
+  }, [trigger]);
   useEffect(() => {
     const arr = [<span>A:</span>];
     if (allAnswers[0] && allAnswers.length < numAnswers) {
@@ -32,34 +34,16 @@ function Answers({ question_id }) {
       }
       setDisplayed(arr);
     }
-  }, [allAnswers]);
+  }, [allAnswers, trigger, numAnswers]);
   function displayAnswer(answer) {
-    return (
-      <div>
-        <li>
-          {answer.body}
-        </li>
-        <div>
-          {`by ${answer.answerer_name} ${answer.date}`}
-          <button type="button" onClick={() => {helpfulAnswer(answer)}}>Helpful?</button>
-          <button type="button" onClick={() => {reportAnswer(answer)}}>Report</button>
-        </div>
-      </div>
-    );
-  }
-  function helpfulAnswer(a) {
-    axios.put(`/db/helpfulanswer?answers_id=${a.answer_id}`)
-    .catch((err) => {console.log('err marking answer helpful', err)})
-  }
-  function reportAnswer(a) {
-    axios.put(`/db/reportanswer?answers_id=${a.answer_id}`)
-    .catch((err) => {console.log('err reporting answer', err)})
+    return (<Answer answer={answer} setTrigger={setTrigger} trigger={trigger} />);
   }
   return (
     <div>
       {displayed}
+      {displayed.length < allAnswers.length && <button type="button" onClick={() => { setNumAnswers(numAnswers + 2); }}>Show more answers</button>}
     </div>
   );
 }
 
-export default Answers;
+export default AnswersList;
