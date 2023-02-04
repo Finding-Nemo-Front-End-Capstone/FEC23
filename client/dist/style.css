@@ -156,7 +156,14 @@ body {
   overflow: hidden;
   display: flex;
   padding-top: 1em;
-  /* flex-direction: row-reverse; */
+}
+
+.ratingReview {
+  display: block;
+  font-size: 16px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
 }
 
 .rating-wrap {
@@ -166,7 +173,7 @@ body {
   /* display: flex; */
 }
 
-.rating .stars-active {
+.ratingReview .stars-active, .rating .stars-active {
   color: #EEBD01;
   position: relative;
   z-index: 10;
@@ -175,7 +182,7 @@ body {
   white-space: nowrap;
 }
 
-.rating .stars-inactive {
+.ratingReview .stars-inactive, .rating .stars-inactive {
   color: grey;
   position: absolute;
   top: 0;
@@ -208,7 +215,7 @@ body {
 
 /* Related Products and Outfits */
 .RelatedOutfits {
-  position: absolute;
+  position: sticky;
   font-family: Arial, Helvetica, sans-serif;
   color: #525252;
 }
@@ -273,7 +280,8 @@ body {
   left: 0%;
 }
 .rightArrow {
-  left: 95%;
+  left: 70%;
+  position:absolute;
 }
 .previewImage {
   height: 250px;
@@ -432,8 +440,10 @@ input:checked + .slider:before {
 .moreReviewBut {
   background: none;
   border: none;
-  color:blue;
+  color: green;
   cursor: pointer;
+  float: right;
+  margin-right: 42.5%;
 }
 
 /* for review label radio button */
@@ -539,7 +549,7 @@ input[type=file]{
 }
 .eachBarBreakdown {
   width: 68%;
-  margin-left: 14%;
+  margin-left: 5%;
   border: none;
   display: inline;
   font-size: 100%;
@@ -572,14 +582,56 @@ input[type=file]{
   width: 90%;
 }
 .reviewHeader {
-  float: right;
+  float: left;
   margin-right: 2%;
+  margin-top: -4%;
 }
 .divReviewEntry {
   width: 50%;
-  max-height: 50%;
-  overflow-y: scroll;
-  position: absolute;
+  position: inherit;
   margin-left: 48%;
-  margin-top: 6%;
+  margin-top: -23%;
+  float: right;
+  border: none;
+  padding-top: 4%;
+  padding-right: 4%;
+  padding-bottom: 3%;
+  padding-left: 6%;
+  height: fit-content;
+}
+.divMapReview {
+  max-height: 80%;
+  overflow-y: scroll;
+  width: 48%;
+  position:absolute
+}
+.reviewAvgRating {
+  width: fit-content;
+  float: left;
+  margin-right: 3%;
+  font-size: 2em;
+  margin-left: 2%;
+}
+.RatingsReview {
+  padding-top: 9%;
+}
+.userNameDate {
+  float: right;
+  margin-top:-3%;
+}
+button.writeReview {
+  float: right;
+  margin-right: 22%;
+  margin-top: 54%;
+}
+select#sort {
+    border: none;
+    border-bottom: 1px solid black;
+    background: none;
+}
+.ReviewEntry {
+  margin-top: 4%;
+  margin-bottom: 4%;
+  border-bottom: 1px solid black;
+  padding-bottom: 8%;
 }

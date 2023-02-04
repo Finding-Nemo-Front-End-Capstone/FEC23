@@ -69,11 +69,9 @@ function ReviewEntry(props) {
   };
 
   return (
-    <div>
-      <label>rating: </label>
+    <div className="ReviewEntry">
       <text className="ratingReview" data-testid="ratingReview">{props.review.rating}</text>
-      <br />
-      <text>{usernameDate}</text>
+      <div className="userNameDate">{usernameDate}</div>
       <br />
       {photoList.map((photo) => (
         <PhotoEntry photo={photo} />
@@ -102,8 +100,6 @@ function ReviewEntry(props) {
         </button>
       </div>
       <text className="thanksHelpful" style={{ display: thanks }}>Thanks for the input!</text>
-      <br />
-      <text>----------------------------------------------------</text>
     </div>
   );
 }
