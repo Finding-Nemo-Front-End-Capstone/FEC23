@@ -542,7 +542,7 @@ input[type=file]{
 /* The bar container */
 .bar-container {
   margin-left: 3%;
-  width: 101%;
+  width: 100%;
   background-color: #f1f1f1;
   text-align: center;
   color: white;
@@ -558,7 +558,16 @@ input[type=file]{
 /* .eachBarBreakdown:hover{
   color:purple;
 } */
-
+.chacBreak {
+  width: 28%;
+  float: left;
+  margin-left: -47%;
+}
+.arrow-comfort {
+  float:left;
+  color:rebeccapurple;
+  margin-left: 48%;
+}
 
 /* Individual bars */
 .bar-5 {height: 10px; background-color: #00bcd4;}
@@ -566,6 +575,10 @@ input[type=file]{
 .bar-3 {height: 10px; background-color: #00bcd4;}
 .bar-2 {height: 10px; background-color: #00bcd4;}
 .bar-1 {height: 10px; background-color: #00bcd4;}
+.bar-container1 {height: 10px; background:none; width: 75%; border-right: 5px solid white;}
+.bar-container2 {height: 10px; background:none; width: 25%; border-right: 5px solid white; margin-top: -3%;}
+.bar-8 {height: 10px}
+.bar-9 {height: 10px}
 
 
 /* Responsive layout - make the columns stack on top of each other instead of next to each other */

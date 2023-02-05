@@ -4,7 +4,8 @@ import axios from 'axios';
 import ClipLoader from 'react-spinners/ClipLoader.js';
 import ReviewEntry from './RatingsComp/ReviewEntry.jsx';
 import ReviewForm from './RatingsComp/ReviewForm.jsx';
-import Breakdown from './RatingsComp/Breakdown.jsx'
+import Breakdown from './RatingsComp/Breakdown.jsx';
+import ChacBreak from './RatingsComp/ChacBreak.jsx';
 
 function Ratings({ product, rating, setProduct }) {
   const [reviewList, setReviewList] = useState([]);
@@ -114,6 +115,7 @@ function Ratings({ product, rating, setProduct }) {
     <div className="RatingsReview">
       RATINGS & REVIEWS
       <Breakdown rating={rating} reviewFilter={reviewFilter} totalReview={totalReview}/>
+      <ChacBreak rating={rating} />
       <div className='divReviewEntry'>
         <div className="reviewHeader">
           <div className="dropdown">
