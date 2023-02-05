@@ -21,13 +21,12 @@ function QuestionsList({
       for (let i = 0; i < numQuestions; i++) {
         arr.push(displayQuestion(filtered[i]));
       }
-      setDisplayed(arr);
     } else if (filtered[0]) {
       for (let i = 0; i < filtered.length; i++) {
         arr.push(displayQuestion(filtered[i]));
       }
-      setDisplayed(arr);
     }
+    setDisplayed(arr);
   }, [numQuestions, filtered, questions]);
   function displayQuestion (question) {
     return (
@@ -40,7 +39,7 @@ function QuestionsList({
   return (
     <div>
       {displayed}
-      {displayed.length < questions.length && <button type="button" onClick={() => { setNumQuestions(numQuestions + 2); }}>Show more questions</button>}
+      {displayed.length < filtered.length && <button type="button" onClick={() => { setNumQuestions(numQuestions + 2); }}>Show more questions</button>}
     </div>
   );
 }

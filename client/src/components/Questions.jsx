@@ -12,7 +12,6 @@ function Questions({ product }) {
   const [numQuestions, setNumQuestions] = useState(4);
   const [search, setSearch] = useState('');
   useEffect(() => {
-    console.log('product id', product);
     axios({
       url: `/db/questions?product_id=${product.id}&page=${1}&count=${100}`,
       method: 'GET',
@@ -30,6 +29,7 @@ function Questions({ product }) {
       <Search questions={questions} setQuestions={setQuestions} search={search} setSearch={setSearch} />
       <button onClick={handleAccordion} type="button">{buttonText}</button>
       {expanded && <QuestionsList product={product} questions={questions} displayed={displayed} setDisplayed={setDisplayed} numQuestions={numQuestions} setNumQuestions={setNumQuestions} search={search}/>}
+      <button type="button">Add a question +</button>
     </div>
   );
 }

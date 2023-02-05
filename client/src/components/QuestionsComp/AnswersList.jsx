@@ -26,13 +26,12 @@ function AnswersList({ question_id }) {
       for (let i = 0; i < allAnswers.length; i++) {
         arr.push(displayAnswer(allAnswers[i]));
       }
-      setDisplayed(arr);
     } else if (allAnswers[0]) {
       for (let i = 0; i < numAnswers; i++) {
         arr.push(displayAnswer(allAnswers[i]));
       }
-      setDisplayed(arr);
     }
+    setDisplayed(arr);
   }, [allAnswers, numAnswers]);
   function displayAnswer(answer) {
     return (<Answer answer={answer} allAnswers={allAnswers} setAllAnswers={setAllAnswers} />);
