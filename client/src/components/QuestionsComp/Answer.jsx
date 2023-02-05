@@ -23,8 +23,19 @@ function Answer({answer, allAnswers, setAllAnswers}) {
         {answer.body}
       </li>
       <div>
-        {`by ${answer.answerer_name} ${answer.date}`}
-        <button type="button" disabled={disableHelpful} onClick={() => {helpfulAnswer(answer)}}>Helpful?</button>
+        <span class="button-feedback">{`by ${answer.answerer_name} ${answer.date}`}</span>
+        <span>|</span>
+        {/* <span class="button-feedback">{`Helpful?`}</span> */}
+        {disableHelpful ?
+        <span class="button-feedback">Thanks for the feedback</span> :
+        <span class="button-feedback">
+          <span>{`Helpful?`}</span>
+          <button type="button" class="helpful-button" onClick={() => {helpfulAnswer(answer)}}><u>Yes</u></button>
+          {console.log(answer)}
+          <span class="button-feedback" id="helpfulness-score">{`(${answer.helpfulness})`}</span>
+        </span>
+        }
+        <span>|</span>
         <button type="button" disabled={disableReport} onClick={() => {reportAnswer(answer)}}>Report</button>
       </div>
     </div>
