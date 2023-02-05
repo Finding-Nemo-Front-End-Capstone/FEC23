@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import QuestionsList from './QuestionsComp/QuestionsList.jsx';
 import Search from './QuestionsComp/Search.jsx';
+import AddQuestion from './QuestionsComp/AddQuestion.jsx';
 
 function Questions({ product }) {
   const [expanded, setExpanded] = useState(true);
@@ -11,6 +12,7 @@ function Questions({ product }) {
   const [displayed, setDisplayed] = useState([]);
   const [numQuestions, setNumQuestions] = useState(4);
   const [search, setSearch] = useState('');
+  const [showAddQuestion, setShowAddQuestion] = useState(false);
   useEffect(() => {
     axios({
       url: `/db/questions?product_id=${product.id}&page=${1}&count=${100}`,
@@ -29,7 +31,9 @@ function Questions({ product }) {
       <Search questions={questions} setQuestions={setQuestions} search={search} setSearch={setSearch} />
       <button onClick={handleAccordion} type="button">{buttonText}</button>
       {expanded && <QuestionsList product={product} questions={questions} displayed={displayed} setDisplayed={setDisplayed} numQuestions={numQuestions} setNumQuestions={setNumQuestions} search={search}/>}
-      <button type="button">Add a question +</button>
+      <button type="button" onClick={() => setShowAddQuestion(true)}>Add a question +</button>
+      <AddQuestion onClose={() => setShowAddQuestion(false)} showAddQuestion={showAddQuestion} />
+
     </div>
   );
 }
