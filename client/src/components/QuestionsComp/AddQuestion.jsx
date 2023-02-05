@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 
-function AddQuestion({showAddQuestion, onClose}) {
-  if(!showAddQuestion) {
+function AddQuestion({ showAddQuestion, onClose }) {
+  if (!showAddQuestion) {
     return null;
   }
 
@@ -14,14 +14,18 @@ function AddQuestion({showAddQuestion, onClose}) {
         </div>
         <div className="add-question-body">
           Modal form goes here
+          <form>
+            <input type="text" placeholder="John Doe" />
+            <input type="text" placeholder="john@gmail.com" />
+            <input type="text" placeholder="Question" />
+          </form>
         </div>
         <div className="add-question-footer">
-          <button onClick={onClose} className="button">Cancel</button>
+          <button type="button" onClick={onClose} className="button">Cancel</button>
         </div>
       </div>
     </div>
-  )
-
+  );
 }
 
 export default AddQuestion;
