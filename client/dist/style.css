@@ -445,6 +445,10 @@ input:checked + .slider:before {
   float: right;
   margin-right: 42.5%;
 }
+.moreReviewsBody {
+  color:#3d8faa;
+  border:none;
+}
 
 /* for review label radio button */
 .reviewLabel {
@@ -533,23 +537,23 @@ input[type=file]{
   clear: both;
 }
 .breakdownBar {
-  display: block;
-  width: 50%;
-  float:left;
-  height:50%;
+  width: 80%;
+  height: 50%;
+  float: left;
+  position: relative;
 }
 
 /* The bar container */
 .bar-container {
   margin-left: 3%;
-  width: 101%;
+  width: 100%;
   background-color: #f1f1f1;
   text-align: center;
   color: white;
 }
 .eachBarBreakdown {
-  width: 68%;
-  margin-left: 5%;
+  width: 100%;
+  margin-left: 2%;
   border: none;
   display: inline;
   font-size: 100%;
@@ -558,7 +562,123 @@ input[type=file]{
 /* .eachBarBreakdown:hover{
   color:purple;
 } */
-
+.chacandbreak {
+  width: 50%;
+  float: left;
+  position: absolute;
+}
+.chacBreak {
+  width: 76%;
+  margin-left: 5%;
+  float: left;
+  margin-top: 0%;
+}
+.breakdown {
+  display: contents;
+}
+.arrow-comfort {
+  float:left;
+  color:rebeccapurple;
+  margin-top: -1%;
+}
+.arrow-quality {
+  float:left;
+  color:rebeccapurple;
+  margin-top: -1%;
+}
+.chac {
+  margin-top: 10%;
+}
+.comfyDesc {
+  margin-left: -6%;
+  font-size: 75%;
+  margin-bottom: 3%;
+}
+text.uncomfortableFONT {
+  float: left;
+  margin-left: 1%;
+  position: absolute;
+}
+text.sUncomfortableFONT {
+  margin-left: 17%;
+  float: left;
+  position: absolute;
+}
+text.ok {
+  margin-left: 43%;
+  float: left;
+  position: absolute;
+}
+text.comfortable {
+  margin-left: 59%;
+  float: left;
+  position: absolute;
+}
+text.perfect {
+  margin-left: 78%;
+  float: left;
+  position: absolute;
+}
+text.poorFONT {
+  float: left;
+  margin-left: 3%;
+  position: absolute;
+}
+text.belowavgFONT {
+  margin-left: 20%;
+  float: left;
+  position: absolute;
+}
+text.whatiexpect {
+  margin-left: 39%;
+  float: left;
+  position: absolute;
+}
+text.prettygreat {
+  margin-left: 59%;
+  float: left;
+  position: absolute;
+}
+text.perfectQ {
+  margin-left: 78%;
+  float: left;
+  position: absolute;
+}
+text.smallFONT {
+  float: left;
+  margin-left: 3%;
+  position: absolute;
+}
+text.perfectS {
+  margin-left: 41%;
+  float: left;
+  position: absolute;
+}
+text.sizeWide {
+  margin-left: 75%;
+  float: left;
+  position: absolute;
+}
+text.toonarrowFONT {
+  float: left;
+  margin-left: 2%;
+  position: absolute;
+}
+text.toowide {
+  margin-left: 78%;
+  float: left;
+  position: absolute;
+}
+text.runshort {
+  float: left;
+  margin-left: 1%;
+  position: absolute;
+}
+text.runslong {
+  margin-left: 77%;
+  float: left;
+  position: absolute;
+}
 
 /* Individual bars */
 .bar-5 {height: 10px; background-color: #00bcd4;}
@@ -566,6 +686,25 @@ input[type=file]{
 .bar-3 {height: 10px; background-color: #00bcd4;}
 .bar-2 {height: 10px; background-color: #00bcd4;}
 .bar-1 {height: 10px; background-color: #00bcd4;}
+.bar-container1 {
+  height: 10px;
+  background: none;
+  width: 49%;
+  margin-left: 25%;
+  border-right: 5px solid white;
+  border-left: 5px solid white;
+}
+.bar-container2 {
+  height: 10px;
+  background: none;
+  width: 50%;
+  border-right: 5px solid white;
+}
+.bar-containerCB {
+  width: 100%;
+  background-color: #989cbd;
+  margin-top: 1%;
+}
 
 
 /* Responsive layout - make the columns stack on top of each other instead of next to each other */
@@ -578,32 +717,27 @@ input[type=file]{
     display: none;
   }
 }
-.row {
-  width: 90%;
-}
 .reviewHeader {
   float: left;
   margin-right: 2%;
   margin-top: -4%;
 }
 .divReviewEntry {
-  width: 50%;
-  position: inherit;
-  margin-left: 48%;
-  margin-top: -23%;
-  float: right;
+  width: 60%;
   border: none;
-  padding-top: 4%;
+  padding-top: 6%;
   padding-right: 4%;
   padding-bottom: 3%;
   padding-left: 6%;
-  height: fit-content;
+  float: left;
+  margin-top: -4%;
+  margin-left: 38%;
 }
 .divMapReview {
-  max-height: 80%;
-  overflow-y: scroll;
   width: 48%;
-  position:absolute
+  position: absolute;
+  overflow: scroll;
+  max-height: 950%;
 }
 .reviewAvgRating {
   width: fit-content;
@@ -613,17 +747,16 @@ input[type=file]{
   margin-left: 2%;
 }
 .RatingsReview {
-  padding-top: 9%;
+  display: block;
+  width: 100%;
+  padding-top: 5%;
+  position: relative;
 }
 .userNameDate {
   float: right;
   margin-top:-3%;
 }
-button.writeReview {
-  float: right;
-  margin-right: 22%;
-  margin-top: 54%;
-}
+
 select#sort {
     border: none;
     border-bottom: 1px solid black;
@@ -634,6 +767,9 @@ select#sort {
   margin-bottom: 4%;
   border-bottom: 1px solid black;
   padding-bottom: 8%;
+}
+.hello {
+  margin-top: 6%
 }
 
 /* Questions and Answers */

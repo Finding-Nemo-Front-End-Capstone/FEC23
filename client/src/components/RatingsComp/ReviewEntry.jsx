@@ -83,7 +83,7 @@ function ReviewEntry(props) {
       <br />
       <label>body: </label>
       <text>{body}</text>
-      <button style={{ display: moreBody }} onClick={moreBodyClick}>more reviews</button>
+      <button className='moreReviewsBody' style={{ display: moreBody }} onClick={moreBodyClick}>MORE...</button>
       <br />
       <text className="recommend">{recommend}</text>
       <br />
