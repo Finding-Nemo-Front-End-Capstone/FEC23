@@ -17,6 +17,15 @@ const serverTest = {
       return [];
     }
   },
+  related: async(product) => {
+    const relatedURL = `http://localhost:${process.env.PORT}/db/related/${product}`;
+    try {
+      return await axios.get(`${relatedURL}`);
+    } catch (e) {
+      return [];
+    }
+  },
+
 };
 
 export default serverTest;

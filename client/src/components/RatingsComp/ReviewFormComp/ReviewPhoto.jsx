@@ -3,8 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import ReviewFormPhotoEntry from './ReviewFormPhotoEntry.jsx';
 
-function ReviewPhoto({ imageList, setImageList }) {
+function ReviewPhoto({ imageList, setImageList, imageFiles, setImageFiles }) {
   const [chooseFile, setChooseFile] = useState('');
+
   useEffect(() => {
     if (imageList.length === 0) {
       setChooseFile('');
@@ -12,6 +13,9 @@ function ReviewPhoto({ imageList, setImageList }) {
   }, [imageList]);
   const submitPhoto = (e) => {
     if (imageList.length < 5) {
+      let arr1 = imageFiles.slice();
+      arr1.push(e.target.files[0])
+      setImageFiles(arr1);
       const photo = URL.createObjectURL(e.target.files[0]);
       const arr = imageList.slice();
       arr.push(photo);

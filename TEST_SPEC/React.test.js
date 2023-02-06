@@ -1,6 +1,6 @@
 /* eslint-disable prefer-destructuring */
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import axios from 'axios';
 // import adapter from axios +'/lib/adapters/http';
 
@@ -55,7 +55,7 @@ describe('SERVER', () => {
   //   it(reviews.status).not.toBe(404 && 500);
   // });
 });
-jest.mock('axios');
+
 describe ('Related Products', () => {
   afterEach(cleanup);
   it('should get list of related products based on the current product', async () => {

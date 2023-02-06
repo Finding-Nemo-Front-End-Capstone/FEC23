@@ -48,8 +48,6 @@ function App() {
       <RelatedProducts id={product.id} product={prodInfo} rating={rating} currStyle={style}/>
       <Ratings product={product} rating={rating} setProduct={setProduct} />
       <br/>
-      <div>
-      </div>
     </div>
   );
 }
