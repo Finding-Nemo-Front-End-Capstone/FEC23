@@ -19,6 +19,8 @@ function ReviewEntry(props) {
   const [response, setResponse] = useState([]);
   const [helpfulSec, setHelpfulSec] = useState('');
   const [thanks, setThanks] = useState('none');
+  const [percentageRating, setPercentageRating] = useState('');
+  const [verified, setVerified] = useState('none')
 
   const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December',
@@ -30,6 +32,9 @@ function ReviewEntry(props) {
   const usernameDate = `${props.review.reviewer_name}, ${month} ${day}, ${year}`;
 
   useEffect(() => {
+    console.log(props.review)
+    const rate = props.review.rating;
+    setPercentageRating(JSON.stringify(rate/5 *100) + '%')
     if (props.review.body.length > 250) {
       setBody(props.review.body.slice(0, 250));
       setMoreBody('');
@@ -48,7 +53,10 @@ function ReviewEntry(props) {
     if (props.review.response !== null) {
       setResponse(props.review.response);
     }
-    console.log('need this for test', props.review);
+    if (props.review.verify) {
+      setVerified('')
+      // this is setup for verification
+    }
   }, [props.review]);
 
   const moreBodyClick = (e) => {
@@ -69,11 +77,28 @@ function ReviewEntry(props) {
   };
 
   return (
-    <div>
-      <label>rating: </label>
-      <text className="ratingReview" data-testid="ratingReview">{props.review.rating}</text>
-      <br />
-      <text>{usernameDate}</text>
+    <div className="ReviewEntry">
+      <span className="ratingReview">
+        <div className="rating-wrap">
+          <span className="stars-active" style={{ width: `${percentageRating}` }}>
+              <i className="fa fa-star" aria-hidden="true"></i>
+              <i className="fa fa-star" aria-hidden="true"></i>
+              <i className="fa fa-star" aria-hidden="true"></i>
+              <i className="fa fa-star" aria-hidden="true"></i>
+              <i className="fa fa-star" aria-hidden="true"></i>
+          </span>
+          <span className="stars-inactive">
+            <i className="fa fa-star-o" aria-hidden="true"></i>
+            <i className="fa fa-star-o" aria-hidden="true"></i>
+            <i className="fa fa-star-o" aria-hidden="true"></i>
+            <i className="fa fa-star-o" aria-hidden="true"></i>
+            <i className="fa fa-star-o" aria-hidden="true"></i>
+          </span>
+        </div>
+      </span>
+      <div className="userNameDate">
+      <i class="fa fa-check-circle" style={{display:verified}}></i>
+      {usernameDate}</div>
       <br />
       {photoList.map((photo) => (
         <PhotoEntry photo={photo} />
@@ -85,7 +110,7 @@ function ReviewEntry(props) {
       <br />
       <label>body: </label>
       <text>{body}</text>
-      <button style={{ display: moreBody }} onClick={moreBodyClick}>more reviews</button>
+      <button className='moreReviewsBody' style={{ display: moreBody }} onClick={moreBodyClick}>MORE...</button>
       <br />
       <text className="recommend">{recommend}</text>
       <br />
@@ -102,8 +127,6 @@ function ReviewEntry(props) {
         </button>
       </div>
       <text className="thanksHelpful" style={{ display: thanks }}>Thanks for the input!</text>
-      <br />
-      <text>----------------------------------------------------</text>
     </div>
   );
 }
