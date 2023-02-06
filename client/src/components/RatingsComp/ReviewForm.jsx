@@ -13,6 +13,7 @@ import Summary from './ReviewFormComp/Summary.jsx';
 import Body from './ReviewFormComp/Body.jsx';
 import ReviewPhoto from './ReviewFormComp/ReviewPhoto.jsx';
 
+
 function ReviewForm({ rating, setReviewForm, totalReview, setTotalReviews, setSort }) {
   const [countStar, setCountStar] = useState(0);
   const [recommendStatus, setRecommendStatus] = useState(false);
@@ -36,6 +37,7 @@ function ReviewForm({ rating, setReviewForm, totalReview, setTotalReviews, setSo
   const [submitWarning, setSubmitWarning] = useState('none');
   const [characteristicList, setCharacteristicList] = useState([]);
   const [idChacList, setIdChacList] = useState([]);
+  const [imageFiles, setImageFiles] = useState([]);
 
   const click = {
     clickSize: (e) => {
@@ -159,30 +161,46 @@ function ReviewForm({ rating, setReviewForm, totalReview, setTotalReviews, setSo
     params.recommend = recommendStatus;
     params.name = nickname;
     params.email = email;
-    params.photos = imageList;
+    params.photos =[];
     // console.log(params);
 
-    axios.post('/db/review/post', params)
-      .then(() => {
-        setTotalReviews(totalReview + 1);
-        setSort('newest');
-        alert('Thank you for submitting a review');
-        setCountStar(0);
-        const radioBut = document.getElementsByClassName('radioButReviewForm');
-        for (let i = 0; i < radioBut.length; i++) {
-          radioBut[i].checked = false;
-        }
-        const slider = document.getElementsByClassName('checkSlider');
-        slider[0].checked = false;
-        setRecommendStatus(false);
-        setNickname('');
-        setEmail('');
-        setSummaryValue('');
-        setBodyValue('');
-        setImageList([]);
-        setReviewForm(false);
+    Promise.all(imageFiles.map((eachFile) => {
+      const formData = new FormData();
+      formData.append('file', eachFile);
+      formData.append('upload_preset', 'o9exuyqa')
+      // console.log(imageFiles)
+      return axios.post(`https://api.cloudinary.com/v1_1/dsiywf70i/image/upload`, formData)
+        .then((res) => {
+          console.log('IneedTHIIIIIS', res.data.secure_url)
+          params.photos.push(res.data.secure_url)
+          console.log(params.photos)
       })
-      .catch(() => console.log('error in posting review'));
+        .catch((err) => console.log(err))
+    }))
+      .then(() => {
+        axios.post('/db/review/post', params)
+          .then(() => {
+            setTotalReviews(totalReview + 1);
+            setSort('newest');
+            alert('Thank you for submitting a review');
+            setCountStar(0);
+            const radioBut = document.getElementsByClassName('radioButReviewForm');
+            for (let i = 0; i < radioBut.length; i++) {
+              radioBut[i].checked = false;
+            }
+            const slider = document.getElementsByClassName('checkSlider');
+            slider[0].checked = false;
+            setRecommendStatus(false);
+            setNickname('');
+            setEmail('');
+            setSummaryValue('');
+            setBodyValue('');
+            setImageList([]);
+            setReviewForm(false);
+            setImageFiles([]);
+          })
+          .catch(() => console.log('error in posting review'));
+      }).catch((err) => console.log(err))
   };
 
   return (
@@ -249,6 +267,8 @@ function ReviewForm({ rating, setReviewForm, totalReview, setTotalReviews, setSo
         <ReviewPhoto
           imageList={imageList}
           setImageList={setImageList}
+          imageFiles={imageFiles}
+          setImageFiles={setImageFiles}
         />
       </div>
       <br />
