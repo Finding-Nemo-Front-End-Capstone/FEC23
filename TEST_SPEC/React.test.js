@@ -1,4 +1,3 @@
-/* eslint-disable prefer-destructuring */
 import React from 'react';
 import { render } from '@testing-library/react';
 import axios from 'axios';
@@ -12,8 +11,8 @@ import serverTest from './utils.js';
 
 // import RelatedProducts from '../client/src/components/RelatedOutfits/RelatedProducts.jsx';
 
-const allProducts = serverTest.allProducts;
-const reviews = serverTest.reviews;
+const { allProducts } = serverTest;
+const { reviews } = serverTest;
 
 const ReviewObjTest = {
   rating: 5,
