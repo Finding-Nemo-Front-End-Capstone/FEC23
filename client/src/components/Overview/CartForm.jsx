@@ -4,7 +4,7 @@ function CartForm({ currStyle }) {
 
   const [currSize, setCurrSize] = useState('SELECT SIZE');
   const [currQty, setCurrQty] = useState(0);
-  console.log('size', currSize)
+  // console.log('size', currSize)
 
 
   let values = Object.values(currStyle.skus);
@@ -14,7 +14,7 @@ function CartForm({ currStyle }) {
   // }
 
   // console.log(currStyle.skus)
-  console.log('values',values)
+  // console.log('values',values)
 
   // onChange={handleChange(i)}
   const handleChange = (e) => {
@@ -22,7 +22,7 @@ function CartForm({ currStyle }) {
     setCurrSize(e.target.value);
     // setCurrQty(values[])
   }
-  console.log('currQty', currQty)
+  // console.log('currQty', currQty)
 
 
 
