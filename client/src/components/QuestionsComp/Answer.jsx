@@ -28,7 +28,6 @@ function Answer({ answer, allAnswers, setAllAnswers }) {
             <span className="button-feedback">
               <span>Helpful?</span>
               <button type="button" className="helpful-button" onClick={() => { helpfulAnswer(answer); }}><u>Yes</u></button>
-              {console.log(answer)}
               <span className="button-feedback" id="helpfulness-score">{`(${answer.helpfulness})`}</span>
             </span>
           )}

@@ -6,7 +6,7 @@ import axios from 'axios';
 
 // import Ratings from '../client/src/components/Ratings.jsx';
 import ReviewEntry from '../client/src/components/RatingsComp/ReviewEntry.jsx';
-import QuestionList from '../client/src/components/Questions/QuestionList.jsx';
+import QuestionsList from '../client/src/components/QuestionsComp/QuestionsList.jsx';
 import serverTest from './utils.js';
 // @jest-environment jsdom
 
@@ -56,7 +56,7 @@ describe('SERVER', () => {
   // });
 });
 
-describe ('Related Products', () => {
+describe('Related Products', () => {
   it('should get list of related products based on the current product', async () => {
     const knownRelated = [40345, 40346, 40351, 40350];
     let getRelated = [];
@@ -67,7 +67,7 @@ describe ('Related Products', () => {
       })
       .catch((err) => console.log('failed get request', err));
   });
-})
+});
 
 // describe ('Overview - Styles', () => {
 //   it('should get list of styles based on the current product', async () => {

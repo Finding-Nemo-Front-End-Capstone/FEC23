@@ -9,6 +9,10 @@
         "airbnb"
     ],
     "overrides": [
+        {
+            "files": ["./TEST_SPEC/*"],
+            "env": {"jest": true, "node": true}
+        }
     ],
     "parserOptions": {
         "ecmaVersion": "latest",
@@ -23,6 +27,7 @@
         "camelcase": "off",
         "no-plusplus": "off",
         "react/prop-types": 0,
-        "import/extensions": 0
+        "import/extensions": 0,
+        "react/jsx-filename-extension": "off"
     }
 }
