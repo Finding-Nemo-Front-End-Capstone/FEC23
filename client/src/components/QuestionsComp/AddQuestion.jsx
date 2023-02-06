@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 function AddQuestion({ showAddQuestion, onClose }) {
+  const [input, setInput] = useState({});
   if (!showAddQuestion) {
     return null;
   }
-
+  function handleChange(e) {
+    console.log(e.target.name);
+    const { name } = e.target;
+    const { value } = e.target;
+    setInput({ ...input, [name]: value });
+  }
   return (
     <div className="add-question-modal">
       <div className="add-question-content">
@@ -14,10 +20,10 @@ function AddQuestion({ showAddQuestion, onClose }) {
         </div>
         <div className="add-question-body">
           Modal form goes here
-          <form>
-            <input type="text" placeholder="John Doe" />
-            <input type="text" placeholder="john@gmail.com" />
-            <input type="text" placeholder="Question" />
+          <form id="add-question-form">
+            <input type="text" name="name" placeholder="John Doe" onChange={handleChange} />
+            <input type="text" name="email" placeholder="john@gmail.com" />
+            <textarea type="text" name="body" placeholder="Question" rows="3" cols="50" />
           </form>
         </div>
         <div className="add-question-footer">

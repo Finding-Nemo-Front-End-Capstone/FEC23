@@ -18,7 +18,7 @@ function Questions({ product }) {
       url: `/db/questions?product_id=${product.id}&page=${1}&count=${100}`,
       method: 'GET',
     })
-      .then((response) => { setQuestions(response.data.results); setQuestionsCopy(response.data.results); });
+      .then((response) => { setQuestions(response.data.results); });
   }, [product]);
   // handles button text change
   function handleAccordion() {
@@ -30,9 +30,9 @@ function Questions({ product }) {
       Questions
       <Search questions={questions} setQuestions={setQuestions} search={search} setSearch={setSearch} />
       <button onClick={handleAccordion} type="button">{buttonText}</button>
-      {expanded && <QuestionsList product={product} questions={questions} displayed={displayed} setDisplayed={setDisplayed} numQuestions={numQuestions} setNumQuestions={setNumQuestions} search={search}/>}
+      {expanded && <QuestionsList product={product} questions={questions} displayed={displayed} setDisplayed={setDisplayed} numQuestions={numQuestions} setNumQuestions={setNumQuestions} search={search} />}
       <button type="button" onClick={() => setShowAddQuestion(true)}>Add a question +</button>
-      <AddQuestion onClose={() => setShowAddQuestion(false)} showAddQuestion={showAddQuestion} />
+      <AddQuestion onClose={() => setShowAddQuestion(false)} showAddQuestion={showAddQuestion} product={product} />
 
     </div>
   );
