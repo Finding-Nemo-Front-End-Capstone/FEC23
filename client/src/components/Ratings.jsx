@@ -21,6 +21,7 @@ function Ratings({ product, rating, setProduct }) {
 
   useEffect(() => {
     if (!containFilter[0]) {
+      console.log('reviewist', reviewList)
       setReviewHolder(reviewList);
       setCount(0);
     } else {
@@ -45,13 +46,18 @@ function Ratings({ product, rating, setProduct }) {
   useEffect(() => {
     if (rating.product_id) {
       axios.get(`/db/reviews/${rating.product_id}/${sort}/${totalReview}/1`)
-        .then((data) => { setReviewList(data.data.results); })
+        .then((data) => {
+          setReviewList(
+            data.data.results.sort((a, b) => {
+              return b.review_id - a.review_id
+        })); })
         .catch(() => console.log('error in obtaining review'));
     }
   }, [totalReview, sort]);
 
   useEffect(() => {
     if (reviewList[0]) {
+      console.log('this is reviewlist', reviewList)
       setReviewHolder(reviewList);
       setCount(0);
     }

@@ -6,7 +6,7 @@ import axios from 'axios';
 
 // import Ratings from '../client/src/components/Ratings.jsx';
 import ReviewEntry from '../client/src/components/RatingsComp/ReviewEntry.jsx';
-import QuestionList from '../client/src/components/Questions/QuestionList.jsx';
+// import QuestionList from '../client/src/components/Questions/QuestionList.jsx';
 import serverTest from './utils.js';
 // @jest-environment jsdom
 
