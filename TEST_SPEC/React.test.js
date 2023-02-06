@@ -6,11 +6,11 @@ import axios from 'axios';
 
 // import Ratings from '../client/src/components/Ratings.jsx';
 import ReviewEntry from '../client/src/components/RatingsComp/ReviewEntry.jsx';
-import QuestionList from '../client/src/components/Questions/QuestionList.jsx';
+// import QuestionList from '../client/src/components/Questions/QuestionList.jsx';
 import serverTest from './utils.js';
 // @jest-environment jsdom
 
-// import RelatedProducts from '../client/src/components/RelatedOutfits/RelatedProducts.jsx';
+import RelatedProducts from '../client/src/components/RelatedOutfits/RelatedProducts.jsx';
 
 const allProducts = serverTest.allProducts;
 const reviews = serverTest.reviews;
@@ -55,8 +55,9 @@ describe('SERVER', () => {
   //   it(reviews.status).not.toBe(404 && 500);
   // });
 });
-
+jest.mock('axios');
 describe ('Related Products', () => {
+  afterEach(cleanup);
   it('should get list of related products based on the current product', async () => {
     const knownRelated = [40345, 40346, 40351, 40350];
     let getRelated = [];
@@ -67,6 +68,10 @@ describe ('Related Products', () => {
       })
       .catch((err) => console.log('failed get request', err));
   });
+
+  it('should get a snapshot of the component', async() => {
+    const { product_40334 } = render(<RelatedProducts id={40344} product={} rating={} currStyle={}/>)
+  })
 })
 
 // describe ('Overview - Styles', () => {
