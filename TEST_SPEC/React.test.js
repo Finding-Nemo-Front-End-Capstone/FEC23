@@ -1,4 +1,3 @@
-/* eslint-disable prefer-destructuring */
 import React from 'react';
 import { render } from '@testing-library/react';
 import axios from 'axios';
@@ -12,8 +11,8 @@ import serverTest from './utils.js';
 
 // import RelatedProducts from '../client/src/components/RelatedOutfits/RelatedProducts.jsx';
 
-const allProducts = serverTest.allProducts;
-const reviews = serverTest.reviews;
+const { allProducts } = serverTest;
+const { reviews } = serverTest;
 
 const ReviewObjTest = {
   rating: 5,
@@ -56,7 +55,7 @@ describe('SERVER', () => {
   // });
 });
 
-describe ('Related Products', () => {
+describe('Related Products', () => {
   it('should get list of related products based on the current product', async () => {
     const knownRelated = [40345, 40346, 40351, 40350];
     let getRelated = [];
@@ -67,7 +66,7 @@ describe ('Related Products', () => {
       })
       .catch((err) => console.log('failed get request', err));
   });
-})
+});
 
 // describe ('Overview - Styles', () => {
 //   it('should get list of styles based on the current product', async () => {
