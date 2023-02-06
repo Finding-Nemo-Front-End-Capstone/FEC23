@@ -114,8 +114,10 @@ function Ratings({ product, rating, setProduct }) {
   return (
     <div className="RatingsReview">
       RATINGS & REVIEWS
-      <Breakdown rating={rating} reviewFilter={reviewFilter} totalReview={totalReview}/>
-      <ChacBreak rating={rating} />
+      <div className='chacandbreak'>
+        <Breakdown rating={rating} reviewFilter={reviewFilter} totalReview={totalReview}/>
+        <ChacBreak rating={rating} />
+      </div>
       <div className='divReviewEntry'>
         <div className="reviewHeader">
           <div className="dropdown">
@@ -135,17 +137,17 @@ function Ratings({ product, rating, setProduct }) {
             aria-label="Loading Spinner"
             data-testid="loader"
           />
-        </div>
-        <div className="divMapReview">
-          {reviewDisplay.map((review) => (
-            <ReviewEntry review={review} />
-          ))}
+          <div className="divMapReview">
+            {reviewDisplay.map((review) => (
+              <ReviewEntry review={review} />
+            ))}
             <button className="moreReviewBut" onClick={moreHandler} style={{ display: moreDisplay }}>More Reviews</button>
+            <button className="writeReview" onClick={reviewFormBut}>Write Review</button>
+            <div className='hello'>{' '}</div>
           </div>
+        </div>
       </div>
       <br />
-      <button className="writeReview" onClick={reviewFormBut}>Write Review</button>
-
       {reviewForm
       && (
       <div className="reviewForm">
