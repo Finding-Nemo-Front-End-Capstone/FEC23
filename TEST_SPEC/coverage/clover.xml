@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1675812561192" clover="3.2.0">
-  <project timestamp="1675812561192" name="All files">
+<coverage generated="1675812606902" clover="3.2.0">
+  <project timestamp="1675812606902" name="All files">
     <metrics statements="126" coveredstatements="99" conditionals="78" coveredconditionals="59" methods="39" coveredmethods="33" elements="243" coveredelements="191" complexity="0" loc="126" ncloc="126" packages="1" files="6" classes="6"/>
     <file name="Modal.jsx" path="/home/schu96/FEC23/client/src/components/RelatedOutfits/Modal.jsx">
       <metrics statements="26" coveredstatements="25" conditionals="24" coveredconditionals="20" methods="9" coveredmethods="9"/>
