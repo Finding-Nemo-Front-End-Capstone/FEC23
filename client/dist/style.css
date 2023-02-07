@@ -581,7 +581,7 @@ input[type=file]{
   color:rebeccapurple;
   margin-top: -1%;
 }
-.arrow-quality {
+.arrow-quality, .arrow-fit, .arrow-length, .arrow-width, .arrow-size, .arrow-comfort {
   float:left;
   color:rebeccapurple;
   margin-top: -1%;
