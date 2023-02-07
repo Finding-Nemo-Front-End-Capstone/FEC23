@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">55% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/20</span>
+                <span class='fraction'>11/20</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>5/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>2/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">57.89% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/19</span>
+                <span class='fraction'>11/19</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -122,16 +122,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -144,7 +144,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -175,17 +175,17 @@
 import axios from 'axios';
 import RelatedStars from './RelatedStars.jsx';
 &nbsp;
-function <span class="fstat-no" title="function not covered" >OutfitCards(</span>{ product, saved, setHasCurrent, setSaved }) {
-  const [cardInfo, setCardInfo] = <span class="cstat-no" title="statement not covered" >useState({});</span>
-<span class="cstat-no" title="statement not covered" >  useEffect(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-    const copy = <span class="cstat-no" title="statement not covered" >{ ...cardInfo };</span>
-<span class="cstat-no" title="statement not covered" >    copy.id = product.id;</span>
-<span class="cstat-no" title="statement not covered" >    copy.category = product.category;</span>
-<span class="cstat-no" title="statement not covered" >    copy.name = product.name;</span>
-<span class="cstat-no" title="statement not covered" >    copy.price = product.price;</span>
-<span class="cstat-no" title="statement not covered" >    copy.rating = product.rating;</span>
-<span class="cstat-no" title="statement not covered" >    copy.thumbnail = product.thumbnail;</span>
-<span class="cstat-no" title="statement not covered" >    setCardInfo(copy);</span>
+function OutfitCards({ product, saved, setHasCurrent, setSaved }) {
+  const [cardInfo, setCardInfo] = useState({});
+  useEffect(() =&gt; {
+    const copy = { ...cardInfo };
+    copy.id = product.id;
+    copy.category = product.category;
+    copy.name = product.name;
+    copy.price = product.price;
+    copy.rating = product.rating;
+    copy.thumbnail = product.thumbnail;
+    setCardInfo(copy);
   }, [product]);
 &nbsp;
   function <span class="fstat-no" title="function not covered" >clickExit(</span>e) {
@@ -198,14 +198,14 @@ function <span class="fstat-no" title="function not covered" >OutfitCards(</span
 <span class="cstat-no" title="statement not covered" >    setHasCurrent(false);</span>
 <span class="cstat-no" title="statement not covered" >    setSaved(output);</span>
   }
-<span class="cstat-no" title="statement not covered" >  return (</span>
+  return (
     &lt;div className="outfitInfo" name={product.id}&gt;
       &lt;button type="submit" className="outfitButton" onClick={clickExit}&gt;
         ✖
       &lt;/button&gt;
       &lt;div className="outfitImageContainer"&gt;
         {cardInfo.thumbnail === null
-          ? &lt;img className="previewImage" alt="" /&gt;
+          ? <span class="branch-0 cbranch-no" title="branch not covered" >&lt;img className="previewImage" alt="" /&gt;</span>
           : &lt;img className="previewImage" src={cardInfo.thumbnail} alt="" /&gt;}
       &lt;/div&gt;
       &lt;div className="cardDetails"&gt;
@@ -232,7 +232,7 @@ export default OutfitCards;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-02-07T19:13:38.905Z
+                at 2023-02-07T23:29:21.167Z
             </div>
         <script src="prettify.js"></script>
         <script>

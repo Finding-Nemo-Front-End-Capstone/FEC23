@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">45.45% </span>
+                <span class="strong">72.72% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/11</span>
+                <span class='fraction'>8/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/6</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/4</span>
+                <span class='fraction'>3/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">45.45% </span>
+                <span class="strong">72.72% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/11</span>
+                <span class='fraction'>8/11</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -118,30 +118,34 @@
 <a name='L53'></a><a href='#L53'>53</a>
 <a name='L54'></a><a href='#L54'>54</a>
 <a name='L55'></a><a href='#L55'>55</a>
-<a name='L56'></a><a href='#L56'>56</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">35x</span>
+<span class="cline-any cline-yes">35x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">35x</span>
+<span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">35x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -186,10 +190,10 @@ function RelatedCards({ relInfo, product, setProduct, display }) {
     setCardInfo(relInfo);
   }, [relInfo, display]);
 &nbsp;
-  function <span class="fstat-no" title="function not covered" >clickModal(</span>e) {
-<span class="cstat-no" title="statement not covered" >    e.stopPropagation();</span>
-<span class="cstat-no" title="statement not covered" >    e.preventDefault();</span>
-<span class="cstat-no" title="statement not covered" >    setShowModal(!showModal);</span>
+  function clickModal(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    setShowModal(!showModal);
   }
   function <span class="fstat-no" title="function not covered" >clickNav(</span>e) {
 <span class="cstat-no" title="statement not covered" >    e.stopPropagation();</span>
@@ -206,12 +210,14 @@ function RelatedCards({ relInfo, product, setProduct, display }) {
       /&gt;
       &lt;div className="relatedImageContainer"&gt;
         {cardInfo.thumbnail === null
-          ? <span class="branch-0 cbranch-no" title="branch not covered" >&lt;img className="previewImage" alt="" /&gt;</span>
+          ? &lt;img className="previewImage" alt="" /&gt;
           : &lt;img className="previewImage" src={cardInfo.thumbnail} alt="" /&gt;}
       &lt;/div&gt;
-      &lt;div className="cardDetails" onClick={clickNav}&gt;
+      &lt;div className="cardDetails" data-testid="cardDetails"
+      onClick={clickNav}
+      &gt;
         &lt;div className="relatedCatText"&gt;
-          {cardInfo.category ? <span class="branch-0 cbranch-no" title="branch not covered" >cardInfo.category.toUpperCase() </span>: null}
+          {cardInfo.category ? cardInfo.category.toUpperCase() : null}
         &lt;/div&gt;
         &lt;div className="relatedProdText"&gt;
           {cardInfo.name}
@@ -220,7 +226,7 @@ function RelatedCards({ relInfo, product, setProduct, display }) {
           ${cardInfo.price}
         &lt;/div&gt;
         &lt;div className="starRating"&gt;
-          {cardInfo.rating ? <span class="branch-0 cbranch-no" title="branch not covered" >&lt;RelatedStars rating={cardInfo.rating} /&gt; </span>: null}
+          {cardInfo.rating ? &lt;RelatedStars rating={cardInfo.rating} /&gt; : null}
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
@@ -235,7 +241,7 @@ export default RelatedCards;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-02-07T00:24:11.985Z
+                at 2023-02-07T22:51:53.312Z
             </div>
         <script src="../../../../../prettify.js"></script>
         <script>

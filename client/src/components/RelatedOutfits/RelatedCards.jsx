@@ -34,7 +34,9 @@ function RelatedCards({ relInfo, product, setProduct, display }) {
           ? <img className="previewImage" alt="" />
           : <img className="previewImage" src={cardInfo.thumbnail} alt="" />}
       </div>
-      <div className="cardDetails" onClick={clickNav}>
+      <div className="cardDetails" data-testid="cardDetails"
+      onClick={clickNav}
+      >
         <div className="relatedCatText">
           {cardInfo.category ? cardInfo.category.toUpperCase() : null}
         </div>
