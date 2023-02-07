@@ -21,20 +21,20 @@ function Ratings({ product, rating, setProduct }) {
 
   useEffect(() => {
     if (!containFilter[0]) {
-      console.log('reviewist', reviewList)
+      console.log('reviewist', reviewList);
       setReviewHolder(reviewList);
       setCount(0);
     } else {
       const arr = reviewList.filter((reviewFilter) => {
         if (containFilter.indexOf(reviewFilter.rating) !== -1) {
-          return true
+          return true;
         }
-        return false
+        return false;
       });
       setReviewHolder(arr);
       setCount(0);
     }
-  }, [containFilter])
+  }, [containFilter]);
 
   useEffect(() => {
     console.log('this is rating', rating);
@@ -48,16 +48,16 @@ function Ratings({ product, rating, setProduct }) {
       axios.get(`/db/reviews/${rating.product_id}/${sort}/${totalReview}/1`)
         .then((data) => {
           setReviewList(
-            data.data.results.sort((a, b) => {
-              return b.review_id - a.review_id
-        })); })
+            data.data.results.sort((a, b) => b.review_id - a.review_id),
+          );
+        })
         .catch(() => console.log('error in obtaining review'));
     }
   }, [totalReview, sort]);
 
   useEffect(() => {
     if (reviewList[0]) {
-      console.log('this is reviewlist', reviewList)
+      console.log('this is reviewlist', reviewList);
       setReviewHolder(reviewList);
       setCount(0);
     }
@@ -99,20 +99,20 @@ function Ratings({ product, rating, setProduct }) {
 
   const reviewFilter = (value) => {
     if (value === 'all') {
-      setContainFilter([])
+      setContainFilter([]);
       setCount(0);
     } else {
       value = Number(value);
-      const index = containFilter.indexOf(value)
+      const index = containFilter.indexOf(value);
       if (index === -1) {
         const result1 = containFilter.slice();
         result1.push(value);
         setContainFilter(result1);
       } else {
-        const arr1 = containFilter.slice(0,index);
+        const arr1 = containFilter.slice(0, index);
         const arr2 = containFilter.slice(index + 1, containFilter.length);
         const result2 = arr1.concat(arr2);
-        setContainFilter(result2)
+        setContainFilter(result2);
       }
     }
   };
@@ -120,11 +120,11 @@ function Ratings({ product, rating, setProduct }) {
   return (
     <div className="RatingsReview">
       RATINGS & REVIEWS
-      <div className='chacandbreak'>
-        <Breakdown rating={rating} reviewFilter={reviewFilter} totalReview={totalReview}/>
+      <div className="chacandbreak">
+        <Breakdown rating={rating} reviewFilter={reviewFilter} totalReview={totalReview} />
         <ChacBreak rating={rating} />
       </div>
-      <div className='divReviewEntry'>
+      <div className="divReviewEntry">
         <div className="reviewHeader">
           <div className="dropdown">
             <label htmlFor="sort">
@@ -149,7 +149,7 @@ function Ratings({ product, rating, setProduct }) {
             ))}
             <button className="moreReviewBut" onClick={moreHandler} style={{ display: moreDisplay }}>More Reviews</button>
             <button className="writeReview" onClick={reviewFormBut}>Write Review</button>
-            <div className='hello'>{' '}</div>
+            <div className="hello">{' '}</div>
           </div>
         </div>
       </div>
