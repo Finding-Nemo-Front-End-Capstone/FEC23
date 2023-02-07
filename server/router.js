@@ -18,7 +18,7 @@ router.post('/question', controllers.questions.addQuestion);
 router.post('/answers/:question_id', controllers.answers.addAnswers);
 router.put('/helpfulquestion', controllers.questions.addHelpful);
 router.put('/helpfulanswer', controllers.answers.addHelpful);
-router.put('/reportquestion/:question_id', controllers.questions.addReport);
+router.put('/reportquestion', controllers.questions.addReport);
 router.put('/reportanswer', controllers.answers.addReport);
 
 router.get('/cart', controllers.cart.getCart);
