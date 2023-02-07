@@ -1,6 +1,3 @@
-/* eslint-disable import/no-named-as-default-member */
-/* eslint-disable import/no-named-as-default */
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
@@ -23,7 +20,7 @@ function App() {
         setProduct(data.data[2]);
         axios.get(`/db/${data.data[2].id}`)
           .then((info) => setProdInfo(info.data))
-          .catch(() => console.log('product info did not work'))
+          .catch(() => console.log('product info did not work'));
       })
       .catch((err) => console.log(err));
   }, []);
@@ -34,7 +31,7 @@ function App() {
         .then((data) => { setRating(data.data); })
         .catch((err) => { console.log('meta did not work'); });
       axios.get(`db/styles/${product.id}`)
-        .then((data) => {setStyle(data.data); })
+        .then((data) => { setStyle(data.data); })
         .catch((err) => { console.log('styles did not work'); });
     }
   }, [product]);
@@ -42,12 +39,16 @@ function App() {
   return (
     <div>
       <nav className="nav-bar">top bar</nav>
-      <Overview product={product} rating={rating}
-      currPhotoIndex={currPhotoIndex} setCurrPhotoIndex={setCurrPhotoIndex}/>
+      <Overview
+        product={product}
+        rating={rating}
+        currPhotoIndex={currPhotoIndex}
+        setCurrPhotoIndex={setCurrPhotoIndex}
+      />
       <Questions product={product} />
-      <RelatedProducts id={product.id} product={prodInfo} rating={rating} currStyle={style}/>
+      <RelatedProducts id={product.id} product={prodInfo} rating={rating} currStyle={style} />
       <Ratings product={product} rating={rating} setProduct={setProduct} />
-      <br/>
+      <br />
     </div>
   );
 }

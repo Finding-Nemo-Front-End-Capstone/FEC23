@@ -19,7 +19,7 @@ function RelatedCards({ relInfo, product, setProduct, display }) {
   function clickNav(e) {
     e.stopPropagation();
     e.preventDefault();
-    setProduct({id : cardInfo.id});
+    setProduct({ id: cardInfo.id });
   }
   return (
     <div className="cardInfo">

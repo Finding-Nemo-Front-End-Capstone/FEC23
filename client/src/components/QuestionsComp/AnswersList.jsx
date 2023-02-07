@@ -1,26 +1,16 @@
-/* eslint-disable no-plusplus */
-/* eslint-disable react/prop-types */
-/* eslint-disable camelcase */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Answer from './Answer.jsx';
 
-function Answers({ question_id }) {
+function AnswersList({ question_id }) {
   const [allAnswers, setAllAnswers] = useState([]);
   const [numAnswers, setNumAnswers] = useState(2);
   const [displayed, setDisplayed] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [page, setPage] = useState(1);
   const [count, setCount] = useState(100);
-  function answerItem(answer) {
-    return (
-      <div>
-        <li>
-          {answer.body}
-        </li>
-        <div>
-          {`by ${answer.answerer_name} ${answer.date}`}
-        </div>
-      </div>
-    );
+  function displayAnswer(answer) {
+    return (<Answer answer={answer} allAnswers={allAnswers} setAllAnswers={setAllAnswers} />);
   }
   useEffect(() => {
     if (question_id) {
@@ -32,24 +22,25 @@ function Answers({ question_id }) {
     }
   }, []);
   useEffect(() => {
-    const arr = [<span>A:</span>];
+    const arr = [];
     if (allAnswers[0] && allAnswers.length < numAnswers) {
       for (let i = 0; i < allAnswers.length; i++) {
-        arr.push(answerItem(allAnswers[i]));
+        arr.push(displayAnswer(allAnswers[i]));
       }
-      setDisplayed(arr);
-    } else if (allAnswers[0] && allAnswers.length > numAnswers) {
+    } else if (allAnswers[0]) {
       for (let i = 0; i < numAnswers; i++) {
-        arr.push(answerItem(allAnswers[i]));
+        arr.push(displayAnswer(allAnswers[i]));
       }
-      setDisplayed(arr);
     }
-  }, [allAnswers]);
+    setDisplayed(arr);
+  }, [allAnswers, numAnswers]);
   return (
     <div>
+      {displayed[0] && <span>A:</span>}
       {displayed}
+      {displayed.length < allAnswers.length && <button type="button" onClick={() => { setNumAnswers(numAnswers + 2); }}>Show more answers</button>}
     </div>
   );
 }
 
-export default Answers;
+export default AnswersList;

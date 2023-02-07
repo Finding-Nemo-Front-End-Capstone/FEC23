@@ -6,7 +6,23 @@
   "scripts": {
     "react-dev": "webpack --mode development --watch",
     "server-dev": "npx nodemon server/index.js",
-    "test": "jest --env=jsdom --setupFiles dotenv/config --watch"
+    "test": "jest --setupFiles dotenv/config --watch"
+  },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "node_modules",
+      "coverage"
+    ],
+    "coverageDirectory": "<rootDir>/TEST_SPEC/coverage",
+    "verbose": false,
+    "testEnvironment": "jsdom",
+    "testPathIgnorePatterns": [
+      "setup.js",
+      "coverage"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/TEST_SPEC/setup.js"
+    ]
   },
   "repository": {
     "type": "git",
@@ -49,6 +65,8 @@
     "webpack-cli": "^4.2.0"
   },
   "dependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/user-event": "^14.4.3",
     "@types/axios": "^0.14.0",
     "axios": "^1.2.4",
     "babel": "^6.23.0",

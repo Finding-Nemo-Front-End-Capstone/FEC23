@@ -771,3 +771,53 @@ select#sort {
 .hello {
   margin-top: 6%
 }
+
+/* Questions and Answers */
+
+.add-question-modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.add-question-content {
+  width: 500px;
+  background-color: #fff;
+}
+
+.add-question-header, .add-question-footer{
+  padding: 10px;
+}
+
+.add-question-title {
+  margin: 0;
+}
+
+.add-question-body {
+  padding: 10px;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.helpful-button {
+  background: none;
+  border: none;
+  margin: 5px;
+  padding: 0;
+}
+
+.button-feedback {
+  font-size: 13px;
+  margin: 5px;
+}
+
+#helpfulness-score {
+  margin-left: 0px;
+}
