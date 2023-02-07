@@ -5,11 +5,11 @@ const Gallery = ({ product, currStyle, currPhotoIndex, setCurrPhotoIndex }) => {
   const [mainPhoto, setMainPhoto] = useState(currStyle.photos[0].url);
   const [slideIndex, setSlideIndex] = useState(1);
   const [modal, setModal] = useState(false);
+  const [zoomed, setZoomed] = useState(false);
   let slides = currStyle.photos;
 
   useEffect(() => {
     setMainPhoto(currStyle.photos[currPhotoIndex].url)
-
       // .then((data) => { console.log(data.data); })
       // .catch((err) => { console.log('meta did not work'); });
   }, [currStyle]);
@@ -20,6 +20,15 @@ const Gallery = ({ product, currStyle, currPhotoIndex, setCurrPhotoIndex }) => {
 
   function prevClick() {setCurrPhotoIndex(currPhotoIndex - 1)}
   function nextClick() {setCurrPhotoIndex(currPhotoIndex + 1)}
+  function handleZoom() {setZoomed(!zoomed)}
+  // function zoom(e) {
+  //   var zoomer = e.currentTarget;
+  //   e.offsetX ? offsetX = e.offsetX : offsetX = e.touches[0].pageX
+  //   e.offsetY ? offsetY = e.offsetY : offsetX = e.touches[0].pageX
+  //   x = offsetX/zoomer.offsetWidth*100
+  //   y = offsetY/zoomer.offsetHeight*100
+  //   zoomer.style.backgroundPosition = x + '% ' + y + '%';
+  // }
 
   return(
     <>
@@ -37,7 +46,9 @@ const Gallery = ({ product, currStyle, currPhotoIndex, setCurrPhotoIndex }) => {
         {currPhotoIndex !== slides.length - 1
         ? <a className="next modal" onClick={nextClick}>&#10095;</a>
         : null}
-        <img className="modal-img" src={mainPhoto}/>
+         {zoomed
+         ? <img className="modal-img zoomed" /*onMouseMove={zoom}*/ src={mainPhoto} onClick={handleZoom}/>
+         : <img className="modal-img" src={mainPhoto} onClick={handleZoom}/>}
       </div>}
 
       <div className="gallery-wrap">

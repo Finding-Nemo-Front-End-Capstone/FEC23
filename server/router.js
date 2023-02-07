@@ -20,6 +20,10 @@ router.put('/helpfulquestion', controllers.questions.addHelpful);
 router.put('/helpfulanswer', controllers.answers.addHelpful);
 router.put('/reportquestion/:question_id', controllers.questions.addReport);
 router.put('/reportanswer', controllers.answers.addReport);
+
+router.get('/cart', controllers.cart.getCart);
+router.post('/cart', controllers.cart.addToCart);
+
 router.get('/:id', controllers.products.getOneProduct);  // this needs to have a more specific path;
 
 router.post('/post/:id', (req, res) => {

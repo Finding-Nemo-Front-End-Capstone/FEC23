@@ -4,7 +4,8 @@ import axios from 'axios';
 import ClipLoader from 'react-spinners/ClipLoader.js';
 import ReviewEntry from './RatingsComp/ReviewEntry.jsx';
 import ReviewForm from './RatingsComp/ReviewForm.jsx';
-import Breakdown from './RatingsComp/Breakdown.jsx'
+import Breakdown from './RatingsComp/Breakdown.jsx';
+import ChacBreak from './RatingsComp/ChacBreak.jsx';
 
 function Ratings({ product, rating, setProduct }) {
   const [reviewList, setReviewList] = useState([]);
@@ -20,6 +21,7 @@ function Ratings({ product, rating, setProduct }) {
 
   useEffect(() => {
     if (!containFilter[0]) {
+      console.log('reviewist', reviewList)
       setReviewHolder(reviewList);
       setCount(0);
     } else {
@@ -44,13 +46,18 @@ function Ratings({ product, rating, setProduct }) {
   useEffect(() => {
     if (rating.product_id) {
       axios.get(`/db/reviews/${rating.product_id}/${sort}/${totalReview}/1`)
-        .then((data) => { setReviewList(data.data.results); })
+        .then((data) => {
+          setReviewList(
+            data.data.results.sort((a, b) => {
+              return b.review_id - a.review_id
+        })); })
         .catch(() => console.log('error in obtaining review'));
     }
   }, [totalReview, sort]);
 
   useEffect(() => {
     if (reviewList[0]) {
+      console.log('this is reviewlist', reviewList)
       setReviewHolder(reviewList);
       setCount(0);
     }
@@ -111,38 +118,42 @@ function Ratings({ product, rating, setProduct }) {
   };
 
   return (
-    <div>
-      RATINGS
-      <Breakdown rating={rating} reviewFilter={reviewFilter}/>
-      <div className="reviewHeader">
-        <div className="dropdown">
-          <label htmlFor="sort">
-            Sort By:
-            <select name="sort" id="sort" onChange={sortChange} value={sort}>
-              <option value="newest">Newest</option>
-              <option value="relevant">Relevant</option>
-              <option value="helpful">Helpful</option>
-            </select>
-          </label>
-        </div>
-        <ClipLoader
-          color="green"
-          loading={loading}
-          size={15}
-          aria-label="Loading Spinner"
-          data-testid="loader"
-        />
+    <div className="RatingsReview">
+      RATINGS & REVIEWS
+      <div className='chacandbreak'>
+        <Breakdown rating={rating} reviewFilter={reviewFilter} totalReview={totalReview}/>
+        <ChacBreak rating={rating} />
       </div>
       <div className='divReviewEntry'>
-        {reviewDisplay.map((review) => (
-          <ReviewEntry review={review} />
-        ))}
+        <div className="reviewHeader">
+          <div className="dropdown">
+            <label htmlFor="sort">
+              Sort By:
+              <select name="sort" id="sort" onChange={sortChange} value={sort}>
+                <option value="newest">Newest</option>
+                <option value="relevant">Relevant</option>
+                <option value="helpful">Helpful</option>
+              </select>
+            </label>
+          </div>
+          <ClipLoader
+            color="green"
+            loading={loading}
+            size={15}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+          <div className="divMapReview">
+            {reviewDisplay.map((review) => (
+              <ReviewEntry review={review} />
+            ))}
+            <button className="moreReviewBut" onClick={moreHandler} style={{ display: moreDisplay }}>More Reviews</button>
+            <button className="writeReview" onClick={reviewFormBut}>Write Review</button>
+            <div className='hello'>{' '}</div>
+          </div>
+        </div>
       </div>
       <br />
-      <button className="moreReviewBut" onClick={moreHandler} style={{ display: moreDisplay }}>More Reviews</button>
-      <br />
-      <button className="writeReview" onClick={reviewFormBut}>Write Review</button>
-
       {reviewForm
       && (
       <div className="reviewForm">

@@ -23,6 +23,8 @@ function Breakdown({rating, reviewFilter}) {
   const [before3, setBefore3] = useState('')
   const [before2, setBefore2] = useState('')
   const [before1, setBefore1] = useState('')
+  const [percentageRating, setPercentageRating] = useState('')
+  const [avgRating, setAvgRating] = useState(0)
 
   const percentage = (num) => {
     const totalRev = Number(rating.recommended.false) + Number(rating.recommended.true)
@@ -42,6 +44,18 @@ function Breakdown({rating, reviewFilter}) {
       setStar3(rating.ratings[3])
       setStar2(rating.ratings[2])
       setStar1(rating.ratings[1])
+      let reviewCount = 0
+      let total = 0;
+      if (rating.ratings) {
+        for (let stars in rating.ratings) {
+          total += (stars * rating.ratings[stars]);
+          reviewCount += Number(rating.ratings[stars]);
+        }
+      }
+      let avgRating = (Math.round(total / reviewCount * 4) / 4).toFixed(2);
+      let percentageRate= avgRating / 5 * 100;
+      setPercentageRating(JSON.stringify(percentageRate)+'%');
+      setAvgRating(avgRating)
     }
   }, [rating])
   const click5 = (e) => {
@@ -134,79 +148,105 @@ function Breakdown({rating, reviewFilter}) {
 
   }
   return (
-    <div className="breakdownBar">
-        <div class="row">
-          <button onClick={allRating}>Show all rating</button>
-          <br/>
-          <button name="5"className="eachBarBreakdown" onClick={click5} style={{cursor: 'pointer', 'color':hoverColor5}} onMouseEnter={hoverOn5} onMouseLeave={hoverOn5}>
-            <div class="side">
-              <div>5 star</div>
-            </div>
-            <div class="middle">
-              <div class="bar-container">
-                <div class="bar-5" style={{width:bar5, 'background-color':hoverColor5}}></div>
+    <div className='breakdown'>
+      <div className='breakdownStar'>
+      <div className='reviewAvgRating'>
+        {avgRating}
+      </div>
+        <span className="ratingReview">
+          <div className="rating-wrap">
+            <span className="stars-active" style={{ width: `${percentageRating}` }}>
+                <i className="fa fa-star" aria-hidden="true"></i>
+                <i className="fa fa-star" aria-hidden="true"></i>
+                <i className="fa fa-star" aria-hidden="true"></i>
+                <i className="fa fa-star" aria-hidden="true"></i>
+                <i className="fa fa-star" aria-hidden="true"></i>
+            </span>
+            <span className="stars-inactive">
+              <i className="fa fa-star-o" aria-hidden="true"></i>
+              <i className="fa fa-star-o" aria-hidden="true"></i>
+              <i className="fa fa-star-o" aria-hidden="true"></i>
+              <i className="fa fa-star-o" aria-hidden="true"></i>
+              <i className="fa fa-star-o" aria-hidden="true"></i>
+            </span>
+          </div>
+        </span>
+        <button onClick={allRating}>Show all rating</button>
+      </div>
+      <div className="breakdownBar">
+          <div class="row">
+
+            <br/>
+            <button name="5"className="eachBarBreakdown" onClick={click5} style={{cursor: 'pointer', 'color':hoverColor5}} onMouseEnter={hoverOn5} onMouseLeave={hoverOn5}>
+              <div class="side">
+                <div>5 star</div>
               </div>
-            </div>
-            <div class="side right">
-              <div>{star5}</div>
-            </div>
-          </button>
-          <br/>
-          <button className="eachBarBreakdown" onClick={click4} style={{cursor: 'pointer', 'color':hoverColor4}} onMouseEnter={hoverOn4} onMouseLeave={hoverOn4}>
-            <div class="side">
-              <div>4 star</div>
-            </div>
-            <div class="middle">
-              <div class="bar-container">
-                <div class="bar-4" style={{width:bar4, 'background-color':hoverColor4}}></div>
+              <div class="middle">
+                <div class="bar-container">
+                  <div class="bar-5" style={{width:bar5, 'background-color':hoverColor5}}></div>
+                </div>
               </div>
-            </div>
-            <div class="side right">
-              <div>{star4}</div>
-            </div>
-          </button>
-          <br/>
-          <button className="eachBarBreakdown" onClick={click3} style={{cursor: 'pointer', 'color':hoverColor3}} onMouseEnter={hoverOn3} onMouseLeave={hoverOn3}>
-            <div class="side">
-              <div>3 star</div>
-            </div>
-            <div class="middle">
-              <div class="bar-container">
-                <div class="bar-3" style={{width:bar3, 'background-color':hoverColor3}}></div>
+              <div class="side right">
+                <div>{star5}</div>
               </div>
-            </div>
-            <div class="side right">
-              <div>{star3}</div>
-            </div>
-          </button>
-          <br/>
-          <button className="eachBarBreakdown" onClick={click2} style={{cursor: 'pointer', 'color':hoverColor2}} onMouseEnter={hoverOn2} onMouseLeave={hoverOn2}>
-            <div class="side">
-              <div>2 star</div>
-            </div>
-            <div class="middle">
-              <div class="bar-container">
-                <div class="bar-2" style={{width:bar2, 'background-color':hoverColor2}}></div>
+            </button>
+            <br/>
+            <button className="eachBarBreakdown" onClick={click4} style={{cursor: 'pointer', 'color':hoverColor4}} onMouseEnter={hoverOn4} onMouseLeave={hoverOn4}>
+              <div class="side">
+                <div>4 star</div>
               </div>
-            </div>
-            <div class="side right">
-              <div>{star2}</div>
-            </div>
-          </button>
-          <br/>
-          <button className="eachBarBreakdown" onClick={click1} style={{cursor: 'pointer', 'color':hoverColor1}} onMouseEnter={hoverOn1} onMouseLeave={hoverOn1}>
-            <div class="side">
-              <div>1 star</div>
-            </div>
-            <div class="middle">
-              <div class="bar-container">
-                <div class="bar-1" style={{width:bar1, 'background-color':hoverColor1}}></div>
+              <div class="middle">
+                <div class="bar-container">
+                  <div class="bar-4" style={{width:bar4, 'background-color':hoverColor4}}></div>
+                </div>
               </div>
-            </div>
-            <div class="side right">
-              <div>{star1}</div>
-            </div>
-          </button>
+              <div class="side right">
+                <div>{star4}</div>
+              </div>
+            </button>
+            <br/>
+            <button className="eachBarBreakdown" onClick={click3} style={{cursor: 'pointer', 'color':hoverColor3}} onMouseEnter={hoverOn3} onMouseLeave={hoverOn3}>
+              <div class="side">
+                <div>3 star</div>
+              </div>
+              <div class="middle">
+                <div class="bar-container">
+                  <div class="bar-3" style={{width:bar3, 'background-color':hoverColor3}}></div>
+                </div>
+              </div>
+              <div class="side right">
+                <div>{star3}</div>
+              </div>
+            </button>
+            <br/>
+            <button className="eachBarBreakdown" onClick={click2} style={{cursor: 'pointer', 'color':hoverColor2}} onMouseEnter={hoverOn2} onMouseLeave={hoverOn2}>
+              <div class="side">
+                <div>2 star</div>
+              </div>
+              <div class="middle">
+                <div class="bar-container">
+                  <div class="bar-2" style={{width:bar2, 'background-color':hoverColor2}}></div>
+                </div>
+              </div>
+              <div class="side right">
+                <div>{star2}</div>
+              </div>
+            </button>
+            <br/>
+            <button className="eachBarBreakdown" onClick={click1} style={{cursor: 'pointer', 'color':hoverColor1}} onMouseEnter={hoverOn1} onMouseLeave={hoverOn1}>
+              <div class="side">
+                <div>1 star</div>
+              </div>
+              <div class="middle">
+                <div class="bar-container">
+                  <div class="bar-1" style={{width:bar1, 'background-color':hoverColor1}}></div>
+                </div>
+              </div>
+              <div class="side right">
+                <div>{star1}</div>
+              </div>
+            </button>
+          </div>
         </div>
       </div>
   )
