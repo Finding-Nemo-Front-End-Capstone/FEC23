@@ -26,9 +26,11 @@ body {
   position: sticky;
   height: 30px;
   background-color: #a8dadc;
-  padding: 10px 10px;
+  padding: 5px 10px;
   /* overflow: hidden; */
   border-radius: 0.5em;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 4em;
 }
 
 .site-announcement {
@@ -48,18 +50,6 @@ body {
   text-transform: uppercase;
 }
 
-.gallery-description {
-  display: flex;
-  flex-direction: column;
-}
-
-/* @media (max-width: 500px) {
-  .prod-content {
-    flex-direction: column;
-    justify-content: space-around;
-  }
-} */
-
 .prod-info {
   display: flex;
   flex-direction: column;
@@ -72,8 +62,8 @@ body {
   flex-direction: column;
   width: 320px;
   height: auto;
-  /* border: 1px solid black; */
   padding-bottom: 1em;
+  /* border: 1px solid black; */
 }
 
 .style-wrapper img {
@@ -124,8 +114,15 @@ body {
   padding-bottom: 10px;
   padding-right: 10px;
   object-fit: cover;
-  border-radius: 10px;
+  /* border-radius: 10px; */
+  cursor: zoom-in;
+
+  /* position: relative; */
 }
+
+/* .main-photo:hover {
+  cursor: zoom-in;
+} */
 
 .gallery-ribbon {
   position: absolute;
@@ -138,15 +135,111 @@ body {
 }
 
 .gallery-photo {
-  width: 80px;
-  height: 80px;
+  width: 55px;
+  height: 55px;
   object-fit: cover;
   border: 1px solid black;
+}
+
+.gallery-photo.selected {
+  border: 5px solid black;
+}
+
+/* Next & previous buttons */
+/* .slides-fade {
+  position:relative;
+} */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: black;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 3px;
+  user-select: none;
+}
+
+.prev {
+  left: 3.5em;
+}
+
+.next {
+  right: .7em;
+}
+
+.prev.modal {
+  top: 1em;
+  left: 40%;
+  color: white;
+  z-index: 101;
+}
+
+.next.modal {
+  /* position: absolute; */
+  top: 1em;
+  right: 40%;
+  color: white;
+  z-index: 101;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+.gallery-modal {
+  position: absolute;
+  width: 95%;
+  z-index: 100;
+  overflow: hidden;
+  /* border: 1px solid black; */
+}
+
+.modal-img {
+  width: 100%;
+  /* position: relative; */
+}
+.modal-img.zoomed {
+  /* width: 250%; */
+  /* zoom: 250%; */
+  transform: scale(2.5);
+}
+.modal-img:hover {
+  cursor: crosshair;
+}
+.modal-img.zoomed:hover {
+  cursor: zoom-out;
+  /* opacity: 0; */
+}
+
+.modal-radio {
+  position: absolute;
+  display: flex;
+  top: 0;
+  /* justify-content: center; */
+}
+
+.modal-buttons {
+  /* display: flex; */
+  border: 1px solid red;
+}
+
+.close {
+  position: absolute;
+  right: 0;
+  color: white;
+  font-size: 20px;
 }
 
 .read-all-reviews {
   text-decoration: underline;
   padding-left: 1em;
+  font-size: 70%;
 }
 
 .rating {
@@ -199,16 +292,19 @@ body {
 .cart-form {
   /* display: flex; */
   /* padding-right: 1em; */
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 
 .cart-form select {
   margin: 1em;
+  height: 2.5em;
 }
 
 .cart-form button {
   /* display: flex; */
   margin: 1em;
+  background-color: white;
+  height: 2.5em;
 }
 
 /* End of Britta's CSS */

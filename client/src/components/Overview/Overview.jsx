@@ -33,10 +33,10 @@ function Overview({ product, rating, currPhotoIndex, setCurrPhotoIndex }) {
     return (
       <div>
         <div className="prod-content">
-          <div className="galler-description">
+          {/* <div className="gallery-description"> */}
             <Gallery product={product} currStyle={currStyle}
             currPhotoIndex={currPhotoIndex} setCurrPhotoIndex={setCurrPhotoIndex}/>
-          </div>
+          {/* </div> */}
           <div className="prod-info">
             <Stars product={product} rating={rating}/>
             <span>{product.category}</span>
