@@ -1,10 +1,17 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import renderer, {
+  screen, act, render, fireEvent, waitFor,
+} from '@testing-library/react';
+import { unmountComponentAtNode } from 'react-dom';
+import '@testing-library/jest-dom/extend-expect';
 import axios from 'axios';
 // import adapter from axios +'/lib/adapters/http';
 
 // import Ratings from '../client/src/components/Ratings.jsx';
+import Ratings from '../client/src/components/Ratings';
 import ReviewEntry from '../client/src/components/RatingsComp/ReviewEntry.jsx';
+import Breakdown from '../client/src/components/RatingsComp/Breakdown.jsx';
+import ChacBreak from '../client/src/components/RatingsComp/ChacBreak.jsx';
 // import QuestionList from '../client/src/components/Questions/QuestionList.jsx';
 import serverTest from './utils.js';
 // @jest-environment jsdom
@@ -26,11 +33,157 @@ const ReviewObjTest = {
   reviewer_name: 'test',
 };
 
+const RatingData = {
+  characteristics: {
+    Comfort: {
+      id: 135226,
+      value: '3.0059523809523810',
+    },
+    Fit: {
+      id: 135224,
+      value: '2.6092715231788079',
+    },
+    Length: {
+      id: 135225,
+      value: '3.1317365269461078',
+    },
+    Quality: {
+      id: 135227,
+      value: '3.3680981595092025',
+    },
+  },
+  product_id: '40346',
+  ratings: {
+    1: '21',
+    2: '46',
+    3: '42',
+    4: '29',
+    5: '80',
+  },
+  recommended: {
+    false: '61',
+    true: '157',
+  },
+};
+
+function arrow(value) {
+  const percentage = ((Number(value) / 5) * 100) - 1;
+  return `${JSON.stringify(percentage)}%`;
+}
+
 describe('Ratings & Reviews', () => {
-  it('should show rating on based on the data that was received', () => {
-    const { getByTestId } = render(<ReviewEntry review={ReviewObjTest} />);
-    const rating = getByTestId('ratingReview').textContent;
-    expect(rating).toEqual('5');
+  it('should show the average rating for className="reviewAvgRating"', async () => {
+    const { getByText } = render(<Breakdown rating={RatingData} />);
+    expect(getByText('3.50')).toBeInTheDocument();
+  });
+
+  it('should show total number of 5 star', async () => {
+    const { getByText } = render(<Breakdown rating={RatingData} />);
+    expect(getByText('80')).toBeInTheDocument();
+  });
+
+  it('should show total number of 4 star', async () => {
+    const { getByText } = render(<Breakdown rating={RatingData} />);
+    expect(getByText('29')).toBeInTheDocument();
+  });
+
+  it('should show total number of 3 star', async () => {
+    const { getByText } = render(<Breakdown rating={RatingData} />);
+    expect(getByText('42')).toBeInTheDocument();
+  });
+
+  it('should show total number of 2 star', async () => {
+    const { getByText } = render(<Breakdown rating={RatingData} />);
+    expect(getByText('46')).toBeInTheDocument();
+  });
+
+  it('should show total number of 1 star', async () => {
+    const { getByText } = render(<Breakdown rating={RatingData} />);
+    expect(getByText('21')).toBeInTheDocument();
+  });
+
+  it('should show comfort breakdown bar', async () => {
+    const { getByText } = render(<ChacBreak rating={RatingData} />);
+    expect(getByText('Comfort:')).toBeVisible();
+  });
+
+  it('should show quality breakdown bar', async () => {
+    const { getByText } = render(<ChacBreak rating={RatingData} />);
+    expect(getByText('Quality:')).toBeVisible();
+  });
+
+  it('should show length breakdown bar', async () => {
+    const { getByText } = render(<ChacBreak rating={RatingData} />);
+    expect(getByText('Length:')).toBeVisible();
+  });
+
+  it('should show fit breakdown bar', async () => {
+    const { getByText } = render(<ChacBreak rating={RatingData} />);
+    expect(getByText('Fit:')).toBeVisible();
+  });
+
+  it('should NOT show Size breakdown bar', async () => {
+    const { getByText } = render(<ChacBreak rating={RatingData} />);
+    expect(getByText('Size:')).not.toBeVisible();
+  });
+
+  it('should NOT show Width breakdown bar', async () => {
+    const { getByText } = render(<ChacBreak rating={RatingData} />);
+    expect(getByText('Width:')).not.toBeVisible();
+  });
+
+  it('should have arrow-quality to be positioned in specific position on the graph', async () => {
+    const { getByTestId } = render(<ChacBreak rating={RatingData} />);
+    const data = arrow(RatingData.characteristics.Quality.value);
+    expect(getByTestId('arrow-quality')).toHaveStyle(`margin-left:${data}`);
+  });
+
+  it('should have arrow-comfort to be positioned in specific position on the graph', async () => {
+    const { getByTestId } = render(<ChacBreak rating={RatingData} />);
+    const data = arrow(RatingData.characteristics.Comfort.value);
+    expect(getByTestId('arrow-comfort')).toHaveStyle(`margin-left:${data}`);
+  });
+
+  it('should have arrow-length to be positioned in specific position on the graph', async () => {
+    const { getByTestId } = render(<ChacBreak rating={RatingData} />);
+    const data = arrow(RatingData.characteristics.Length.value);
+    expect(getByTestId('arrow-length')).toHaveStyle(`margin-left:${data}`);
+  });
+
+  it('should have arrow-fit to be positioned in specific position on the graph', async () => {
+    const { getByTestId } = render(<ChacBreak rating={RatingData} />);
+    const data = arrow(RatingData.characteristics.Fit.value);
+    expect(getByTestId('arrow-fit')).toHaveStyle(`margin-left:${data}`);
+  });
+
+  it('should turn the bar to purple on mouseEnter', async () => {
+    const { getByTestId, container } = render(<Breakdown rating={RatingData} />);
+    fireEvent.mouseEnter(getByTestId('bar-1'));
+    expect(getByTestId('bar-1')).toHaveStyle('background-color:purple');
+  });
+
+  it('should turn the bar to original color on mouseLeave', async () => {
+    const { getByTestId, container } = render(<Breakdown rating={RatingData} />);
+    fireEvent.mouseEnter(getByTestId('bar-1'));
+    fireEvent.mouseLeave(getByTestId('bar-1'));
+    expect(getByTestId('bar-1')).toHaveStyle('background-color:');
+  });
+
+  it('should turn the bar to yellow color on click', async () => {
+    const { getByTestId, container } = render(<Ratings rating={RatingData} />);
+    fireEvent.mouseEnter(getByTestId('bar-1'));
+    fireEvent.click(getByTestId('bar-1'));
+    fireEvent.mouseLeave(getByTestId('bar-1'));
+    expect(getByTestId('bar-1')).toHaveStyle('background-color: orange');
+  });
+
+  it('should turn the bar to original color when rating filter is reset on click', async () => {
+    const { getByTestId, container, getByText } = render(<Ratings rating={RatingData} />);
+    fireEvent.mouseEnter(getByTestId('bar-1'));
+    fireEvent.click(getByTestId('bar-1'));
+    fireEvent.mouseLeave(getByTestId('bar-1'));
+    fireEvent.click(getByText('Show all rating'));
+    expect(getByTestId('bar-1')).toHaveStyle('background-color:');
   });
 });
 
@@ -47,12 +200,12 @@ describe('SERVER', () => {
     expect(reviewsData.status).toBe(200);
   });
 
-  // it('should obtain the meta from the first product', async () => {
-  //   const data = await axios.get(`http://localhost:${process.env.PORT}/db/allProducts`);
-  //   const firstProduct = data.data[0].id;
-  //   const reviews = await axios.get(`http://localhost:${process.env.PORT}/db/meta/${firstProduct}`);
-  //   it(reviews.status).not.toBe(404 && 500);
-  // });
+  it('should obtain the meta from the first product', async () => {
+    const data = await axios.get(`http://localhost:${process.env.PORT}/db/allProducts`);
+    const firstProduct = data.data[0].id;
+    const reviews = await axios.get(`http://localhost:${process.env.PORT}/db/meta/${firstProduct}`);
+    expect(reviews.status).not.toBe(404 && 500);
+  });
 });
 
 describe('Related Products', () => {
