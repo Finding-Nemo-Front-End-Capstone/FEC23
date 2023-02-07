@@ -1,13 +1,9 @@
 import React from 'react';
-<<<<<<< HEAD
-import { render, screen } from '@testing-library/react';
-=======
 import renderer, {
   screen, act, render, fireEvent, waitFor,
 } from '@testing-library/react';
 import { unmountComponentAtNode } from 'react-dom';
 import '@testing-library/jest-dom/extend-expect';
->>>>>>> f65327be55e836136ce42e272e7a9504aca2b3f2
 import axios from 'axios';
 // import adapter from axios +'/lib/adapters/http';
 
@@ -37,15 +33,6 @@ const ReviewObjTest = {
   reviewer_name: 'test',
 };
 
-<<<<<<< HEAD
-// describe('Ratings & Reviews', () => {
-//   it('should show rating on based on the data that was received', () => {
-//     const { getByTestId } = render(<ReviewEntry review={ReviewObjTest} />);
-//     const rating = getByTestId('ratingReview').textContent;
-//     expect(rating).toEqual('5');
-//   });
-// });
-=======
 const RatingData = {
   characteristics: {
     Comfort: {
@@ -199,7 +186,6 @@ describe('Ratings & Reviews', () => {
     expect(getByTestId('bar-1')).toHaveStyle('background-color:');
   });
 });
->>>>>>> f65327be55e836136ce42e272e7a9504aca2b3f2
 
 describe('SERVER', () => {
   test('should receive all products', async () => {
