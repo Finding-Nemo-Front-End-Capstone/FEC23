@@ -176,6 +176,15 @@ describe('Ratings & Reviews', () => {
     fireEvent.mouseLeave(getByTestId('bar-1'));
     expect(getByTestId('bar-1')).toHaveStyle('background-color: orange');
   });
+
+  it('should turn the bar to original color when rating filter is reset on click', async () => {
+    const { getByTestId, container, getByText } = render(<Ratings rating={RatingData} />);
+    fireEvent.mouseEnter(getByTestId('bar-1'));
+    fireEvent.click(getByTestId('bar-1'));
+    fireEvent.mouseLeave(getByTestId('bar-1'));
+    fireEvent.click(getByText('Show all rating'));
+    expect(getByTestId('bar-1')).toHaveStyle('background-color:');
+  });
 });
 
 describe('SERVER', () => {
@@ -191,12 +200,12 @@ describe('SERVER', () => {
     expect(reviewsData.status).toBe(200);
   });
 
-  // it('should obtain the meta from the first product', async () => {
-  //   const data = await axios.get(`http://localhost:${process.env.PORT}/db/allProducts`);
-  //   const firstProduct = data.data[0].id;
-  //   const reviews = await axios.get(`http://localhost:${process.env.PORT}/db/meta/${firstProduct}`);
-  //   it(reviews.status).not.toBe(404 && 500);
-  // });
+  it('should obtain the meta from the first product', async () => {
+    const data = await axios.get(`http://localhost:${process.env.PORT}/db/allProducts`);
+    const firstProduct = data.data[0].id;
+    const reviews = await axios.get(`http://localhost:${process.env.PORT}/db/meta/${firstProduct}`);
+    expect(reviews.status).not.toBe(404 && 500);
+  });
 });
 
 describe('Related Products', () => {
