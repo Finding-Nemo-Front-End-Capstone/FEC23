@@ -2,3 +2,4 @@ node_modules
 client/dist/bundle.js
 config.js
 .env
+TEST_SPEC/coverage/lcov-report/FEC23/config.js.html
