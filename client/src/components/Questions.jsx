@@ -27,13 +27,13 @@ function Questions({ product }) {
   }
   return (
     <div id="questions-and-answers">
-      Questions
+      <div>Prodcut Q&A</div>
+      <span>Questions</span>
+      <button type="button" onClick={() => setShowAddQuestion(true)}>Ask a question +</button>
       <Search questions={questions} setQuestions={setQuestions} search={search} setSearch={setSearch} />
       <button onClick={handleAccordion} type="button">{buttonText}</button>
       {expanded && <QuestionsList product={product} questions={questions} displayed={displayed} setDisplayed={setDisplayed} numQuestions={numQuestions} setNumQuestions={setNumQuestions} search={search} />}
-      <button type="button" onClick={() => setShowAddQuestion(true)}>Add a question +</button>
       <AddQuestion onClose={() => setShowAddQuestion(false)} showAddQuestion={showAddQuestion} product={product} />
-
     </div>
   );
 }

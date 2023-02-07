@@ -5,6 +5,7 @@ import AnswersList from './AnswersList.jsx';
 function Question({ question }) {
   const [disableHelpful, setDisableHelpful] = useState(false);
   const [disableReport, setDisableReport] = useState(false);
+  const [showAddAnswer, setShowAddAnswer] = useState(false);
   function helpfulQuestion(q) {
     setDisableHelpful(true);
     axios.put(`/db/helpfulquestion?question_id=${q.question_id}`)
@@ -29,6 +30,7 @@ function Question({ question }) {
             <span className="button-feedback" id="helpfulness-score">{`(${question.question_helpfulness})`}</span>
             <span>|</span>
             <button type="button" disabled={disableReport} onClick={() => { reportQuestion(question); }}>Report</button>
+            <button type="button">Answer this question</button>
             <AnswersList question_id={question.question_id} />
           </span>
         )}
