@@ -20,10 +20,18 @@ function Question({ question }) {
       Q:
       {' '}
       {question.question_body}
-      <button type="button" disabled={disableHelpful} onClick={() => { helpfulQuestion(question); }}>Helpful?</button>
-      <button type="button" disabled={disableReport} onClick={() => { reportQuestion(question); }}>Report</button>
-      {/* <Answer question_id={question.question_id} /> */}
-      <AnswersList question_id={question.question_id} />
+      {disableHelpful
+        ? <span className="button-feedback">Thanks for the feedback</span>
+        : (
+          <span className="question-feedback">
+            <span>Helpful?</span>
+            <button type="button" className="helpful-button" disabled={disableHelpful} onClick={() => { helpfulQuestion(question); }}><u>Yes</u></button>
+            <span className="button-feedback" id="helpfulness-score">{`(${question.question_helpfulness})`}</span>
+            <span>|</span>
+            <button type="button" disabled={disableReport} onClick={() => { reportQuestion(question); }}>Report</button>
+            <AnswersList question_id={question.question_id} />
+          </span>
+        )}
     </div>
   );
 }

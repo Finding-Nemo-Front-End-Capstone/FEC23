@@ -26,7 +26,7 @@ function Questions({ product }) {
     setExpanded(!expanded);
   }
   return (
-    <div>
+    <div id="questions-and-answers">
       Questions
       <Search questions={questions} setQuestions={setQuestions} search={search} setSearch={setSearch} />
       <button onClick={handleAccordion} type="button">{buttonText}</button>

@@ -22,14 +22,22 @@ function AnswersList({ question_id }) {
     }
   }, []);
   useEffect(() => {
-    const arr = [];
-    if (allAnswers[0] && allAnswers.length < numAnswers) {
-      for (let i = 0; i < allAnswers.length; i++) {
-        arr.push(displayAnswer(allAnswers[i]));
+    const sorted = [...allAnswers].sort((a, b) => {
+      if (a.answerer_name.toLowerCase() === 'seller') {
+        return -1;
+      } if (b.answerer_name.toLowerCase() === 'seller') {
+        return 1;
       }
-    } else if (allAnswers[0]) {
+      return 0;
+    });
+    const arr = [];
+    if (sorted[0] && sorted.length < numAnswers) {
+      for (let i = 0; i < sorted.length; i++) {
+        arr.push(displayAnswer(sorted[i]));
+      }
+    } else if (sorted[0]) {
       for (let i = 0; i < numAnswers; i++) {
-        arr.push(displayAnswer(allAnswers[i]));
+        arr.push(displayAnswer(sorted[i]));
       }
     }
     setDisplayed(arr);
@@ -38,7 +46,8 @@ function AnswersList({ question_id }) {
     <div>
       {displayed[0] && <span>A:</span>}
       {displayed}
-      {displayed.length < allAnswers.length && <button type="button" onClick={() => { setNumAnswers(numAnswers + 2); }}>Show more answers</button>}
+      {displayed.length < allAnswers.length && <button type="button" onClick={() => { setNumAnswers(allAnswers.length); }}>Show more answers</button>}
+      {displayed[0] && displayed.length > 2 && displayed.length === allAnswers.length && <button type="button" onClick={() => { setNumAnswers(2); }}>Collapse answers</button>}
     </div>
   );
 }

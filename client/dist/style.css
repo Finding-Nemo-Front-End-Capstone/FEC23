@@ -773,6 +773,15 @@ select#sort {
 }
 
 /* Questions and Answers */
+#questions-and-answers {
+max-width: 80%;
+margin:auto;
+}
+
+/* .question-feedback {
+  float: right;
+  margin-right: 20%;
+} */
 
 .add-question-modal {
   position: fixed;
@@ -806,7 +815,7 @@ select#sort {
   border-bottom: 1px solid #eee;
 }
 
-.helpful-button {
+.helpful-button, .report-button {
   background: none;
   border: none;
   margin: 5px;
@@ -820,4 +829,17 @@ select#sort {
 
 #helpfulness-score {
   margin-left: 0px;
+}
+
+#email-notice {
+  font-size: 10px;
+}
+
+textarea {
+  /* will prevent resizing horizontally */
+  resize:vertical;
+}
+
+#add-question-form input {
+  width: 40%;
 }

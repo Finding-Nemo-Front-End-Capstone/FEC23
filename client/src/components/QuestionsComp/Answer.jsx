@@ -10,9 +10,16 @@ function Answer({ answer, allAnswers, setAllAnswers }) {
       .catch((err) => { console.log('err marking answer helpful', err); });
   }
   function reportAnswer(a) {
+    setDisableReport(true);
     axios.put(`/db/reportanswer?answers_id=${a.answer_id}`)
-      .then(() => { setAllAnswers(allAnswers.filter((x) => (a.answer_id !== x.answer_id))); })
+      // .then(() => { setAllAnswers(allAnswers.filter((x) => (a.answer_id !== x.answer_id))); })
       .catch((err) => { console.log('err reporting answer', err); });
+  }
+  function displayUsername() {
+    if (answer.answerer_name.toLowerCase() === 'seller') {
+      return (<b>Seller</b>);
+    }
+    return answer.answerer_name;
   }
   return (
     <div>
@@ -20,7 +27,15 @@ function Answer({ answer, allAnswers, setAllAnswers }) {
         {answer.body}
       </li>
       <div>
-        <span className="button-feedback">{`by ${answer.answerer_name} ${answer.date}`}</span>
+        <span className="button-feedback">
+          by
+          {' '}
+          {displayUsername()}
+          {' '}
+          on
+          {' '}
+          {answer.date}
+        </span>
         <span>|</span>
         {disableHelpful
           ? <span className="button-feedback">Thanks for the feedback</span>
@@ -32,7 +47,9 @@ function Answer({ answer, allAnswers, setAllAnswers }) {
             </span>
           )}
         <span>|</span>
-        <button type="button" disabled={disableReport} onClick={() => { reportAnswer(answer); }}>Report</button>
+        {disableReport
+          ? <span className="button-feedback">Reported</span>
+          : <button type="button" className="report-button" disabled={disableReport} onClick={() => { reportAnswer(answer); }}>Report</button>}
       </div>
     </div>
   );
