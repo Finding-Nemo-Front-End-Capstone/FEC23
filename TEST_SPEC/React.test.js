@@ -15,8 +15,8 @@ import ChacBreak from '../client/src/components/RatingsComp/ChacBreak.jsx';
 // import QuestionList from '../client/src/components/Questions/QuestionList.jsx';
 import serverTest from './utils.js';
 // @jest-environment jsdom
-
-// import RelatedProducts from '../client/src/components/RelatedOutfits/RelatedProducts.jsx';
+import mockAx from '../helpers';
+import RelatedProducts from '../client/src/components/RelatedOutfits/RelatedProducts.jsx';
 
 const { allProducts } = serverTest;
 const { reviews } = serverTest;

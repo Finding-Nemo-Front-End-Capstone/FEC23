@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import RelatedStars from './RelatedStars.jsx';
+
 function OutfitCards({ product, saved, setHasCurrent, setSaved }) {
   const [cardInfo, setCardInfo] = useState({});
   useEffect(() => {
-    const copy = {...cardInfo};
+    const copy = { ...cardInfo };
     copy.id = product.id;
     copy.category = product.category;
     copy.name = product.name;
@@ -44,7 +45,7 @@ function OutfitCards({ product, saved, setHasCurrent, setSaved }) {
         <div className="outfitPriceText">
           ${cardInfo.price}
         </div>
-        {cardInfo.rating ? <RelatedStars rating = {cardInfo.rating} /> : null}
+        {cardInfo.rating ? <RelatedStars rating={cardInfo.rating} /> : null}
       </div>
     </div>
   );
