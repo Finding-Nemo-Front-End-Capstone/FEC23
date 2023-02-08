@@ -35,6 +35,7 @@ function RelatedProducts({ id, product, setProduct, rating, currStyle }) {
           res.features = prod.data.features;
           res.rating = ratings.data;
           res.thumbnail = styles.data.results[0].photos[0].thumbnail_url;
+          console.log({item : JSON.stringify(res)});
           return res;
         })
       )

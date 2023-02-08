@@ -52,7 +52,10 @@ function Outfits({ product, rating, currStyle }) {
   return (
     <div className="outfitsContainer">
       { currentIndex !== 0 && saved.length >= 3
-        ? <input type="submit" className="leftOutfit" onClick={arrowClick} value="left" />
+        ?
+        <button type="submit" className="leftOutfit" onClick={arrowClick}>
+          {'<'}
+        </button>
         : null}
       { hasCurrent === false
         ? (
@@ -64,7 +67,8 @@ function Outfits({ product, rating, currStyle }) {
         )
         : null }
       { currentIndex !== saved.length - 3 && saved.length >= 3
-        ? <input type="submit" className="rightOutfit" onClick={arrowClick} value="right" />
+        ? <button type="submit" className="rightOutfit" onClick={arrowClick}>{'>'}
+        </button>
         : null}
       {createOutfitsCard(saved)}
     </div>

@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom';
 import RelatedProducts from '../client/src/components/RelatedOutfits/RelatedProducts.jsx';
 import RelatedCards from '../client/src/components/RelatedOutfits/RelatedCards.jsx';
 import Outfits from '../client/src/components/RelatedOutfits/Outfits.jsx';
+import OutfitCards from '../client/src/components/RelatedOutfits/OutfitCards.jsx';
 import exData from './exampleData/exampleDataRelatedProducts.js';
 
 jest.mock('axios');
@@ -106,8 +107,8 @@ describe('Outfits component', () => {
         }
       };
     })();
-    mockLocalStorage.setItem('outfits', "[{\"id\":40346,\"category\":\"Pants\",\"name\":\"Morning Joggers\",\"price\":\"40.00\",\"rating\":{\"product_id\":\"40346\",\"ratings\":{\"1\":\"19\",\"2\":\"45\",\"3\":\"40\",\"4\":\"24\",\"5\":\"78\"},\"recommended\":{\"false\":\"59\",\"true\":\"147\"},\"characteristics\":{\"Fit\":{\"id\":135224,\"value\":\"2.5467625899280576\"},\"Length\":{\"id\":135225,\"value\":\"3.1096774193548387\"},\"Comfort\":{\"id\":135226,\"value\":\"2.9807692307692308\"},\"Quality\":{\"id\":135227,\"value\":\"3.3576158940397351\"}}},\"thumbnail\":\"https://images.unsplash.com/photo-1552902865-b72c031ac5ea?ix….1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80\"}]")
-    Object.defineProperty(window, 'localStorage', { value: mockLocalStorage});
+    mockLocalStorage.setItem('outfits', exData.string40344)
+    Object.defineProperty(window, 'localStorage', { value: mockLocalStorage });
     const jsonMock = jest.spyOn(localStorage, 'setItem');
     await act(async () => {
       await render (<Outfits product={exData.p40344} rating={exData.r40344} currStyle={exData.s40344} />);
@@ -115,4 +116,73 @@ describe('Outfits component', () => {
     await userEvent.click( await screen.getByText(/Add to my outfits/i));
     expect(jsonMock).toHaveBeenCalled();
   });
+
+  // test('Should call arrowClick when multiple items are stored in outfits', async () => {
+  //   const mockLocalStorage = (function () {
+  //     const store = {};
+  //     return {
+  //       getItem: function (key) {
+  //         return store[key];
+  //       },
+  //       setItem: function (key, value) {
+  //         store[key] = value.toString();
+  //       },
+  //       clear: function () {
+  //         store = {};
+  //       },
+  //       removeItem: function(key) {
+  //         delete store[key];
+  //       }
+  //     };
+  //   })();
+  //   mockLocalStorage.setItem('outfits', exData.string40344);
+  //   Object.defineProperty(window, 'localStorage', { value: mockLocalStorage });
+  //   await act(async() => {
+  //     render( <Outfits product={exData.p40344} rating={exData.r40344} currStyle={exData.s40344} />) });
+  //   await userEvent.click( await screen.findByRole('button', { name: '>' }) );
+  // });
+
+  describe('OutfitCards component', () => {
+    test('Render the component correctly', async() => {
+      await act(async () => {
+        await render(<OutfitCards product={exData.p40344} saved={localStorage}/>)
+      });
+    });
+
+    test('Should render img without a thumbnail', async() => {
+      let alteredExData = JSON.parse(exData.string40344);
+      alteredExData.thumbnail = null;
+      await act(async () => {
+        await render(<OutfitCards product={alteredExData} saved={localStorage}/>)
+      });
+    });
+
+    test('Should remove a product when clicking X', async() => {
+      const mockLocalStorage = (function () {
+        const store = {};
+        return {
+          getItem: function (key) {
+            return store[key];
+          },
+          setItem: function (key, value) {
+            store[key] = value.toString();
+          },
+          clear: function () {
+            store = {};
+          },
+          removeItem: function(key) {
+            delete store[key];
+          }
+        };
+      })();
+      mockLocalStorage.setItem('outfits', [exData.string40344]);
+      Object.defineProperty(window, 'localStorage', { value : mockLocalStorage });
+      const jsonMock = jest.spyOn(localStorage, 'getItem');
+      await act(async () => {
+        await render (<Outfits product={exData.p40344} rating={exData.r40344} currStyle={exData.s40344} />);
+      });
+      await userEvent.click( await screen.getAllByText(/✖/i)[0]);
+      expect(jsonMock).toHaveBeenCalled();
+    })
+  })
 });
