@@ -38,8 +38,8 @@ function Outfits({ product, rating, currStyle }) {
   function arrowClick(e) {
     e.preventDefault();
     let copy = currentIndex;
-    if (e.target.className === 'leftOutfit') { copy += 1; }
-    if (e.target.className === 'rightOutfit') { copy -= 1; }
+    if (e.target.className === 'leftOutfit') { copy -= 1; }
+    if (e.target.className === 'rightOutfit') { copy += 1; }
     setCurrentIndex(copy);
   }
   function createOutfitsCard(arr) {
@@ -50,13 +50,13 @@ function Outfits({ product, rating, currStyle }) {
     ));
   }
   return (
-    <div className="outfitsContainer">
-      { currentIndex !== 0 && saved.length >= 3
-        ?
-        <button type="submit" className="leftOutfit" onClick={arrowClick}>
-          {'<'}
-        </button>
-        : null}
+    <>
+    { currentIndex !== 0 && saved.length >= 3 ?
+      <button type="submit" className="leftOutfit" onClick={arrowClick}>
+      {'<'}
+      </button>
+      : null }
+      <div className="outfitsContainer">
       { hasCurrent === false
         ? (
           <button type="submit" className="addOutfit" onClick={clickHandler}>
@@ -66,12 +66,13 @@ function Outfits({ product, rating, currStyle }) {
           </button>
         )
         : null }
+        {createOutfitsCard(saved)}
+    </div>
       { currentIndex !== saved.length - 3 && saved.length >= 3
         ? <button type="submit" className="rightOutfit" onClick={arrowClick}>{'>'}
         </button>
         : null}
-      {createOutfitsCard(saved)}
-    </div>
+    </>
   );
 }
 

@@ -23,7 +23,7 @@ describe('Related Products component', () => {
     expect(axiosMock.spread).toBeCalled();
   });
 
-  test('Should not have left arrow when at index 0', async () => {
+  test('Should not have left arrow when at index 0 for Related container', async () => {
     axiosMock.get.mockResolvedValueOnce( { data : exData.knownRelated });
     axiosMock.spread.mockResolvedValueOnce( { data : exData.all40344 })
     await act(async () => {
@@ -33,15 +33,24 @@ describe('Related Products component', () => {
     expect(screen.queryByText('▶')).toBeTruthy();
 
     await userEvent.click(await screen.findByRole('button', { name: '▶'}));
-
     expect(screen.queryByText('◀')).toBeTruthy();
     expect(screen.queryByText('▶')).toBeFalsy();
+    await userEvent.click(await screen.findByRole('button', { name: '◀'}));
+    expect(screen.queryByText('◀')).toBeFalsy();
+    expect(screen.queryByText('▶')).toBeTruthy();
     // mock anything you need, render, etc.
     // const firstImage = await screen.findByAltText(relatedProduct[0].altText);
     // await userEvent.click(await screen.findByRole('button', { name: ' > ' });
     // expect(firstImage).not.toBeInTheDocument();
   });
-
+  test('Should console.log when axios.get fails', async() => {
+    axiosMock.get.mockRejectedValueOnce();
+    const failSpy = jest.spyOn(console, 'log');
+    await act (async () => {
+      render (<RelatedProducts id={exData.testId} product={exData.p40344} rating={exData.r40344} currStyle={exData.s40344} />);
+    });
+    expect(failSpy).toHaveBeenCalled();
+  })
   test('Should setDisplay on successful data', async() => {
     axiosMock.get.mockResolvedValueOnce( { data: exData.knownRelated });
     axiosMock.spread.mockResolvedValueOnce( { data : exData.all40344 });
@@ -52,7 +61,6 @@ describe('Related Products component', () => {
   })
 });
 
-const testRelInfo = exData.all40344[0];
 describe('Related Cards component', () => {
   beforeAll(() => {
     ReactDOM.createPortal = jest.fn((element, node) => {
@@ -61,14 +69,21 @@ describe('Related Cards component', () => {
   })
 
   test('Render the component along with modal', async () => {
-    render(<RelatedCards relInfo={testRelInfo} product={exData.p40344} />)
+    render(<RelatedCards relInfo={exData.all40344[0]} product={exData.p40344} />)
     await userEvent.click(screen.getByText('⭐'));
   });
 
   test('Should show have empty image container when thumbnail is not provided', () => {
-    testRelInfo.thumbnail = null;
-    render(<RelatedCards relInfo={testRelInfo} product={exData.p40344}/>);
+    exData.all40344[0].thumbnail = null;
+    render(<RelatedCards relInfo={exData.all40344[0]} product={exData.p40344}/>);
   });
+
+  test('Should fire clickNav when cardDetails is clicked', async() => {
+    const setMock = jest.fn();
+    render(<RelatedCards relInfo={exData.all40344[0]} product={exData.p40344} setProduct={setMock} />);
+    await userEvent.click(screen.getByTestId('cardDetails'));
+    expect (setMock).toHaveBeenCalled();
+  })
 });
 
 describe('Outfits component', () => {
@@ -81,7 +96,7 @@ describe('Outfits component', () => {
     expect(mockLocalStorage).not.toHaveBeenCalled();
   });
 
-  test('Should not have left arrow when at index 0', async () => {
+  test('Should not have arrow buttons when Outfits container has less than 3 items', async () => {
     await act(async() => {
       await render (<Outfits product={exData.p40344} rating = {exData.r40344} currStyle={exData.s40344} />);
     });
@@ -107,7 +122,7 @@ describe('Outfits component', () => {
         }
       };
     })();
-    mockLocalStorage.setItem('outfits', exData.string40344)
+    mockLocalStorage.setItem('outfits', `[${exData.string40345}, ${exData.string40346}, ${exData.string40350}, ${exData.string40351} ]`)
     Object.defineProperty(window, 'localStorage', { value: mockLocalStorage });
     const jsonMock = jest.spyOn(localStorage, 'setItem');
     await act(async () => {
@@ -117,30 +132,33 @@ describe('Outfits component', () => {
     expect(jsonMock).toHaveBeenCalled();
   });
 
-  // test('Should call arrowClick when multiple items are stored in outfits', async () => {
-  //   const mockLocalStorage = (function () {
-  //     const store = {};
-  //     return {
-  //       getItem: function (key) {
-  //         return store[key];
-  //       },
-  //       setItem: function (key, value) {
-  //         store[key] = value.toString();
-  //       },
-  //       clear: function () {
-  //         store = {};
-  //       },
-  //       removeItem: function(key) {
-  //         delete store[key];
-  //       }
-  //     };
-  //   })();
-  //   mockLocalStorage.setItem('outfits', exData.string40344);
-  //   Object.defineProperty(window, 'localStorage', { value: mockLocalStorage });
-  //   await act(async() => {
-  //     render( <Outfits product={exData.p40344} rating={exData.r40344} currStyle={exData.s40344} />) });
-  //   await userEvent.click( await screen.findByRole('button', { name: '>' }) );
-  // });
+  test('Should call arrowClick when multiple items are stored in outfits', async () => {
+    const mockLocalStorage = (function () {
+      const store = {};
+      return {
+        getItem: function (key) {
+          return store[key];
+        },
+        setItem: function (key, value) {
+          store[key] = value.toString();
+        },
+        clear: function () {
+          store = {};
+        },
+        removeItem: function(key) {
+          delete store[key];
+        }
+      };
+    })();
+    mockLocalStorage.setItem('outfits', `[${exData.string40345}, ${exData.string40346}, ${exData.string40350}, ${exData.string40351}]`);
+    Object.defineProperty(window, 'localStorage', { value: mockLocalStorage });
+    await act(async() => {
+      render( <Outfits product={exData.p40344} rating={exData.r40344} currStyle={exData.s40344} />) });
+    await userEvent.click( await screen.findByRole('button', { name: '>' }) );
+    await userEvent.click( await screen.findByRole('button', { name: '<'}) );
+    // expect(screen.findByRole('button', {name: '>'})).toBeInTheDocument();
+    // expect(screen.findByRole('button', {name: '<'})).not.toBeInTheDocument();
+  });
 
   describe('OutfitCards component', () => {
     test('Render the component correctly', async() => {
@@ -184,5 +202,5 @@ describe('Outfits component', () => {
       await userEvent.click( await screen.getAllByText(/✖/i)[0]);
       expect(jsonMock).toHaveBeenCalled();
     })
-  })
+  });
 });

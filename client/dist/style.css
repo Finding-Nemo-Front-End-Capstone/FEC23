@@ -368,16 +368,28 @@ body {
   background-color: white;
 }
 .leftArrow,
-.rightArrow {
+.rightArrow{
   position: absolute;
   font-size: 30px;
   top: 20%;
   z-index: 1;
   left: 0%;
 }
-.rightArrow {
+.leftOutfit,
+.rightOutfit{
+  position: absolute;
+  font-size: 35px;
+  top: 40%;
+  z-index: 1;
+  left: 0%;
+}
+.rightArrow{
   left: 700px;
   position:absolute;
+}
+.rightOutfit{
+  top: 73%;
+  left: 700px;
 }
 .previewImage {
   height: 250px;
@@ -389,6 +401,7 @@ body {
   /* max-width: 100%; */
   width:100%
 }
+
 .relatedModal {
   border: 2px solid lightslategrey;
   background-color: white;
