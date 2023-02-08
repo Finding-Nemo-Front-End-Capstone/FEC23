@@ -17,19 +17,29 @@ function Question({ question }) {
       .catch((err) => { console.log('err reporting question', err); });
   }
   return (
-    <div>
+    <div data-testid="question">
       Q:
       {' '}
       {question.question_body}
       {disableHelpful
-        ? <span className="button-feedback">Thanks for the feedback</span>
+        ? <span className="button-feedback" data-testid="helpful-question-button-feedback">Thanks for the feedback</span>
         : (
           <span className="question-feedback">
             <span>Helpful?</span>
-            <button type="button" className="helpful-button" disabled={disableHelpful} onClick={() => { helpfulQuestion(question); }}><u>Yes</u></button>
+            <button
+              type="button"
+              className="helpful-button"
+              data-testid="helpful-question-button"
+              disabled={disableHelpful}
+              onClick={() => { helpfulQuestion(question); }}
+            >
+              <u>Yes</u>
+            </button>
             <span className="button-feedback" id="helpfulness-score">{`(${question.question_helpfulness})`}</span>
             <span>|</span>
-            <button type="button" disabled={disableReport} onClick={() => { reportQuestion(question); }}>Report</button>
+            {disableReport
+              ? <span className="button-feedback" data-testid="report-question-button-feedback">Reported</span>
+              : <button type="button" data-testid="report-question-button" disabled={disableReport} onClick={() => { reportQuestion(question); }}>Report</button>}
             <button type="button">Answer this question</button>
             <AnswersList question_id={question.question_id} />
           </span>

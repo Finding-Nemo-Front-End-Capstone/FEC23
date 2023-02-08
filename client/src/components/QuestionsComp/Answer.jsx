@@ -23,7 +23,7 @@ function Answer({ answer, allAnswers, setAllAnswers }) {
   }
   return (
     <div>
-      <li>
+      <li data-testid="answer-body">
         {answer.body}
       </li>
       <div>
@@ -38,18 +38,18 @@ function Answer({ answer, allAnswers, setAllAnswers }) {
         </span>
         <span>|</span>
         {disableHelpful
-          ? <span className="button-feedback">Thanks for the feedback</span>
+          ? <span className="button-feedback" data-testid="helpful-button-feedback">Thanks for the feedback</span>
           : (
             <span className="button-feedback">
               <span>Helpful?</span>
-              <button type="button" className="helpful-button" onClick={() => { helpfulAnswer(answer); }}><u>Yes</u></button>
+              <button type="button" className="helpful-button" data-testid="helpful-button" onClick={() => { helpfulAnswer(answer); }}><u>Yes</u></button>
               <span className="button-feedback" id="helpfulness-score">{`(${answer.helpfulness})`}</span>
             </span>
           )}
         <span>|</span>
         {disableReport
-          ? <span className="button-feedback">Reported</span>
-          : <button type="button" className="report-button" disabled={disableReport} onClick={() => { reportAnswer(answer); }}>Report</button>}
+          ? <span className="button-feedback" data-testid="report-button-feedback">Reported</span>
+          : <button type="button" className="report-button" data-testid="answer-report-button" disabled={disableReport} onClick={() => { reportAnswer(answer); }}>Report</button>}
       </div>
     </div>
   );

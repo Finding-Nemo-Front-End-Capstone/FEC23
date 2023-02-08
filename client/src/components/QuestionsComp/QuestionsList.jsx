@@ -7,6 +7,7 @@ import Question from './Question.jsx';
 function QuestionsList({
   product, questions, displayed, setDisplayed, numQuestions, setNumQuestions, search,
 }) {
+  const [filtered, setFiltered] = useState([]);
   function displayQuestion(question) {
     return (
       <div>
@@ -15,7 +16,6 @@ function QuestionsList({
       </div>
     );
   }
-  const [filtered, setFiltered] = useState([]);
   useEffect(() => {
     if (search.length > 2) {
       setFiltered(questions.filter((question) => (question.question_body.toLowerCase().includes(search))));
@@ -36,10 +36,11 @@ function QuestionsList({
     }
     setDisplayed(arr);
   }, [numQuestions, filtered, questions]);
+
   return (
-    <div>
+    <div data-testid="question-list">
       {displayed}
-      {displayed.length < filtered.length && <button type="button" onClick={() => { setNumQuestions(numQuestions + 2); }}>Show more questions</button>}
+      {displayed.length < filtered.length && <button type="button" data-testid="show-more-questions" onClick={() => { setNumQuestions(numQuestions + 2); }}>Show more questions</button>}
     </div>
   );
 }

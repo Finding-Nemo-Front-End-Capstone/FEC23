@@ -26,12 +26,12 @@ function Questions({ product }) {
     setExpanded(!expanded);
   }
   return (
-    <div id="questions-and-answers">
-      <div>Prodcut Q&A</div>
+    <div id="questions-and-answers" data-testid="questions-and-answers">
+      <div>Product Q&A</div>
       <span>Questions</span>
       <button type="button" onClick={() => setShowAddQuestion(true)}>Ask a question +</button>
       <Search questions={questions} setQuestions={setQuestions} search={search} setSearch={setSearch} />
-      <button onClick={handleAccordion} type="button">{buttonText}</button>
+      <button onClick={handleAccordion} type="button" data-testid="expand-collapse">{buttonText}</button>
       {expanded && <QuestionsList product={product} questions={questions} displayed={displayed} setDisplayed={setDisplayed} numQuestions={numQuestions} setNumQuestions={setNumQuestions} search={search} />}
       <AddQuestion onClose={() => setShowAddQuestion(false)} showAddQuestion={showAddQuestion} product={product} />
     </div>
