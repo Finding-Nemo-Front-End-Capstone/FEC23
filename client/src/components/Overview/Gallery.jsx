@@ -3,8 +3,10 @@ import React, { useState, useEffect } from 'react';
 const Gallery = ({ product, currStyle, currPhotoIndex, setCurrPhotoIndex }) => {
 
   const [mainPhoto, setMainPhoto] = useState(currStyle.photos[0].url);
-  const [slideNumber, setSlideNumer] = useState(0);
-  const [openModal, setOpenModal] = useState(false);
+  const [slideIndex, setSlideIndex] = useState(1);
+  const [modal, setModal] = useState(false);
+  const [zoomed, setZoomed] = useState(false);
+  let slides = currStyle.photos;
 
   useEffect(() => {
     setMainPhoto(currStyle.photos[currPhotoIndex].url)
@@ -12,7 +14,76 @@ const Gallery = ({ product, currStyle, currPhotoIndex, setCurrPhotoIndex }) => {
       // .catch((err) => { console.log('meta did not work'); });
   }, [currStyle]);
 
-  let galleryPhotos = currStyle.photos;
+  useEffect(() => {
+    setMainPhoto(currStyle.photos[currPhotoIndex].url)
+  }, [currPhotoIndex])
+
+  function prevClick() {setCurrPhotoIndex(currPhotoIndex - 1)}
+  function nextClick() {setCurrPhotoIndex(currPhotoIndex + 1)}
+  function handleZoom() {setZoomed(!zoomed)}
+  // function zoom(e) {
+  //   var zoomer = e.currentTarget;
+  //   e.offsetX ? offsetX = e.offsetX : offsetX = e.touches[0].pageX
+  //   e.offsetY ? offsetY = e.offsetY : offsetX = e.touches[0].pageX
+  //   x = offsetX/zoomer.offsetWidth*100
+  //   y = offsetY/zoomer.offsetHeight*100
+  //   zoomer.style.backgroundPosition = x + '% ' + y + '%';
+  // }
+
+  return(
+    <>
+      {modal && <div className="gallery-modal">
+        <button className="close" onClick={() => setModal(!modal)}>X</button>
+        {currPhotoIndex !== 0
+        ? <a className="prev modal" onClick={prevClick}>&#10094;</a>
+        : null}
+        <ul className="modal-radio">
+          {slides.map((photo, i) => {
+            return <input type="radio" name="img-selector" id={i}
+              onChange={() => setCurrPhotoIndex(i)}/>
+          })}
+        </ul>
+        {currPhotoIndex !== slides.length - 1
+        ? <a className="next modal" onClick={nextClick}>&#10095;</a>
+        : null}
+         {zoomed
+         ? <img className="modal-img zoomed" /*onMouseMove={zoom}*/ src={mainPhoto} onClick={handleZoom}/>
+         : <img className="modal-img" src={mainPhoto} onClick={handleZoom}/>}
+      </div>}
+
+      <div className="gallery-wrap">
+          {currPhotoIndex !== 0
+          ? <a className="prev" onClick={prevClick}>&#10094;</a>
+          : null}
+          <img className="main-photo" src={mainPhoto}
+          onClick={() => setModal(!modal)}/>
+          {currPhotoIndex !== slides.length - 1
+          ? <a className="next" onClick={nextClick}>&#10095;</a>
+          : null}
+        <div className="gallery-ribbon">
+          {slides.map((photo, i) => {
+            return (
+              <>
+                <img className={currPhotoIndex === i ? "gallery-photo selected" : "gallery-photo"}
+                src={photo.thumbnail_url} key={photo.url} index={i}
+                onClick={() => {
+                  setMainPhoto(currStyle.photos[i].url);
+                  setCurrPhotoIndex(i);
+                }}/>
+              </>
+            )
+          })}
+        </div>
+      </div>
+    </>
+  )
+}
+
+export default Gallery;
+
+// onclick="plusSlides(1)"
+
+
 
   // const handleOpenModal = (index) => {
   //   setSlideNumer(index);
@@ -30,28 +101,3 @@ const Gallery = ({ product, currStyle, currPhotoIndex, setCurrPhotoIndex }) => {
   //     </div>
   //   </div>
   // }
-
-  return(
-    <div className="gallery-wrap">
-      <img className="main-photo" src={mainPhoto}/>
-      {/* <p>{product.description}</p> */}
-      <div className="gallery-ribbon">
-        {galleryPhotos && galleryPhotos.map((photo, i) => {
-          return (
-            // <div className="single" key={i} onClick={ () => handleOpenModal(i)}>
-              <img className="gallery-photo"
-              src={photo.thumbnail_url} key={photo.url} index={i}
-              onClick={() => {
-                setMainPhoto(currStyle.photos[i].url);
-                setCurrPhotoIndex(i);
-              }}
-              />
-            // </div>
-          )
-        })}
-      </div>
-    </div>
-  )
-}
-
-export default Gallery;
