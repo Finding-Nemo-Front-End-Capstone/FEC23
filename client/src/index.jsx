@@ -13,12 +13,13 @@ function App() {
   const [rating, setRating] = useState({});
   const [currPhotoIndex, setCurrPhotoIndex] = useState(0);
   const [style, setStyle] = useState([]);
+  const [invoke, setInvoke] = useState(true);
 
   useEffect(() => {
     axios.get('/db/allProducts')
       .then((data) => {
-        setProduct(data.data[2]);
-        axios.get(`/db/${data.data[2].id}`)
+        setProduct(data.data[0]);
+        axios.get(`/db/${data.data[0].id}`)
           .then((info) => setProdInfo(info.data))
           .catch(() => console.log('product info did not work'));
       })
@@ -34,7 +35,7 @@ function App() {
         .then((data) => { setStyle(data.data); })
         .catch((err) => { console.log('styles did not work'); });
     }
-  }, [product]);
+  }, [product, invoke]);
 
   return (
     <div>
@@ -48,7 +49,7 @@ function App() {
       {/* <Ratings product={product} rating={rating} setProduct={setProduct} /> */}
       <Questions product={product} />
       <RelatedProducts id={product.id} product={prodInfo} rating={rating} currStyle={style} />
-      <Ratings product={product} rating={rating} setProduct={setProduct} />
+      <Ratings product={product} rating={rating} setProduct={setProduct} invoke={invoke} setInvoke={setInvoke} />
       <br />
     </div>
   );

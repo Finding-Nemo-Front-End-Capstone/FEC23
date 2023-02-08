@@ -7,7 +7,9 @@ import ReviewForm from './RatingsComp/ReviewForm.jsx';
 import Breakdown from './RatingsComp/Breakdown.jsx';
 import ChacBreak from './RatingsComp/ChacBreak.jsx';
 
-function Ratings({ product, rating, setProduct }) {
+function Ratings({
+  product, rating, setProduct, invoke, setInvoke,
+}) {
   const [reviewList, setReviewList] = useState([]);
   const [sort, setSort] = useState('newest');
   const [count, setCount] = useState(0);
@@ -20,6 +22,7 @@ function Ratings({ product, rating, setProduct }) {
   const [containFilter, setContainFilter] = useState([]);
 
   useEffect(() => {
+    console.log('this is RATING', rating);
     if (!containFilter[0]) {
       console.log('reviewist', reviewList);
       setReviewHolder(reviewList);
@@ -40,20 +43,39 @@ function Ratings({ product, rating, setProduct }) {
     console.log('this is rating', rating);
     if (rating.product_id) {
       setTotalReviews(rating.recommended.true + rating.recommended.false);
-    }
-  }, [rating]);
-
-  useEffect(() => {
-    if (rating.product_id) {
-      axios.get(`/db/reviews/${rating.product_id}/${sort}/${totalReview}/1`)
+      axios.get(`/db/reviews/${rating.product_id}/${sort}/${rating.recommended.true + rating.recommended.false}/1`)
         .then((data) => {
-          setReviewList(
-            data.data.results.sort((a, b) => b.review_id - a.review_id),
-          );
+          if (sort === 'newest') {
+            setReviewList(
+              data.data.results.sort((a, b) => b.review_id - a.review_id),
+            );
+          } else {
+            setReviewList(data.data.results);
+          }
         })
         .catch(() => console.log('error in obtaining review'));
     }
-  }, [totalReview, sort]);
+  }, [rating, sort]);
+
+  // useEffect(() => {
+  //   if (rating.product_id) {
+  //     console.log(totalReview);
+  //     if (totalReview !== rating.recommended.true + rating.recommended.false) {
+  //       axios.get(`/db/reviews/${rating.product_id}/${sort}/${totalReview}/1`)
+  //         .then((data) => {
+  //           console.log('Ineedthe form of this', data);
+  //           if (sort === 'newest') {
+  //             setReviewList(
+  //               data.data.results.sort((a, b) => b.review_id - a.review_id),
+  //             );
+  //           } else {
+  //             setReviewList(data.data.results);
+  //           }
+  //         })
+  //         .catch(() => console.log('error in obtaining review'));
+  //     }
+  //   }
+  // }, [totalReview, sort]);
 
   useEffect(() => {
     if (reviewList[0]) {
@@ -119,12 +141,13 @@ function Ratings({ product, rating, setProduct }) {
 
   return (
     <div className="RatingsReview">
-      RATINGS & REVIEWS
+      <text className="RatingsReview">RATINGS & REVIEWS</text>
       <div className="chacandbreak">
         <Breakdown rating={rating} reviewFilter={reviewFilter} totalReview={totalReview} />
         <ChacBreak rating={rating} />
       </div>
       <div className="divReviewEntry">
+
         <div className="reviewHeader">
           <div className="dropdown">
             <label htmlFor="sort">
@@ -165,6 +188,8 @@ function Ratings({ product, rating, setProduct }) {
             totalReview={totalReview}
             setTotalReviews={setTotalReviews}
             setSort={setSort}
+            invoke={invoke}
+            setInvoke={setInvoke}
           />
         </div>
       </div>
