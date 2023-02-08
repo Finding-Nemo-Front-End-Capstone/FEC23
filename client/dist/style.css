@@ -874,6 +874,24 @@ max-width: 80%;
 margin:auto;
 }
 
+.questions-list {
+  height: 200px;
+  overflow-y: hidden;
+  max-height: 50%; /* set the maximum height to half the viewport */
+}
+
+.questions-list:hover {
+  overflow-y: scroll; /* show the scrollbar when hovered */
+}
+
+@media (min-height: 500px) {
+  .questions-list {
+    height:fit-content;
+    max-height: calc(70vh - 100px); /* set the height to half the viewport minus an offset */
+  }
+}
+
+
 /* .question-feedback {
   float: right;
   margin-right: 20%;

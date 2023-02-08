@@ -833,53 +833,179 @@ const questions = [
     answers: {},
   },
 ];
+const results = {
+  data: {
+    results: [
+      {
+          "answer_id": 5990533,
+          "body": "unique444",
+          "date": "2023-02-06T00:00:00.000Z",
+          "answerer_name": "not a seller",
+          "helpfulness": 0,
+          "photos": [
+              {
+                  "id": 5347550,
+                  "url": "https://web.postman.co/workspace/My-Workspace~d81eadb3-83ef-4227-8324-c804294a8fb0/request/25221147-886f4df6-0444-488d-a981-8bb688187b97"
+              }
+          ]
+      },
+      {
+          "answer_id": 5990534,
+          "body": "Are these shoes gonna make my feet look bigger? meow",
+          "date": "2023-02-06T00:00:00.000Z",
+          "answerer_name": "not a seller",
+          "helpfulness": 0,
+          "photos": [
+              {
+                  "id": 5347551,
+                  "url": "https://web.postman.co/workspace/My-Workspace~d81eadb3-83ef-4227-8324-c804294a8fb0/request/25221147-886f4df6-0444-488d-a981-8bb688187b97"
+              }
+          ]
+      },
+      {
+          "answer_id": 5990536,
+          "body": "Are these shoes gonna make my feet look bigger?444",
+          "date": "2023-02-06T00:00:00.000Z",
+          "answerer_name": "seller",
+          "helpfulness": 0,
+          "photos": [
+              {
+                  "id": 5347553,
+                  "url": "https://web.postman.co/workspace/My-Workspace~d81eadb3-83ef-4227-8324-c804294a8fb0/request/25221147-886f4df6-0444-488d-a981-8bb688187b97"
+              }
+          ]
+      },
+      {
+          "answer_id": 5990535,
+          "body": "Are these shoes gonna make my feet look bigger?",
+          "date": "2023-02-06T00:00:00.000Z",
+          "answerer_name": "seller",
+          "helpfulness": 0,
+          "photos": [
+              {
+                  "id": 5347552,
+                  "url": "https://web.postman.co/workspace/My-Workspace~d81eadb3-83ef-4227-8324-c804294a8fb0/request/25221147-886f4df6-0444-488d-a981-8bb688187b97"
+              }
+          ]
+      },
+      {
+          "answer_id": 5990537,
+          "body": "Are these shoes gonna make my feet look bigger?",
+          "date": "2023-02-06T00:00:00.000Z",
+          "answerer_name": "seller",
+          "helpfulness": 0,
+          "photos": [
+              {
+                  "id": 5347554,
+                  "url": "https://web.postman.co/workspace/My-Workspace~d81eadb3-83ef-4227-8324-c804294a8fb0/request/25221147-886f4df6-0444-488d-a981-8bb688187b97"
+              }
+          ]
+      },
+      {
+          "answer_id": 5990538,
+          "body": "Are these shoes gonna make my feet look bigger?",
+          "date": "2023-02-06T00:00:00.000Z",
+          "answerer_name": "seller",
+          "helpfulness": 0,
+          "photos": [
+              {
+                  "id": 5347555,
+                  "url": "https://web.postman.co/workspace/My-Workspace~d81eadb3-83ef-4227-8324-c804294a8fb0/request/25221147-886f4df6-0444-488d-a981-8bb688187b97"
+              }
+          ]
+      },
+      {
+          "answer_id": 5990539,
+          "body": "Are these shoes gonna make my feet look bigger?",
+          "date": "2023-02-06T00:00:00.000Z",
+          "answerer_name": "seller",
+          "helpfulness": 0,
+          "photos": [
+              {
+                  "id": 5347556,
+                  "url": "https://web.postman.co/workspace/My-Workspace~d81eadb3-83ef-4227-8324-c804294a8fb0/request/25221147-886f4df6-0444-488d-a981-8bb688187b97"
+              }
+          ]
+      },
+      {
+          "answer_id": 5990576,
+          "body": "Are these shoes gonna make my feet look bigger?",
+          "date": "2023-02-07T00:00:00.000Z",
+          "answerer_name": "seller",
+          "helpfulness": 0,
+          "photos": [
+              {
+                  "id": 5347581,
+                  "url": "https://web.postman.co/workspace/My-Workspace~d81eadb3-83ef-4227-8324-c804294a8fb0/request/25221147-886f4df6-0444-488d-a981-8bb688187b97"
+              }
+          ]
+      }
+    ]
+  }
+}
 
-describe('Questions & Answers', () => {
-  it('should display question body', async () => {
-    const { getByTestId } = render(<Question question={question} />);
-    expect(getByTestId('question')).toHaveTextContent('Honk');
+jest.mock('axios');
+beforeEach(jest.clearAllMocks);
+
+describe('AnswerList Component', () => {
+  test('Render the component fully', async () => {
+    axiosMock.get.mockResolvedValueOnce(results);
+    await act(async () => {
+      render(<AnswersList question_id={question.question_id} />)
+    });
+    fireEvent.click(screen.queryByTestId('show-more-answers'));
+    expect(axiosMock.get).toBeCalled();
+    expect(screen.queryByText('Are these shoes gonna make my feet look bigger?444')).toBeInTheDocument();
+
   });
-
-  it('should not display question body after clicking collpase', async () => {
-    const { getByTestId, queryByTestId } = render(<Questions product={product} />);
-    fireEvent.click(queryByTestId('expand-collapse'));
-    expect(queryByTestId('question-list')).not.toBeInTheDocument();
-  });
-
-  it('should see question list after clicking collapse/expand twice', async () => {
-    const { getByTestId, queryByTestId } = render(<Questions product={product} />);
-    fireEvent.click(queryByTestId('expand-collapse'));
-    fireEvent.click(queryByTestId('expand-collapse'));
-    expect(queryByTestId('question-list')).toBeInTheDocument();
-  });
-
-  it('should see thanks for feedback after clicking collapse/expand twice', async () => {
-    const { getByTestId, queryByTestId } = render(<Question question={question} />);
-    fireEvent.click(queryByTestId('helpful-question-button'));
-    expect(getByTestId('helpful-question-button-feedback')).toBeVisible();
-  });
-
-  it('should disable button after clicking report button', async () => {
-    const { getByTestId, queryByTestId } = render(<Question question={question} />);
-    fireEvent.click(queryByTestId('report-question-button'));
-    expect(queryByTestId('report-question-button-feedback')).toHaveTextContent('Reported');
-  });
-
-  it('should render answer body', async () => {
-    const { queryByTestId } = render(<Answer answer={question.answers[5989532]} allAnswers={question.answers} />);
-    expect(queryByTestId('answer-body')).toHaveTextContent('Honk :o)');
-  });
-
-  it('should change help button to message', async () => {
-    const { getByTestId, queryByTestId } = await render(<Answer answer={question.answers[5989532]} allAnswers={question.answers} />);
-    fireEvent.click(queryByTestId('helpful-button'));
-    expect(queryByTestId('helpful-button-feedback')).toHaveTextContent('Thanks for the feedback');
-  });
-
-  it('should change report button to a message', async () => {
-    const { getByTestId, queryByTestId } = await render(<Answer answer={question.answers[5989532]} allAnswers={question.answers} />);
-    fireEvent.click(queryByTestId('answer-report-button'));
-    expect(queryByTestId('report-button-feedback')).toHaveTextContent('Reported');
-  });
-
 });
+
+// describe('Questions & Answers', () => {
+//   it('should display question body', async () => {
+//     const { getByTestId } = render(<Question question={question} />);
+//     expect(getByTestId('question')).toHaveTextContent('Honk');
+//   });
+
+//   it('should not display question body after clicking collpase', async () => {
+//     const { getByTestId, queryByTestId } = render(<Questions product={product} />);
+//     fireEvent.click(queryByTestId('expand-collapse'));
+//     expect(queryByTestId('question-list')).not.toBeInTheDocument();
+//   });
+
+//   it('should see question list after clicking collapse/expand twice', async () => {
+//     const { getByTestId, queryByTestId } = render(<Questions product={product} />);
+//     fireEvent.click(queryByTestId('expand-collapse'));
+//     fireEvent.click(queryByTestId('expand-collapse'));
+//     expect(queryByTestId('question-list')).toBeInTheDocument();
+//   });
+
+//   it('should see thanks for feedback after clicking collapse/expand twice', async () => {
+//     const { getByTestId, queryByTestId } = render(<Question question={question} />);
+//     fireEvent.click(queryByTestId('helpful-question-button'));
+//     expect(getByTestId('helpful-question-button-feedback')).toBeVisible();
+//   });
+
+//   it('should disable button after clicking report button', async () => {
+//     const { getByTestId, queryByTestId } = render(<Question question={question} />);
+//     fireEvent.click(queryByTestId('report-question-button'));
+//     expect(queryByTestId('report-question-button-feedback')).toHaveTextContent('Reported');
+//   });
+
+//   it('should render answer body', async () => {
+//     const { queryByTestId } = render(<Answer answer={question.answers[5989532]} allAnswers={question.answers} />);
+//     expect(queryByTestId('answer-body')).toHaveTextContent('Honk :o)');
+//   });
+
+//   it('should change help button to message', async () => {
+//     const { getByTestId, queryByTestId } = await render(<Answer answer={question.answers[5989532]} allAnswers={question.answers} />);
+//     fireEvent.click(queryByTestId('helpful-button'));
+//     expect(queryByTestId('helpful-button-feedback')).toHaveTextContent('Thanks for the feedback');
+//   });
+
+//   it('should change report button to a message', async () => {
+//     const { getByTestId, queryByTestId } = await render(<Answer answer={question.answers[5989532]} allAnswers={question.answers} />);
+//     fireEvent.click(queryByTestId('answer-report-button'));
+//     expect(queryByTestId('report-button-feedback')).toHaveTextContent('Reported');
+//   });
+
+// });

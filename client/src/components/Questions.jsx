@@ -32,7 +32,9 @@ function Questions({ product }) {
       <button type="button" onClick={() => setShowAddQuestion(true)}>Ask a question +</button>
       <Search questions={questions} setQuestions={setQuestions} search={search} setSearch={setSearch} />
       <button onClick={handleAccordion} type="button" data-testid="expand-collapse">{buttonText}</button>
-      {expanded && <QuestionsList product={product} questions={questions} displayed={displayed} setDisplayed={setDisplayed} numQuestions={numQuestions} setNumQuestions={setNumQuestions} search={search} />}
+      <div hidden={!expanded}>
+        <QuestionsList product={product} questions={questions} displayed={displayed} setDisplayed={setDisplayed} numQuestions={numQuestions} setNumQuestions={setNumQuestions} search={search} />
+      </div>
       <AddQuestion onClose={() => setShowAddQuestion(false)} showAddQuestion={showAddQuestion} product={product} />
     </div>
   );

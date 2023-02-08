@@ -6,7 +6,6 @@ function AnswersList({ question_id }) {
   const [allAnswers, setAllAnswers] = useState([]);
   const [numAnswers, setNumAnswers] = useState(2);
   const [displayed, setDisplayed] = useState([]);
-  // eslint-disable-next-line no-unused-vars
   const [page, setPage] = useState(1);
   const [count, setCount] = useState(100);
   function displayAnswer(answer) {
@@ -14,11 +13,8 @@ function AnswersList({ question_id }) {
   }
   useEffect(() => {
     if (question_id) {
-      axios({
-        url: `/db/answers/${question_id}?page=${page}&count=${count}`,
-        method: 'GET',
-      })
-        .then((response) => { setAllAnswers(response.data.results); });
+      axios.get(`/db/answers/${question_id}?page=${page}&count=${count}`)
+        .then((response) => { setAllAnswers(response.data.results); console.log("RESPONSE0", response) });
     }
   }, []);
   useEffect(() => {
@@ -46,7 +42,7 @@ function AnswersList({ question_id }) {
     <div>
       {displayed[0] && <span data-testid="answers-list-meow">A:</span>}
       {displayed}
-      {displayed.length < allAnswers.length && <button type="button" onClick={() => { setNumAnswers(allAnswers.length); }}>Show more answers</button>}
+      {displayed.length < allAnswers.length && <button type="button" data-testid='show-more-answers' onClick={() => { setNumAnswers(allAnswers.length); }}>Show more answers</button>}
       {displayed[0] && displayed.length > 2 && displayed.length === allAnswers.length && <button type="button" onClick={() => { setNumAnswers(2); }}>Collapse answers</button>}
     </div>
   );

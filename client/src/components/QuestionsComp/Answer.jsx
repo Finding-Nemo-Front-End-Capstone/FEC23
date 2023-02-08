@@ -12,7 +12,6 @@ function Answer({ answer, allAnswers, setAllAnswers }) {
   function reportAnswer(a) {
     setDisableReport(true);
     axios.put(`/db/reportanswer?answers_id=${a.answer_id}`)
-      // .then(() => { setAllAnswers(allAnswers.filter((x) => (a.answer_id !== x.answer_id))); })
       .catch((err) => { console.log('err reporting answer', err); });
   }
   function displayUsername() {

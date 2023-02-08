@@ -38,7 +38,7 @@ function QuestionsList({
   }, [numQuestions, filtered, questions]);
 
   return (
-    <div data-testid="question-list">
+    <div class="questions-list" data-testid="question-list">
       {displayed}
       {displayed.length < filtered.length && <button type="button" data-testid="show-more-questions" onClick={() => { setNumQuestions(numQuestions + 2); }}>Show more questions</button>}
     </div>
