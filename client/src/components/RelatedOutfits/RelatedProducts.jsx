@@ -11,12 +11,13 @@ function RelatedProducts({ id, product, setProduct, rating, currStyle }) {
   function arrowHandler(e) {
     e.preventDefault();
     let copy = currentIndex;
-    if (e.target.className === 'rightArrow') { copy += 1; }
     if (e.target.className === 'leftArrow') { copy -= 1; }
-    setCurrentIndex(copy);
+    if (e.target.className === 'rightArrow') { copy += 1; }
     setDisplay([copy, copy + 4 > relatedIds.length
       ? relatedIds.length
       : copy + 4]);
+    setCurrentIndex(copy);
+
   }
   async function getInfo(relId) {
     const endpoints = [
@@ -68,11 +69,11 @@ function RelatedProducts({ id, product, setProduct, rating, currStyle }) {
     <div className="RelatedOutfits">
       <h4 className="relatedProductsHeader">RELATED PRODUCTS</h4>
       <div className="modalPortal"/>
-      { currentIndex !== 0 && !relatedIds.length <= 3 ? <button onClick={arrowHandler} type="button" className="leftArrow">◀</button> : null }
+      { currentIndex !== 0 && relatedIds.length >= 3 ? <button onClick={arrowHandler} type="button" className="leftArrow">◀</button> : null }
       <div className="relatedContainer">
         {cards()}
       </div>
-      { currentIndex !== relatedIds.length - 3 && display[1] <= 4 ? <button onClick={arrowHandler} type="button" className="rightArrow">▶</button> : null }
+      { currentIndex !== relatedIds.length - 3 && relatedIds.length >= 3 ? <button onClick={arrowHandler} type="button" className="rightArrow">▶</button> : null }
       <br />
       <h4 className="outfitsHeader">YOUR OUTFIT</h4>
       <Outfits product={product} rating={rating} currStyle={currStyle} />
