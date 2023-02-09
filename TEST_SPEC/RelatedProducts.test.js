@@ -100,8 +100,8 @@ describe('Outfits component', () => {
     await act(async() => {
       await render (<Outfits product={exData.p40344} rating = {exData.r40344} currStyle={exData.s40344} />);
     });
-    expect(screen.queryByText('◀')).toBeNull();
-    expect(screen.queryByText('▶')).toBeNull();
+    expect(screen.queryByText('<')).toBeNull();
+    expect(screen.queryByText('>')).toBeNull();
   });
 
   test('Should add current product when "Add to my outfits" is clicked', async() => {

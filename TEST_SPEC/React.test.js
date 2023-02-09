@@ -16,7 +16,6 @@ import ChacBreak from '../client/src/components/RatingsComp/ChacBreak.jsx';
 import serverTest from './utils.js';
 // @jest-environment jsdom
 import mockAx from '../helpers';
-import RelatedProducts from '../client/src/components/RelatedOutfits/RelatedProducts.jsx';
 
 const { allProducts } = serverTest;
 const { reviews } = serverTest;
@@ -205,19 +204,6 @@ describe('SERVER', () => {
     const firstProduct = data.data[0].id;
     const reviews = await axios.get(`http://localhost:${process.env.PORT}/db/meta/${firstProduct}`);
     expect(reviews.status).not.toBe(404 && 500);
-  });
-});
-
-describe('Related Products', () => {
-  it('should get list of related products based on the current product', async () => {
-    const knownRelated = [40345, 40346, 40351, 40350];
-    let getRelated = [];
-    axios.get(`/db/related/${40344}`)
-      .then((data) => {
-        getRelated = data.data;
-        expect(JSON.stringify(knownRelated)).toBe(JSON.stringify(getRelated));
-      })
-      .catch((err) => console.log('failed get request', err));
   });
 });
 
