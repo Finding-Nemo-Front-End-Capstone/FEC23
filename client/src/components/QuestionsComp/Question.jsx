@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import AnswersList from './AnswersList.jsx';
+import AddAnswer from './AddAnswer.jsx';
 
-function Question({ question }) {
+function Question({ question, product }) {
   const [disableHelpful, setDisableHelpful] = useState(false);
   const [disableReport, setDisableReport] = useState(false);
   const [showAddAnswer, setShowAddAnswer] = useState(false);
@@ -37,11 +38,13 @@ function Question({ question }) {
             </button>
             <span className="button-feedback" id="helpfulness-score">{`(${question.question_helpfulness})`}</span>
             <span>|</span>
+            <button type="button" className="add-answer" onClick={() => { setShowAddAnswer(true); }}>Add Answer</button>
+            <span>|</span>
             {disableReport
               ? <span className="button-feedback" data-testid="report-question-button-feedback">Reported</span>
-              : <button type="button" data-testid="report-question-button" disabled={disableReport} onClick={() => { reportQuestion(question); }}>Report</button>}
-            <button type="button">Answer this question</button>
+              : <button type="button" className="report-button" data-testid="report-question-button" disabled={disableReport} onClick={() => { reportQuestion(question); }}>Report</button>}
             <AnswersList question_id={question.question_id} />
+            <AddAnswer onClose={() => setShowAddAnswer(false)} showAddAnswer={showAddAnswer} question={question} product={product} />
           </span>
         )}
     </div>

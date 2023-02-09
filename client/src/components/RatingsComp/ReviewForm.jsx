@@ -13,8 +13,9 @@ import Summary from './ReviewFormComp/Summary.jsx';
 import Body from './ReviewFormComp/Body.jsx';
 import ReviewPhoto from './ReviewFormComp/ReviewPhoto.jsx';
 
-
-function ReviewForm({ rating, setReviewForm, totalReview, setTotalReviews, setSort }) {
+function ReviewForm({
+  rating, setReviewForm, totalReview, setTotalReviews, setSort,
+}) {
   const [countStar, setCountStar] = useState(0);
   const [recommendStatus, setRecommendStatus] = useState(false);
   const [size, setSize] = useState('');
@@ -161,21 +162,21 @@ function ReviewForm({ rating, setReviewForm, totalReview, setTotalReviews, setSo
     params.recommend = recommendStatus;
     params.name = nickname;
     params.email = email;
-    params.photos =[];
+    params.photos = [];
     // console.log(params);
 
     Promise.all(imageFiles.map((eachFile) => {
       const formData = new FormData();
       formData.append('file', eachFile);
-      formData.append('upload_preset', 'o9exuyqa')
+      formData.append('upload_preset', 'o9exuyqa');
       // console.log(imageFiles)
-      return axios.post(`https://api.cloudinary.com/v1_1/dsiywf70i/image/upload`, formData)
+      return axios.post('https://api.cloudinary.com/v1_1/dsiywf70i/image/upload', formData)
         .then((res) => {
-          console.log('IneedTHIIIIIS', res.data.secure_url)
-          params.photos.push(res.data.secure_url)
-          console.log(params.photos)
-      })
-        .catch((err) => console.log(err))
+          console.log('IneedTHIIIIIS', res.data.secure_url);
+          params.photos.push(res.data.secure_url);
+          console.log(params.photos);
+        })
+        .catch((err) => console.log(err));
     }))
       .then(() => {
         axios.post('/db/review/post', params)
@@ -200,7 +201,7 @@ function ReviewForm({ rating, setReviewForm, totalReview, setTotalReviews, setSo
             setImageFiles([]);
           })
           .catch(() => console.log('error in posting review'));
-      }).catch((err) => console.log(err))
+      }).catch((err) => console.log(err));
   };
 
   return (

@@ -1,17 +1,20 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-plusplus */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import Question from './Question.jsx';
 
 function QuestionsList({
-  product, questions, displayed, setDisplayed, numQuestions, setNumQuestions, search,
+  product, questions, displayed, setDisplayed, numQuestions, setNumQuestions, search, filtered, setFiltered,
 }) {
-  const [filtered, setFiltered] = useState([]);
+  // const bottomRef = useRef(null);
+  // function handleButtonClick() {
+  //   bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+  // }
   function displayQuestion(question) {
     return (
       <div>
-        <Question question={question} />
+        <Question question={question} product={product} />
         <br />
       </div>
     );
@@ -38,9 +41,8 @@ function QuestionsList({
   }, [numQuestions, filtered, questions]);
 
   return (
-    <div class="questions-list" data-testid="question-list">
+    <div className="questions-list" data-testid="question-list">
       {displayed}
-      {displayed.length < filtered.length && <button type="button" data-testid="show-more-questions" onClick={() => { setNumQuestions(numQuestions + 2); }}>Show more questions</button>}
     </div>
   );
 }

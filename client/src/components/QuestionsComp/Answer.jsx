@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import AnswerPhotoEntry from './AnswerPhotoEntry.jsx';
 
 function Answer({ answer, allAnswers, setAllAnswers }) {
   const [disableHelpful, setDisableHelpful] = useState(false);
   const [disableReport, setDisableReport] = useState(false);
+  const [photoList, setPhotoList] = useState([]);
   function helpfulAnswer(a) {
     setDisableHelpful(true);
     axios.put(`/db/helpfulanswer?answers_id=${a.answer_id}`)
@@ -20,11 +22,22 @@ function Answer({ answer, allAnswers, setAllAnswers }) {
     }
     return answer.answerer_name;
   }
+  function formatDate(x) {
+    const date = new Date(x);
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const formattedDate = date.toLocaleDateString('en-US', options);
+    return formattedDate;
+  }
   return (
-    <div>
-      <li data-testid="answer-body">
+    <div className="answer">
+
+      <span className="answer-body" data-testid="answer-body">
         {answer.body}
-      </li>
+        <br />
+        {answer.photos.map((photo) => (
+          <AnswerPhotoEntry photo={photo} />
+        ))}
+      </span>
       <div>
         <span className="button-feedback">
           by
@@ -33,7 +46,7 @@ function Answer({ answer, allAnswers, setAllAnswers }) {
           {' '}
           on
           {' '}
-          {answer.date}
+          {formatDate(answer.date)}
         </span>
         <span>|</span>
         {disableHelpful

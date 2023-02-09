@@ -843,7 +843,7 @@ describe('Questions & Answers', () => {
   it('should not display question body after clicking collpase', async () => {
     const { getByTestId, queryByTestId } = render(<Questions product={product} />);
     fireEvent.click(queryByTestId('expand-collapse'));
-    expect(queryByTestId('question-list')).not.toBeInTheDocument();
+    expect(queryByTestId('question-list')).not.toBeVisible();
   });
 
   it('should see question list after clicking collapse/expand twice', async () => {

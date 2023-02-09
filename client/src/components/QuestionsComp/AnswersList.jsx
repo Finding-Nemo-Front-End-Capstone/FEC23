@@ -14,7 +14,7 @@ function AnswersList({ question_id }) {
   useEffect(() => {
     if (question_id) {
       axios.get(`/db/answers/${question_id}?page=${page}&count=${count}`)
-        .then((response) => { setAllAnswers(response.data.results); console.log("RESPONSE0", response) });
+        .then((response) => { setAllAnswers(response.data.results); });
     }
   }, []);
   useEffect(() => {
@@ -42,7 +42,7 @@ function AnswersList({ question_id }) {
     <div>
       {displayed[0] && <span data-testid="answers-list-meow">A:</span>}
       {displayed}
-      {displayed.length < allAnswers.length && <button type="button" data-testid='show-more-answers' onClick={() => { setNumAnswers(allAnswers.length); }}>Show more answers</button>}
+      {displayed.length < allAnswers.length && <button type="button" data-testid="show-more-answers" onClick={() => { setNumAnswers(allAnswers.length); }}>Show more answers</button>}
       {displayed[0] && displayed.length > 2 && displayed.length === allAnswers.length && <button type="button" onClick={() => { setNumAnswers(2); }}>Collapse answers</button>}
     </div>
   );

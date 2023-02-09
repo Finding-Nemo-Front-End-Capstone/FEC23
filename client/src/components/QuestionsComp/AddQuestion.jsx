@@ -17,11 +17,6 @@ function AddQuestion({ showAddQuestion, onClose, product }) {
     const { name } = e.target;
     const { value } = e.target;
     setInput({ ...input, product_id: product.id, [name]: value });
-    // if (name === 'email') {
-    //   console.log(value);
-    //   setValidEmail(validateEmail(value));
-    //   console.log('is the email valid', validEmail);
-    // }
   }
   function submitQuestion() {
     setValidEmail(validateEmail(input.email));
@@ -43,15 +38,15 @@ function AddQuestion({ showAddQuestion, onClose, product }) {
     let valid = true;
     const error = [];
     if (!input.name) {
-      error.push(<div className="form-error">Username is required</div>);
+      error.push(<div className="form-error">username is required</div>);
       valid = false;
     }
     if (!input.email) {
-      error.push(<div className="form-error">Email is required</div>);
+      error.push(<div className="form-error">email is required</div>);
       valid = false;
     }
     if (!input.body) {
-      error.push(<div className="form-error">Question is required</div>);
+      error.push(<div className="form-error">question is required</div>);
       valid = false;
     }
     setErrors(error);
@@ -78,7 +73,7 @@ function AddQuestion({ showAddQuestion, onClose, product }) {
             <div>
               <span>Email: </span>
               <input type="text" name="email" placeholder="Example: jack@email.com" maxLength="60" required onChange={(e) => handleChange(e)} />
-              {!validEmail && <span>Invalid Email</span>}
+              {!validEmail && <span id="email-error">invalid email</span>}
             </div>
             <div id="email-notice">For authentication reasons, you will not be emailed</div>
             <textarea type="text" name="body" placeholder="Question" maxLength="1000" rows="3" cols="50" required onChange={(e) => handleChange(e)} />
