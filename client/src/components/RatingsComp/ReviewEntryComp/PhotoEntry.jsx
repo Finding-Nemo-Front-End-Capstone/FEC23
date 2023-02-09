@@ -16,11 +16,11 @@ function PhotoEntry(props) {
   };
   return (
     <div className="divEachReviewPhoto">
-      <img className="eachReviewPhoto" src={props.photo.url} onClick={imgClick} />
+      <img className="eachReviewPhoto" src={props.photo.url} onClick={imgClick} data-testid="entryphoto" />
 
       {hugeimage
         && (
-        <div className="reviewForm" onClick={imgClick}>
+        <div className="reviewForm" onClick={imgClick} data-testid="entryphotoBig">
           <div className="overlay">
             <img src={props.photo.url} className="imgHuge" />
           </div>
