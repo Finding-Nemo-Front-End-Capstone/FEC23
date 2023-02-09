@@ -17,20 +17,21 @@ import ChacBreak from '../client/src/components/RatingsComp/ChacBreak.jsx';
 import serverTest from './utils.js';
 
 jest.mock('axios');
-beforeEach(jest.clearAllMocks);
+// beforeEach(jest.clearAllMocks);
 
 const dataResult = [
   {
     review_id: 4,
     rating: 4,
     summary: 'asdf4',
-    recommend: false,
+    recommend: true,
     response: ['hi this is admin'],
     reviewer_name: '4',
     photos: [],
     body: 'asdfa;lsdkflaksdlfklaskdlfkslkdlfklskdflksldkfdlfk',
     date: '2023-02-07T00:00:00.000Z',
     helpfulness: 4,
+    verify: true,
   },
   {
     review_id: 3,
@@ -39,7 +40,7 @@ const dataResult = [
     recommend: false,
     response: ['hi this is admin'],
     reviewer_name: '3',
-    photos: [],
+    photos: ['a'],
     body: 'asdfa;lsdkflaksdlfklaskdlfkslkdlfklskdflksldkfdlfk',
     date: '2023-02-07T00:00:00.000Z',
   },
@@ -51,7 +52,7 @@ const dataResult = [
     response: ['hi this is admin'],
     reviewer_name: '2',
     photos: [],
-    body: 'asdfa;lsdkflaksdlfklaskdlfkslkdlfklskdflksldkfdlfk',
+    body: 'asdfa;lsdkflaksdlfklaskdlfkasdfkasdkfjkasdjfkjaskdlfjlaksdjflkajsdflkajsdfkljaksdjflkajsdflajsdklfjalksdjfklajsdkfjslkdlfklskdflksldkfdlsdfnmansdf,mansdf,mansdmfn,asndfkasdlfkjaksdjfkjaskdjfkajsdkfjaksjdfkjaksdfjkajsdfjaksdjfkjasdjfasdjfalsdfasjdffkkasdkfjkajsdkfjalsjdfkjasdkjflajsdlfaksdjfkjasldfjaksdjfasdflasdjflaksdf',
     date: '2023-02-07T00:00:00.000Z',
   },
   {
@@ -106,11 +107,93 @@ const RatingData = {
 
 describe('Review Entry', () => {
   test('should show all comp through data pass', async () => {
-    axiosMock.get.mockResolvedValueOnce({ data: 'trythis' });
-    axiosMock.get.mockResolvedValueOnce({ data: 'trythis' });
+    axiosMock.get.mockResolvedValueOnce(mockData);
+    // axiosMock.get.mockResolvedValueOnce({ data: 'trythis' });
     await act(async () => {
       render(<Ratings rating={RatingData} />);
     });
     expect(axiosMock.get).toBeCalled();
+    expect(screen.queryByText(/asdf4/i)).toBeVisible();
   });
+
+  test('should show all comp through data pass', async () => {
+    axiosMock.get.mockResolvedValueOnce(mockData);
+    // axiosMock.get.mockResolvedValueOnce({ data: 'trythis' });
+    await act(async () => {
+      render(<Ratings rating={RatingData} />);
+    });
+    fireEvent.click(screen.queryByText('More Reviews'));
+    fireEvent.click(screen.queryByTestId('more3'));
+    expect(axiosMock.get).toBeCalled();
+    // expect(screen.queryByText(/asdf1/i)).toBeVisible();
+    expect(screen.queryByText(dataResult[2].body)).toBeVisible();
+  });
+
+  test('should show all comp through data pass', async () => {
+    axiosMock.get.mockResolvedValueOnce(mockData);
+    // axiosMock.get.mockResolvedValueOnce({ data: 'trythis' });
+    await act(async () => {
+      render(<Ratings rating={RatingData} />);
+    });
+    fireEvent.click(screen.queryByText('More Reviews'));
+    fireEvent.click(screen.queryByTestId('more3'));
+    expect(axiosMock.get).toBeCalled();
+    // expect(screen.queryByText(/asdf1/i)).toBeVisible();
+    expect(screen.queryByText(dataResult[2].body)).toBeVisible();
+    expect(screen.queryByTestId('verify1')).toBeVisible();
+    expect(screen.queryByTestId('recommend2')).not.toBeVisible();
+  });
+
+  test('should show all comp through data pass', async () => {
+    axiosMock.get.mockResolvedValueOnce(mockData);
+    // axiosMock.get.mockResolvedValueOnce({ data: 'trythis' });
+    await act(async () => {
+      render(<Ratings rating={RatingData} />);
+    });
+    fireEvent.click(screen.queryByText('More Reviews'));
+    fireEvent.click(screen.queryByTestId('more3'));
+    fireEvent.click(screen.queryByTestId('thumbdown1'));
+    expect(axiosMock.get).toBeCalled();
+    // expect(screen.queryByText(/asdf1/i)).toBeVisible();
+    expect(screen.queryByText(dataResult[2].body)).toBeVisible();
+    expect(screen.queryByTestId('verify1')).toBeVisible();
+    expect(screen.queryByTestId('recommend2')).not.toBeVisible();
+    expect(screen.queryByTestId('thanks1')).toBeVisible();
+  });
+
+  test('should show all comp through data pass', async () => {
+    axiosMock.get.mockResolvedValueOnce(mockData);
+    // axiosMock.get.mockResolvedValueOnce({ data: 'trythis' });
+    await act(async () => {
+      render(<Ratings rating={RatingData} />);
+    });
+    fireEvent.click(screen.queryByText('More Reviews'));
+    expect(axiosMock.get).toBeCalled();
+    fireEvent.click(screen.queryByTestId('entryphoto'));
+    expect(screen.queryByTestId('entryphotoBig')).toBeVisible();
+  });
+
+  // test('should show all comp through data pass', async () => {
+  //   axiosMock.get.mockResolvedValueOnce(mockData);
+  //   // axiosMock.get.mockResolvedValueOnce({ data: 'trythis' });
+  //   await act(async () => {
+  //     render(<Ratings rating={RatingData} />);
+  //   });
+  //   fireEvent.mouseEnter(screen.queryByTestId('bar-1'));
+  //   console.log('WANNNTTT TOOO', screen.container.getElementsByClassName('divMapReview'))
+  //   expect(screen.container.getElementsByClassName('divMapReview').length).toBe(2);
+  // });
+
+  // test('should show all comp through data pass', async () => {
+  //   axiosMock.get.mockResolvedValueOnce(mockData);
+  //   // axiosMock.get.mockResolvedValueOnce({ data: 'trythis' });
+  //   await act(async () => {
+  //     render(<Ratings rating={RatingData} />);
+  //   });
+  //   fireEvent.click(screen.queryByText('More Reviews'));
+  //   // fireEvent.click(screen.queryByText(/MORE.../i));
+  //   expect(axiosMock.get).toBeCalled();
+  //   expect(screen.queryByText(/MORE../i)).toBeVisible();
+  //   // expect(screen.queryByText(dataResult[2].body)).toBeInTheDocument();
+  // });
 });

@@ -46,7 +46,7 @@ function ReviewEntry(props) {
       setRecommend('');
     }
     if (props.review.photos[0]) {
-      console.log('photossss', props.review.photos)
+      // console.log('photossss', props.review.photos);
       setPhotoList(props.review.photos);
       setPhotoDisplay('none');
     } else {
@@ -108,7 +108,7 @@ function ReviewEntry(props) {
       <div className="userNameDate">
         {usernameDate}
         <br />
-        <span style={{ display: verified }}>(VERIFIED &#10003;)</span>
+        <span style={{ display: verified }} data-testid={`verify${props.moreTestid}`}>(VERIFIED &#10003;)</span>
       </div>
       <br />
       {photoList.map((photo) => (
@@ -119,27 +119,27 @@ function ReviewEntry(props) {
       <div className="summary">{props.review.summary}</div>
       <br />
       <div>{body}</div>
-      <button className="moreReviewsBody" style={{ display: moreBody }} onClick={moreBodyClick}>MORE...</button>
+      <button data-testid={`more${props.moreTestid}`} className="moreReviewsBody" style={{ display: moreBody }} onClick={moreBodyClick}>MORE...</button>
       <br />
-      <div className="recommend" style={{ display: recommend }}>
+      <div className="recommend" style={{ display: recommend }} data-testid={`recommend${props.moreTestid}`}>
         I recommend this product
         <i className="fa fa-check-circle" />
       </div>
       <br />
       {response.map((eachRes) => (
-        <ReviewResponse eachRes={eachRes} />
+        <ReviewResponse eachRes={eachRes} testId={props.moreTestId} />
       ))}
       <div className="helpfulDiv" style={{ display: helpfulSec }}>
         <text className="helpfulText">Was this review helpful?</text>
         <text className="helpfulnessCount">{`(${props.review.helpfulness})`}</text>
-        <button type="button" className="thumbUp" onClick={thumbUpClick}>
+        <button data-testid={`thumbup${props.moreTestid}`} type="button" className="thumbUp" onClick={thumbUpClick}>
           <i className="fa fa-thumbs-up" />
         </button>
-        <button type="button" className="thumbDown" onClick={thumbDownClick}>
+        <button data-testid={`thumbdown${props.moreTestid}`} type="button" className="thumbDown" onClick={thumbDownClick}>
           <i className="fa fa-thumbs-down" />
         </button>
       </div>
-      <text className="thanksHelpful" style={{ display: thanks }}>Thanks for the input!</text>
+      <text data-testid={`thanks${props.moreTestid}`} className="thanksHelpful" style={{ display: thanks }}>Thanks for the input!</text>
     </div>
   );
 }

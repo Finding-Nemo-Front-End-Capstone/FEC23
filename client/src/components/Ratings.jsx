@@ -21,8 +21,10 @@ function Ratings({
   const [reviewForm, setReviewForm] = useState(false);
   const [containFilter, setContainFilter] = useState([]);
 
+  let countTest = 0;
+
   useEffect(() => {
-    console.log('this is RATING', rating);
+    // console.log('this is RATING', rating);
     if (!containFilter[0]) {
       console.log('reviewist', reviewList);
       setReviewHolder(reviewList);
@@ -40,11 +42,12 @@ function Ratings({
   }, [containFilter]);
 
   useEffect(() => {
-    console.log('this is rating', rating);
+    // console.log('this is rating', rating);
     if (rating.product_id) {
       setTotalReviews(rating.recommended.true + rating.recommended.false);
       axios.get(`/db/reviews/${rating.product_id}/${sort}/${rating.recommended.true + rating.recommended.false}/1`)
         .then((data) => {
+          console.log('HOHO', data);
           if (sort === 'newest') {
             setReviewList(
               data.data.results.sort((a, b) => b.review_id - a.review_id),
@@ -152,7 +155,7 @@ function Ratings({
           <div className="dropdown">
             <label htmlFor="sort">
               Sort By:
-              <select name="sort" id="sort" onChange={sortChange} value={sort}>
+              <select data-testid="sort" name="sort" id="sort" onChange={sortChange} value={sort}>
                 <option value="newest">Newest</option>
                 <option value="relevant">Relevant</option>
                 <option value="helpful">Helpful</option>
@@ -166,10 +169,13 @@ function Ratings({
             aria-label="Loading Spinner"
             data-testid="loader"
           />
-          <div className="divMapReview">
-            {reviewDisplay.map((review) => (
-              <ReviewEntry review={review} />
-            ))}
+          <div className="divMapReview" data-testid="divMapReview">
+            {reviewDisplay.map((review) => {
+              countTest++;
+              return (
+                <ReviewEntry review={review} moreTestid={countTest} />
+              );
+            })}
             <button className="moreReviewBut" onClick={moreHandler} style={{ display: moreDisplay }}>More Reviews</button>
             <button className="writeReview" onClick={reviewFormBut}>Write Review</button>
             <div className="hello">{' '}</div>

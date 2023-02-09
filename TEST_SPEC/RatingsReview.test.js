@@ -603,6 +603,7 @@ describe('Ratings & Reviews', () => {
       fireEvent.change(queryByTestId('nickname'), { target: { value: 'jestTest' } });
       fireEvent.change(queryByTestId('email'), { target: { value: 'asd@asdf.asdf' } });
       fireEvent.change(queryByTestId('revbody'), { target: { value: 'asdfhajsdfjhajsdhfjhaksjdfjahsjdfhjashdjfhjsahdfjda' } });
+      fireEvent.click(queryByTestId('recommendinput'));
       fireEvent.click(queryByTestId('star2'));
       fireEvent.click(queryByTestId('radio11'));
       fireEvent.click(queryByTestId('radio3'));

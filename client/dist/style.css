@@ -341,7 +341,7 @@ body {
   right: 0;
   bottom: 0;
   position: fixed;
-  z-index: 10;
+  z-index: 11;
 }
 .overlay {
   background: rgba(49,49,49,0.8);
