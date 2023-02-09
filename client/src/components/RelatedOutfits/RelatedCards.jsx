@@ -3,7 +3,7 @@ import axios from 'axios';
 import Modal from './Modal.jsx';
 import RelatedStars from './RelatedStars.jsx';
 
-function RelatedCards({ relInfo, product, display }) {
+function RelatedCards({ relInfo, product, setProduct, display }) {
   const [cardInfo, setCardInfo] = useState({});
   const [showModal, setShowModal] = useState(false);
 
@@ -15,6 +15,11 @@ function RelatedCards({ relInfo, product, display }) {
     e.stopPropagation();
     e.preventDefault();
     setShowModal(!showModal);
+  }
+  function clickNav(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    setProduct({ id: cardInfo.id });
   }
   return (
     <div className="cardInfo">
@@ -29,7 +34,9 @@ function RelatedCards({ relInfo, product, display }) {
           ? <img className="previewImage" alt="" />
           : <img className="previewImage" src={cardInfo.thumbnail} alt="" />}
       </div>
-      <div className="cardDetails">
+      <div className="cardDetails" data-testid="cardDetails"
+      onClick={clickNav}
+      >
         <div className="relatedCatText">
           {cardInfo.category ? cardInfo.category.toUpperCase() : null}
         </div>

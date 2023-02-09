@@ -3,3 +3,5 @@ client/dist/bundle.js
 config.js
 .env
 coverage
+TEST_SPEC/coverage/
+
