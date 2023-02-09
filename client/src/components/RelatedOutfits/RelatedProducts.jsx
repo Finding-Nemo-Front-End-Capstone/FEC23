@@ -35,7 +35,6 @@ function RelatedProducts({ id, product, setProduct, rating, currStyle }) {
           res.features = prod.data.features;
           res.rating = ratings.data;
           res.thumbnail = styles.data.results[0].photos[0].thumbnail_url;
-          console.log({item : JSON.stringify(res)});
           return res;
         })
       )
@@ -68,6 +67,7 @@ function RelatedProducts({ id, product, setProduct, rating, currStyle }) {
   return (
     <div className="RelatedOutfits">
       <h4 className="relatedProductsHeader">RELATED PRODUCTS</h4>
+      <div className="modalPortal"/>
       { currentIndex !== 0 && !relatedIds.length <= 3 ? <button onClick={arrowHandler} type="button" className="leftArrow">◀</button> : null }
       <div className="relatedContainer">
         {cards()}

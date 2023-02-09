@@ -17,8 +17,8 @@ function App() {
   useEffect(() => {
     axios.get('/db/allProducts')
       .then((data) => {
-        setProduct(data.data[3]);
-        axios.get(`/db/${data.data[3].id}`)
+        setProduct(data.data[0]);
+        axios.get(`/db/${data.data[0].id}`)
           .then((info) => setProdInfo(info.data))
           .catch(() => console.log('product info did not work'));
       })
@@ -45,8 +45,8 @@ function App() {
         currPhotoIndex={currPhotoIndex}
         setCurrPhotoIndex={setCurrPhotoIndex}
       />
-      <Questions product={product} />
       <RelatedProducts id={product.id} product={prodInfo} rating={rating} currStyle={style} />
+      <Questions product={product} />
       <Ratings product={product} rating={rating} setProduct={setProduct} />
       <br />
     </div>
