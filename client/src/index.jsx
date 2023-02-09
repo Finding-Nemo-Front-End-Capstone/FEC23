@@ -33,7 +33,8 @@ function App() {
       axios.get(`db/styles/${product.id}`)
         .then((data) => { setStyle(data.data); })
         .catch((err) => { console.log('styles did not work'); });
-    }
+      setProdInfo(product);
+      }
   }, [product]);
 
   return (
@@ -45,7 +46,7 @@ function App() {
         currPhotoIndex={currPhotoIndex}
         setCurrPhotoIndex={setCurrPhotoIndex}
       />
-      <RelatedProducts id={product.id} product={prodInfo} rating={rating} currStyle={style} />
+      <RelatedProducts id={product.id} product={prodInfo} setProduct={setProduct} rating={rating} currStyle={style} />
       <Questions product={product} />
       <Ratings product={product} rating={rating} setProduct={setProduct} />
       <br />
@@ -54,4 +55,3 @@ function App() {
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
-// ReactDOM.createRoot()

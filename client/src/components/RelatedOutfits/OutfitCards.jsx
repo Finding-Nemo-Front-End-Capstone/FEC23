@@ -45,7 +45,9 @@ function OutfitCards({ product, saved, setHasCurrent, setSaved }) {
         <div className="outfitPriceText">
           ${cardInfo.price}
         </div>
-        {cardInfo.rating ? <RelatedStars rating={cardInfo.rating} /> : null}
+        <div className="starRating">
+          {cardInfo.rating ? <RelatedStars rating={cardInfo.rating} /> : null}
+        </div>
       </div>
     </div>
   );

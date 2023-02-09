@@ -17,8 +17,10 @@ function Outfits({ product, rating, currStyle }) {
   useEffect(() => {
     if (saved.some((item) => item.id === product.id)) {
       setHasCurrent(true);
+    } else {
+      setHasCurrent(false);
     }
-  }, [saved]);
+  }, [saved, product]);
   function createItem(info, rate, img) {
     const item = {
       id: info.id,
@@ -66,8 +68,8 @@ function Outfits({ product, rating, currStyle }) {
       { hasCurrent === false
         ? (
           <button type="submit" className="addOutfit" onClick={clickHandler}>
-            <h1>+</h1>
-            <br />
+            +
+            <br/>
             Add to my outfits
           </button>
         )

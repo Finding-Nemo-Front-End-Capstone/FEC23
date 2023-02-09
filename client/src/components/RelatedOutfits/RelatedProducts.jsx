@@ -46,15 +46,19 @@ function RelatedProducts({ id, product, setProduct, rating, currStyle }) {
     if (id) {
       axios.get(`/db/related/${id}`)
         .then(async (data) => {
-          setRelatedIds(await Promise.all(data.data.map((singleId) => getInfo(singleId))));
-          if (data.data.length > 4) { setDisplay([0, 4]); } else { setDisplay([0, data.data.length]); }
+          let unique = new Set(data.data);
+          unique.delete(id);
+          unique = Array.from(unique);
+          setRelatedIds(await Promise.all(unique.map((singleId) => getInfo(singleId))));
+          if (unique.length > 4) { setDisplay([0, 4]); } else { setDisplay([0, unique.length]); }
         })
         .catch(() => console.log('error with get all'));
       if (!localStorage.getItem('outfits')) {
         localStorage.setItem('outfits', JSON.stringify([]));
       }
+      console.log('this is product in relatedProducts.jsx', product, id);
     }
-  }, [id]);
+  }, [product, id]);
   function cards() {
     return (
       relatedIds.slice(display[0], display[1]).map((targetInfo) => (
