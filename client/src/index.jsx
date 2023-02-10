@@ -7,7 +7,6 @@ import Overview from './components/Overview/Overview.jsx';
 import Ratings from './components/Ratings.jsx';
 
 function App() {
-// const [productList, setProductList] = useState([]);
   const [product, setProduct] = useState({});
   const [prodInfo, setProdInfo] = useState({});
   const [rating, setRating] = useState({});
@@ -46,6 +45,7 @@ function App() {
         currPhotoIndex={currPhotoIndex}
         setCurrPhotoIndex={setCurrPhotoIndex}
       />
+      <RelatedProducts id={product.id} product={prodInfo} setProduct={setProduct} rating={rating} currStyle={style} />
       <Questions product={product} />
       <RelatedProducts id={product.id} product={prodInfo} rating={rating} currStyle={style} />
       <Ratings product={product} rating={rating} setProduct={setProduct} invoke={invoke} setInvoke={setInvoke} />
@@ -55,4 +55,3 @@ function App() {
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
-// ReactDOM.createRoot()

@@ -32,8 +32,8 @@ function OutfitCards({ product, saved, setHasCurrent, setSaved }) {
       </button>
       <div className="outfitImageContainer">
         {cardInfo.thumbnail === null
-          ? <img className="previewImage" alt="" />
-          : <img className="previewImage" src={cardInfo.thumbnail} alt="" />}
+          ? <img className="previewImage" alt="Image missing" />
+          : <img className="previewImage" src={cardInfo.thumbnail} alt="Image missing" />}
       </div>
       <div className="cardDetails">
         <div className="outfitCatText">
@@ -45,7 +45,9 @@ function OutfitCards({ product, saved, setHasCurrent, setSaved }) {
         <div className="outfitPriceText">
           ${cardInfo.price}
         </div>
-        {cardInfo.rating ? <RelatedStars rating={cardInfo.rating} /> : null}
+        <div className="starRating">
+          {cardInfo.rating ? <RelatedStars rating={cardInfo.rating} /> : null}
+        </div>
       </div>
     </div>
   );
