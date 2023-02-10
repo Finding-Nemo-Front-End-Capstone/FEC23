@@ -27,8 +27,7 @@ function RelatedCards({ relInfo, product, setProduct, display }) {
         ⭐
       </button>
       <Modal show={showModal} setShowModal={setShowModal} relFeat={relInfo.features}
-        relName={cardInfo.name} currFeat={product.features} currName={product.name}
-      />
+        relName={cardInfo.name} currFeat={product.features} currName={product.name} />
       <div className="relatedImageContainer">
         {cardInfo.thumbnail === null
           ? <img className="previewImage" alt="Image missing" />
