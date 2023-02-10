@@ -11,19 +11,16 @@ function RelatedProducts({ id, product, setProduct, rating, currStyle }) {
   function arrowHandler(e) {
     e.preventDefault();
     let copy = currentIndex;
-    if (e.target.className === 'rightArrow') { copy += 1; }
     if (e.target.className === 'leftArrow') { copy -= 1; }
-    setCurrentIndex(copy);
+    if (e.target.className === 'rightArrow') { copy += 1; }
     setDisplay([copy, copy + 4 > relatedIds.length
       ? relatedIds.length
       : copy + 4]);
+    setCurrentIndex(copy);
+
   }
   async function getInfo(relId) {
-    const endpoints = [
-      `db/styles/${relId}`,
-      `db/${relId}`,
-      `db/meta/${relId}`
-    ];
+    const endpoints = [`db/styles/${relId}`, `db/${relId}`, `db/meta/${relId}`];
     const obj = await Promise.all(endpoints.map((endpoint) => axios.get(endpoint)))
       .then(
         axios.spread((styles, prod, ratings) => {
@@ -45,15 +42,22 @@ function RelatedProducts({ id, product, setProduct, rating, currStyle }) {
     if (id) {
       axios.get(`/db/related/${id}`)
         .then(async (data) => {
-          setRelatedIds(await Promise.all(data.data.map((singleId) => getInfo(singleId))));
-          if (data.data.length > 4) { setDisplay([0, 4]); } else { setDisplay([0, data.data.length]); }
+          let unique = new Set(data.data);
+          unique.delete(id);
+          unique = Array.from(unique);
+          setRelatedIds(await Promise.all(unique.map((singleId) => getInfo(singleId))));
+          if (unique.length > 4) {
+            setDisplay([0, 4]);
+          } else {
+            setDisplay([0, unique.length]);
+          }
         })
         .catch(() => console.log('error with get all'));
       if (!localStorage.getItem('outfits')) {
         localStorage.setItem('outfits', JSON.stringify([]));
       }
     }
-  }, [id]);
+  }, [product, id]);
   function cards() {
     return (
       relatedIds.slice(display[0], display[1]).map((targetInfo) => (
@@ -67,11 +71,12 @@ function RelatedProducts({ id, product, setProduct, rating, currStyle }) {
   return (
     <div className="RelatedOutfits">
       <h4 className="relatedProductsHeader">RELATED PRODUCTS</h4>
-      { currentIndex !== 0 && !relatedIds.length <= 3 ? <button onClick={arrowHandler} type="button" className="leftArrow">◀</button> : null }
+      <div className="modalPortal"/>
+      { currentIndex !== 0 && relatedIds.length >= 3 ? <button onClick={arrowHandler} type="button" className="leftArrow">◀</button> : null }
       <div className="relatedContainer">
         {cards()}
       </div>
-      { currentIndex !== relatedIds.length - 3 && display[1] <= 4 ? <button onClick={arrowHandler} type="button" className="rightArrow">▶</button> : null }
+      { currentIndex !== relatedIds.length - 3 && relatedIds.length >= 3 ? <button onClick={arrowHandler} type="button" className="rightArrow">▶</button> : null }
       <br />
       <h4 className="outfitsHeader">YOUR OUTFIT</h4>
       <Outfits product={product} rating={rating} currStyle={currStyle} />
