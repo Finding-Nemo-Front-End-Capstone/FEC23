@@ -24,6 +24,7 @@ function ReviewEntry(props) {
   const [percentageRating, setPercentageRating] = useState('');
   const [verified, setVerified] = useState('none');
   const [check, setCheck] = useState('none');
+  const [idSubmit, setIdSubmit] = useState({})
 
   const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December',
@@ -37,6 +38,7 @@ function ReviewEntry(props) {
   useEffect(() => {
     console.log('this is review', props.review);
     const rate = props.review.rating;
+    setHelpfulSec('')
     setPercentageRating(`${JSON.stringify(rate / 5 * 100)}%`);
     if (props.review.body.length > 250) {
       setBody(props.review.body.slice(0, 250));
@@ -62,6 +64,9 @@ function ReviewEntry(props) {
       setVerified('');
       // this is setup for verification
     }
+    if (idSubmit[props.review.review_id]) {
+      setHelpfulSec(idSubmit[props.review.review_id])
+    }
   }, [props.review]);
 
   useEffect(() => {
@@ -70,6 +75,14 @@ function ReviewEntry(props) {
     }
   }, [recommend]);
 
+  useEffect(() => {
+    if (helpfulSec === 'none') {
+      setThanks('')
+    } else {
+      setThanks('none')
+    }
+  }, [helpfulSec])
+
   const moreBodyClick = (e) => {
     // handleClick()
     setBody(props.review.body);
@@ -77,17 +90,24 @@ function ReviewEntry(props) {
   };
   const thumbUpClick = (e) => {
     // handleClick()
+    console.log(props.review.review_id)
     axios.put(`/db/helpfulpost/${props.review.review_id}`)
       .then(() => {
         setHelpfulSec('none');
-        setThanks('');
+        let idSubmitCopy = idSubmit;
+        idSubmitCopy[props.review.review_id] = 'none'
+        setIdSubmit(idSubmitCopy)
+        // setThanks('');
       })
       .catch(() => { console.log('fail helpful'); });
   };
   const thumbDownClick = (e) => {
     // handleClick()
     setHelpfulSec('none');
-    setThanks('');
+    let idSubmitCopy = idSubmit;
+    idSubmitCopy[props.review.review_id] = 'none'
+    setIdSubmit(idSubmitCopy)
+    // setThanks('');
   };
 
   return (

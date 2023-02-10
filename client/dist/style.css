@@ -2,7 +2,7 @@
 /* Start of Britta's CSS */
 
 :root {
-  --bg: #f1faee;
+  --bg: #fffff;
 }
 
 .heading {
@@ -240,7 +240,10 @@ body {
   justify-content:center;
 }
 .modal-img {
-  width: 100%;
+  top: 0;
+  width: auto;
+  height:100%;
+  background-color: white;
   /* position: relative; */
 }
 .modal-img.zoomed {
@@ -276,8 +279,11 @@ figure:hover img {
 .close {
   position: absolute;
   right: 0;
+  top: 0;
   color: white;
+  background-color: #b3a394;
   font-size: 20px;
+  border-radius: 5px;
 }
 .read-all-reviews {
   text-decoration: underline;
@@ -327,8 +333,11 @@ figure:hover img {
   /* overflow: hidden; */
 }
 
-.on-sale {
+.strikethrough {
   text-decoration: line-through;
+}
+
+.red {
   color: red;
 }
 
@@ -340,14 +349,21 @@ figure:hover img {
 
 .cart-form select {
   margin: 1em;
-  height: 2.5em;
+  height: 3em;
+  padding-right: 10px;
+  padding-left: 10px;
+  border-radius: 8px;
+  background-color: white;
 }
 
 .cart-form button {
   /* display: flex; */
   margin: 1em;
-  background-color: white;
-  height: 2.5em;
+  padding-right: 10px;
+  padding-left: 10px;
+  height: 3em;
+  border-radius: 8px;
+  background-color: #b3a394;
 }
 
 /* End of Britta's CSS */
