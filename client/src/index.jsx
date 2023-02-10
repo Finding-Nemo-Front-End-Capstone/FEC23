@@ -39,19 +39,19 @@ export const ClickContext = createContext();
           .catch((err) => console.log(err));
       }, []);
 
-      useEffect(() => {
-        if (product.id) {
-          axios.get(`db/meta/${product.id}`)
-            .then((data) => { setRating(data.data); })
-            .catch((err) => { console.log('meta did not work'); });
-          axios.get(`db/styles/${product.id}`)
-            .then((data) => { setStyle(data.data); })
-            .catch((err) => { console.log('styles did not work'); });
-        }
-      }, [product, invoke]);
+  useEffect(() => {
+    if (product.id) {
+      setProdInfo(product);
+      axios.get(`db/meta/${product.id}`)
+        .then((data) => { setRating(data.data); })
+        .catch((err) => { console.log('meta did not work'); });
+      axios.get(`db/styles/${product.id}`)
+        .then((data) => { setStyle(data.data); })
+        .catch((err) => { console.log('styles did not work'); });
+    }
+  }, [product, invoke]);
 
       return (
-        // <ClickContext.Provider value={{clicks, handleClick}}
         <div onClick={handleClick} >
           <nav className="nav-bar">Nemos</nav>
           <Overview
@@ -61,13 +61,10 @@ export const ClickContext = createContext();
             setCurrPhotoIndex={setCurrPhotoIndex}
           />
           <Questions product={product} />
-          <RelatedProducts id={product.id} product={prodInfo} rating={rating} currStyle={style} />
+          <RelatedProducts id={product.id} product={prodInfo} setProduct={setProduct} rating={rating} currStyle={style} />
           <Ratings product={product} rating={rating} setProduct={setProduct} invoke={invoke} setInvoke={setInvoke} />
           <br />
         </div>
-        // </ClickContext.Provider>
       );
     }
-// )
-
 ReactDOM.render(<App />, document.getElementById('app'));

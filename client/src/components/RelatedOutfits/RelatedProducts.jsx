@@ -67,7 +67,6 @@ function RelatedProducts({ id, product, setProduct, rating, currStyle }) {
       ))
     );
   }
-
   return (
     <div className="RelatedOutfits">
       <h4 className="relatedProductsHeader">RELATED PRODUCTS</h4>
