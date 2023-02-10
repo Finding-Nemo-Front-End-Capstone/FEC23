@@ -93,8 +93,9 @@ function Gallery({ currStyle, currPhotoIndex, setCurrPhotoIndex }) {
         : null}
         <ul className="modal-radio">
           {thumbnails.map((photo, i) => {
-            return <input type="radio" name="img-selector" id={i}
-              onChange={() => setCurrPhotoIndex(i)}/>
+            return <i className="fa-duotone fa-circle" onChange={() => setCurrPhotoIndex(i)}></i>
+            // <input type="radio" name="img-selector" id={i}
+            //   onChange={() => setCurrPhotoIndex(i)}/>
           })}
         </ul>
         {currPhotoIndex !== currStyle.photos.length - 1

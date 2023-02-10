@@ -240,7 +240,10 @@ body {
   justify-content:center;
 }
 .modal-img {
-  width: 100%;
+  top: 0;
+  width: auto;
+  height:100%;
+  background-color: white;
   /* position: relative; */
 }
 .modal-img.zoomed {
@@ -269,16 +272,25 @@ figure:hover img {
   top: 0;
   /* justify-content: center; */
 }
+
+.fa-circle {
+  z-index: 100;
+  /* border: 2px solid red; */
+}
+
 .modal-buttons {
   /* display: flex; */
   border: 1px solid red;
 }
+
 .close {
   position: absolute;
   right: 0;
   top: 0;
   color: white;
+  background-color: #b3a394;
   font-size: 20px;
+  border-radius: 5px;
 }
 .read-all-reviews {
   text-decoration: underline;
