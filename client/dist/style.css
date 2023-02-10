@@ -342,7 +342,8 @@ body {
   -webkit-mask-image: linear-gradient(90deg, white, 90% ,transparent);
   scrollbar-width: None;
 }
-.relatedContainer::-webkit-scrollbar {
+.relatedContainer::-webkit-scrollbar,
+.outfitsContainer::-webkit-scrollbar {
   display: none;
 }
 .relatedCard, .outfitCard,
