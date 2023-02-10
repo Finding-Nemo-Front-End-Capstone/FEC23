@@ -10,6 +10,8 @@ function AnswersList({ question_id, triggerReload, product }) {
   const [count, setCount] = useState(100);
 
   function renderAnswer(answer) {
+
+  function renderAnswer(answer) {
     return (<Answer answer={answer} allAnswers={allAnswers} setAllAnswers={setAllAnswers} />);
   }
   useEffect(() => {

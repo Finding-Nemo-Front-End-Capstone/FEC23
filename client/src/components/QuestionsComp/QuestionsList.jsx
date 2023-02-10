@@ -39,7 +39,9 @@ function QuestionsList({
     setDisplayed(arr);
   }, [numQuestions, filtered, questions]);
 
+
   return (
+    <div className="questions-list" data-testid="question-list">
     <div className="questions-list" data-testid="question-list">
       {displayed}
       <div className="bottom-questions-list" ref={bottomRef} />
