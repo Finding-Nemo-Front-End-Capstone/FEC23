@@ -1,21 +1,23 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-plusplus */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import Question from './Question.jsx';
 
 function QuestionsList({
-  product, questions, displayed, setDisplayed, numQuestions, setNumQuestions, search,
+  product, questions, displayed, setDisplayed, numQuestions, setNumQuestions, search, filtered, setFiltered,
 }) {
+  // const bottomRef = useRef(null);
+  // function handleButtonClick() {
+  //   bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+  // }
   function displayQuestion(question) {
     return (
       <div>
-        <Question question={question} />
-        <br />
+        <Question question={question} product={product} />
       </div>
     );
   }
-  const [filtered, setFiltered] = useState([]);
   useEffect(() => {
     if (search.length > 2) {
       setFiltered(questions.filter((question) => (question.question_body.toLowerCase().includes(search))));
@@ -36,10 +38,10 @@ function QuestionsList({
     }
     setDisplayed(arr);
   }, [numQuestions, filtered, questions]);
+
   return (
-    <div>
+    <div className="questions-list" data-testid="question-list">
       {displayed}
-      {displayed.length < filtered.length && <button type="button" onClick={() => { setNumQuestions(numQuestions + 2); }}>Show more questions</button>}
     </div>
   );
 }

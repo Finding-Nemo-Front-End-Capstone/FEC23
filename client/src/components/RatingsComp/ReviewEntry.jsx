@@ -112,6 +112,7 @@ function ReviewEntry(props) {
       // setThanks('');
     })
     .catch(() => { console.log('fail helpful'); });
+
   };
 
   return (

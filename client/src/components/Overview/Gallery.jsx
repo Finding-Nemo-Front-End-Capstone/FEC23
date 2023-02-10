@@ -1,103 +1,155 @@
+/*eslint-disable*/
 import React, { useState, useEffect } from 'react';
 
-const Gallery = ({ product, currStyle, currPhotoIndex, setCurrPhotoIndex }) => {
-
+function Gallery({ currStyle, currPhotoIndex, setCurrPhotoIndex }) {
   const [mainPhoto, setMainPhoto] = useState(currStyle.photos[0].url);
-  const [slideIndex, setSlideIndex] = useState(1);
   const [modal, setModal] = useState(false);
   const [zoomed, setZoomed] = useState(false);
-  let slides = currStyle.photos;
+  const [firstThumIndex, setFirstThumIndex] = useState(0);
+  const [thumbnails, setThumbnails] = useState(currStyle.photos.slice(0, 7));
+  const [imageX, setImageX] = useState(0);
+  const [imageY, setImageY] = useState(0);
+
+  /*
+  first = 0
+  last = first + 7
+  thumbnails = currStyle.photos.slice(first, last);
+  */
 
   useEffect(() => {
-    setMainPhoto(currStyle.photos[currPhotoIndex].url)
-      // .then((data) => { console.log(data.data); })
-      // .catch((err) => { console.log('meta did not work'); });
+    setMainPhoto(currStyle.photos[currPhotoIndex].url);
+    setThumbnails(currStyle.photos.slice(0, 7))
   }, [currStyle]);
 
   useEffect(() => {
-    setMainPhoto(currStyle.photos[currPhotoIndex].url)
-  }, [currPhotoIndex])
+    setMainPhoto(currStyle.photos[currPhotoIndex + firstThumIndex].url);
+    console.log('index: ', currPhotoIndex)
+  }, [currPhotoIndex, firstThumIndex]);
 
-  function prevClick() {setCurrPhotoIndex(currPhotoIndex - 1)}
-  function nextClick() {setCurrPhotoIndex(currPhotoIndex + 1)}
-  function handleZoom() {setZoomed(!zoomed)}
-  // function zoom(e) {
-  //   var zoomer = e.currentTarget;
-  //   e.offsetX ? offsetX = e.offsetX : offsetX = e.touches[0].pageX
-  //   e.offsetY ? offsetY = e.offsetY : offsetX = e.touches[0].pageX
-  //   x = offsetX/zoomer.offsetWidth*100
-  //   y = offsetY/zoomer.offsetHeight*100
-  //   zoomer.style.backgroundPosition = x + '% ' + y + '%';
-  // }
+  useEffect(() => {
+    setThumbnails(currStyle.photos.slice(firstThumIndex, firstThumIndex + 7));
+  }, [firstThumIndex])
 
-  return(
+  function prevClick() {
+    if (currPhotoIndex === 0) {
+      // setCurrPhotoIndex(currPhotoIndex - 1);
+      prevThumClick();
+      setCurrPhotoIndex(0)
+    } else {
+
+      setCurrPhotoIndex(currPhotoIndex - 1);
+    }
+  }
+
+  function nextClick() {
+    console.log('index: ', currPhotoIndex)
+    // setFirstThumIndex(firstThumIndex + 1);
+
+    if (currPhotoIndex === 6) {
+      nextThumClick()
+      // setFirstThumIndex(firstThumIndex + 1);
+      setCurrPhotoIndex(6)
+    } else {
+
+      setCurrPhotoIndex(currPhotoIndex + 1);
+    }
+  }
+
+  function prevThumClick() {
+    setFirstThumIndex(firstThumIndex - 1);
+    setCurrPhotoIndex(currPhotoIndex + 1);
+  }
+  function nextThumClick() {
+    setFirstThumIndex(firstThumIndex + 1);
+    setCurrPhotoIndex(currPhotoIndex - 1);
+  }
+
+  function handleZoom() { setZoomed(!zoomed); }
+
+  useEffect(() => {
+    window.addEventListener('mousemove', handleMouseMove);
+    return (
+      () => {window.removeEventListener('mousemove', handleMouseMove)}
+    )
+  }, [zoomed])
+
+ // mainPhoto = src
+  function handleMouseMove(e) {
+    const { left, top, width, height } = e.target.getBoundingClientRect()
+    const x = (e.pageX - left) / width * 100
+    const y = (e.pageY - top) / height * 100
+    setImageX(x);
+    setImageY(y);
+  }
+
+
+
+  return (
     <>
       {modal && <div className="gallery-modal">
         <button className="close" onClick={() => setModal(!modal)}>X</button>
         {currPhotoIndex !== 0
-        ? <a className="prev modal" onClick={prevClick}>&#10094;</a>
+        ? <a className="prev modal-prev" onClick={prevClick}>&#10094;</a>
         : null}
         <ul className="modal-radio">
-          {slides.map((photo, i) => {
-            return <input type="radio" name="img-selector" id={i}
-              onChange={() => setCurrPhotoIndex(i)}/>
+          {thumbnails.map((photo, i) => {
+            return <i className="fa-duotone fa-circle" onChange={() => setCurrPhotoIndex(i)}></i>
+            // <input type="radio" name="img-selector" id={i}
+            //   onChange={() => setCurrPhotoIndex(i)}/>
           })}
         </ul>
-        {currPhotoIndex !== slides.length - 1
-        ? <a className="next modal" onClick={nextClick}>&#10095;</a>
+        {currPhotoIndex !== currStyle.photos.length - 1
+        ? <a className="next modal-next" onClick={nextClick}>&#10095;</a>
         : null}
          {zoomed
-         ? <img className="modal-img zoomed" /*onMouseMove={zoom}*/ src={mainPhoto} onClick={handleZoom}/>
+         ? <figure onMouseMove={handleMouseMove} onClick={handleZoom}
+         style={{backgroundImage: `url(${mainPhoto})`, backgroundPosition: `${imageX}% ${imageY}%`, backgroundSize: '250%' }}>
+           <img className="modal-img zoomed" src={mainPhoto} />
+          </figure>
          : <img className="modal-img" src={mainPhoto} onClick={handleZoom}/>}
       </div>}
 
       <div className="gallery-wrap">
-          {currPhotoIndex !== 0
-          ? <a className="prev" onClick={prevClick}>&#10094;</a>
+
+        {currPhotoIndex !== 0
+        ? <a className="prev main-prev" onClick={prevClick}>&#10094;</a>
+        : null}
+        <img className="main-photo" data-testid="main" src={mainPhoto}
+        onClick={() => setModal(!modal)}/>
+        {currPhotoIndex !== currStyle.photos.length - 1
+        ? <a className="next main-next" onClick={nextClick}>&#10095;</a>
+        : null}
+
+        <div className="thumbnail-wrap">
+          {firstThumIndex > 0
+          ? <a className="prev thum-prev" onClick={prevThumClick}>&#10224;</a>
           : null}
-          <img className="main-photo" src={mainPhoto}
-          onClick={() => setModal(!modal)}/>
-          {currPhotoIndex !== slides.length - 1
-          ? <a className="next" onClick={nextClick}>&#10095;</a>
+
+            {thumbnails.map((photo, i) => {
+              return (
+                <div className="thumbnail-ribbon">
+                  <img className={ (currPhotoIndex === i)
+                  ? "thumbnail selected" : "thumbnail"}
+                  data-testid={currPhotoIndex === i ? "thumbnail" : null}
+                  src={photo.thumbnail_url} key={photo.url} index={i}
+                  onClick={() => {
+                    setCurrPhotoIndex(i);
+                    // console.log('i: ', i)
+                    // console.log('first thum index: ', firstThumIndex)
+                    // console.log('curr photo index: ', currPhotoIndex)
+                  }}/>
+                </div>
+              )
+            })}
+
+          {(firstThumIndex + 7) < (currStyle.photos.length)
+          ? <a className="next thum-next" onClick={nextThumClick}>&#10225;</a>
           : null}
-        <div className="gallery-ribbon">
-          {slides.map((photo, i) => {
-            return (
-              <>
-                <img className={currPhotoIndex === i ? "gallery-photo selected" : "gallery-photo"}
-                src={photo.thumbnail_url} key={photo.url} index={i}
-                onClick={() => {
-                  setMainPhoto(currStyle.photos[i].url);
-                  setCurrPhotoIndex(i);
-                }}/>
-              </>
-            )
-          })}
         </div>
+
       </div>
     </>
-  )
+  );
 }
 
 export default Gallery;
-
-// onclick="plusSlides(1)"
-
-
-
-  // const handleOpenModal = (index) => {
-  //   setSlideNumer(index);
-  //   setOpenModal(true);
-  // }
-  // {openModal &&
-  //   <div className="slider-wrap">
-  //     {/* <FontAwesomeIcon icon={faCircleXmark} className="btnClose"/> */}
-  //     {/* <FontAwesomeIcon icon={faCircleChevronLeft} className="btnPrev"/> */}
-  //     <i class="fal fa-times-circle"></i>
-  //     <i class="fas fa-chevron-left"></i>
-  //     <i class="fas fa-chevron-right"></i>
-  //     <div>
-  //       <img src={gallerPhotos[slideNumber]} />
-  //     </div>
-  //   </div>
-  // }

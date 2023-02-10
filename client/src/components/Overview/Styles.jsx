@@ -9,7 +9,7 @@ const Styles = ({ styles, currStyle, setCurrStyle }) => {
           {styles.map((style, i) => {
             return (
               <span>
-                <img src={style.photos[0].thumbnail_url} key={style.style_id} index={i}
+                <img src={style.photos[0].thumbnail_url} key={style.style_id} index={i} data-testid="style"
                 onClick={e => {setCurrStyle(styles[e.target.getAttribute('index')])}}/>
                 {currStyle === styles[i] ? <i className="fa fa-check-circle"></i> : null }
               </span>

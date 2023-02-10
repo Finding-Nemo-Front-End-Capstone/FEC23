@@ -7,8 +7,8 @@ function Search({
     setSearch(e.target.value.toLowerCase());
   }
   return (
-    <div>
-      <input type="text" placeholder="Have a question? Search for answers…" onChange={(e) => { handleChange(e); }} />
+    <div className="div-answers-search-bar">
+      <input type="text" className="answers-search-bar" placeholder="Have a question? Search for answers…" onChange={(e) => { handleChange(e); }} />
     </div>
   );
 }

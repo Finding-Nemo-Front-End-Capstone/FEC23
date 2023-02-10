@@ -18,7 +18,7 @@ function Social() {
       <i className="fa fa-twitter-square" onClick={clickTwitter} />
       <i className="fa fa-pinterest-square" onClick={clickPinterest} />
     </div>
-  )
+  );
 }
 
 export default Social;
