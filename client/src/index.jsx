@@ -9,7 +9,6 @@ import Ratings from './components/Ratings.jsx';
 
 export const ClickContext = createContext();
 
-
 // withClickTracking (
   function App() {
     // const [productList, setProductList] = useState([]);
@@ -71,6 +70,4 @@ export const ClickContext = createContext();
     }
 // )
 
-
 ReactDOM.render(<App />, document.getElementById('app'));
-// ReactDOM.createRoot()

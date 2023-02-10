@@ -12,7 +12,8 @@
     "coveragePathIgnorePatterns": [
       "node_modules",
       "coverage",
-      "exampleData"
+      "exampleData",
+      "helpers"
     ],
     "coverageDirectory": "<rootDir>/TEST_SPEC/coverage",
     "verbose": false,
