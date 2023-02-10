@@ -10,7 +10,6 @@ import Ratings from './components/Ratings.jsx';
 export const ClickContext = createContext();
 
 function App() {
-// const [productList, setProductList] = useState([]);
   const [product, setProduct] = useState({});
   const [prodInfo, setProdInfo] = useState({});
   const [rating, setRating] = useState({});
