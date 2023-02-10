@@ -24,7 +24,7 @@ function QuestionsList({
     } else {
       setFiltered(questions);
     }
-  }, [search, questions, product]); // product was here
+  }, [search, questions]); // product was here
   useEffect(() => {
     const arr = [];
     if (filtered[0] && filtered.length > numQuestions) {
@@ -37,7 +37,7 @@ function QuestionsList({
       }
     }
     setDisplayed(arr);
-  }, [numQuestions, filtered, questions]);
+  }, [numQuestions, filtered]);
 
 
   return (

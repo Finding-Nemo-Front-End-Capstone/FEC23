@@ -18,7 +18,7 @@ function AnswersList({ question_id, triggerReload, product }) {
         .then((response) => { setAllAnswers(response.data.results); })
         .catch((err) => { console.log(err, 'from answerlist axios'); });
     }
-  }, [triggerReload, product]); //product was here
+  }, [triggerReload, question_id]);
   useEffect(() => {
     console.log(allAnswers, 'This should change after each submit');
     const sorted = [...allAnswers].sort((a, b) => {

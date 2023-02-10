@@ -20,34 +20,40 @@ function Question({ question, product }) {
   }
   return (
     <div data-testid="question" className="question">
-      Q:
-      {' '}
-      {question.question_body}
-      {disableHelpful
-        ? <span className="button-feedback" data-testid="helpful-question-button-feedback">Thanks for the feedback</span>
-        : (
-          <span className="question-feedback">
-            <span>Helpful?</span>
-            <button
-              type="button"
-              className="helpful-button"
-              data-testid="helpful-question-button"
-              disabled={disableHelpful}
-              onClick={() => { helpfulQuestion(question); }}
-            >
-              <u>Yes</u>
-            </button>
-            <span className="button-feedback" id="helpfulness-score">{`(${question.question_helpfulness})`}</span>
-            <span>|</span>
-            <button type="button" className="add-answer" onClick={() => { setShowAddAnswer(true); }}>Add Answer</button>
-            <span>|</span>
-            {disableReport
-              ? <span className="button-feedback" data-testid="report-question-button-feedback">Reported</span>
-              : <button type="button" className="report-button" data-testid="report-question-button" disabled={disableReport} onClick={() => { reportQuestion(question); }}>Report</button>}
-            <AnswersList question_id={question.question_id} product={product} triggerReload={triggerReload} />
-            <AddAnswer onClose={() => setShowAddAnswer(false)} showAddAnswer={showAddAnswer} question={question} product={product} triggerReload={triggerReload} setTriggerReload={setTriggerReload} />
-          </span>
-        )}
+      <div className="question-title">
+        Q:
+        {' '}
+        <span className="question-body">{question.question_body}</span>
+        <div id="question-feedback">
+          {disableHelpful
+            ? <span className="button-feedback" data-testid="helpful-question-button-feedback">Thanks for the feedback</span>
+            : (
+              <span className="question-feedback">
+                <span>Helpful?</span>
+                <button
+                  type="button"
+                  className="helpful-button"
+                  data-testid="helpful-question-button"
+                  disabled={disableHelpful}
+                  onClick={() => { helpfulQuestion(question); }}
+                >
+                  <u>Yes</u>
+                </button>
+                <span className="button-feedback" id="helpfulness-score">{`(${question.question_helpfulness})`}</span>
+              </span>
+            )}
+          <span>|</span>
+          <button type="button" className="add-answer" onClick={() => { setShowAddAnswer(true); }}>Add Answer</button>
+          <span>|</span>
+          {disableReport
+            ? <span className="button-feedback" data-testid="report-question-button-feedback">Reported</span>
+            : <button type="button" className="report-button" data-testid="report-question-button" disabled={disableReport} onClick={() => { reportQuestion(question); }}>Report</button>}
+
+        </div>
+      </div>
+
+      <AnswersList question_id={question.question_id} product={product} triggerReload={triggerReload} />
+      <AddAnswer onClose={() => setShowAddAnswer(false)} showAddAnswer={showAddAnswer} question={question} product={product} triggerReload={triggerReload} setTriggerReload={setTriggerReload} />
     </div>
   );
 }
