@@ -2,22 +2,25 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Answer from './Answer.jsx';
 
-function AnswersList({ question_id }) {
+function AnswersList({ question_id, triggerReload }) {
   const [allAnswers, setAllAnswers] = useState([]);
   const [numAnswers, setNumAnswers] = useState(2);
   const [displayed, setDisplayed] = useState([]);
   const [page, setPage] = useState(1);
   const [count, setCount] = useState(100);
-  function displayAnswer(answer) {
+
+  function renderAnswer(answer) {
     return (<Answer answer={answer} allAnswers={allAnswers} setAllAnswers={setAllAnswers} />);
   }
   useEffect(() => {
     if (question_id) {
       axios.get(`/db/answers/${question_id}?page=${page}&count=${count}`)
-        .then((response) => { setAllAnswers(response.data.results); });
+        .then((response) => { setAllAnswers(response.data.results); })
+        .catch((err) => { console.log(err, 'from answerlist axios'); });
     }
-  }, []);
+  }, [triggerReload]);
   useEffect(() => {
+    console.log(allAnswers, 'This should change after each submit');
     const sorted = [...allAnswers].sort((a, b) => {
       if (a.answerer_name.toLowerCase() === 'seller') {
         return -1;
@@ -29,11 +32,11 @@ function AnswersList({ question_id }) {
     const arr = [];
     if (sorted[0] && sorted.length < numAnswers) {
       for (let i = 0; i < sorted.length; i++) {
-        arr.push(displayAnswer(sorted[i]));
+        arr.push(renderAnswer(sorted[i]));
       }
     } else if (sorted[0]) {
       for (let i = 0; i < numAnswers; i++) {
-        arr.push(displayAnswer(sorted[i]));
+        arr.push(renderAnswer(sorted[i]));
       }
     }
     setDisplayed(arr);

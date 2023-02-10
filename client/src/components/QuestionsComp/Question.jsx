@@ -7,6 +7,7 @@ function Question({ question, product }) {
   const [disableHelpful, setDisableHelpful] = useState(false);
   const [disableReport, setDisableReport] = useState(false);
   const [showAddAnswer, setShowAddAnswer] = useState(false);
+  const [triggerReload, setTriggerReload] = useState(true);
   function helpfulQuestion(q) {
     setDisableHelpful(true);
     axios.put(`/db/helpfulquestion?question_id=${q.question_id}`)
@@ -43,8 +44,8 @@ function Question({ question, product }) {
             {disableReport
               ? <span className="button-feedback" data-testid="report-question-button-feedback">Reported</span>
               : <button type="button" className="report-button" data-testid="report-question-button" disabled={disableReport} onClick={() => { reportQuestion(question); }}>Report</button>}
-            <AnswersList question_id={question.question_id} />
-            <AddAnswer onClose={() => setShowAddAnswer(false)} showAddAnswer={showAddAnswer} question={question} product={product} />
+            <AnswersList question_id={question.question_id} triggerReload={triggerReload} />
+            <AddAnswer onClose={() => setShowAddAnswer(false)} showAddAnswer={showAddAnswer} question={question} product={product} triggerReload={triggerReload} setTriggerReload={setTriggerReload} />
           </span>
         )}
     </div>

@@ -3,7 +3,7 @@ import axios from 'axios';
 import AddAnswerPhoto from './AddAnswerPhoto.jsx';
 
 function AddAnswer({
-  showAddAnswer, onClose, question, product,
+  showAddAnswer, onClose, question, product, triggerReload, setTriggerReload,
 }) {
   const [input, setInput] = useState({});
   const [formIsValid, setFormIsValid] = useState(true);
@@ -50,6 +50,7 @@ function AddAnswer({
             setErrors([]);
             setFormIsValid(true);
             setInput({});
+            setTriggerReload(!triggerReload);
           })
           .catch((err) => { console.log('error adding question', err); });
       });
@@ -113,7 +114,7 @@ function AddAnswer({
         <div className="add-answer-footer">
           {!formIsValid && <div>{errors}</div>}
           <button type="button" onClick={() => { onClose(); setErrors([]); setFormIsValid(true); setInput({}); }}>Cancel</button>
-          <button type="button" onClick={handleValidation}>Submit</button>
+          <button type="button" onClick={() => { handleValidation(); }}>Submit</button>
         </div>
       </div>
     </div>

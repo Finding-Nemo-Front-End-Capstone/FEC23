@@ -4,6 +4,7 @@ function AddAnswerPhotoEntry({
   image, imageUrls, setImageUrls, setChooseFile,
 }) {
   const removeUploadPic = (e) => {
+    console.log('even', e);
     const updateImageList = [];
     console.log(imageUrls);
     for (let i = 0; i < imageUrls.length; i++) {

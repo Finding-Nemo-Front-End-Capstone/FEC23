@@ -30,7 +30,7 @@ function AddAnswerPhoto({
       <label>
         Upload photos:
         {' '}
-        <input onSubmit={submitPhoto} id="files" type="file" className="reviewUploadPhoto" onChange={submitPhoto} style={{ display: chooseFile }} title="work" />
+        <input id="files" type="file" className="reviewUploadPhoto" onChange={submitPhoto} style={{ display: chooseFile }} title="work" />
         <div className="review-photo">
           {imageUrls.map((image) => <AddAnswerPhotoEntry image={image} imageUrls={imageUrls} setImageUrls={setImageUrls} setChooseFile={setChooseFile} />)}
         </div>
