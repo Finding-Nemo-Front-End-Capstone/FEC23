@@ -27,6 +27,7 @@ function App() {
 
   useEffect(() => {
     if (product.id) {
+      setProdInfo(product);
       axios.get(`db/meta/${product.id}`)
         .then((data) => { setRating(data.data); })
         .catch((err) => { console.log('meta did not work'); });
@@ -47,7 +48,6 @@ function App() {
       />
       <RelatedProducts id={product.id} product={prodInfo} setProduct={setProduct} rating={rating} currStyle={style} />
       <Questions product={product} />
-      <RelatedProducts id={product.id} product={prodInfo} rating={rating} currStyle={style} />
       <Ratings product={product} rating={rating} setProduct={setProduct} invoke={invoke} setInvoke={setInvoke} />
       <br />
     </div>
