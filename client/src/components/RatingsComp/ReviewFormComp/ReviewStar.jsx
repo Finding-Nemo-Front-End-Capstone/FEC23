@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function ReviewStar({setCountStar, countStar}) {
+function ReviewStar({ setCountStar, countStar }) {
   const unclick = 'fa fa-star';
   const clicked = 'fa fa-star checked';
   const [star1, setStar1] = useState(unclick);
@@ -90,12 +90,12 @@ function ReviewStar({setCountStar, countStar}) {
     <div>
       <div className="reviewFormStarRating">
         <text>Rating: </text>
-        <span id="star1" className={star1} onClick={starClick} />
-        <span id="star2" className={star2} onClick={starClick} />
-        <span id="star3" className={star3} onClick={starClick} />
-        <span id="star4" className={star4} onClick={starClick} />
-        <span id="star5" className={star5} onClick={starClick} />
-        <text>{starDef}</text>
+        <span id="star1" data-testid="star1" className={star1} onClick={starClick} />
+        <span id="star2" data-testid="star2" className={star2} onClick={starClick} />
+        <span id="star3" data-testid="star3" className={star3} onClick={starClick} />
+        <span id="star4" data-testid="star4" className={star4} onClick={starClick} />
+        <span id="star5" data-testid="star5" className={star5} onClick={starClick} />
+        <text data-testid="starDef">{starDef}</text>
       </div>
     </div>
   );

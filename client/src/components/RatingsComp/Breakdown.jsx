@@ -177,7 +177,7 @@ function Breakdown({ rating, reviewFilter }) {
           <br />
           <button name="5" className="eachBarBreakdown" onClick={click5} style={{ cursor: 'pointer', color: hoverColor5 }} onMouseEnter={hoverOn5} onMouseLeave={hoverOn5}>
             <div className="side">
-              <div>5 star</div>
+              <div>5 stars</div>
             </div>
             <div className="middle">
               <div className="bar-container">
@@ -191,7 +191,7 @@ function Breakdown({ rating, reviewFilter }) {
           <br />
           <button className="eachBarBreakdown" onClick={click4} style={{ cursor: 'pointer', color: hoverColor4 }} onMouseEnter={hoverOn4} onMouseLeave={hoverOn4}>
             <div className="side">
-              <div>4 star</div>
+              <div>4 stars</div>
             </div>
             <div className="middle">
               <div className="bar-container">
@@ -205,7 +205,7 @@ function Breakdown({ rating, reviewFilter }) {
           <br />
           <button className="eachBarBreakdown" onClick={click3} style={{ cursor: 'pointer', color: hoverColor3 }} onMouseEnter={hoverOn3} onMouseLeave={hoverOn3}>
             <div className="side">
-              <div>3 star</div>
+              <div>3 stars</div>
             </div>
             <div className="middle">
               <div className="bar-container">
@@ -219,7 +219,7 @@ function Breakdown({ rating, reviewFilter }) {
           <br />
           <button className="eachBarBreakdown" onClick={click2} style={{ cursor: 'pointer', color: hoverColor2 }} onMouseEnter={hoverOn2} onMouseLeave={hoverOn2}>
             <div className="side">
-              <div>2 star</div>
+              <div>2 stars</div>
             </div>
             <div className="middle">
               <div className="bar-container">
@@ -233,7 +233,7 @@ function Breakdown({ rating, reviewFilter }) {
           <br />
           <button data-testid="eachBarBreakdown" className="eachBarBreakdown" onClick={click1} style={{ cursor: 'pointer', color: hoverColor1 }} onMouseEnter={hoverOn1} onMouseLeave={hoverOn1}>
             <div className="side">
-              <div>1 star</div>
+              <div>1 stars</div>
             </div>
             <div className="middle">
               <div className="bar-container">

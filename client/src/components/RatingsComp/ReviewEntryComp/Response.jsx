@@ -10,7 +10,7 @@ import React, { useState, useEffect } from 'react';
 function ReviewResponse({eachRes}) {
   return (
     <div>
-      <text>response from seller:  </text>
+      <text>Response from seller:  </text>
       <text className="adminResponse">{eachRes}</text>
     </div>
   );
