@@ -11,7 +11,6 @@ const headers = {
 module.exports = {
 
   getReviewById(req, res) {
-    console.log('test', req.params);
     helpers.getReviews(req.params)
       .then((data) => { res.header(headers); res.status(200).send(data.data); })
       .catch((err) => {
