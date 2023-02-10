@@ -5,20 +5,19 @@ function CartForm({ currStyle }) {
   const [currSize, setCurrSize] = useState('select-size');
   const [currQty, setCurrQty] = useState(0);
   const [selectedQty, setSelectedQty] = useState(0);
-  const [warning, setWarning] = useState(false);
+  const [noWarning, setNoWarning] = useState(true);
 
   const values = Object.values(currStyle.skus);
 
   function handleSize(e) { setCurrSize(e.target.value); }
   function handleQty(e) { setSelectedQty(e.target.value); }
 
-  console.log('size', currSize)
-
   useEffect(() => {
     for (let i = 0; i < values.length; i++) {
-      if (currSize === 'select-size') {
-        setCurrQty(0);
-      } else if (values[i].size === currSize) {
+      // if (currSize === 'select-size') {
+      //   setCurrQty(0);
+      // } else
+      if (values[i].size === currSize) {
         setCurrQty(values[i].quantity);
       }
     }
@@ -34,21 +33,22 @@ function CartForm({ currStyle }) {
     return options;
   }
 
-  function handleClick() {
+  const { skus } = currStyle;
+  let sku;
+  for (const key in skus) {
+    if (skus[key].size === currSize) {
+      sku = key;
+    }
+  }
+
+  function handleClick(e) {
+    e.preventDefault();
     if (currSize === 'select-size') {
       // const x = document.getElementById("size");
       // x.size = x.options.length;
-      setWarning(true);
+      setNoWarning(false);
     } else {
-      setWarning(false);
-      const { skus } = currStyle;
-      let sku;
-      for (const key in skus) {
-        if (skus[key].size === currSize) {
-          sku = key;
-        }
-      }
-
+      setNoWarning(true);
       for (let i = 1; i <= selectedQty; i++) {
         axios.post('/db/cart', { sku_id: sku })
           .then((response) => { console.log(response); })
@@ -59,7 +59,8 @@ function CartForm({ currStyle }) {
 
   return (
     <form className="cart-form">
-      {warning ? <p style={{color: 'red'}}>Please select size</p> : null}
+      {/* {warning ? <p style={{color: 'red'}}>Please select size</p> : null} */}
+      <p style={{color: 'red'}} hidden={noWarning}>Please select size</p>
       <select className="size-list" data-testid="select-size" id="sizes" value={currSize} onChange={handleSize}>
         <option value="select-size">SELECT SIZE</option>
         {values.map((sku, i) => <option data-testid="size" key={i} value={sku.size}>{sku.size}</option>)}
@@ -69,7 +70,7 @@ function CartForm({ currStyle }) {
           ? quantities(currQty)
           : <option value="select-qty">-</option>}
       </select>
-      <button data-testid="bag" onClick={handleClick}>ADD TO BAG</button>
+      <button data-testid="bag" onClick={(e) => handleClick(e)}>ADD TO BAG</button>
       <button>☆</button>
     </form>
 

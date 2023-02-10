@@ -54,7 +54,7 @@ function Overview({
           </div>
         </div>
         <div className="prod-description">
-          <p className="slogan">{product.slogan}.</p>
+          <p className="slogan">{product.slogan}</p>
           <p>{product.description}</p>
         </div>
       </div>
