@@ -9,7 +9,6 @@ import Ratings from './components/Ratings.jsx';
 
 export const ClickContext = createContext();
 
-
 function App() {
 // const [productList, setProductList] = useState([]);
   const [product, setProduct] = useState({});
@@ -51,21 +50,21 @@ function App() {
     }
   }, [product, invoke]);
 
-  return (
-    <div onClick={handleClick} >
-      <nav className="nav-bar">Nemos</nav>
-      <Overview
-        product={product}
-        rating={rating}
-        currPhotoIndex={currPhotoIndex}
-        setCurrPhotoIndex={setCurrPhotoIndex}
-      />
-      <Questions product={product} />
-      <RelatedProducts id={product.id} product={prodInfo} setProduct={setProduct} rating={rating} currStyle={style} />
-      <Ratings product={product} rating={rating} setProduct={setProduct} invoke={invoke} setInvoke={setInvoke} />
-      <br />
-    </div>
-  );
-}
+      return (
+        <div onClick={handleClick} >
+          <nav className="nav-bar">Nemos</nav>
+          <Overview
+            product={product}
+            rating={rating}
+            currPhotoIndex={currPhotoIndex}
+            setCurrPhotoIndex={setCurrPhotoIndex}
+          />
+          <Questions product={product} />
+          <RelatedProducts id={product.id} product={prodInfo} setProduct={setProduct} rating={rating} currStyle={style} />
+          <Ratings product={product} rating={rating} setProduct={setProduct} invoke={invoke} setInvoke={setInvoke} />
+          <br />
+        </div>
+      );
+    }
 
 ReactDOM.render(<App />, document.getElementById('app'));

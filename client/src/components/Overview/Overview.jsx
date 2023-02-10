@@ -45,7 +45,7 @@ function Overview({ product, rating, currPhotoIndex, setCurrPhotoIndex }) {
             <Styles styles={styles} currStyle={currStyle}
             setCurrStyle={setCurrStyle}/>
             <CartForm currStyle={currStyle}/>
-            <Social/>
+            <Social />
           </div>
         </div>
           <p>{product.description}</p>
