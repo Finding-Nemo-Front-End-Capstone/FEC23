@@ -9,15 +9,13 @@ import Ratings from './components/Ratings.jsx';
 
 export const ClickContext = createContext();
 
-// withClickTracking (
-  function App() {
-    // const [productList, setProductList] = useState([]);
-      const [product, setProduct] = useState({});
-      const [prodInfo, setProdInfo] = useState({});
-      const [rating, setRating] = useState({});
-      const [currPhotoIndex, setCurrPhotoIndex] = useState(0);
-      const [style, setStyle] = useState([]);
-      const [invoke, setInvoke] = useState(true);
+function App() {
+  const [product, setProduct] = useState({});
+  const [prodInfo, setProdInfo] = useState({});
+  const [rating, setRating] = useState({});
+  const [currPhotoIndex, setCurrPhotoIndex] = useState(0);
+  const [style, setStyle] = useState([]);
+  const [invoke, setInvoke] = useState(true);
 
       const [clicks, setClicks] = useState([]);
 
@@ -67,4 +65,5 @@ export const ClickContext = createContext();
         </div>
       );
     }
+
 ReactDOM.render(<App />, document.getElementById('app'));
