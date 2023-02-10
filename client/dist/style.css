@@ -921,6 +921,963 @@ text.runslong {
   margin-top:-3%;
 }
 
+/* Start of Britta's CSS */
+
+:root {
+  --bg: #f1faee;
+}
+
+.heading {
+  /* margin: 5px; */
+  /* width: fit-content; */
+}
+
+/* button,
+#app {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+} */
+
+body {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  background-color: var(--bg);
+  display: block;
+  padding: 10px;
+}
+
+.nav-bar {
+  position: sticky;
+  height: 30px;
+  background-color: #a8dadc;
+  padding: 5px 10px;
+  /* overflow: hidden; */
+  border-radius: 0.5em;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 4em;
+}
+
+.site-announcement {
+  text-align: center;
+}
+
+.prod-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+  padding-top: 2em;
+  /* border: 1px solid black; */
+}
+
+.prod-content span {
+  text-transform: uppercase;
+}
+
+.prod-info {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  /* border: 1px solid red; */
+}
+
+.style-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  height: auto;
+  padding-bottom: 1em;
+  /* border: 1px solid black; */
+}
+
+.style-wrapper img {
+  width: 60px;
+  height: 60px;
+  border: 2px solid grey;
+  border-radius: 50px;
+  padding: 1px;
+  object-fit: cover;
+}
+
+.style-wrapper span {
+  position: relative;
+  margin: 5px;
+}
+
+.style-wrapper i {
+  position: absolute;
+  top: 10;
+  right: 0;
+}
+
+.social {
+  font-size: 50px;
+
+}
+.fa-facebook-square {
+  color: #3b5998;
+  cursor: pointer;
+}
+.fa-twitter-square {
+  color: #1DA1F2;
+  padding: 10px;
+  cursor: pointer;
+}
+.fa-pinterest-square {
+  color: #E60023;
+  cursor: pointer;
+}
+
+.gallery-wrap {
+  position: relative;
+  /* display: flex;
+  flex-wrap: wrap; */
+  /* border: 1px solid blue; */
+}
+
+.main-photo {
+  width: 500px;
+  height: 600px;
+  padding-bottom: 10px;
+  padding-right: 10px;
+  object-fit: cover;
+  /* border-radius: 10px; */
+  cursor: zoom-in;
+
+  /* position: relative; */
+}
+
+/* .main-photo:hover {
+  cursor: zoom-in;
+} */
+
+.gallery-ribbon {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+}
+
+.gallery-photo {
+  width: 55px;
+  height: 55px;
+  object-fit: cover;
+  border: 1px solid black;
+}
+
+.gallery-photo.selected {
+  border: 5px solid black;
+}
+
+/* Next & previous buttons */
+/* .slides-fade {
+  position:relative;
+} */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: black;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 3px;
+  user-select: none;
+}
+
+.prev {
+  left: 3.5em;
+}
+
+.next {
+  right: .7em;
+}
+
+.prev.modal {
+  top: 1em;
+  left: 40%;
+  color: white;
+  z-index: 101;
+}
+
+.next.modal {
+  /* position: absolute; */
+  top: 1em;
+  right: 40%;
+  color: white;
+  z-index: 101;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+.gallery-modal {
+  position: absolute;
+  width: 95%;
+  z-index: 100;
+  overflow: hidden;
+  /* border: 1px solid black; */
+}
+
+.modal-img {
+  width: 100%;
+  /* position: relative; */
+}
+.modal-img.zoomed {
+  /* width: 250%; */
+  /* zoom: 250%; */
+  transform: scale(2.5);
+}
+.modal-img:hover {
+  cursor: crosshair;
+}
+.modal-img.zoomed:hover {
+  cursor: zoom-out;
+  /* opacity: 0; */
+}
+
+.modal-radio {
+  position: absolute;
+  display: flex;
+  top: 0;
+  /* justify-content: center; */
+}
+
+.modal-buttons {
+  /* display: flex; */
+  border: 1px solid red;
+}
+
+.close {
+  position: absolute;
+  right: 0;
+  color: white;
+  font-size: 20px;
+}
+
+.read-all-reviews {
+  text-decoration: underline;
+  padding-left: 1em;
+  font-size: 70%;
+}
+
+.rating {
+  display: block;
+  font-size: 16px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  padding-top: 1em;
+}
+
+.ratingReview {
+  display: block;
+  font-size: 16px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+}
+
+.rating-wrap {
+  display: inline-block;
+  position: relative;
+  height: 19px;
+  /* display: flex; */
+}
+
+.ratingReview .stars-active, .rating .stars-active {
+  color: #EEBD01;
+  position: relative;
+  z-index: 10;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ratingReview .stars-inactive, .rating .stars-inactive {
+  color: grey;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-text-stroke: initial;
+  /* overflow: hidden; */
+}
+
+.on-sale {
+  text-decoration: line-through;
+  color: red;
+}
+
+.cart-form {
+  /* display: flex; */
+  /* padding-right: 1em; */
+  /* border: 1px solid black; */
+}
+
+.cart-form select {
+  margin: 1em;
+  height: 2.5em;
+}
+
+.cart-form button {
+  /* display: flex; */
+  margin: 1em;
+  background-color: white;
+  height: 2.5em;
+}
+
+/* End of Britta's CSS */
+
+/* Related Products and Outfits */
+.RelatedOutfits {
+  position: relative;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #525252;
+  left: 10%;
+}
+.relatedProductsHeader,
+.outfitsHeader {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #525252;
+  font-size: small;
+}
+.relatedCatText, .relatedPriceText,
+.outfitCatText, .outfitPriceText {
+  font-size: x-small;
+}
+.relatedProdText,
+.outfitProdText {
+  font-weight: bold;
+}
+.relatedContainer,
+.outfitsContainer {
+  position: relative;
+  overflow-x: auto;
+  display: flex;
+  width: 700px;
+  -webkit-mask-image: linear-gradient(90deg, white, 90% ,transparent);
+  scrollbar-width: None;
+}
+.relatedContainer::-webkit-scrollbar {
+  display: none;
+}
+.relatedCard, .outfitCard,
+.addOutfit {
+  border: 1.5px solid grey;
+  margin-right: 10px;
+  max-width: 175px;
+}
+.addOutfit {
+  width: 100px;
+  min-width: 100px;
+  height: 100px;
+}
+.cardInfo,
+.outfitInfo {
+  position: relative;
+  width: 100%;
+  min-width: 175px;
+}
+.cardDetails {
+  margin-left: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+  height: 100px;
+}
+.modalButton,
+.outfitButton {
+  position: absolute;
+  right: 0;
+  background-color: #f1faee;
+}
+.leftArrow,
+.rightArrow{
+  position: absolute;
+  font-size: 30px;
+  top: 20%;
+  z-index: 1;
+  left: -4%;
+  border-color: transparent;
+}
+.rightArrow{
+  left: 700px;
+}
+.leftOutfit,
+.rightOutfit{
+  position: absolute;
+  font-size: 35px;
+  top: 73%;
+  z-index: 1;
+  left: -4%;
+  border-color: transparent;
+}
+.rightOutfit{
+  left: 700px;
+}
+.previewImage {
+  height: 250px;
+  width: 100%;
+  object-fit: cover;
+}
+.relatedImageContainer,
+.outfitImageContainer {
+  width: 100%;
+  height: 250px;
+}
+
+.modalPortal {
+  position: relative;
+  left: 125px;
+}
+.relatedModal {
+  border: 2px solid lightslategrey;
+  background-color: #f1faee;
+  z-index: 1;
+  position: absolute;
+  font-size: small;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.modalCurrHeader,
+.modalCompHeader {
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  padding-left: 10px;
+  padding-right: 10px;
+  max-width: 100px;
+}
+.modalCompHeader {
+  text-align: right;
+}
+.modalCurr {
+  text-align: left;
+  padding-left: 10px;
+  max-width: 100px;
+}
+.modalProp {
+  text-align: center;
+  max-width: 75px;
+  padding-left: 60px;
+  padding-right: 60px;
+}
+.modalRel {
+  text-align: right;
+  padding-right: 10px;
+  max-width: 100px;
+}
+.relatedModalComparing {
+  font-size: xx-small;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 5px 0px 0px 10px;
+}
+.starRating {
+  position: absolute;
+  bottom: 5px;
+}
+
+/* Review & Ratings */
+/* review form */
+
+.reviewForm, .overlay {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  z-index: 11;
+}
+.overlay {
+  background: rgba(49,49,49,0.8);
+  }
+.reviewFormContent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1.4;
+  background: #6bd7f0;
+  padding: 14px 28px;
+  border-radius: 3px;
+  max-width: 600px;
+  min-width: 300px;
+  height: 80%;
+  overflow-y: auto;
+  z-index: 11;
+}
+.closeReviewForm {
+  margin-right: 5%;
+  margin-top: 5%;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  margin-right: 33%;
+  z-index: 13;
+  position: relative;
+  margin-left: 64%;
+}
+button {
+  cursor: pointer;
+  background: none;
+}
+/* for review star Rating */
+.checked {
+  color: orange;
+}
+.fa.fa-star {
+  cursor: pointer;
+}
+
+/* for slider ReviewForm */
+input[type=checkbox], input[type=radio] {
+  margin: 3px 0 0;
+  margin-left: 10%;
+  line-height: normal;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 17px;
+  margin-left: 1%;
+}
+.slider {
+  position:absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 13px;
+  width: 13px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+input:checked + .slider {
+  background-color: #2196F3;
+}
+input:checked + .slider:before {
+  -webkit-transform: translateX(13px);
+  -ms-transform: translateX(13px);
+  transform: translateX(13px);
+}
+.slider.round {
+  border-radius: 34px;
+}
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* more review button */
+.moreReviewBut {
+  background: none;
+  border: none;
+  color: green;
+  cursor: pointer;
+  float: right;
+  margin-right: 42.5%;
+}
+.moreReviewsBody {
+  color:#3d8faa;
+  border:none;
+}
+
+/* for review label radio button */
+.reviewLabel {
+  width: fit-content;
+  margin-left: 9.5%;
+}
+.review2 {
+  margin-left: 25%;
+}
+.radioDivReviewForm {
+  width: 50%;
+  margin-left: 8%;
+  /* color: blue; */
+}
+label.eachChacForm {
+  display: block;
+}
+input.radioButReviewForm {
+  margin-left: 2%;
+}
+
+/* for Upload photo in review */
+.reviewUploadPhoto {
+  border:'none';
+}
+.ReviewFormPhotoEntry {
+  margin: 0.5em 0;
+  width:30%;
+  display: flex;
+  flex-direction: column;
+}
+.divReviewFormPhotoEntry {
+  width:fit-content;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.eachReviewPhoto {
+  width: 5%;
+  margin-left: 1%;
+}
+.divEachReviewPhoto {
+  display:contents;
+  width: fit-content;
+}
+.imgHuge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1.4;
+  padding: 14px 28px;
+  border-radius: 3px;
+  max-width: 600px;
+  min-width: 300px;
+  height: 80%;
+  z-index: 11;
+}
+input[type=file]{
+  width:90px;
+  color:transparent;
+}
+/* Three column layout */
+.side {
+  float: left;
+  width: 15%;
+  margin-top: 10px;
+}
+
+.middle {
+  float: left;
+  width: 70%;
+  margin-top: 15px;
+}
+
+/* Place text to the right */
+.right {
+  text-align: right;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.breakdownBar {
+  width: 86%;
+  height: 50%;
+  float: right;
+  position: relative;
+  margin-right: 10%;
+}
+
+/* The bar container */
+.bar-container {
+  margin-left: 3%;
+  width: 100%;
+  background-color: #f1f1f1;
+  text-align: center;
+  color: white;
+}
+.eachBarBreakdown {
+  width: 100%;
+  margin-left: 2%;
+  border: none;
+  display: inline;
+  font-size: 100%;
+  cursor: pointer;
+}
+/* .eachBarBreakdown:hover{
+  color:purple;
+} */
+.chacandbreak {
+  width: 41%;
+  float: left;
+  position: absolute;
+}
+.chacBreak {
+  width: 76%;
+  margin-left: 5%;
+  float: right;
+  margin-top: 0%;
+  margin-right: 10%;
+}
+.breakdown {
+  display: contents;
+}
+.breakdownStar {
+  width: 65%;
+  float: right;
+  margin-right: 28%;
+}
+.arrow-comfort {
+  float:left;
+  color:rebeccapurple;
+  margin-top: -1%;
+}
+.arrow-quality, .arrow-fit, .arrow-length, .arrow-width, .arrow-size, .arrow-comfort {
+  float:left;
+  color:rebeccapurple;
+  margin-top: -1%;
+}
+.chac {
+  margin-top: 10%;
+}
+.comfyDesc {
+  margin-left: -6%;
+  font-size: 75%;
+  margin-bottom: 3%;
+}
+text.uncomfortableFONT {
+  float: left;
+  margin-left: 1%;
+  position: absolute;
+}
+text.sUncomfortableFONT {
+  margin-left: 17%;
+  float: left;
+  position: absolute;
+}
+text.ok {
+  margin-left: 43%;
+  float: left;
+  position: absolute;
+}
+text.comfortable {
+  margin-left: 59%;
+  float: left;
+  position: absolute;
+}
+text.perfect {
+  margin-left: 78%;
+  float: left;
+  position: absolute;
+}
+text.poorFONT {
+  float: left;
+  margin-left: 3%;
+  position: absolute;
+}
+text.belowavgFONT {
+  margin-left: 20%;
+  float: left;
+  position: absolute;
+}
+text.whatiexpect {
+  margin-left: 39%;
+  float: left;
+  position: absolute;
+}
+text.prettygreat {
+  margin-left: 59%;
+  float: left;
+  position: absolute;
+}
+text.perfectQ {
+  margin-left: 78%;
+  float: left;
+  position: absolute;
+}
+text.smallFONT {
+  float: left;
+  margin-left: 3%;
+  position: absolute;
+}
+text.perfectS {
+  margin-left: 41%;
+  float: left;
+  position: absolute;
+}
+text.sizeWide {
+  margin-left: 75%;
+  float: left;
+  position: absolute;
+}
+text.toonarrowFONT {
+  float: left;
+  margin-left: 2%;
+  position: absolute;
+}
+text.toowide {
+  margin-left: 78%;
+  float: left;
+  position: absolute;
+}
+text.runshort {
+  float: left;
+  margin-left: 1%;
+  position: absolute;
+}
+text.runslong {
+  margin-left: 77%;
+  float: left;
+  position: absolute;
+}
+
+/* Individual bars */
+.bar-5 {height: 10px; background-color: #00bcd4;}
+.bar-4 {height: 10px; background-color: #00bcd4;}
+.bar-3 {height: 10px; background-color: #00bcd4;}
+.bar-2 {height: 10px; background-color: #00bcd4;}
+.bar-1 {height: 10px; background-color: #00bcd4;}
+.bar-container1 {
+  height: 10px;
+  background: none;
+  width: 49%;
+  margin-left: 25%;
+  border-right: 5px solid white;
+  border-left: 5px solid white;
+}
+.bar-container2 {
+  height: 10px;
+  background: none;
+  width: 50%;
+  border-right: 5px solid white;
+}
+.bar-containerCB {
+  width: 100%;
+  background-color: #989cbd;
+  margin-top: 1%;
+}
+
+
+/* Responsive layout - make the columns stack on top of each other instead of next to each other */
+@media (max-width: 400px) {
+  .side, .middle {
+    width: 100%;
+  }
+  /* Hide the right column on small screens */
+  .right {
+    display: none;
+  }
+}
+.reviewHeader {
+  float: left;
+  margin-right: 2%;
+  margin-top: -4%;
+}
+.divReviewEntry {
+  border: none;
+  padding-top: 6%;
+  padding-bottom: 3%;
+  padding-left: 6%;
+  float: left;
+  margin-top: -6%;
+  margin-left: 38%;
+}
+.divMapReview {
+  width: 48%;
+  position: absolute;
+  overflow: scroll;
+  max-height: 700%;
+}
+.reviewAvgRating {
+  width: fit-content;
+  float: left;
+  margin-right: 3%;
+  font-size: 2em;
+  margin-left: 2%;
+}
+.RatingsReview {
+  display: block;
+  width: 100%;
+  padding-top: 1%;
+  position: relative;
+  margin:1.5%;
+}
+.userNameDate {
+  float: right;
+  margin-top:-3%;
+}
+
+select#sort {
+    border: none;
+    border-bottom: 1px solid black;
+    background: none;
+}
+.ReviewEntry {
+  margin-top: 4%;
+  margin-bottom: 4%;
+  border-bottom: 1px solid black;
+  padding-bottom: 8%;
+}
+.hello {
+  margin-top: 6%
+}
+
+/* Questions and Answers */
+
+.add-question-modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.add-question-content {
+  width: 500px;
+  background-color: #fff;
+}
+
+.add-question-header, .add-question-footer{
+  padding: 10px;
+}
+
+.add-question-title {
+  margin: 0;
+}
+
+.add-question-body {
+  padding: 10px;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.helpful-button {
+  background: none;
+  border: none;
+  margin: 5px;
+  padding: 0;
+}
+
+.button-feedback {
+  font-size: 13px;
+  margin: 5px;
+}
+
+#helpfulness-score {
+  margin-left: 0px;
+}
+
 select#sort {
     border: none;
     border-bottom: 1px solid black;
