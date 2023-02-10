@@ -2,12 +2,7 @@
 /* Start of Britta's CSS */
 
 :root {
-  --bg: #f1faee;
-}
-
-.heading {
-  /* margin: 5px; */
-  /* width: fit-content; */
+  --bg: #FFFFFF;
 }
 
 /* button,
@@ -48,6 +43,7 @@ body {
 
 .prod-content span {
   text-transform: uppercase;
+  /* border: 1px solid red; */
 }
 
 .prod-info {
@@ -55,6 +51,22 @@ body {
   flex-direction: column;
   width: 300px;
   /* border: 1px solid red; */
+}
+
+.category {
+  padding-top: 10px;
+}
+
+.prod-description {
+  position: relative;
+  left: 30%;
+  width: 30%;
+  justify-content: center;
+  /* border: 1px solid red; */
+}
+
+.slogan {
+  font-family: 'Bebas Neue';
 }
 
 .style-wrapper {
@@ -88,7 +100,6 @@ body {
 
 .social {
   font-size: 50px;
-
 }
 .fa-facebook-square {
   color: #3b5998;
@@ -103,8 +114,9 @@ body {
 
 .gallery-wrap {
   position: relative;
-  /* display: flex;
-  flex-wrap: wrap; */
+  display: flex;
+  /* flex-wrap: wrap; */
+  /* flex-direction: column; */
   /* border: 1px solid blue; */
 }
 
@@ -116,71 +128,94 @@ body {
   object-fit: cover;
   /* border-radius: 10px; */
   cursor: zoom-in;
-
-  /* position: relative; */
+  position: relative;
 }
 
-/* .main-photo:hover {
-  cursor: zoom-in;
-} */
-
-.gallery-ribbon {
+.thumbnail-wrap {
   position: absolute;
-  left: 5px;
-  top: 5px;
+  /* left: 2px;
+  top: 1px; */
   display: flex;
   flex-direction: column;
-  gap: 10px;
-
+  /* border: 1px solid red; */
 }
 
-.gallery-photo {
+.thumbnail-ribbon {
+
+  left: 2px;
+  top: 10px;
+  padding: 5px;
+  /* border: 1px solid blue; */
+}
+
+.thumbnail {
+  /* position: absolute; */
   width: 55px;
   height: 55px;
+  /* gap: 10px; */
   object-fit: cover;
+  display: flex;
+  flex-direction: column;
   border: 1px solid black;
 }
 
-.gallery-photo.selected {
-  border: 5px solid black;
+.thumbnail.selected {
+  border: 3px solid black;
 }
 
-/* Next & previous buttons */
-/* .slides-fade {
-  position:relative;
-} */
 .prev, .next {
   cursor: pointer;
-  position: absolute;
-  top: 50%;
   width: auto;
-  margin-top: -22px;
-  padding: 16px;
+
   color: black;
   font-weight: bold;
   font-size: 18px;
   transition: 0.6s ease;
   border-radius: 3px;
   user-select: none;
+  z-index: 1;
 }
 
-.prev {
-  left: 3.5em;
+.main-prev {
+  position: absolute;
+  margin-top: -22px;
+  padding: 16px;
+  top: 50%;
+  left: 3.7em;
 }
 
-.next {
-  right: .7em;
+.main-next {
+  position: absolute;
+  margin-top: -22px;
+  padding: 16px;
+  top: 50%;
+  right: .65em;
 }
 
-.prev.modal {
+.thum-prev {
+  margin-left: 1em;
+  color: white;
+}
+
+.thum-next {
+  margin-left: 1em;
+  color: white;
+}
+
+.modal-prev {
+  position: absolute;
+  margin-top: -22px;
+  padding: 16px;
   top: 1em;
   left: 40%;
   color: white;
   z-index: 101;
 }
 
-.next.modal {
-  /* position: absolute; */
+.modal-next {
+  position: absolute;
+  margin-top: -22px;
+  padding: 16px;
   top: 1em;
   right: 40%;
   color: white;
@@ -188,16 +223,28 @@ body {
 }
 
 /* On hover, add a black background color with a little bit see-through */
-.prev:hover, .next:hover {
+.main-prev:hover, .main-next:hover {
   background-color: rgba(0,0,0,0.8);
 }
 
 .gallery-modal {
-  position: absolute;
+  /* position: fixed;
   width: 95%;
   z-index: 100;
-  overflow: hidden;
+  overflow: hidden; */
   /* border: 1px solid black; */
+  z-index: 100;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:center;
 }
 
 .modal-img {
@@ -209,6 +256,17 @@ body {
   /* zoom: 250%; */
   transform: scale(2.5);
 }
+
+figure {
+  width: 1600px;
+  /* width: 95%; */
+  background-repeat: no-repeat;
+}
+
+figure:hover img {
+  opacity: 0;
+}
+
 .modal-img:hover {
   cursor: crosshair;
 }
@@ -284,8 +342,11 @@ body {
   /* overflow: hidden; */
 }
 
-.on-sale {
+.strikethrough {
   text-decoration: line-through;
+}
+
+.red {
   color: red;
 }
 
@@ -297,14 +358,21 @@ body {
 
 .cart-form select {
   margin: 1em;
-  height: 2.5em;
+  height: 3em;
+  padding-right: 10px;
+  padding-left: 10px;
+  border-radius: 8px;
+  background-color: white;
 }
 
 .cart-form button {
   /* display: flex; */
   margin: 1em;
-  background-color: white;
-  height: 2.5em;
+  padding-right: 10px;
+  padding-left: 10px;
+  height: 3em;
+  border-radius: 8px;
+  background-color: #b3a394;
 }
 
 /* End of Britta's CSS */
