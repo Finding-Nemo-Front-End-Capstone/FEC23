@@ -24,28 +24,35 @@ function Gallery({ currStyle, currPhotoIndex, setCurrPhotoIndex }) {
   useEffect(() => {
     setMainPhoto(currStyle.photos[currPhotoIndex + firstThumIndex].url);
     console.log('index: ', currPhotoIndex)
-  }, [currPhotoIndex]);
+  }, [currPhotoIndex, firstThumIndex]);
 
   useEffect(() => {
     setThumbnails(currStyle.photos.slice(firstThumIndex, firstThumIndex + 7));
   }, [firstThumIndex])
 
   function prevClick() {
-    // if (currPhotoIndex === 0) {
-    //   // setCurrPhotoIndex(currPhotoIndex - 1);
-    //   prevThumClick();
-    // }
+    if (currPhotoIndex === 0) {
+      // setCurrPhotoIndex(currPhotoIndex - 1);
+      prevThumClick();
+      setCurrPhotoIndex(0)
+    } else {
+
       setCurrPhotoIndex(currPhotoIndex - 1);
+    }
   }
 
   function nextClick() {
     console.log('index: ', currPhotoIndex)
     // setFirstThumIndex(firstThumIndex + 1);
-    setCurrPhotoIndex(currPhotoIndex + 1);
 
-    // if (currPhotoIndex === 6) {
-    //   nextThumClick()
-    // }
+    if (currPhotoIndex === 6) {
+      nextThumClick()
+      // setFirstThumIndex(firstThumIndex + 1);
+      setCurrPhotoIndex(6)
+    } else {
+
+      setCurrPhotoIndex(currPhotoIndex + 1);
+    }
   }
 
   function prevThumClick() {
@@ -134,7 +141,7 @@ function Gallery({ currStyle, currPhotoIndex, setCurrPhotoIndex }) {
               )
             })}
 
-          {(firstThumIndex + 7) < (currStyle.photos.length - 1)
+          {(firstThumIndex + 7) < (currStyle.photos.length)
           ? <a className="next thum-next" onClick={nextThumClick}>&#10225;</a>
           : null}
         </div>

@@ -2,7 +2,7 @@
 /* Start of Britta's CSS */
 
 :root {
-  --bg: #f1faee;
+  --bg: #fffff;
 }
 
 .heading {
@@ -276,6 +276,7 @@ figure:hover img {
 .close {
   position: absolute;
   right: 0;
+  top: 0;
   color: white;
   font-size: 20px;
 }
