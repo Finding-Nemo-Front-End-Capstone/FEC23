@@ -31,6 +31,7 @@ module.exports = {
   postReview(req, res) {
     helpers.postReview(req.body)
       .then((data) => {
+        console.log('IT WOOORKKSS');
         res.status(201).send(data.data); })
       .catch((err) => {
         console.log('error in posting controller review');

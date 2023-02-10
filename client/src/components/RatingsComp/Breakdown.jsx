@@ -1,7 +1,9 @@
 /* eslint-disable react/button-has-type */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+// import {ClickContext} from '../../index.jsx'
 
 function Breakdown({ rating, reviewFilter }) {
+  // const {clicks, handleClick} = useContext(ClickContext);
   const [bar5, setBar5] = useState('');
   const [bar4, setBar4] = useState('');
   const [bar3, setBar3] = useState('');
@@ -58,6 +60,7 @@ function Breakdown({ rating, reviewFilter }) {
     }
   }, [rating]);
   const click5 = (e) => {
+    // handleClick()
     reviewFilter('5');
     if (before5 === 'orange') {
       setBefore5('');
@@ -73,6 +76,7 @@ function Breakdown({ rating, reviewFilter }) {
     }
   };
   const click4 = (e) => {
+    // handleClick()
     reviewFilter('4');
     if (before4 === 'orange') {
       setBefore4('');
@@ -88,6 +92,7 @@ function Breakdown({ rating, reviewFilter }) {
     }
   };
   const click3 = (e) => {
+    // handleClick()
     reviewFilter('3');
     if (before3 === 'orange') {
       setBefore3('');
@@ -103,6 +108,7 @@ function Breakdown({ rating, reviewFilter }) {
     }
   };
   const click2 = (e) => {
+    // handleClick()
     reviewFilter('2');
     if (before2 === 'orange') {
       setBefore2('');
@@ -118,6 +124,7 @@ function Breakdown({ rating, reviewFilter }) {
     }
   };
   const click1 = (e) => {
+    // handleClick()
     reviewFilter('1');
     if (before1 === 'orange') {
       setBefore1('');
@@ -133,6 +140,7 @@ function Breakdown({ rating, reviewFilter }) {
     }
   };
   const allRating = (e) => {
+    // handleClick()
     reviewFilter('all');
     setBefore5('');
     setBefore4('');
@@ -177,7 +185,7 @@ function Breakdown({ rating, reviewFilter }) {
           <br />
           <button name="5" className="eachBarBreakdown" onClick={click5} style={{ cursor: 'pointer', color: hoverColor5 }} onMouseEnter={hoverOn5} onMouseLeave={hoverOn5}>
             <div className="side">
-              <div>5 star</div>
+              <div>5 stars</div>
             </div>
             <div className="middle">
               <div className="bar-container">
@@ -191,7 +199,7 @@ function Breakdown({ rating, reviewFilter }) {
           <br />
           <button className="eachBarBreakdown" onClick={click4} style={{ cursor: 'pointer', color: hoverColor4 }} onMouseEnter={hoverOn4} onMouseLeave={hoverOn4}>
             <div className="side">
-              <div>4 star</div>
+              <div>4 stars</div>
             </div>
             <div className="middle">
               <div className="bar-container">
@@ -205,7 +213,7 @@ function Breakdown({ rating, reviewFilter }) {
           <br />
           <button className="eachBarBreakdown" onClick={click3} style={{ cursor: 'pointer', color: hoverColor3 }} onMouseEnter={hoverOn3} onMouseLeave={hoverOn3}>
             <div className="side">
-              <div>3 star</div>
+              <div>3 stars</div>
             </div>
             <div className="middle">
               <div className="bar-container">
@@ -219,7 +227,7 @@ function Breakdown({ rating, reviewFilter }) {
           <br />
           <button className="eachBarBreakdown" onClick={click2} style={{ cursor: 'pointer', color: hoverColor2 }} onMouseEnter={hoverOn2} onMouseLeave={hoverOn2}>
             <div className="side">
-              <div>2 star</div>
+              <div>2 stars</div>
             </div>
             <div className="middle">
               <div className="bar-container">
@@ -233,7 +241,7 @@ function Breakdown({ rating, reviewFilter }) {
           <br />
           <button data-testid="eachBarBreakdown" className="eachBarBreakdown" onClick={click1} style={{ cursor: 'pointer', color: hoverColor1 }} onMouseEnter={hoverOn1} onMouseLeave={hoverOn1}>
             <div className="side">
-              <div>1 star</div>
+              <div>1 stars</div>
             </div>
             <div className="middle">
               <div className="bar-container">

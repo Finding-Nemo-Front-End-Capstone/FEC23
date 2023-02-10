@@ -19,7 +19,7 @@ function RelatedCards({ relInfo, product, setProduct, display }) {
   function clickNav(e) {
     e.stopPropagation();
     e.preventDefault();
-    setProduct({ id: cardInfo.id });
+    setProduct(relInfo);
   }
   return (
     <div className="cardInfo">
@@ -31,12 +31,11 @@ function RelatedCards({ relInfo, product, setProduct, display }) {
       />
       <div className="relatedImageContainer">
         {cardInfo.thumbnail === null
-          ? <img className="previewImage" alt="" />
+          ? <img className="previewImage" alt="Image missing" />
           : <img className="previewImage" src={cardInfo.thumbnail} alt="" />}
       </div>
       <div className="cardDetails" data-testid="cardDetails"
-      onClick={clickNav}
-      >
+      onClick={clickNav}>
         <div className="relatedCatText">
           {cardInfo.category ? cardInfo.category.toUpperCase() : null}
         </div>

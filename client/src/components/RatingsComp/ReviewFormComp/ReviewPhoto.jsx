@@ -1,11 +1,11 @@
 /* eslint-disable max-len */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import ReviewFormPhotoEntry from './ReviewFormPhotoEntry.jsx';
+import {ClickContext} from '../../../index.jsx'
 
-function ReviewPhoto({
-  imageList, setImageList, imageFiles, setImageFiles,
-}) {
+function ReviewPhoto({ imageList, setImageList, imageFiles, setImageFiles }) {
+  // const {clicks, handleClick} = useContext(ClickContext);
   const [chooseFile, setChooseFile] = useState('');
 
   useEffect(() => {
@@ -14,6 +14,7 @@ function ReviewPhoto({
     }
   }, [imageList]);
   const submitPhoto = (e) => {
+    // handleClick()
     if (imageList.length < 5) {
       const arr1 = imageFiles.slice();
       arr1.push(e.target.files[0]);

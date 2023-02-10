@@ -14,7 +14,6 @@ const RelatedStars = ({ rating }) => {
 
   if (rating.ratings) {
     return (
-      <div>
       <span className="rating">
         <div className="rating-wrap">
           <span className="stars-active" style={{ width: `${percentage}%` }}>
@@ -33,7 +32,6 @@ const RelatedStars = ({ rating }) => {
           </span>
         </div>
       </span>
-    </div>
     )
   }
 
