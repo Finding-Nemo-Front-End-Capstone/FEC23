@@ -1,15 +1,17 @@
 /* eslint-disable react/button-has-type */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import axios from 'axios';
 import ClipLoader from 'react-spinners/ClipLoader.js';
 import ReviewEntry from './RatingsComp/ReviewEntry.jsx';
 import ReviewForm from './RatingsComp/ReviewForm.jsx';
 import Breakdown from './RatingsComp/Breakdown.jsx';
 import ChacBreak from './RatingsComp/ChacBreak.jsx';
+import {ClickContext} from '../index.jsx'
 
 function Ratings({
   product, rating, setProduct, invoke, setInvoke,
 }) {
+  // const {clicks, handleClick} = useContext(ClickContext);
   const [reviewList, setReviewList] = useState([]);
   const [sort, setSort] = useState('newest');
   const [count, setCount] = useState(0);
@@ -105,6 +107,8 @@ function Ratings({
   }, [count]);
 
   const moreHandler = (e) => {
+    // console.log('this is context', clicks)
+    // handleClick(e.target.id)
     const addCount = count + 2;
     setCount(addCount);
     if (addCount >= reviewHolder.length) {
@@ -113,12 +117,14 @@ function Ratings({
   };
 
   const sortChange = (e) => {
+    // handleClick()
     setLoading(true);
     setSort(e.target.value);
     setCount(0);
   };
 
   const reviewFormBut = (e) => {
+    // handleClick()
     setReviewForm(!reviewForm);
   };
 
@@ -143,7 +149,7 @@ function Ratings({
   };
 
   return (
-    <div className="RatingsReview">
+    <div className="RatingsReview" >
       <text className="RatingsReview">RATINGS & REVIEWS</text>
       <div className="chacandbreak">
         <Breakdown rating={rating} reviewFilter={reviewFilter} totalReview={totalReview} />
