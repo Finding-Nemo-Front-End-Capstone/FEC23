@@ -1,7 +1,9 @@
 /* eslint-disable react/button-has-type */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+// import {ClickContext} from '../../index.jsx'
 
 function Breakdown({ rating, reviewFilter }) {
+  // const {clicks, handleClick} = useContext(ClickContext);
   const [bar5, setBar5] = useState('');
   const [bar4, setBar4] = useState('');
   const [bar3, setBar3] = useState('');
@@ -58,6 +60,7 @@ function Breakdown({ rating, reviewFilter }) {
     }
   }, [rating]);
   const click5 = (e) => {
+    // handleClick()
     reviewFilter('5');
     if (before5 === 'orange') {
       setBefore5('');
@@ -73,6 +76,7 @@ function Breakdown({ rating, reviewFilter }) {
     }
   };
   const click4 = (e) => {
+    // handleClick()
     reviewFilter('4');
     if (before4 === 'orange') {
       setBefore4('');
@@ -88,6 +92,7 @@ function Breakdown({ rating, reviewFilter }) {
     }
   };
   const click3 = (e) => {
+    // handleClick()
     reviewFilter('3');
     if (before3 === 'orange') {
       setBefore3('');
@@ -103,6 +108,7 @@ function Breakdown({ rating, reviewFilter }) {
     }
   };
   const click2 = (e) => {
+    // handleClick()
     reviewFilter('2');
     if (before2 === 'orange') {
       setBefore2('');
@@ -118,6 +124,7 @@ function Breakdown({ rating, reviewFilter }) {
     }
   };
   const click1 = (e) => {
+    // handleClick()
     reviewFilter('1');
     if (before1 === 'orange') {
       setBefore1('');
@@ -133,6 +140,7 @@ function Breakdown({ rating, reviewFilter }) {
     }
   };
   const allRating = (e) => {
+    // handleClick()
     reviewFilter('all');
     setBefore5('');
     setBefore4('');

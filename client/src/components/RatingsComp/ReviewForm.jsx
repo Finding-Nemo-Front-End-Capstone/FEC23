@@ -4,7 +4,7 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import ReviewInput from './ReviewFormComp/ReviewInput.jsx';
 import ReviewStar from './ReviewFormComp/ReviewStar.jsx';
@@ -12,10 +12,12 @@ import Characteristic from './ReviewFormComp/Characteristic.jsx';
 import Summary from './ReviewFormComp/Summary.jsx';
 import Body from './ReviewFormComp/Body.jsx';
 import ReviewPhoto from './ReviewFormComp/ReviewPhoto.jsx';
+// import {ClickContext} from '../../index.jsx'
 
 function ReviewForm({
   rating, setReviewForm, totalReview, setTotalReviews, setSort, invoke, setInvoke,
 }) {
+  // const {clicks, handleClick} = useContext(ClickContext);
   const [countStar, setCountStar] = useState(0);
   const [recommendStatus, setRecommendStatus] = useState(false);
   const [size, setSize] = useState('');
@@ -101,6 +103,7 @@ function ReviewForm({
   };
 
   const submitForm = (e) => {
+    // handleClick()
     const uncomplete = () => {
       setSubmitWarning('');
     };

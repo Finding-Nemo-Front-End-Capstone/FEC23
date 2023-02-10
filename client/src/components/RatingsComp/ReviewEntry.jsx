@@ -4,13 +4,15 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/button-has-type */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import PhotoEntry from './ReviewEntryComp/PhotoEntry.jsx';
 import ReviewResponse from './ReviewEntryComp/Response.jsx';
+// import {ClickContext} from '../../index.jsx'
 
 function ReviewEntry(props) {
   // console.log(props.review);
+  // const {clicks, handleClick} = useContext(ClickContext);
   const [body, setBody] = useState('');
   const [moreBody, setMoreBody] = useState('none');
   const [recommend, setRecommend] = useState('none');
@@ -69,10 +71,12 @@ function ReviewEntry(props) {
   }, [recommend]);
 
   const moreBodyClick = (e) => {
+    // handleClick()
     setBody(props.review.body);
     setMoreBody('none');
   };
   const thumbUpClick = (e) => {
+    // handleClick()
     axios.put(`/db/helpfulpost/${props.review.review_id}`)
       .then(() => {
         setHelpfulSec('none');
@@ -81,6 +85,7 @@ function ReviewEntry(props) {
       .catch(() => { console.log('fail helpful'); });
   };
   const thumbDownClick = (e) => {
+    // handleClick()
     setHelpfulSec('none');
     setThanks('');
   };

@@ -1,9 +1,11 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import {ClickContext} from '../../../index.jsx'
 
 function ReviewStar({ setCountStar, countStar }) {
+  // const {clicks, handleClick} = useContext(ClickContext);
   const unclick = 'fa fa-star';
   const clicked = 'fa fa-star checked';
   const [star1, setStar1] = useState(unclick);
@@ -45,6 +47,7 @@ function ReviewStar({ setCountStar, countStar }) {
   }, [star1, star2, star3, star4, star5]);
 
   const starClick = (e) => {
+    // handleClick()
     if (e.target.id === 'star5') {
       setStar5(clicked);
       setStar4(clicked);
