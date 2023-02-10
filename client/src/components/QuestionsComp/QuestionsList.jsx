@@ -5,7 +5,7 @@ import axios from 'axios';
 import Question from './Question.jsx';
 
 function QuestionsList({
-  product, questions, displayed, setDisplayed, numQuestions, setNumQuestions, search, filtered, setFiltered,
+  product, questions, displayed, setDisplayed, numQuestions, setNumQuestions, search, filtered, setFiltered, bottomRef,
 }) {
   // const bottomRef = useRef(null);
   // function handleButtonClick() {
@@ -24,7 +24,7 @@ function QuestionsList({
     } else {
       setFiltered(questions);
     }
-  }, [search, questions]);
+  }, [search, questions, product]); // product was here
   useEffect(() => {
     const arr = [];
     if (filtered[0] && filtered.length > numQuestions) {
@@ -42,6 +42,7 @@ function QuestionsList({
   return (
     <div className="questions-list" data-testid="question-list">
       {displayed}
+      <div className="bottom-questions-list" ref={bottomRef} />
     </div>
   );
 }

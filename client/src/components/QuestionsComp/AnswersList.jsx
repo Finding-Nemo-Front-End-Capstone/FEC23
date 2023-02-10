@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Answer from './Answer.jsx';
 
-function AnswersList({ question_id, triggerReload }) {
+function AnswersList({ question_id, triggerReload, product }) {
   const [allAnswers, setAllAnswers] = useState([]);
   const [numAnswers, setNumAnswers] = useState(2);
   const [displayed, setDisplayed] = useState([]);
@@ -18,7 +18,7 @@ function AnswersList({ question_id, triggerReload }) {
         .then((response) => { setAllAnswers(response.data.results); })
         .catch((err) => { console.log(err, 'from answerlist axios'); });
     }
-  }, [triggerReload]);
+  }, [triggerReload, product]); //product was here
   useEffect(() => {
     console.log(allAnswers, 'This should change after each submit');
     const sorted = [...allAnswers].sort((a, b) => {

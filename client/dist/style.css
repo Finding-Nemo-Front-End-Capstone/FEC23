@@ -919,6 +919,10 @@ margin:auto;
   max-height: 50%;
 }
 
+.questions-list::-webkit-scrollbar {
+  display: none;
+}
+
 .questions-list:hover {
   overflow-y: scroll; /* show the scrollbar when hovered */
 }

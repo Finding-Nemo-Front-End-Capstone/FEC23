@@ -44,7 +44,7 @@ function Question({ question, product }) {
             {disableReport
               ? <span className="button-feedback" data-testid="report-question-button-feedback">Reported</span>
               : <button type="button" className="report-button" data-testid="report-question-button" disabled={disableReport} onClick={() => { reportQuestion(question); }}>Report</button>}
-            <AnswersList question_id={question.question_id} triggerReload={triggerReload} />
+            <AnswersList question_id={question.question_id} product={product} triggerReload={triggerReload} />
             <AddAnswer onClose={() => setShowAddAnswer(false)} showAddAnswer={showAddAnswer} question={question} product={product} triggerReload={triggerReload} setTriggerReload={setTriggerReload} />
           </span>
         )}
