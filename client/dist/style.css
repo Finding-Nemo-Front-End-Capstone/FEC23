@@ -240,7 +240,10 @@ body {
   justify-content:center;
 }
 .modal-img {
-  width: 100%;
+  top: 0;
+  width: auto;
+  height:100%;
+  background-color: white;
   /* position: relative; */
 }
 .modal-img.zoomed {
@@ -278,7 +281,9 @@ figure:hover img {
   right: 0;
   top: 0;
   color: white;
+  background-color: #b3a394;
   font-size: 20px;
+  border-radius: 5px;
 }
 .read-all-reviews {
   text-decoration: underline;
