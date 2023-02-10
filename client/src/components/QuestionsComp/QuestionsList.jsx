@@ -15,7 +15,6 @@ function QuestionsList({
     return (
       <div>
         <Question question={question} product={product} />
-        <br />
       </div>
     );
   }

@@ -19,7 +19,7 @@ function Question({ question, product }) {
       .catch((err) => { console.log('err reporting question', err); });
   }
   return (
-    <div data-testid="question">
+    <div data-testid="question" className="question">
       Q:
       {' '}
       {question.question_body}

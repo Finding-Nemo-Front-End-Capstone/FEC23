@@ -32,15 +32,18 @@ function Questions({ product }) {
   return (
     <div id="questions-and-answers" data-testid="questions-and-answers">
       <div className="qna-title">Product Q&A</div>
-      <Search questions={questions} setQuestions={setQuestions} search={search} setSearch={setSearch} />
-      <button onClick={(e) => { handleAccordion(e); }} type="button" id="expand-collapse-down" data-testid="expand-collapse" />
-      <div>Questions</div>
+      <div className="div-trouble">
+        <Search questions={questions} setQuestions={setQuestions} search={search} setSearch={setSearch} />
+        <button type="button" id="ask-question" onClick={() => { setShowAddQuestion(true); }}>Ask a question +</button>
+        <button onClick={(e) => { handleAccordion(e); }} type="button" id="expand-collapse-down" data-testid="expand-collapse" />
+      </div>
+      <div id="questions-header">Questions</div>
       <div hidden={!expanded}>
         <QuestionsList product={product} questions={questions} displayed={displayed} setDisplayed={setDisplayed} numQuestions={numQuestions} setNumQuestions={setNumQuestions} search={search} filtered={filtered} setFiltered={setFiltered} />
       </div>
-      <div>
-        {displayed.length < filtered.length && <button type="button" data-testid="show-more-questions" onClick={() => { setNumQuestions(numQuestions + 2); }}>Show more questions</button>}
-        <button type="button" onClick={() => { setShowAddQuestion(true); }}>Ask a question +</button>
+      <div id="questions-button-footer">
+        {displayed.length < filtered.length && <button type="button" data-testid="show-more-questions" id="show-more-questions" onClick={() => { setNumQuestions(numQuestions + 2); }}>Show more questions</button>}
+        {/* <button type="button" id="ask-question" onClick={() => { setShowAddQuestion(true); }}>Ask a question +</button> */}
         <AddQuestion onClose={() => setShowAddQuestion(false)} showAddQuestion={showAddQuestion} product={product} questionReload={questionReload} setQuestionReload={setQuestionReload} />
       </div>
     </div>

@@ -45,8 +45,8 @@ function AnswersList({ question_id, triggerReload }) {
     <div>
       {displayed[0] && <span data-testid="answers-list-meow">A:</span>}
       {displayed}
-      {displayed.length < allAnswers.length && <button type="button" data-testid="show-more-answers" onClick={() => { setNumAnswers(allAnswers.length); }}>Show more answers</button>}
-      {displayed[0] && displayed.length > 2 && displayed.length === allAnswers.length && <button type="button" onClick={() => { setNumAnswers(2); }}>Collapse answers</button>}
+      {displayed.length < allAnswers.length && <button type="button" className="show-more-answers" data-testid="show-more-answers" onClick={() => { setNumAnswers(allAnswers.length); }}>Expand answers</button>}
+      {displayed[0] && displayed.length > 2 && displayed.length === allAnswers.length && <button type="button" className="show-more-answers" onClick={() => { setNumAnswers(2); }}>Collapse answers</button>}
     </div>
   );
 }
