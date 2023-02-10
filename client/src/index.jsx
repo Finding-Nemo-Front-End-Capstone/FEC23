@@ -61,7 +61,7 @@ function App() {
         setCurrPhotoIndex={setCurrPhotoIndex}
       />
       <Questions product={product} />
-      <RelatedProducts id={product.id} product={prodInfo} setProduct={setProduct} rating={rating} currStyle={style} />zs
+      <RelatedProducts id={product.id} product={prodInfo} setProduct={setProduct} rating={rating} currStyle={style} />
       <Ratings product={product} rating={rating} setProduct={setProduct} invoke={invoke} setInvoke={setInvoke} />
       <br />
     </div>

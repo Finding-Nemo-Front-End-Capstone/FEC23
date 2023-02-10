@@ -77,6 +77,7 @@ function ReviewEntry(props) {
   };
   const thumbUpClick = (e) => {
     // handleClick()
+    console.log(props.review.review_id)
     axios.put(`/db/helpfulpost/${props.review.review_id}`)
       .then(() => {
         setHelpfulSec('none');
