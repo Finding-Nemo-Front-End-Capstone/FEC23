@@ -15,14 +15,16 @@ function Questions({ product }) {
   const [showAddQuestion, setShowAddQuestion] = useState(false);
   const [filtered, setFiltered] = useState([]);
   const [questionReload, setQuestionReload] = useState(true);
+  // const [invoke, setInvoke] = useState(true);
 
+  const bottomRef = React.useRef();
   useEffect(() => {
     axios({
-      url: `/db/questions?product_id=${product.id}&page=${1}&count=${100}`,
+      url: `/db/questions?product_id=${product.id}&page=${1}&count=${1000}`,
       method: 'GET',
     })
       .then((response) => { setQuestions(response.data.results); });
-  }, [product]);
+  }, [product, questionReload]);
   // handles button text change
   function handleAccordion(e) {
     // console.log("THIS", e.target.id);
@@ -39,10 +41,11 @@ function Questions({ product }) {
       </div>
       <div id="questions-header">Questions</div>
       <div hidden={!expanded}>
-        <QuestionsList product={product} questions={questions} displayed={displayed} setDisplayed={setDisplayed} numQuestions={numQuestions} setNumQuestions={setNumQuestions} search={search} filtered={filtered} setFiltered={setFiltered} />
+        <QuestionsList product={product} questions={questions} displayed={displayed} setDisplayed={setDisplayed} numQuestions={numQuestions} setNumQuestions={setNumQuestions} search={search} filtered={filtered} setFiltered={setFiltered} bottomRef={bottomRef} />
+
       </div>
       <div id="questions-button-footer">
-        {displayed.length < filtered.length && <button type="button" data-testid="show-more-questions" id="show-more-questions" onClick={() => { setNumQuestions(numQuestions + 2); }}>Show more questions</button>}
+        {displayed.length < filtered.length && <button type="button" data-testid="show-more-questions" id="show-more-questions" onClick={() => { setNumQuestions(numQuestions + 2); bottomRef.current.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"}); }}>Show more questions</button>}
         {/* <button type="button" id="ask-question" onClick={() => { setShowAddQuestion(true); }}>Ask a question +</button> */}
         <AddQuestion onClose={() => setShowAddQuestion(false)} showAddQuestion={showAddQuestion} product={product} questionReload={questionReload} setQuestionReload={setQuestionReload} />
       </div>
