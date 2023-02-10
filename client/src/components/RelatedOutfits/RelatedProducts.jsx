@@ -20,11 +20,7 @@ function RelatedProducts({ id, product, setProduct, rating, currStyle }) {
 
   }
   async function getInfo(relId) {
-    const endpoints = [
-      `db/styles/${relId}`,
-      `db/${relId}`,
-      `db/meta/${relId}`
-    ];
+    const endpoints = [`db/styles/${relId}`, `db/${relId}`, `db/meta/${relId}`];
     const obj = await Promise.all(endpoints.map((endpoint) => axios.get(endpoint)))
       .then(
         axios.spread((styles, prod, ratings) => {
@@ -50,13 +46,16 @@ function RelatedProducts({ id, product, setProduct, rating, currStyle }) {
           unique.delete(id);
           unique = Array.from(unique);
           setRelatedIds(await Promise.all(unique.map((singleId) => getInfo(singleId))));
-          if (unique.length > 4) { setDisplay([0, 4]); } else { setDisplay([0, unique.length]); }
+          if (unique.length > 4) {
+            setDisplay([0, 4]);
+          } else {
+            setDisplay([0, unique.length]);
+          }
         })
         .catch(() => console.log('error with get all'));
       if (!localStorage.getItem('outfits')) {
         localStorage.setItem('outfits', JSON.stringify([]));
       }
-      console.log('this is product in relatedProducts.jsx', product, id);
     }
   }, [product, id]);
   function cards() {

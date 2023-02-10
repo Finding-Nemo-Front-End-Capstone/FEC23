@@ -31,7 +31,7 @@ function RelatedCards({ relInfo, product, setProduct, display }) {
       />
       <div className="relatedImageContainer">
         {cardInfo.thumbnail === null
-          ? <img className="previewImage" alt="" />
+          ? <img className="previewImage" alt="Image missing" />
           : <img className="previewImage" src={cardInfo.thumbnail} alt="" />}
       </div>
       <div className="cardDetails" data-testid="cardDetails"

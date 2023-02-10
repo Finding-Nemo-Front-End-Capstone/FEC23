@@ -7,7 +7,6 @@ import Overview from './components/Overview/Overview.jsx';
 import Ratings from './components/Ratings.jsx';
 
 function App() {
-// const [productList, setProductList] = useState([]);
   const [product, setProduct] = useState({});
   const [prodInfo, setProdInfo] = useState({});
   const [rating, setRating] = useState({});

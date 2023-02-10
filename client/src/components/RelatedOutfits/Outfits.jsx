@@ -6,6 +6,7 @@ function Outfits({ product, rating, currStyle }) {
   const [hasCurrent, setHasCurrent] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [display, setDisplay] = useState([]);
+
   useEffect(() => {
     if (localStorage.getItem('outfits')) {
       const getStorage = JSON.parse(localStorage.getItem('outfits'));
@@ -21,18 +22,19 @@ function Outfits({ product, rating, currStyle }) {
       setHasCurrent(false);
     }
   }, [saved, product]);
+
   function createItem(info, rate, img) {
     const item = {
       id: info.id,
       category: info.category,
       name: info.name,
-      price: info.default_price,
+      price: info.price,
       rating: rate,
       thumbnail: img.results[0].photos[0].thumbnail_url
     };
     return item;
   }
-  function clickHandler(e) {
+  function clickAdd(e) {
     e.preventDefault();
     const newItem = createItem(product, rating, currStyle);
     const storage = JSON.parse(localStorage.getItem('outfits'));
@@ -57,6 +59,7 @@ function Outfits({ product, rating, currStyle }) {
       </div>
     ));
   }
+
   return (
     <>
     { currentIndex !== 0 && saved.length >= 3 ?
@@ -65,11 +68,11 @@ function Outfits({ product, rating, currStyle }) {
       </button>
       : null }
       <div className="outfitsContainer">
-      { hasCurrent === false
-        ? (
-          <button type="submit" className="addOutfit" onClick={clickHandler}>
+      { hasCurrent === false ?
+        (
+          <button type="submit" className="addOutfit" onClick={clickAdd}>
             +
-            <br/>
+            <br />
             Add to my outfits
           </button>
         )
@@ -79,7 +82,7 @@ function Outfits({ product, rating, currStyle }) {
       { currentIndex !== saved.length - 3 && saved.length >= 3
         ? <button type="submit" className="rightOutfit" onClick={arrowClick}>{'>'}
         </button>
-        : null}
+        : null }
     </>
   );
 }

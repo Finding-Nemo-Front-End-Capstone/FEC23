@@ -322,17 +322,13 @@ body {
   color: #525252;
   font-size: small;
 }
-.relatedCatText,
-.outfitCatText {
+.relatedCatText, .relatedPriceText,
+.outfitCatText, .outfitPriceText {
   font-size: x-small;
 }
 .relatedProdText,
 .outfitProdText {
   font-weight: bold;
-}
-.relatedPriceText,
-.outfitPriceText {
-  font-size: x-small;
 }
 .relatedContainer,
 .outfitsContainer {
@@ -346,8 +342,7 @@ body {
 .relatedContainer::-webkit-scrollbar {
   display: none;
 }
-.relatedCard,
-.outfitCard,
+.relatedCard, .outfitCard,
 .addOutfit {
   border: 1.5px solid grey;
   margin-right: 10px;
@@ -382,11 +377,11 @@ body {
   font-size: 30px;
   top: 20%;
   z-index: 1;
-  left: 0%;
+  left: -4%;
+  border-color: transparent;
 }
 .rightArrow{
   left: 700px;
-  position:absolute;
 }
 .leftOutfit,
 .rightOutfit{
@@ -394,10 +389,10 @@ body {
   font-size: 35px;
   top: 73%;
   z-index: 1;
-  left: 0%;
+  left: -4%;
+  border-color: transparent;
 }
 .rightOutfit{
-  top: 73%;
   left: 700px;
 }
 .previewImage {
@@ -407,7 +402,8 @@ body {
 }
 .relatedImageContainer,
 .outfitImageContainer {
-  width:100%
+  width: 100%;
+  height: 250px;
 }
 
 .modalPortal {
