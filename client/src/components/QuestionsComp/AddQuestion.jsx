@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function AddQuestion({ showAddQuestion, onClose, product }) {
+function AddQuestion({
+  showAddQuestion, onClose, product, questionReload, setQuestionReload,
+}) {
   const [input, setInput] = useState({});
   const [formIsValid, setFormIsValid] = useState(true);
   const [errors, setErrors] = useState([]);
@@ -30,6 +32,7 @@ function AddQuestion({ showAddQuestion, onClose, product }) {
         setErrors([]);
         setFormIsValid(true);
         setInput({});
+        setQuestionReload(!questionReload);
       })
       .catch((err) => { console.log('error adding question', err); });
   }

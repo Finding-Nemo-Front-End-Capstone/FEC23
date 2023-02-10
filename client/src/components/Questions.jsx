@@ -14,6 +14,7 @@ function Questions({ product }) {
   const [search, setSearch] = useState('');
   const [showAddQuestion, setShowAddQuestion] = useState(false);
   const [filtered, setFiltered] = useState([]);
+  const [questionReload, setQuestionReload] = useState(true);
 
   useEffect(() => {
     axios({
@@ -40,7 +41,7 @@ function Questions({ product }) {
       <div>
         {displayed.length < filtered.length && <button type="button" data-testid="show-more-questions" onClick={() => { setNumQuestions(numQuestions + 2); }}>Show more questions</button>}
         <button type="button" onClick={() => { setShowAddQuestion(true); }}>Ask a question +</button>
-        <AddQuestion onClose={() => setShowAddQuestion(false)} showAddQuestion={showAddQuestion} product={product} />
+        <AddQuestion onClose={() => setShowAddQuestion(false)} showAddQuestion={showAddQuestion} product={product} questionReload={questionReload} setQuestionReload={setQuestionReload} />
       </div>
     </div>
   );
