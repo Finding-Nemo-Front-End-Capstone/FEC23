@@ -1,12 +1,22 @@
 import React, { useState, useEffect } from 'react';
 
 function Social() {
+  const url = 'localhost:3000';
+  const text = 'Check this out!';
+  function clickFacebook () {
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`);
+  }
+  function clickTwitter () {
+    window.open(`https://www.twitter.com/intent/tweet?url=${url}&text=${text}`);
+  }
+  function clickPinterest () {
+    window.open(`https://www.pinterest.com/pin/create/link/?url=${url}&description=${text}`);
+  }
   return (
     <div className="social">
-      <i className="fa fa-facebook-square" />
-      <i className="fa fa-twitter-square" />
-      {/* <a href="https://twitter.com/intent/tweet?url=https://dev.to/dsasse07/beginner-s-guide-to-jest-testing-in-react-1nig&text=Beginner's%20Guide%20to%20Jest%20Testing%20in%20React&via=dannysasse" target="_blank" rel="noreferrer">Share on Twitter</a>
-      <i className="fa fa-pinterest-square" /> */}
+      <i className="fa fa-facebook-square" onClick={clickFacebook} />
+      <i className="fa fa-twitter-square" onClick={clickTwitter} />
+      <i className="fa fa-pinterest-square" onClick={clickPinterest} />
     </div>
   );
 }

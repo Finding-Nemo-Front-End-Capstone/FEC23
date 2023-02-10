@@ -24,7 +24,7 @@ router.put('/reportanswer', controllers.answers.addReport);
 router.get('/cart', controllers.cart.getCart);
 router.post('/cart', controllers.cart.addToCart);
 
-router.get('/:id', controllers.products.getOneProduct); // this needs to have a more specific path;
+router.get('/:id', controllers.products.getOneProduct);  // this needs to have a more specific path;
 
 router.post('/post/:id', (req, res) => {
   res.status(200).send('making a post not set up yet');

@@ -15,7 +15,7 @@ function Body({ bodyValue, setBodyValue }) {
         Body:
         <text className="bodyCharacterCount">{`${bodyCharacterLeft}Character Left`}</text>
         <br />
-        <textarea rows="20" cols="70" value={bodyValue} onChange={bodyInput} placeholder='Why did you like the product or not?' />
+        <textarea data-testid="revbody" rows="20" cols="70" value={bodyValue} onChange={bodyInput} placeholder="Why did you like the product or not?" />
       </label>
     </div>
   );

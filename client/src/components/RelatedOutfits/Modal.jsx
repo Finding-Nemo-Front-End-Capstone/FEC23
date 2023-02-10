@@ -76,7 +76,7 @@ function Modal({show, setShowModal, relFeat, relName, currFeat, currName}) {
         {makeFeat()}
       </tbody>
     </table>,
-    document.getElementById('app'),
+    document.querySelector('#app .RelatedOutfits .modalPortal')
   );
 }
 
