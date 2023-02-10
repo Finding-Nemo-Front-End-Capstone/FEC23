@@ -26,6 +26,23 @@
       "<rootDir>/TEST_SPEC/setup.js"
     ]
   },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "node_modules",
+      "coverage",
+      "exampleData"
+    ],
+    "coverageDirectory": "<rootDir>/TEST_SPEC/coverage",
+    "verbose": false,
+    "testEnvironment": "jsdom",
+    "testPathIgnorePatterns": [
+      "setup.js",
+      "coverage"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/TEST_SPEC/setup.js"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Finding-Nemo-Front-End-Capstone/FEC23.git"
@@ -54,6 +71,7 @@
     "@babel/preset-react": "^7.12.5",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.4.3",
     "babel-loader": "^8.2.1",
     "enzyme": "^3.11.0",
     "eslint": "^8.33.0",
