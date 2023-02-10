@@ -142,6 +142,7 @@ function Gallery({ currStyle, currPhotoIndex, setCurrPhotoIndex }) {
             })}
 
           {(firstThumIndex + 7) < (currStyle.photos.length)
+
           ? <a className="next thum-next" onClick={nextThumClick}>&#10225;</a>
           : null}
         </div>

@@ -16,8 +16,8 @@ function ReviewPhoto({ imageList, setImageList, imageFiles, setImageFiles }) {
   const submitPhoto = (e) => {
     // handleClick()
     if (imageList.length < 5) {
-      let arr1 = imageFiles.slice();
-      arr1.push(e.target.files[0])
+      const arr1 = imageFiles.slice();
+      arr1.push(e.target.files[0]);
       setImageFiles(arr1);
       const photo = URL.createObjectURL(e.target.files[0]);
       const arr = imageList.slice();
