@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import RelatedStars from './RelatedStars.jsx';
+
 function OutfitCards({ product, saved, setHasCurrent, setSaved }) {
   const [cardInfo, setCardInfo] = useState({});
   useEffect(() => {
-    const copy = {...cardInfo};
+    const copy = { ...cardInfo };
     copy.id = product.id;
     copy.category = product.category;
     copy.name = product.name;
@@ -31,8 +32,8 @@ function OutfitCards({ product, saved, setHasCurrent, setSaved }) {
       </button>
       <div className="outfitImageContainer">
         {cardInfo.thumbnail === null
-          ? <img className="previewImage" alt="" />
-          : <img className="previewImage" src={cardInfo.thumbnail} alt="" />}
+          ? <img className="previewImage" alt="Image missing" />
+          : <img className="previewImage" src={cardInfo.thumbnail} alt="Image missing" />}
       </div>
       <div className="cardDetails">
         <div className="outfitCatText">
@@ -44,7 +45,9 @@ function OutfitCards({ product, saved, setHasCurrent, setSaved }) {
         <div className="outfitPriceText">
           ${cardInfo.price}
         </div>
-        {cardInfo.rating ? <RelatedStars rating = {cardInfo.rating} /> : null}
+        <div className="starRating">
+          {cardInfo.rating ? <RelatedStars rating={cardInfo.rating} /> : null}
+        </div>
       </div>
     </div>
   );

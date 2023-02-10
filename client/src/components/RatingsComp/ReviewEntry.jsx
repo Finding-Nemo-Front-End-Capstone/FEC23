@@ -4,23 +4,26 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/button-has-type */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import PhotoEntry from './ReviewEntryComp/PhotoEntry.jsx';
 import ReviewResponse from './ReviewEntryComp/Response.jsx';
+// import {ClickContext} from '../../index.jsx'
 
 function ReviewEntry(props) {
   // console.log(props.review);
+  // const {clicks, handleClick} = useContext(ClickContext);
   const [body, setBody] = useState('');
   const [moreBody, setMoreBody] = useState('none');
-  const [recommend, setRecommend] = useState('');
+  const [recommend, setRecommend] = useState('none');
   const [photoList, setPhotoList] = useState([]);
   const [photoDisplay, setPhotoDisplay] = useState('');
   const [response, setResponse] = useState([]);
   const [helpfulSec, setHelpfulSec] = useState('');
   const [thanks, setThanks] = useState('none');
   const [percentageRating, setPercentageRating] = useState('');
-  const [verified, setVerified] = useState('none')
+  const [verified, setVerified] = useState('none');
+  const [check, setCheck] = useState('none');
 
   const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December',
@@ -32,9 +35,9 @@ function ReviewEntry(props) {
   const usernameDate = `${props.review.reviewer_name}, ${month} ${day}, ${year}`;
 
   useEffect(() => {
-    console.log(props.review)
+    console.log('this is review', props.review);
     const rate = props.review.rating;
-    setPercentageRating(JSON.stringify(rate/5 *100) + '%')
+    setPercentageRating(`${JSON.stringify(rate / 5 * 100)}%`);
     if (props.review.body.length > 250) {
       setBody(props.review.body.slice(0, 250));
       setMoreBody('');
@@ -42,28 +45,38 @@ function ReviewEntry(props) {
       setBody(props.review.body);
     }
     if (props.review.recommend) {
-      setRecommend('recommend');
-    } else {
-      setRecommend('not recommend');
+      setRecommend('');
     }
     if (props.review.photos[0]) {
+      // console.log('photossss', props.review.photos);
       setPhotoList(props.review.photos);
       setPhotoDisplay('none');
+    } else {
+      setPhotoList([]);
+      setPhotoDisplay('');
     }
     if (props.review.response !== null) {
       setResponse(props.review.response);
     }
     if (props.review.verify) {
-      setVerified('')
+      setVerified('');
       // this is setup for verification
     }
   }, [props.review]);
 
+  useEffect(() => {
+    if (recommend === 'I recommend this product') {
+      setCheck('');
+    }
+  }, [recommend]);
+
   const moreBodyClick = (e) => {
+    // handleClick()
     setBody(props.review.body);
     setMoreBody('none');
   };
   const thumbUpClick = (e) => {
+    // handleClick()
     axios.put(`/db/helpfulpost/${props.review.review_id}`)
       .then(() => {
         setHelpfulSec('none');
@@ -72,6 +85,7 @@ function ReviewEntry(props) {
       .catch(() => { console.log('fail helpful'); });
   };
   const thumbDownClick = (e) => {
+    // handleClick()
     setHelpfulSec('none');
     setThanks('');
   };
@@ -80,53 +94,57 @@ function ReviewEntry(props) {
     <div className="ReviewEntry">
       <span className="ratingReview">
         <div className="rating-wrap">
-          <span className="stars-active" style={{ width: `${percentageRating}` }}>
-              <i className="fa fa-star" aria-hidden="true"></i>
-              <i className="fa fa-star" aria-hidden="true"></i>
-              <i className="fa fa-star" aria-hidden="true"></i>
-              <i className="fa fa-star" aria-hidden="true"></i>
-              <i className="fa fa-star" aria-hidden="true"></i>
+          <span data-testid="percentR" className="stars-active" style={{ width: `${percentageRating}` }}>
+            <i className="fa fa-star" aria-hidden="true" />
+            <i className="fa fa-star" aria-hidden="true" />
+            <i className="fa fa-star" aria-hidden="true" />
+            <i className="fa fa-star" aria-hidden="true" />
+            <i className="fa fa-star" aria-hidden="true" />
           </span>
           <span className="stars-inactive">
-            <i className="fa fa-star-o" aria-hidden="true"></i>
-            <i className="fa fa-star-o" aria-hidden="true"></i>
-            <i className="fa fa-star-o" aria-hidden="true"></i>
-            <i className="fa fa-star-o" aria-hidden="true"></i>
-            <i className="fa fa-star-o" aria-hidden="true"></i>
+            <i className="fa fa-star-o" aria-hidden="true" />
+            <i className="fa fa-star-o" aria-hidden="true" />
+            <i className="fa fa-star-o" aria-hidden="true" />
+            <i className="fa fa-star-o" aria-hidden="true" />
+            <i className="fa fa-star-o" aria-hidden="true" />
           </span>
         </div>
       </span>
       <div className="userNameDate">
-      <i class="fa fa-check-circle" style={{display:verified}}></i>
-      {usernameDate}</div>
+        {usernameDate}
+        <br />
+        <span style={{ display: verified }} data-testid={`verify${props.moreTestid}`}>(VERIFIED &#10003;)</span>
+      </div>
       <br />
       {photoList.map((photo) => (
         <PhotoEntry photo={photo} />
       ))}
       <text style={{ display: photoDisplay }}>--no photo to display--</text>
       <br />
-      <label>summary: </label>
-      <text className="summary">{props.review.summary}</text>
+      <div className="summary">{props.review.summary}</div>
       <br />
-      <label>body: </label>
-      <text>{body}</text>
-      <button className='moreReviewsBody' style={{ display: moreBody }} onClick={moreBodyClick}>MORE...</button>
+      <div>{body}</div>
+      <button data-testid={`more${props.moreTestid}`} className="moreReviewsBody" style={{ display: moreBody }} onClick={moreBodyClick}>MORE...</button>
       <br />
-      <text className="recommend">{recommend}</text>
+      <div className="recommend" style={{ display: recommend }} data-testid={`recommend${props.moreTestid}`}>
+        I recommend this product
+        <i className="fa fa-check-circle" />
+      </div>
       <br />
       {response.map((eachRes) => (
-        <ReviewResponse eachRes={eachRes} />
+        <ReviewResponse eachRes={eachRes} testId={props.moreTestId} />
       ))}
       <div className="helpfulDiv" style={{ display: helpfulSec }}>
         <text className="helpfulText">Was this review helpful?</text>
-        <button type="button" className="thumbUp" onClick={thumbUpClick}>
+        <text className="helpfulnessCount">{`(${props.review.helpfulness})`}</text>
+        <button data-testid={`thumbup${props.moreTestid}`} type="button" className="thumbUp" onClick={thumbUpClick}>
           <i className="fa fa-thumbs-up" />
         </button>
-        <button type="button" className="thumbDown" onClick={thumbDownClick}>
+        <button data-testid={`thumbdown${props.moreTestid}`} type="button" className="thumbDown" onClick={thumbDownClick}>
           <i className="fa fa-thumbs-down" />
         </button>
       </div>
-      <text className="thanksHelpful" style={{ display: thanks }}>Thanks for the input!</text>
+      <text data-testid={`thanks${props.moreTestid}`} className="thanksHelpful" style={{ display: thanks }}>Thanks for the input!</text>
     </div>
   );
 }

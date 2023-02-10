@@ -2,11 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 const Styles = ({ styles, currStyle, setCurrStyle }) => {
 
-  // const handleClick = (e) => {
-
-  //   setCurrStyle(styles[e.target.getAttribute('index')]);
-  // }
-
   return (
     <div className="style-wrapper">
       <p>STYLE > {currStyle.name}</p>

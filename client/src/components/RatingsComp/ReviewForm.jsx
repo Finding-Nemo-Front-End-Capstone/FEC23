@@ -4,7 +4,7 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import ReviewInput from './ReviewFormComp/ReviewInput.jsx';
 import ReviewStar from './ReviewFormComp/ReviewStar.jsx';
@@ -12,9 +12,12 @@ import Characteristic from './ReviewFormComp/Characteristic.jsx';
 import Summary from './ReviewFormComp/Summary.jsx';
 import Body from './ReviewFormComp/Body.jsx';
 import ReviewPhoto from './ReviewFormComp/ReviewPhoto.jsx';
+// import {ClickContext} from '../../index.jsx'
 
-
-function ReviewForm({ rating, setReviewForm, totalReview, setTotalReviews, setSort }) {
+function ReviewForm({
+  rating, setReviewForm, totalReview, setTotalReviews, setSort, invoke, setInvoke,
+}) {
+  // const {clicks, handleClick} = useContext(ClickContext);
   const [countStar, setCountStar] = useState(0);
   const [recommendStatus, setRecommendStatus] = useState(false);
   const [size, setSize] = useState('');
@@ -100,6 +103,7 @@ function ReviewForm({ rating, setReviewForm, totalReview, setTotalReviews, setSo
   };
 
   const submitForm = (e) => {
+    // handleClick()
     const uncomplete = () => {
       setSubmitWarning('');
     };
@@ -145,10 +149,24 @@ function ReviewForm({ rating, setReviewForm, totalReview, setTotalReviews, setSo
       }
     }
     if (bodyValue.length < 50 || nickname === ''
-    || email === '' || email.indexOf('@') === -1
+    || email === '' || email.indexOf('@') === -1 || email.indexOf('.') === -1
      || countStar === 0) {
       return uncomplete();
     }
+    if (email.indexOf('@') !== -1) {
+      const emailcheck = email.slice(email.indexOf('@'));
+      if (emailcheck.indexOf('.') === -1) {
+        return uncomplete();
+      }
+      const emailCheck2 = emailcheck.slice(emailcheck.indexOf('.'));
+      if (emailCheck2.length === 1) {
+        return uncomplete();
+      }
+    }
+    if (email.indexOf('@') === 0) {
+      return uncomplete();
+    }
+
     setSubmitWarning('none');
     params.characteristics = {};
     for (let i = 0; i < cList.length; i++) {
@@ -161,26 +179,27 @@ function ReviewForm({ rating, setReviewForm, totalReview, setTotalReviews, setSo
     params.recommend = recommendStatus;
     params.name = nickname;
     params.email = email;
-    params.photos =[];
+    params.photos = [];
     // console.log(params);
 
     Promise.all(imageFiles.map((eachFile) => {
       const formData = new FormData();
       formData.append('file', eachFile);
-      formData.append('upload_preset', 'o9exuyqa')
+      formData.append('upload_preset', 'o9exuyqa');
       // console.log(imageFiles)
-      return axios.post(`https://api.cloudinary.com/v1_1/dsiywf70i/image/upload`, formData)
+      return axios.post('https://api.cloudinary.com/v1_1/dsiywf70i/image/upload', formData)
         .then((res) => {
-          console.log('IneedTHIIIIIS', res.data.secure_url)
-          params.photos.push(res.data.secure_url)
-          console.log(params.photos)
-      })
-        .catch((err) => console.log(err))
+          console.log('IneedTHIIIIIS', res.data.secure_url);
+          params.photos.push(res.data.secure_url);
+          console.log(params.photos);
+        })
+        .catch((err) => console.log(err));
     }))
       .then(() => {
+        console.log(params);
         axios.post('/db/review/post', params)
           .then(() => {
-            setTotalReviews(totalReview + 1);
+            setInvoke(!invoke);
             setSort('newest');
             alert('Thank you for submitting a review');
             setCountStar(0);
@@ -199,18 +218,17 @@ function ReviewForm({ rating, setReviewForm, totalReview, setTotalReviews, setSo
             setReviewForm(false);
             setImageFiles([]);
           })
-          .catch(() => console.log('error in posting review'));
-      }).catch((err) => console.log(err))
+          .catch((err) => console.log('error in posting review', err));
+      }).catch((err) => console.log(err));
   };
 
   return (
-    <div className="reviewFormContent">
-      ReviewForm
-      <br />
+    <div className="reviewFormContent" data-testid="reviewFormContent">
       <br />
       <label htmlFor="nickname">
         Nickname:
         <input
+          data-testid="nickname"
           type="text"
           className="nickname"
           value={nickname}
@@ -220,6 +238,7 @@ function ReviewForm({ rating, setReviewForm, totalReview, setTotalReviews, setSo
       <label htmlFor="email">
         email:
         <input
+          data-testid="email"
           type="email"
           className="email"
           value={email}
@@ -272,7 +291,7 @@ function ReviewForm({ rating, setReviewForm, totalReview, setTotalReviews, setSo
         />
       </div>
       <br />
-      <text className="submittingWarning" style={{ display: submitWarning, color: 'red' }}>Please make sure that nickname, email,rating, characteristics, and body (min of 50 characters) are all filled out before submitting</text>
+      <text data-testid="Warning" className="submittingWarning" style={{ display: submitWarning, color: 'red' }}>Please make sure that nickname, email,rating, characteristics, and body (min of 50 characters) are all filled out before submitting</text>
       <br />
       <button className="submitReviewForm" onClick={submitForm}>Submit Review</button>
     </div>

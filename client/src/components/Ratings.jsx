@@ -1,13 +1,17 @@
 /* eslint-disable react/button-has-type */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import axios from 'axios';
 import ClipLoader from 'react-spinners/ClipLoader.js';
 import ReviewEntry from './RatingsComp/ReviewEntry.jsx';
 import ReviewForm from './RatingsComp/ReviewForm.jsx';
 import Breakdown from './RatingsComp/Breakdown.jsx';
 import ChacBreak from './RatingsComp/ChacBreak.jsx';
+import {ClickContext} from '../index.jsx'
 
-function Ratings({ product, rating, setProduct }) {
+function Ratings({
+  product, rating, setProduct, invoke, setInvoke,
+}) {
+  // const {clicks, handleClick} = useContext(ClickContext);
   const [reviewList, setReviewList] = useState([]);
   const [sort, setSort] = useState('newest');
   const [count, setCount] = useState(0);
@@ -19,7 +23,10 @@ function Ratings({ product, rating, setProduct }) {
   const [reviewForm, setReviewForm] = useState(false);
   const [containFilter, setContainFilter] = useState([]);
 
+  let countTest = 0;
+
   useEffect(() => {
+    // console.log('this is RATING', rating);
     if (!containFilter[0]) {
       console.log('reviewist', reviewList);
       setReviewHolder(reviewList);
@@ -37,23 +44,43 @@ function Ratings({ product, rating, setProduct }) {
   }, [containFilter]);
 
   useEffect(() => {
-    console.log('this is rating', rating);
+    // console.log('this is rating', rating);
     if (rating.product_id) {
       setTotalReviews(rating.recommended.true + rating.recommended.false);
-    }
-  }, [rating]);
-
-  useEffect(() => {
-    if (rating.product_id) {
-      axios.get(`/db/reviews/${rating.product_id}/${sort}/${totalReview}/1`)
+      axios.get(`/db/reviews/${rating.product_id}/${sort}/${rating.recommended.true + rating.recommended.false}/1`)
         .then((data) => {
-          setReviewList(
-            data.data.results.sort((a, b) => b.review_id - a.review_id),
-          );
+          console.log('HOHO', data);
+          if (sort === 'newest') {
+            setReviewList(
+              data.data.results.sort((a, b) => b.review_id - a.review_id),
+            );
+          } else {
+            setReviewList(data.data.results);
+          }
         })
         .catch(() => console.log('error in obtaining review'));
     }
-  }, [totalReview, sort]);
+  }, [rating, sort]);
+
+  // useEffect(() => {
+  //   if (rating.product_id) {
+  //     console.log(totalReview);
+  //     if (totalReview !== rating.recommended.true + rating.recommended.false) {
+  //       axios.get(`/db/reviews/${rating.product_id}/${sort}/${totalReview}/1`)
+  //         .then((data) => {
+  //           console.log('Ineedthe form of this', data);
+  //           if (sort === 'newest') {
+  //             setReviewList(
+  //               data.data.results.sort((a, b) => b.review_id - a.review_id),
+  //             );
+  //           } else {
+  //             setReviewList(data.data.results);
+  //           }
+  //         })
+  //         .catch(() => console.log('error in obtaining review'));
+  //     }
+  //   }
+  // }, [totalReview, sort]);
 
   useEffect(() => {
     if (reviewList[0]) {
@@ -80,6 +107,8 @@ function Ratings({ product, rating, setProduct }) {
   }, [count]);
 
   const moreHandler = (e) => {
+    // console.log('this is context', clicks)
+    // handleClick(e.target.id)
     const addCount = count + 2;
     setCount(addCount);
     if (addCount >= reviewHolder.length) {
@@ -88,12 +117,14 @@ function Ratings({ product, rating, setProduct }) {
   };
 
   const sortChange = (e) => {
+    // handleClick()
     setLoading(true);
     setSort(e.target.value);
     setCount(0);
   };
 
   const reviewFormBut = (e) => {
+    // handleClick()
     setReviewForm(!reviewForm);
   };
 
@@ -118,18 +149,19 @@ function Ratings({ product, rating, setProduct }) {
   };
 
   return (
-    <div className="RatingsReview">
-      RATINGS & REVIEWS
+    <div className="RatingsReview" >
+      <text className="RatingsReview">RATINGS & REVIEWS</text>
       <div className="chacandbreak">
         <Breakdown rating={rating} reviewFilter={reviewFilter} totalReview={totalReview} />
         <ChacBreak rating={rating} />
       </div>
       <div className="divReviewEntry">
+
         <div className="reviewHeader">
           <div className="dropdown">
             <label htmlFor="sort">
               Sort By:
-              <select name="sort" id="sort" onChange={sortChange} value={sort}>
+              <select data-testid="sort" name="sort" id="sort" onChange={sortChange} value={sort}>
                 <option value="newest">Newest</option>
                 <option value="relevant">Relevant</option>
                 <option value="helpful">Helpful</option>
@@ -143,10 +175,13 @@ function Ratings({ product, rating, setProduct }) {
             aria-label="Loading Spinner"
             data-testid="loader"
           />
-          <div className="divMapReview">
-            {reviewDisplay.map((review) => (
-              <ReviewEntry review={review} />
-            ))}
+          <div className="divMapReview" data-testid="divMapReview">
+            {reviewDisplay.map((review) => {
+              countTest++;
+              return (
+                <ReviewEntry review={review} moreTestid={countTest} />
+              );
+            })}
             <button className="moreReviewBut" onClick={moreHandler} style={{ display: moreDisplay }}>More Reviews</button>
             <button className="writeReview" onClick={reviewFormBut}>Write Review</button>
             <div className="hello">{' '}</div>
@@ -165,6 +200,8 @@ function Ratings({ product, rating, setProduct }) {
             totalReview={totalReview}
             setTotalReviews={setTotalReviews}
             setSort={setSort}
+            invoke={invoke}
+            setInvoke={setInvoke}
           />
         </div>
       </div>
