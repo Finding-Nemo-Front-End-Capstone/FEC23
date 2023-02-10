@@ -102,12 +102,17 @@ function ReviewEntry(props) {
       .catch(() => { console.log('fail helpful'); });
   };
   const thumbDownClick = (e) => {
-    // handleClick()
-    setHelpfulSec('none');
-    let idSubmitCopy = idSubmit;
-    idSubmitCopy[props.review.review_id] = 'none'
-    setIdSubmit(idSubmitCopy)
-    // setThanks('');
+
+    axios.put(`/db/reportpost/${props.review.review_id}`)
+    .then(() => {
+      setHelpfulSec('none');
+      let idSubmitCopy = idSubmit;
+      idSubmitCopy[props.review.review_id] = 'none'
+      setIdSubmit(idSubmitCopy)
+      // setThanks('');
+    })
+    .catch(() => { console.log('fail helpful'); });
+
   };
 
   return (
@@ -143,7 +148,7 @@ function ReviewEntry(props) {
       <br />
       <div className="summary">{props.review.summary}</div>
       <br />
-      <div>{body}</div>
+      <div className="body">{body}</div>
       <button data-testid={`more${props.moreTestid}`} className="moreReviewsBody" style={{ display: moreBody }} onClick={moreBodyClick}>MORE...</button>
       <br />
       <div className="recommend" style={{ display: recommend }} data-testid={`recommend${props.moreTestid}`}>

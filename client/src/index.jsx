@@ -31,7 +31,7 @@ function App() {
           .then((data) => {
             setProduct(data.data[2]);
             axios.get(`/db/${data.data[2].id}`)
-              .then((info) => setProdInfo(info.data))
+              .then((info) => {setProdInfo(info.data); console.log('THIS IS INFO', info)})
               .catch(() => console.log('product info did not work'));
           })
           .catch((err) => console.log(err));

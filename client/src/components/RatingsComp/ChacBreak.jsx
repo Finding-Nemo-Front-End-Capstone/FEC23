@@ -28,7 +28,7 @@ function ChacBreak({ rating }) {
       console.log('check this', arrChac);
       const referenceArr = ['Fit', 'Length', 'Comfort', 'Quality', 'Width', 'Size'];
       for (let i = 0; i < arrChac.length; i++) {
-        if (referenceArr.indexOf(arrChac[i]) !== -1) {
+        if (referenceArr.indexOf(arrChac[i]) !== -2) {
           if (arrChac[i] === 'Fit') {
             setFitDis('');
             setFit(chacFunc('Fit'));
@@ -65,14 +65,14 @@ function ChacBreak({ rating }) {
         <br />
         <div className="comfyDesc">
           <text className="uncomfortableFONT"> Uncomfortable</text>
-          <text className="sUncomfortableFONT">Slightly uncomfortable</text>
+          {/* <text className="sUncomfortableFONT">Slightly uncomfortable</text> */}
           <text className="ok">OK</text>
-          <text className="comfortable">Comfortable</text>
+          {/* <text className="comfortable">Comfortable</text> */}
           <text className="perfect">Perfect</text>
         </div>
         <div className="bar-containerCB">
           <div className="bar-container1" />
-          <span className="arrow-comfort" data-testid="arrow-comfort" style={{ 'margin-left': comfort }}>&#8679;</span>
+          <span className="arrow-comfort" data-testid="arrow-comfort" style={{ 'margin-left': comfort }}>	&#9650;</span>
         </div>
       </div>
       <div className="chac" style={{ display: qualityDis }}>
@@ -80,9 +80,9 @@ function ChacBreak({ rating }) {
         <br />
         <div className="comfyDesc">
           <text className="poorFONT"> Poor</text>
-          <text className="belowavgFONT">Below average</text>
+          {/* <text className="belowavgFONT">Below average</text> */}
           <text className="whatiexpect">What I expected</text>
-          <text className="prettygreat">Pretty great</text>
+          {/* <text className="prettygreat">Pretty great</text> */}
           <text className="perfectQ">Perfect</text>
         </div>
         <div className="bar-containerCB">
@@ -92,7 +92,7 @@ function ChacBreak({ rating }) {
             className="arrow-quality"
             style={{ 'margin-left': quality }}
           >
-            &#8679;
+            	&#9650;
 
           </span>
         </div>
@@ -107,7 +107,7 @@ function ChacBreak({ rating }) {
         </div>
         <div className="bar-containerCB">
           <div className="bar-container2" />
-          <span className="arrow-size" style={{ 'margin-left': size }}>&#8679;</span>
+          <span className="arrow-size" style={{ 'margin-left': size }}>	&#9650;</span>
         </div>
       </div>
       <div className="chac" style={{ display: widthDis }}>
@@ -120,7 +120,7 @@ function ChacBreak({ rating }) {
         </div>
         <div className="bar-containerCB">
           <div className="bar-container2" />
-          <span className="arrow-width" style={{ 'margin-left': width }}>&#8679;</span>
+          <span className="arrow-width" style={{ 'margin-left': width }}>	&#9650;</span>
         </div>
       </div>
       <div className="chac" style={{ display: lengthDis }}>
@@ -133,7 +133,7 @@ function ChacBreak({ rating }) {
         </div>
         <div className="bar-containerCB">
           <div className="bar-container2" />
-          <span data-testid="arrow-length" className="arrow-length" style={{ 'margin-left': length }}>&#8679;</span>
+          <span data-testid="arrow-length" className="arrow-length" style={{ 'margin-left': length }}>	&#9650;</span>
         </div>
       </div>
       <div className="chac" style={{ display: fitDis }}>
@@ -146,7 +146,7 @@ function ChacBreak({ rating }) {
         </div>
         <div className="bar-containerCB">
           <div className="bar-container2" />
-          <span data-testid="arrow-fit" className="arrow-fit" style={{ 'margin-left': fit }}>&#8679;</span>
+          <span data-testid="arrow-fit" className="arrow-fit" style={{ 'margin-left': fit }}>	&#9650;</span>
         </div>
       </div>
     </div>
