@@ -18,6 +18,8 @@ The FEC23 webpage can be split into the following subcomponents:
 
 ### Product Overview
 The landing page of the featured product's preview image, image gallery, distinct styles, stock, and description. Users are able to select different available styles, sizes, share the featured product on social media, and add valid quantities of any given style and size to their cart. 
+<iframe width="560" height="315" src="https://youtu.be/1MgPwuNmAfY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
 
 ### Questions and Answers (Q&A)
 Contains the questions and answers pertaining to the featured product. The Q&A subcomponent allows user interaction with any given question or answer such as marking an input as helpful/not helpful, dynamically rendering questions matching a search query, and allowing users to ask a new question or add an answer to an existing question.
@@ -28,7 +30,7 @@ Displays the ratings of a product based on user created reviews. Ratings and rev
 ### Related Products and Outfits (RPO)
 Displays products related to the featured product and allows users to navigate to the Product Overview page upon clicking a new product. The RPO additionally allows unique users to save products within their browser's local storage. The related products component allows users to compare characteristics between the featured product and any given related product.
 
-# Dependencies
+# Dependenciese
 @babel
 eslint
 Jest
